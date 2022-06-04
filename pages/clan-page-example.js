@@ -1,5 +1,4 @@
 import { styled, useStyletron } from 'styletron-react'
-import React, { useState, useEffect } from 'react';
 import DefaultTemplate from '../components/DefaultLayout'
 import { Row, Col, Div, Text } from "atomize";
 
@@ -16,21 +15,6 @@ const Title = styled('h1', {
 export default function ClanPage({name, about, motto, memberCount}) {
   // an alternative hook based API
   const [css] = useStyletron()
-  const [data, setData] = useState(null)
-  const [isLoading, setLoading] = useState(false)
-
-  /*useEffect(() => {
-    setLoading(true)
-    fetch(url, { headers })
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setLoading(false)
-      })
-      console.log(data)
-  })*/
-
-  if (isLoading) return <p>Loading...</p>
 
   return (
     <DefaultTemplate>

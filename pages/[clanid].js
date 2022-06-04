@@ -1,10 +1,8 @@
-import { useRouter } from 'next/router'
 import { styled, useStyletron } from 'styletron-react'
 import DefaultTemplate from '../components/DefaultLayout'
 import { Row, Col, Div, Text } from "atomize";
 
 const apikey = '3a85f7e1a4444ec1865efb39ef019313';
-const url = 'https://www.bungie.net/Platform/GroupV2/2084197/'; //4599535 Fruit Snaccs
 const headers = { 'X-API-Key' : apikey }
 
 export default function ClanPage({name, about, motto, memberCount}) {
@@ -44,9 +42,9 @@ export default function ClanPage({name, about, motto, memberCount}) {
   )
 }
 
-export async function getServerSideProps() {
-  const router = useRouter()
-  const { clanid } = router.query
+export async function getServerSideProps(context) {
+  const { clanid } = context.query
+  const url = 'https://www.bungie.net/Platform/GroupV2/'+clanid+'/'; //House Fruit: 2084197 Fruit Snaccs: 4599535
 
   const res = await fetch(url, { headers })
   const json = await res.json()
