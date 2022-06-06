@@ -16,7 +16,7 @@ const AppHeader = () => {
 
     return (
         <header>
-            <Div bg="brand900" rounded="xl" m={{t: "-1rem", l: "-1rem", r: "-1rem"}}>
+            <Div bg="brand900" rounded="xl" shadow="5" m={{t: "-1rem", l: "-1rem", r: "-1rem"}}>
                 <Row>
                     <Col>
                         <Div>
