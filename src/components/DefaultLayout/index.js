@@ -1,6 +1,6 @@
 import { styled, useStyletron } from 'styletron-react'
 import { Div } from "atomize";
-import AppHeader from '../../organisms/commons/AppHeader'
+import AppHeader from '../../components/AppHeader'
 
 const DefaultLayout = ({ children }) => {
     const [css] = useStyletron()

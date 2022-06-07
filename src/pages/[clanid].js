@@ -1,5 +1,6 @@
 import { styled, useStyletron } from 'styletron-react'
 import DefaultTemplate from '../components/DefaultLayout'
+import InfoBox from '../components/InfoBox'
 import { Row, Col, Div, Text, Image, Container } from "atomize";
 
 const apikey = '3a85f7e1a4444ec1865efb39ef019313';
@@ -15,7 +16,7 @@ export default function ClanPage({name, about, motto, memberCount, clanCallSign,
       <Div>
         <Row>
           <Col size="2">
-            <Div bg="brand900" rounded="md" m={{t: "2rem"}}>
+            <Div bg="brand900" rounded="md" m={{t: "1rem"}}>
               <Container bgImg={urlStart + clanBannerDetails.clanDecalBackgroundURL} bgSize="cover" bgPos="center">
                 <Image src={urlStart + clanBannerDetails.clanDecalForegroundURL}/>
               </Container>
@@ -23,12 +24,12 @@ export default function ClanPage({name, about, motto, memberCount, clanCallSign,
           </Col>
           <Col size="8">
             <Row m={{l: "0.5rem"}}>
-              <Div rounded="md" shadow="5" border="3px solid" borderColor="brand900" m={{t: "2rem", b: "2rem"}}>
+              <InfoBox>
                 <Text textSize="display2" textColor="brand900" m={{l: "2rem", r: "2rem"}}>
                   {name} [{clanCallSign}]
                 </Text>
-              </Div>
-              <Div rounded="md" shadow="5" border="3px solid" borderColor="brand900">
+              </InfoBox>
+              <InfoBox>
                 <Text textSize="title" textColor="brand900" m={{l: "1.5rem", r: "1.5rem"}}>
                   DESCRIPTION
                 </Text>
@@ -41,10 +42,10 @@ export default function ClanPage({name, about, motto, memberCount, clanCallSign,
                   <br/>
                   {about}
                 </Text>
-              </Div>
+              </InfoBox>
             </Row>
             <Row m={{l: "0.5rem"}}>
-              <Div rounded="md" shadow="5" border="3px solid" borderColor="brand900" m={{t: "2rem", b: "2rem"}}>
+              <InfoBox>
                 <Text textSize="title" textColor="brand900" m={{l: "1.5rem", r: "1.5rem"}}>
                   CLAN LEVEL
                 </Text>
@@ -56,7 +57,7 @@ export default function ClanPage({name, about, motto, memberCount, clanCallSign,
                   WEEKLY XP EARNED: {d2ClanProgressions.weeklyProgress}/{d2ClanProgressions.weeklyLimit}
                   <br/>
                 </Text>
-              </Div>
+              </InfoBox>
             </Row>
           </Col>
           <Col size="2">
