@@ -24,7 +24,9 @@ const AppHeader = () => {
                             </Div>
                         </Col>
                         <Col>
-                            <SearchBar/>
+                            <Div m="3rem">
+                                <SearchBar/>
+                            </Div>
                         </Col>
                     </Row>
                     <Row>

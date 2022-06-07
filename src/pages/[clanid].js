@@ -29,6 +29,8 @@ export default function ClanPage({name, about, motto, memberCount, clanCallSign,
                   {name} [{clanCallSign}]
                 </Text>
               </InfoBox>
+            </Row>
+            <Row m={{l: "0.5rem"}}>
               <InfoBox>
                 <Text textSize="title" textColor="brand900" m={{l: "1.5rem", r: "1.5rem"}}>
                   DESCRIPTION

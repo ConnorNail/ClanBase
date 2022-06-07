@@ -11,36 +11,40 @@ const SearchBar = ({ children }) => {
 
     const router = useRouter()
 
-    const tempInput = ''
     const [input, setInput] = useState('')
 
-    function handleSearch(e) {
-        setInput(tempInput)
-        console.log(tempInput)
-        fetchData()
+    function handleSearch(e, button) {
+        if (input.length > 2) {
+            search()
+            if (button) {
+                e.target.parentElement.firstChild.value = ''
+            } else {
+                e.target.value = ''
+            }
+        }
     }
 
-    const fetchData = async () => {
-        console.log(tempInput)
-        const res = await fetch('https://www.bungie.net/Platform/GroupV2/NameV2/', { method: 'post', headers, body: JSON.stringify({
-            'groupName': tempInput,
+    const search = async () => {
+        await fetch('https://www.bungie.net/Platform/GroupV2/NameV2/', { method: 'post', headers, body: JSON.stringify({
+            'groupName': input,
             'groupType': 1,
         })})
-        console.log(res)
-        const json = await res.json()
-        console.log(json.Response.detail.groupId)
-
-        router.push('/'+json.Response.detail.groupId)
+        .then((res) => res.json())
+        .then((data) => {
+            router.push('/'+data.Response.detail.groupId)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
     }
 
     return (
         <Input
             placeholder="Search"
-            m="3rem"
-            onInput={e => {tempInput = e.target.value}}
+            onInput={e => {setInput(e.target.value)}}
             onKeyPress={e => {
                 if (e.key === "Enter") {
-                    handleSearch(e)
+                    handleSearch(e, false)
                 }
             }}
             suffix={
@@ -48,7 +52,7 @@ const SearchBar = ({ children }) => {
                     name="Search"
                     size="20px"
                     cursor="pointer"
-                    onClick={e => handleSearch(e)}
+                    onClick={(e) => handleSearch(e, true)}
                     pos="absolute"
                     top="50%"
                     right="1rem"
