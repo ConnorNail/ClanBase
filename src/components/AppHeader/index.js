@@ -41,7 +41,7 @@ const AppHeader = () => {
                             </Link>
                         </Col>
                         <Col>
-                            <Link href="/clan-page-example">
+                            <Link href="/test-table">
                                 <Anchor textSize="display1" textAlign="center" textColor="white" hoverTextColor="black800" m="1rem">PAGE 3</Anchor>
                             </Link>
                         </Col>
