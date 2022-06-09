@@ -2,7 +2,6 @@ import { styled, useStyletron } from 'styletron-react'
 import React, { useState } from 'react';
 import { Div, Anchor, Text, Row, Col, Input, Icon } from "atomize";
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import SearchBar from '../../components/SearchBar'
 
 const apikey = '3a85f7e1a4444ec1865efb39ef019313';
@@ -13,8 +12,8 @@ const AppHeader = () => {
 
     return (
         <header>
-            <Div bg="brand900" rounded="xl" shadow="5" m={{t: "-1rem", l: "-1rem", r: "-1rem"}}>
-                <Div m={{l: "1rem", r: "1rem"}}>
+            <Div bg="brand900" shadow="5" m={{t: "-0.5rem", l: "-0.5rem", r: "-0.5rem"}}>
+                <Div m={{l: "0.5rem", r: "0.5rem"}}>
                     <Row>
                         <Col>
                             <Div>

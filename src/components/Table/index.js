@@ -1,5 +1,7 @@
 import React from "react";
 import { useTable } from "react-table";
+import { Div } from "atomize";
+import InfoBox from '../../components/InfoBox'
 
 export default function Table({ columns, data }) {
     // Use the useTable Hook to send the columns and data to build the table
@@ -31,7 +33,11 @@ export default function Table({ columns, data }) {
                     return (
                         <tr {...row.getRowProps()}>
                             {row.cells.map(cell => {
-                                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                                return <td {...cell.getCellProps()}>
+                                    <Div m={{l: "0.5rem", r: "0.5rem"}}>
+                                        {cell.render("Cell")}
+                                    </Div>
+                                </td>;
                             })}
                         </tr>
                     );

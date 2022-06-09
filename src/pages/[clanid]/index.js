@@ -1,12 +1,13 @@
 import { styled, useStyletron } from 'styletron-react'
-import DefaultTemplate from '../components/DefaultLayout'
-import InfoBox from '../components/InfoBox'
-import { Row, Col, Div, Text, Image, Container } from "atomize";
+import DefaultTemplate from '../../components/DefaultLayout'
+import InfoBox from '../../components/InfoBox'
+import { Row, Col, Div, Text, Image, Container, Anchor } from "atomize";
+import Link from 'next/link'
 
 const apikey = '3a85f7e1a4444ec1865efb39ef019313';
-const headers = { 'X-API-Key' : apikey }
+const headers = { 'X-API-Key': apikey }
 
-export default function ClanPage({name, about, motto, memberCount, clanCallSign, d2ClanProgressions, clanBannerDetails}) {
+export default function ClanPage({ clanId, name, about, motto, memberCount, clanCallSign, d2ClanProgressions, clanBannerDetails }) {
   const [css] = useStyletron()
 
   const urlStart = 'https://www.bungie.net/'
@@ -15,49 +16,56 @@ export default function ClanPage({name, about, motto, memberCount, clanCallSign,
     <DefaultTemplate>
       <Div>
         <Row>
+          <InfoBox>
+            <Link href={"/"+clanId+"/members"}>
+              <Anchor textSize="display1" textColor="brand900" hoverTextColor="black800" m="2rem">MEMBERS</Anchor>
+            </Link>
+          </InfoBox>
+        </Row>
+        <Row>
           <Col size="2">
-            <Div bg="brand900" rounded="md" m={{t: "1rem"}}>
+            <Div bg="brand900" rounded="md" m={{ t: "1rem" }}>
               <Container bgImg={urlStart + clanBannerDetails.clanDecalBackgroundURL} bgSize="cover" bgPos="center">
-                <Image src={urlStart + clanBannerDetails.clanDecalForegroundURL}/>
+                <Image src={urlStart + clanBannerDetails.clanDecalForegroundURL} />
               </Container>
             </Div>
           </Col>
           <Col size="8">
-            <Row m={{l: "0.5rem"}}>
+            <Row m={{ l: "0.5rem" }}>
               <InfoBox>
-                <Text textSize="display2" textColor="brand900" m={{l: "2rem", r: "2rem"}}>
+                <Text textSize="display2" textColor="brand900" m={{ l: "2rem", r: "2rem" }}>
                   {name} [{clanCallSign}]
                 </Text>
               </InfoBox>
             </Row>
-            <Row m={{l: "0.5rem"}}>
+            <Row m={{ l: "0.5rem" }}>
               <InfoBox>
-                <Text textSize="title" textColor="brand900" m={{l: "1.5rem", r: "1.5rem"}}>
+                <Text textSize="title" textColor="brand900" m={{ l: "1.5rem", r: "1.5rem" }}>
                   DESCRIPTION
                 </Text>
-                <Text textSize="subheader" textColor="brand900" m={{l: "1.5rem", r: "1.5rem"}}>
+                <Text textSize="subheader" textColor="brand900" m={{ l: "1.5rem", r: "1.5rem" }}>
                   {memberCount} Members
-                  <br/>
-                  <br/>
+                  <br />
+                  <br />
                   "{motto}"
-                  <br/>
-                  <br/>
+                  <br />
+                  <br />
                   {about}
                 </Text>
               </InfoBox>
             </Row>
-            <Row m={{l: "0.5rem"}}>
+            <Row m={{ l: "0.5rem" }}>
               <InfoBox>
-                <Text textSize="title" textColor="brand900" m={{l: "1.5rem", r: "1.5rem"}}>
+                <Text textSize="title" textColor="brand900" m={{ l: "1.5rem", r: "1.5rem" }}>
                   CLAN LEVEL
                 </Text>
-                <Text textSize="subheader" textColor="brand900" m={{l: "1.5rem", r: "1.5rem"}}>
+                <Text textSize="subheader" textColor="brand900" m={{ l: "1.5rem", r: "1.5rem" }}>
                   LEVEL: {d2ClanProgressions.level}/{d2ClanProgressions.levelCap}
-                  <br/>
+                  <br />
                   TO NEXT LEVEL: {d2ClanProgressions.progressToNextLevel}/{d2ClanProgressions.nextLevelAt}
-                  <br/>
+                  <br />
                   WEEKLY XP EARNED: {d2ClanProgressions.weeklyProgress}/{d2ClanProgressions.weeklyLimit}
-                  <br/>
+                  <br />
                 </Text>
               </InfoBox>
             </Row>
@@ -72,7 +80,7 @@ export default function ClanPage({name, about, motto, memberCount, clanCallSign,
 
 export async function getServerSideProps(context) {
   const { clanid } = context.query
-  const url1 = 'https://www.bungie.net/Platform/GroupV2/'+clanid+'/' //House Fruit: 2084197 Fruit Snaccs: 4599535
+  const url1 = 'https://www.bungie.net/Platform/GroupV2/' + clanid + '/' //House Fruit: 2084197 Fruit Snaccs: 4599535
   const url2 = 'https://www.bungie.net/Platform/Destiny2/Clan/ClanBannerDictionary/'
 
   // Clan details
@@ -93,6 +101,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
+      clanId: clanid,
       name: json1.Response.detail.name,
       about: json1.Response.detail.about,
       motto: json1.Response.detail.motto,
