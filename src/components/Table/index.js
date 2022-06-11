@@ -1,5 +1,5 @@
 import React from "react";
-import { useTable } from "react-table";
+import { useTable, useSortBy } from "react-table";
 import { Div } from "atomize";
 import InfoBox from '../../components/InfoBox'
 
@@ -14,7 +14,9 @@ export default function Table({ columns, data }) {
     } = useTable({
         columns,
         data
-    });
+    },
+        useSortBy
+    );
 
     return (
         <table {...getTableProps()}>
@@ -22,7 +24,12 @@ export default function Table({ columns, data }) {
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
                         {headerGroup.headers.map(column => (
-                            <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                            <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                {column.render("Header")}
+                                <span>
+                                    {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
+                                </span>
+                            </th>
                         ))}
                     </tr>
                 ))}
@@ -34,7 +41,7 @@ export default function Table({ columns, data }) {
                         <tr {...row.getRowProps()}>
                             {row.cells.map(cell => {
                                 return <td {...cell.getCellProps()}>
-                                    <Div m={{l: "0.5rem", r: "0.5rem"}}>
+                                    <Div m={{ l: "0.5rem", r: "0.5rem" }}>
                                         {cell.render("Cell")}
                                     </Div>
                                 </td>;
