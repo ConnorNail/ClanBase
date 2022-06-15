@@ -43,7 +43,7 @@ export default function ClanPage({ clanId, name, about, motto, memberCount, clan
                 <Text textSize="title" textColor="brand900" m={{ l: "1.5rem", r: "1.5rem" }}>
                   DESCRIPTION
                 </Text>
-                <Text textSize="subheader" textColor="brand900" m={{ l: "1.5rem", r: "1.5rem" }}>
+                <Text style={{ whiteSpace: "pre-line" }} textSize="subheader" textColor="brand900" m={{ l: "1.5rem", r: "1.5rem" }}>
                   {memberCount} Members
                   <br />
                   <br />

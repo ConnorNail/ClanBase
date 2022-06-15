@@ -1,7 +1,9 @@
 import { styled, useStyletron } from 'styletron-react'
 import DefaultTemplate from '../components/DefaultLayout'
 import InfoBox from '../components/InfoBox'
-import { ThemeProvider, Div, Text } from "atomize";
+import SearchBar from '../components/SearchBar'
+import { useRouter } from 'next/router'
+import { Container, Button, Text, Row, Col, Image } from "atomize";
 
 // statically styled component
 const Title = styled('h1', {
@@ -18,18 +20,52 @@ const SubTitle = styled('h2', ({ $size }) => ({
 export default function Home() {
   // an alternative hook based API
   const [css] = useStyletron()
+
+  const router = useRouter()
+
   return (
     <DefaultTemplate>
-      <Div>
-        <Text textSize="display1" textColor="brand900" m={{l: "1rem"}}>
-          About Us
-        </Text>
-        <InfoBox>
-          <Text textSize="body" textColor="brand900" m={{l: "1rem"}}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <Container>
+        <Row d="flex" flexDir="column" align="center">
+          <Text textSize="display2" textAlign="center" textWeight="500" textColor="brand900" m={{t: "1rem", b: "0rem"}}>
+            WELCOME TO CLANBASE
           </Text>
-        </InfoBox>
-      </Div>
+          <Text textSize="title" textAlign="center" textColor="brand900" m={{t: "0rem", b: "2rem"}}>
+            The home base for all Destiny Clans
+          </Text>
+        </Row>
+        <Row d="flex" flexDir="column" align="space-around">
+          <SearchBar/>
+        </Row>
+        <Row d="flex" flexDir="column" align="center">
+          <Button m="1rem" bg="none" rounded="md" shadow="5" border="3px solid" borderColor="brand900">
+            <Text textSize="display1" textAlign="center" textColor="brand900">SIGN IN</Text>
+          </Button>
+        </Row>
+        <Row d="flex" flexDir="column" align="center">
+          <InfoBox>
+            <Text textSize="body" textColor="brand900" m={{l: "1rem"}}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </Text>
+          </InfoBox>
+        </Row>
+        <Row d="flex" flexDir="column" align="center">
+          <Row>
+            <Text textSize="display1" textAlign="center" textColor="brand900">Connect With Us</Text>
+          </Row>
+          <Row>
+            <Button m="1rem" h="2.5rem" w="2.5rem" p="0rem" shadow="5" bg="none" onClick={() => location.assign("https://twitter.com/clanbasedev")}>
+              <Image src="twitter.svg"/>
+            </Button>
+            <Button m="1rem" h="2.5rem" w="2.5rem" p="0.5rem" shadow="5" bg="#5865F2" onClick={() => location.assign("https://discord.gg/WDQC97ybAV")}>
+              <Image src="discord.svg"/>
+            </Button>
+            <Button m="1rem" h="2.5rem" w="2.5rem" p="0.5rem" shadow="5" bg="#FF424D" onClick={() => location.assign("https://www.patreon.com/clanbase")}>
+              <Image src="patreon.png"/>
+            </Button>
+          </Row>
+        </Row>
+      </Container>
     </DefaultTemplate>
   )
 }

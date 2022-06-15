@@ -40,7 +40,7 @@ const SearchBar = ({ children }) => {
 
     return (
         <Input
-            placeholder="Search"
+            placeholder="Enter Clan Name"
             onInput={e => {setInput(e.target.value)}}
             onKeyPress={e => {
                 if (e.key === "Enter") {
