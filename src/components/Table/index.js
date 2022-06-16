@@ -1,7 +1,6 @@
 import React from "react";
 import { useTable, useSortBy } from "react-table";
 import { Div } from "atomize";
-import InfoBox from '../../components/InfoBox'
 
 export default function Table({ columns, data }) {
     // Use the useTable Hook to send the columns and data to build the table

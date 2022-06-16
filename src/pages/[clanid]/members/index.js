@@ -7,7 +7,7 @@ import { Div, Text, Image } from "atomize";
 const apikey = '3a85f7e1a4444ec1865efb39ef019313';
 const headers = { 'X-API-Key': apikey }
 
-export default function TestTable({ clanid }) {
+export default function Members({ clanid }) {
     // an alternative hook based API
     const [css] = useStyletron()
 

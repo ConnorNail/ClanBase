@@ -16,12 +16,12 @@ const AppHeader = () => {
     return (
         <header>
             <Div bg="brand900" shadow="5" m={{t: "-0.5rem", l: "-0.5rem", r: "-0.5rem"}}>
-                <Div m={{l: "0.5rem", r: "0.5rem"}}>
+                <Div m={{t: "0.5rem", l: "0.5rem", r: "0.5rem"}}>
                     <Row>
                         <Col>
-                            <Div>
-                                <Button m="1rem" h="8rem" w="8rem" hoverShadow="4" p="0rem" bg="none" onClick={() => router.push("/")}>
-                                    <Image src="clanbaseLogo.svg"/>
+                            <Div m={{l: "1.5rem"}}>
+                                <Button m="1rem" h="auto" w="8rem" hoverShadow="4" p="0rem" bg="none" onClick={() => router.push("/")}>
+                                    <Image src="../clanbaseLogo.svg"/>
                                 </Button>
                             </Div>
                         </Col>
