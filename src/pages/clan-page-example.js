@@ -1,9 +1,10 @@
-import { styled, useStyletron } from 'styletron-react'
-import DefaultTemplate from '../components/DefaultLayout'
+import { styled, useStyletron } from 'styletron-react';
+import DefaultTemplate from '../components/DefaultLayout';
 import { Row, Col, Div, Text } from "atomize";
-import getClanMemberInfo from '../functions/getClanMemberInfo'
+import getClanMemberInfo from '../functions/getClanMemberInfo';
 import setupRosterTable from "../functions/setupRosterTable";
-import getAllMembersProfile from '../functions/getAllMembersProfile'
+import setupRecentMemberTable from "../functions/setupRecentMemberTable";
+import getAllMembersProfile from '../functions/getAllMembersProfile';
 import Table from "../components/Table";
 
 export default function ClanPage() {
@@ -13,13 +14,19 @@ export default function ClanPage() {
   const clanMemberInfo = getClanMemberInfo(2084197)
   const clanMemberProfileInfo = getAllMembersProfile(clanMemberInfo)
   console.log(clanMemberProfileInfo)
-  const [columns, data] = setupRosterTable(clanMemberProfileInfo)
+  const [rosterColumns, rosterData] = setupRosterTable(clanMemberProfileInfo)
+  const [recentColumns, recentData] = setupRecentMemberTable(clanMemberProfileInfo)
 
   return (
     <DefaultTemplate>
-      <Div>
-        <Table columns={columns} data={data}/>
-      </Div>
+      <Row>
+        <Col>
+          <Table columns={rosterColumns} data={rosterData}/>
+        </Col>
+        <Col>
+          <Table columns={recentColumns} data={recentData}/>
+        </Col>
+      </Row>
     </DefaultTemplate>
   )
 }

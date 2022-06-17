@@ -1,8 +1,20 @@
 import React, { useMemo } from "react";
-import { Div, Text, Image } from "atomize";
+import { Div, Text } from "atomize";
 import { displayEmblem, displayEmblemBackground } from "../displayEmblem";
 
-export default function setupRosterTable(data) {
+export default function setupRecentMemberTable(data) {
+
+    function displayDate(date) {
+        const prettyDate = new Date(date).toLocaleString()
+
+        return (
+            <Div bg="info600" rounded="xl" >
+                <Text textSize="body" m={{ l: "0.5rem", r: "0.5rem" }}>
+                    {prettyDate}
+                </Text>
+            </Div>
+        )
+    }
 
     const columns = useMemo(
         () => [
@@ -33,15 +45,13 @@ export default function setupRosterTable(data) {
                         }
                     },
                     {
-                        Header: "Online",
-                        accessor: "isOnline",
+                        Header: "Joined On",
+                        accessor: "joinDate",
                         Cell: ({ cell: { value } }) => {
                             return (
-                                <Div bg={value ? "success600" : "danger600"} rounded="xl" >
-                                    <Text textSize="body" m={{ l: "0.5rem", r: "0.5rem" }}>
-                                        {value ? 'Online' : 'Offline'}
-                                    </Text>
-                                </Div>
+                                <>
+                                    {displayDate(value)}
+                                </>
                             )
                         }
                     },
