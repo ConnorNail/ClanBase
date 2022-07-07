@@ -1,7 +1,12 @@
 import { styled, useStyletron } from 'styletron-react'
 import DefaultTemplate from '../../components/DefaultLayout'
 import InfoBox from '../../components/InfoBox'
-import { Row, Col, Div, Text, Image, Container, Anchor } from "atomize";
+import SearchBar from '../../components/SearchBar'
+import getClanMemberInfo from '../../functions/getClanMemberInfo';
+import setupRosterTable from "../../functions/setupRosterTable";
+import getAllMembersProfile from '../../functions/getAllMembersProfile';
+import Table from "../../components/Table";
+import { Row, Col, Div, Text, Image, Container, Anchor, Icon } from "atomize";
 import Link from 'next/link'
 
 const apikey = '3a85f7e1a4444ec1865efb39ef019313';
@@ -11,24 +16,89 @@ export default function ClanPage({ clanId, name, about, motto, memberCount, clan
   const [css] = useStyletron()
 
   const urlStart = 'https://www.bungie.net/'
+  const clanMemberInfo = getClanMemberInfo(clanId)
+  const clanMemberProfileInfo = getAllMembersProfile(clanMemberInfo)
+  const [rosterColumns, rosterData] = setupRosterTable(clanMemberProfileInfo)
 
   return (
     <DefaultTemplate>
-      <Div>
+      <Div bgImg="../../destinyimage2.png" bgPos="top" bgSize="auto" bgRepeat="no-repeat">
+        <Container d="flex" flexDir="column" align="space-around">
+          <SearchBar />
+        </Container>
+        <Row d="flex" flexDir="column" align="space-around" m={{ l: "2rem", r: "2rem" }}>
+          <InfoBox>
+            <Row>
+              <Text textSize="title" textColor="white" m={{ l: "2rem", r: "2rem" }}>
+                CLAN LEVEL
+              </Text>
+            </Row>
+            <Row>
+              <Col size="2">
+                <Div bg="brand900" rounded="md" m="1rem">
+                  <Container bgImg={urlStart + clanBannerDetails.clanDecalBackgroundURL} bgSize="cover" bgPos="center">
+                    <Image src={urlStart + clanBannerDetails.clanDecalForegroundURL} alt="clan banner"/>
+                  </Container>
+                </Div>
+              </Col>
+              <Col size="3">
+                <Row>
+                  <Text textSize="title" textColor="white" p="0.5rem">
+                    {name} [{clanCallSign}]
+                  </Text>
+                </Row>
+                <Row>
+                  <Text style={{ whiteSpace: "pre-line" }} textSize="h1" textColor="white" p="0.5rem">
+                    {about}
+                  </Text>
+                </Row>
+                <Row>
+                  <Col size="1">
+                    <Icon
+                      name="UserSolid"
+                      size="25px"
+                      color="white"
+                    />
+                  </Col>
+                  <Col size="1">
+                    <Text style={{ whiteSpace: "pre-line" }} textSize="h1" textColor="#D6BF27" p="0.5rem">
+                      {memberCount}
+                    </Text>
+                  </Col>
+                  <Col>
+                    <Text style={{ whiteSpace: "pre-line" }} textSize="h1" textColor="white" p="0.5rem">
+                      Members
+                    </Text>
+                  </Col>
+                </Row>
+              </Col>
+              <Col size="2">
+
+              </Col>
+              <Col size="4">
+
+              </Col>
+              <Col size="1">
+
+              </Col>
+            </Row>
+          </InfoBox>
+        </Row>
+        <Row m={{ l: "2rem", r: "2rem" }}>
+          <InfoBox>
+            <Table columns={rosterColumns} data={rosterData}/>
+          </InfoBox>
+        </Row>
         <Row>
           <InfoBox>
-            <Link href={"/"+clanId+"/members"}>
+            <Link href={"/" + clanId + "/members"}>
               <Anchor textSize="display1" textColor="brand900" hoverTextColor="black800" m="2rem">MEMBERS</Anchor>
             </Link>
           </InfoBox>
         </Row>
         <Row>
           <Col size="2">
-            <Div bg="brand900" rounded="md" m={{ t: "1rem" }}>
-              <Container bgImg={urlStart + clanBannerDetails.clanDecalBackgroundURL} bgSize="cover" bgPos="center">
-                <Image src={urlStart + clanBannerDetails.clanDecalForegroundURL} />
-              </Container>
-            </Div>
+
           </Col>
           <Col size="8">
             <Row m={{ l: "0.5rem" }}>
@@ -47,7 +117,7 @@ export default function ClanPage({ clanId, name, about, motto, memberCount, clan
                   {memberCount} Members
                   <br />
                   <br />
-                  "{motto}"
+                  &quot;{motto}&quot;
                   <br />
                   <br />
                   {about}

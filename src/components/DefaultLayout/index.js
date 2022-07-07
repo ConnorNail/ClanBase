@@ -1,17 +1,14 @@
 import { styled, useStyletron } from 'styletron-react'
-import { Div } from "atomize";
+import { ThemeProvider, Div } from "atomize";
 import AppHeader from '../../components/AppHeader'
 
 const DefaultLayout = ({ children }) => {
     const [css] = useStyletron()
     return (
-      <Div>
-        <AppHeader />
-  
-        {/* Spacer */}
-        <div className="h-12" />
-        {children}
-      </Div>
+        <Div className="font-face-gm" m={{t: "-0.5rem", l: "-0.5rem", r: "-0.5rem"}}>
+          <AppHeader />
+          {children}
+        </Div>
     )
   }
   

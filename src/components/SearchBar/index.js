@@ -31,6 +31,7 @@ const SearchBar = ({ children }) => {
         })})
         .then((res) => res.json())
         .then((data) => {
+            console.log(data)
             router.push('/'+data.Response.detail.groupId)
         })
         .catch((error) => {
@@ -41,6 +42,11 @@ const SearchBar = ({ children }) => {
     return (
         <Input
             placeholder="Enter Clan Name"
+            rounded="circle"
+            bg="#E72F1DBF"
+            borderColor="#F1E9E6"
+            textColor="#F1E9E6"
+            h="3rem"
             onInput={e => {setInput(e.target.value)}}
             onKeyPress={e => {
                 if (e.key === "Enter") {
@@ -52,6 +58,7 @@ const SearchBar = ({ children }) => {
                     name="Search"
                     size="20px"
                     cursor="pointer"
+                    color="#F1E9E6"
                     onClick={(e) => handleSearch(e, true)}
                     pos="absolute"
                     top="50%"

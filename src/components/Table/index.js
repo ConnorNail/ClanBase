@@ -21,9 +21,9 @@ export default function Table({ columns, data }) {
         <table {...getTableProps()}>
             <thead>
                 {headerGroups.map(headerGroup => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
+                    <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
                         {headerGroup.headers.map(column => (
-                            <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                            <th {...column.getHeaderProps(column.getSortByToggleProps())} key={column.id}>
                                 {column.render("Header")}
                                 <span>
                                     {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
@@ -37,9 +37,9 @@ export default function Table({ columns, data }) {
                 {rows.map((row, i) => {
                     prepareRow(row);
                     return (
-                        <tr {...row.getRowProps()}>
+                        <tr {...row.getRowProps()} key={row.id}>
                             {row.cells.map(cell => {
-                                return <td {...cell.getCellProps()}>
+                                return <td {...cell.getCellProps()} key={cell.id}>
                                     <Div m={{ l: "0.5rem", r: "0.5rem" }}>
                                         {cell.render("Cell")}
                                     </Div>
