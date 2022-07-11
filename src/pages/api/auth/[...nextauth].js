@@ -11,14 +11,10 @@ export default NextAuth({
         "X-API-Key": process.env.BUNGIE_API_KEY
       },
       authorization: {
-        url: 'https://www.bungie.net/en/OAuth/Authorize?reauth=true',
+        url: 'https://www.bungie.net/en/OAuth/Authorize?client_id={'+process.env.BUNGIE_CLIENT_ID+'}&response_type=code',
         params: {
            scope: '',
         },
      },
-     token: {
-        url: "https://www.bungie.net/platform/app/oauth/token"
-      }
-    }),
   ]
 })
