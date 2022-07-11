@@ -1,10 +1,10 @@
 @font-face {
-    font-family: "GoldmanBold";
-    src: local("GoldmanBold"),
+    font-family: "NimbusSans";
+    src: local("NimbusSans"),
      url("../fonts/Nimbus-Sans-D-OT-Bold_32747.ttf") format("truetype");
     font-weight: bold;
   }
   
   .font-face-gm {
-    font-family: "GoldmanBold";
+    font-family: "NimbusSans";
   }

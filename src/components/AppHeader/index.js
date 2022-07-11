@@ -15,36 +15,41 @@ const AppHeader = () => {
 
     return (
         <header>
-            <Div bgImg="../redbar.svg" bgPos="left" bgSize={{ h: "auto" }} bgRepeat="no-repeat">
+            <Div bgImg="../redbar.svg" bgPos="top left" bgSize="cover" bgRepeat="no-repeat">
                 <Row>
-                    <Div m={{ l: "1.5rem", t: "1.5rem" }}>
-                        <Button m="1rem" h="auto" w="6rem" hoverShadow="4" p="0rem" bg="none" onClick={() => router.push("/")}>
-                            <Image src="../clanbaseLogo.svg" />
-                        </Button>
-                    </Div>
+                    <Col size="2">
+                        <Div m={{ l: "1.5rem", t: "1.5rem" }}>
+                            <Button m="1rem" h="auto" w="6rem" hoverShadow="4" p="0rem" bg="none" onClick={() => router.push("/")}>
+                                <Image src="../clanbaseLogo.svg" />
+                            </Button>
+                        </Div>
+                    </Col>
+                    <Col size="6">
+                        <Row transform="translate(0%, 100%)" maxW="50rem">
+                            <Col>
+                                <Link href="/2084197">
+                                    <Anchor d="flex" flexDir="column" textSize="title" textAlign="center" textColor="white" hoverTextColor="black800" transform="translate(0%, 50%)">HOME</Anchor>
+                                </Link>
+                            </Col>
+                            <Col>
+                                <Link href="/4599535">
+                                    <Anchor d="flex" flexDir="column" textSize="title" textAlign="center" textColor="white" hoverTextColor="black800">CLAN COMPARISON</Anchor>
+                                </Link>
+                            </Col>
+                            <Col>
+                                <Link href="/test-table">
+                                    <Anchor d="flex" flexDir="column" textSize="title" textAlign="center" textColor="white" hoverTextColor="black800">TOURNAMENT BUILDER</Anchor>
+                                </Link>
+                            </Col>
+                            <Col>
+                                <Link href="/clan-page-example">
+                                    <Anchor d="flex" flexDir="column" textSize="title" textAlign="center" textColor="white" hoverTextColor="black800" transform="translate(0%, 50%)">ABOUT</Anchor>
+                                </Link>
+                            </Col>
+                        </Row>
+                    </Col>
                 </Row>
-                <Row m={{ l: "9rem", r: "29rem" }}>
-                    <Col>
-                        <Link href="/2084197">
-                            <Anchor d="flex" flexDir="column" textSize="title" textAlign="center" textColor="white" hoverTextColor="black800">HOME</Anchor>
-                        </Link>
-                    </Col>
-                    <Col>
-                        <Link href="/4599535">
-                            <Anchor d="flex" flexDir="column" textSize="title" textAlign="center" textColor="white" hoverTextColor="black800">CLAN COMPARISON</Anchor>
-                        </Link>
-                    </Col>
-                    <Col>
-                        <Link href="/test-table">
-                            <Anchor d="flex" flexDir="column" textSize="title" textAlign="center" textColor="white" hoverTextColor="black800">TOURNAMENT BUILDER</Anchor>
-                        </Link>
-                    </Col>
-                    <Col>
-                        <Link href="/clan-page-example">
-                            <Anchor d="flex" flexDir="column" textSize="title" textAlign="center" textColor="white" hoverTextColor="black800">ABOUT</Anchor>
-                        </Link>
-                    </Col>
-                </Row>
+
             </Div>
         </header>
     )

@@ -32,24 +32,25 @@ export default function Home() {
               <Text textSize="title" textAlign="center" textWeight="500" textColor="white" m={{t: "3rem", b: "0rem"}}>
                 WELCOME TO
               </Text>
-              <Text textSize="display3" textAlign="center" textWeight="700" textColor="white" m={{t: "1rem", b: "0rem"}}>
+              <Text textSize="display3" textAlign="center" textWeight="700" textColor="white" m={{t: "0rem", b: "0rem"}}>
                 CLANBASE
               </Text>
               <Text textSize="title" textAlign="center" textColor="white" m={{t: "0rem", b: "2rem"}}>
-                The home base for all Destiny Clans
+                THE HOME BASE FOR ALL DESTINY CLANS
               </Text>
             </Row>
             <Row d="flex" flexDir="column" align="space-around">
               <SearchBar/>
             </Row>
-            <Row d="flex" flexDir="column" align="center">
-              <Button m="1rem" bg="none" rounded="md" shadow="5" border="3px solid" borderColor="brand900">
-                <Text textSize="display1" textAlign="center" textColor="brand900">SIGN IN</Text>
+            <Row d="flex" flexDir="column" align="center" m={{t: "2rem", b: "0rem"}}>
+              <Button m="1rem" bg="none" rounded="md">
+                <Image src="signin.png" alt="sign in" transform="translate(0%, 18%)"/>
+                <Text textSize="display1" textAlign="center" textColor="white" pos="absolute" textAlign="center">SIGN IN</Text>
               </Button>
             </Row>
             <Row d="flex" flexDir="column" align="center">
               <Row>
-                <Text textSize="display1" textAlign="center" textColor="brand900">Connect With Us</Text>
+                <Text textSize="display1" textAlign="center" textColor="white">Connect With Us</Text>
               </Row>
               <Row>
                 <Button m="1rem" h="2.5rem" w="2.5rem" p="0rem" shadow="5" bg="none" onClick={() => location.assign("https://twitter.com/clanbasedev")}>
