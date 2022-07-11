@@ -6,9 +6,9 @@ import './index.css';
 
 export default class MyApp extends App {
   render() {
-    const { Component, pageProps: { session, ...pageProps } } = this.props
+    const { Component, pageProps } = this.props
     return (
-      <SessionProvider session={session}>
+      <SessionProvider session={pageProps.session}>
         <StyletronProvider value={styletron}>
           <Component {...pageProps} />
         </StyletronProvider>
