@@ -11,5 +11,6 @@ export default NextAuth({
         "X-API-Key": process.env.BUNGIE_API_KEY
       }
     }),
-  ]
+  ],
+  secret: process.env.NEXTAUTH_SECRET
 })
