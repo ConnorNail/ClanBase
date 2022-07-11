@@ -12,7 +12,10 @@ export default NextAuth({
       }
     }),
   ],
-  theme: {
-    colorScheme: "light",
-  },
+  authorization: {
+    url: 'https://www.bungie.net/en/OAuth/Authorize?reauth=true',
+    params: {
+       scope: '',
+    },
+ },
 })
