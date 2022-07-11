@@ -46,7 +46,7 @@ export default function Home() {
             <Row d="flex" flexDir="column" align="center" m={{t: "2rem", b: "0rem"}}>
               <Button m="1rem" bg="none" rounded="md">
                 <Image src="signin.png" alt="sign in" transform="translate(0%, 18%)"/>
-                <Text textSize="display1" textAlign="center" textColor="white" pos="absolute" textAlign="center">SIGN IN</Text>
+                <Text textSize="display1" textAlign="center" textColor="white" pos="absolute">SIGN IN</Text>
               </Button>
             </Row>
             <Row d="flex" flexDir="column" align="center">
