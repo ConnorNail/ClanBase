@@ -2,6 +2,7 @@ import { styled, useStyletron } from 'styletron-react'
 import DefaultTemplate from '../components/DefaultLayout'
 import InfoBox from '../components/InfoBox'
 import SearchBar from '../components/SearchBar'
+import LoginButton from '../components/LoginButton'
 import { useRouter } from 'next/router'
 import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
 
@@ -62,6 +63,9 @@ export default function Home() {
                 <Button m="1rem" h="2.5rem" w="2.5rem" p="0.5rem" shadow="5" bg="#FF424D" onClick={() => location.assign("https://www.patreon.com/clanbase")}>
                   <Image src="patreon.png" alt="patreon"/>
                 </Button>
+              </Row>
+              <Row>
+                <LoginButton/>
               </Row>
             </Row>
           </Container>
