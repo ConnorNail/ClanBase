@@ -21,23 +21,15 @@ export default NextAuth({
     theme: {
         colorScheme: "dark"
     },
-    callbacks: {
-        async jwt({ token, user, account }) {
-          if (account && user) {
-            return {
-              ...token,
-              accessToken: user.data.token,
-              refreshToken: user.data.refreshToken,
-            };
-          }
-    
-          return token;
+    logger: {
+        error(code, metadata) {
+            console.error(code, metadata)
         },
-    
-        async session({ session, token }) {
-          session.user.accessToken = token.accessToken;
-            
-          return session;
+        warn(code) {
+            console.warn(code)
         },
-      },
+        debug(code, metadata) {
+            console.debug(code, metadata)
+        }
+      }
 })
