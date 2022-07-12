@@ -23,13 +23,13 @@ export default NextAuth({
     },
     logger: {
         error(code, metadata) {
-            console.error(code, metadata)
+            console.log(code, metadata)
         },
         warn(code) {
-            console.warn(code)
+            console.log(code)
         },
         debug(code, metadata) {
-            console.debug(code, metadata)
+            console.log(code, metadata)
         }
       }
 })
