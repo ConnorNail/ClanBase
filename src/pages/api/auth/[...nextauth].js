@@ -18,17 +18,7 @@ export default NextAuth({
             }
         }),
     ],
-    logger: {
-        error(code, metadata) {
-            log.error(code, metadata)
-        },
-        warn(code) {
-            log.warn(code)
-        },
-        debug(code, metadata) {
-            log.debug(code, metadata)
-        }
-    },
+    debug: true,
     theme: {
         colorScheme: "dark"
     }
