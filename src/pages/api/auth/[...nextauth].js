@@ -21,15 +21,15 @@ export default NextAuth({
     theme: {
         colorScheme: "dark"
     },
-    logger: {
-        error(code, metadata) {
-            console.log(code, metadata)
-        },
-        warn(code) {
-            console.log(code)
-        },
-        debug(code, metadata) {
-            console.log(code, metadata)
+    cookies: {
+        pkceCodeVerifier: {
+          name: `${cookiePrefix}next-auth.pkce.code_verifier`,
+          options: {
+            httpOnly: true,
+            sameSite: 'lax',
+            path: '/',
+            secure: useSecureCookies
+          }
         }
       }
 })
