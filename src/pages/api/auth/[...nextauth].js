@@ -22,17 +22,22 @@ export default NextAuth({
         colorScheme: "dark"
     },
     callbacks: {
-        async signIn({ user, account, profile, email, credentials }) {
-          return true
+        async jwt({ token, user, account }) {
+          if (account && user) {
+            return {
+              ...token,
+              accessToken: user.data.token,
+              refreshToken: user.data.refreshToken,
+            };
+          }
+    
+          return token;
         },
-        async redirect({ url, baseUrl }) {
-          return baseUrl
+    
+        async session({ session, token }) {
+          session.user.accessToken = token.accessToken;
+            
+          return session;
         },
-        async session({ session, user, token }) {
-          return session
-        },
-        async jwt({ token, user, account, profile, isNewUser }) {
-          return token
-        }
-    }
+      },
 })
