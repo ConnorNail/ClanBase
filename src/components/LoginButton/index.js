@@ -19,7 +19,7 @@ const LoginButton = ({ children }) => {
             m={{ r: "0.5rem" }}
             onClick={() => location.assign("https://www.bungie.net/en/OAuth/Authorize?client_id=37316&response_type=code")}
         >
-            Large
+            Login
         </Button>
     )
 }

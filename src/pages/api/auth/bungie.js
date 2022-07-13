@@ -19,22 +19,25 @@ export default function handler(req, res) {
     // }
     const encodedString = Buffer.from(/*process.env.BUNGIE_CLIENT_ID*/ '37316' + ':' + 'FlLSqv37Ry3Hi4x4DirTk3gisQWAcTFihfiJHT6SPt8' /*process.env.BUNGIE_SECRET*/).toString('base64');
 
+    const search = async () => {
+        await fetch('https://www.bungie.net/Platform/App/OAuth/Token/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Basic ' + encodedString,
+                'X-API-Key': '3a85f7e1a4444ec1865efb39ef019313'
+            },
+            body: new URLSearchParams({
+                'client_id': /*process.env.BUNGIE_CLIENT_ID*/ "37316",
+                'grant_type': "authorization_code",
+                'code': code
+            }).toString()
+        }).then(function (response) {
+            console.log(response);
+            return response.json();
+        });
+    }
+    search()
 
-    const data = fetch('https://www.bungie.net/Platform/App/OAuth/Token/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Basic ' + encodedString
-        },
-        body: new URLSearchParams({
-            'client_id': /*process.env.BUNGIE_CLIENT_ID*/ "37316",
-            'grant_type': "authorization_code",
-            'code': code
-        }).toString()
-    }).then(function (response) {
-        console.log(response);
-        return response.json();
-    });
-
-    res.status(200).json({ id: data /*process.env.BUNGIE_CLIENT_ID*/ })
+    res.status(200).json({ id: encodedString /*process.env.BUNGIE_CLIENT_ID*/ })
 }
