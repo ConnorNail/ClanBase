@@ -11,8 +11,9 @@ export default function Login(code) {
 
     useEffect(() => {
         async function getData() {
-            const token = await fetch('https://www.bungie.net/Platform/App/OAuth/Token/client_id=37316&grant_type=authorization_code&code=' + code, {
+            const token = await fetch('https://www.bungie.net/Platform/App/OAuth/Token/client_id=37316&grant_type=authorization_code&code=92b0f431da1118b29bb7c6c652bd577d', {
                 method: 'POST',
+                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Authorization': 'Basic MzczMTY6RmxMU3F2MzdSeTNIaTR4NERpclRrM2dpc1FXQWNURmloZmlKSFQ2U1B0OA==',
