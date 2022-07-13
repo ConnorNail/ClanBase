@@ -1,6 +1,7 @@
 import { styled, useStyletron } from 'styletron-react'
 import DefaultTemplate from '../../components/DefaultLayout'
 import LoginButton from '../../components/LoginButton'
+import userLoggedIn from '../../functions/userLoggedIn'
 import { Row, Col, Div, Text, Image, Container, Anchor, Icon } from "atomize";
 import React, { useEffect } from "react";
 
@@ -12,11 +13,11 @@ export default function Login(code) {
     // an alternative hook based API
     const [css] = useStyletron()
 
-    useEffect(() => {
+    if (userLoggedIn()) {
+        console.log("Logged In!");
+    }
 
-        if (localStorage.getItem("access_token") !== null) {
-            console.log("Logged In!!!")
-        }
+    useEffect(() => {
 
         async function getData() {
             const encodedString = Buffer.from(process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID + ':' + process.env.NEXT_PUBLIC_BUNGIE_SECRET).toString('base64');
@@ -56,7 +57,12 @@ export default function Login(code) {
 }
 
 export async function getServerSideProps(context) {
-    const { code } = context.query
+    // try {
+        const { code } = context.query
+    // } catch (error) {
+    //     const code = ''
+    //     console.error(error)
+    // }
 
     return {
         props: {
