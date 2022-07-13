@@ -3,6 +3,7 @@ import { Button } from "atomize";
 
 const LoginButton = ({ children }) => {
     const [css] = useStyletron()
+    console.log(process.env.BUNGIE_CLIENT_ID)
     return (
         <Button
             h="3.5rem"
@@ -16,7 +17,7 @@ const LoginButton = ({ children }) => {
             borderColor="info700"
             hoverBorderColor="info900"
             m={{ r: "0.5rem" }}
-            onClick={() => location.assign("https://www.bungie.net/en/OAuth/Authorize?client_id=" + process.env.BUNGIE_CLIENT_ID + "&response_type=code")}
+            onClick={() => location.assign("https://www.bungie.net/en/OAuth/Authorize?client_id=" + 37316 + "&response_type=code")}
         >
             Large
         </Button>
