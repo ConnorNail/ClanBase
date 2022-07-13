@@ -13,11 +13,11 @@ export default function Login(code) {
     const [css] = useStyletron()
 
     console.log(code.code)
-    console.log(process.env.BUNGIE_CLIENT_ID)
+    console.log(process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID)
 
     useEffect(() => {
         async function getData() {
-            const encodedString = Buffer.from(/*process.env.BUNGIE_CLIENT_ID*/ clientid + ':' + clientsecret /*process.env.BUNGIE_SECRET*/).toString('base64');
+            const encodedString = Buffer.from(process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID /*clientid*/ + ':' + /*clientsecret*/ process.env.NEXT_PUBLIC_BUNGIE_SECRET).toString('base64');
 
             const token = await fetch('https://www.bungie.net/Platform/App/OAuth/Token/', {
                 method: 'POST',
