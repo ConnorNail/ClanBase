@@ -29,7 +29,7 @@ export default function Login(code) {
                 return response.json();
             });
 
-            console.log("test")
+            console.log(token)
         }
         getData()
 
