@@ -9,8 +9,13 @@ export default NextAuth({
             clientSecret: process.env.BUNGIE_SECRET,
             headers: {
                 "X-API-Key": process.env.BUNGIE_API_KEY
+            },
+            authorization: {
+                params: {
+                    scope: '',
+                },
             }
-        }),
+        })
     ],
     debug: true,
     theme: {
