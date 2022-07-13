@@ -4,6 +4,10 @@ import LoginButton from '../../components/LoginButton'
 import { Row, Col, Div, Text, Image, Container, Anchor, Icon } from "atomize";
 import React, { useEffect } from "react";
 
+const apikey = '3a85f7e1a4444ec1865efb39ef019313';
+const clientid = '37316';
+const clientsecret = 'FlLSqv37Ry3Hi4x4DirTk3gisQWAcTFihfiJHT6SPt8';
+
 export default function Login(code) {
     // an alternative hook based API
     const [css] = useStyletron()
@@ -13,19 +17,17 @@ export default function Login(code) {
 
     useEffect(() => {
         async function getData() {
-            const encodedString = Buffer.from(/*process.env.BUNGIE_CLIENT_ID*/ '37316' + ':' + 'FlLSqv37Ry3Hi4x4DirTk3gisQWAcTFihfiJHT6SPt8' /*process.env.BUNGIE_SECRET*/).toString('base64');
-
-            console.log(encodedString)
+            const encodedString = Buffer.from(/*process.env.BUNGIE_CLIENT_ID*/ clientid + ':' + clientsecret /*process.env.BUNGIE_SECRET*/).toString('base64');
 
             const token = await fetch('https://www.bungie.net/Platform/App/OAuth/Token/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Authorization': 'Basic ' + encodedString,
-                    'X-API-Key': '3a85f7e1a4444ec1865efb39ef019313'
+                    'X-API-Key': apikey
                 },
                 body: new URLSearchParams({
-                    'client_id': /*process.env.BUNGIE_CLIENT_ID*/ "37316",
+                    'client_id': /*process.env.BUNGIE_CLIENT_ID*/ clientid,
                     'grant_type': "authorization_code",
                     'code': code.code
                 }).toString()
