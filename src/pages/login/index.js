@@ -12,11 +12,12 @@ export default function Login(code) {
     // an alternative hook based API
     const [css] = useStyletron()
 
-    if (localStorage.getItem("access_token") !== null) {
-        console.log("Logged In!!!")
-    }
-
     useEffect(() => {
+
+        if (localStorage.getItem("access_token") !== null) {
+            console.log("Logged In!!!")
+        }
+
         async function getData() {
             const encodedString = Buffer.from(process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID + ':' + process.env.NEXT_PUBLIC_BUNGIE_SECRET).toString('base64');
 
