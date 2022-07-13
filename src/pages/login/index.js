@@ -15,11 +15,13 @@ export default function Login(code) {
         async function getData() {
             const encodedString = Buffer.from(/*process.env.BUNGIE_CLIENT_ID*/ '37316' + ':' + 'FlLSqv37Ry3Hi4x4DirTk3gisQWAcTFihfiJHT6SPt8' /*process.env.BUNGIE_SECRET*/).toString('base64');
 
+            console.log(encodedString)
+
             const token = await fetch('https://www.bungie.net/Platform/App/OAuth/Token/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': 'Basic MzczMTY6RmxMU3F2MzdSeTNIaTR4NERpclRrM2dpc1FXQWNURmloZmlKSFQ2U1B0OA==',
+                    'Authorization': 'Basic ' + encodedString,
                     'X-API-Key': '3a85f7e1a4444ec1865efb39ef019313'
                 },
                 body: new URLSearchParams({
