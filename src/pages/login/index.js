@@ -13,7 +13,6 @@ export default function Login(code) {
     const [css] = useStyletron()
 
     console.log(code.code)
-    console.log(process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID)
 
     useEffect(() => {
         async function getData() {
@@ -35,8 +34,12 @@ export default function Login(code) {
                 console.log("data", response);
                 return response.json();
             });
+            
+            localStorage.setItem("access_token", await token.access_token);
+            localStorage.setItem("refresh_token", await token.refresh_token);
+            localStorage.setItem("membership_is", await token.membership_id);
 
-            console.log(token)
+            console.log(await token)
         }
         getData()
 
