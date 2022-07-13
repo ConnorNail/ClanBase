@@ -3,7 +3,7 @@ import { Button } from "atomize";
 
 const LoginButton = ({ children }) => {
     const [css] = useStyletron()
-    console.log(process.env.BUNGIE_CLIENT_ID)
+    console.log(process.env.REACT_APP_BUNGIE_CLIENT_ID)
     return (
         <Button
             h="3.5rem"
