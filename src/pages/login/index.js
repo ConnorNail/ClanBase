@@ -12,7 +12,9 @@ export default function Login(code) {
     // an alternative hook based API
     const [css] = useStyletron()
 
-    console.log(code.code)
+    if (localStorage.getItem("access_token") !== null) {
+        console.log("Logged In!!!")
+    }
 
     useEffect(() => {
         async function getData() {
@@ -38,8 +40,6 @@ export default function Login(code) {
             localStorage.setItem("access_token", await token.access_token);
             localStorage.setItem("refresh_token", await token.refresh_token);
             localStorage.setItem("membership_is", await token.membership_id);
-
-            console.log(await token)
         }
         getData()
 
@@ -56,23 +56,6 @@ export default function Login(code) {
 
 export async function getServerSideProps(context) {
     const { code } = context.query
-
-    // const token = await fetch('https://www.bungie.net/Platform/App/OAuth/Token/', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/x-www-form-urlencoded',
-    //         'Authorization': 'Basic MzczMTY6RmxMU3F2MzdSeTNIaTR4NERpclRrM2dpc1FXQWNURmloZmlKSFQ2U1B0OA==',
-    //         'X-API-Key': '3a85f7e1a4444ec1865efb39ef019313'
-    //     },
-    //     body: new URLSearchParams({
-    //         'client_id': /*process.env.BUNGIE_CLIENT_ID*/ "37316",
-    //         'grant_type': "authorization_code",
-    //         'code': code
-    //     }).toString()
-    // }).then(function (response) {
-    //     console.log("data", response);
-    //     return response.json();
-    // });
 
     return {
         props: {
