@@ -17,17 +17,17 @@ export default function Login(code) {
 
     useEffect(() => {
         async function getData() {
-            const encodedString = Buffer.from(process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID /*clientid*/ + ':' + /*clientsecret*/ process.env.NEXT_PUBLIC_BUNGIE_SECRET).toString('base64');
+            const encodedString = Buffer.from(process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID + ':' + process.env.NEXT_PUBLIC_BUNGIE_SECRET).toString('base64');
 
             const token = await fetch('https://www.bungie.net/Platform/App/OAuth/Token/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Authorization': 'Basic ' + encodedString,
-                    'X-API-Key': apikey
+                    'X-API-Key': process.env.NEXT_PUBLIC_BUNGIE_API_KEY
                 },
                 body: new URLSearchParams({
-                    'client_id': process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID /*clientid*/,
+                    'client_id': process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID,
                     'grant_type': "authorization_code",
                     'code': code.code
                 }).toString()
