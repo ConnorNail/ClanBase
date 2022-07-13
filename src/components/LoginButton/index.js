@@ -1,19 +1,26 @@
-import { useSession, signIn, signOut } from "next-auth/react"
-export default function Component() {
-  const { data: session } = useSession()
-  console.log(session)
-  if (session) {
+import { styled, useStyletron } from 'styletron-react'
+import { Button } from "atomize";
+
+const LoginButton = ({ children }) => {
+    const [css] = useStyletron()
     return (
-      <>
-        Signed in as <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
+        <Button
+            h="3.5rem"
+            p={{ x: "1.5rem" }}
+            textSize="body"
+            textColor="info700"
+            hoverTextColor="info900"
+            bg="white"
+            hoverBg="info200"
+            border="1px solid"
+            borderColor="info700"
+            hoverBorderColor="info900"
+            m={{ r: "0.5rem" }}
+            onClick={() => location.assign("https://www.bungie.net/en/OAuth/Authorize?client_id=" + process.env.BUNGIE_CLIENT_ID + "&response_type=code")}
+        >
+            Large
+        </Button>
     )
-  }
-  return (
-    <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
-    </>
-  )
 }
+
+export default LoginButton
