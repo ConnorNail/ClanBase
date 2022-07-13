@@ -11,18 +11,18 @@ export default function Login(code) {
 
     useEffect(() => {
         async function getData() {
-            const token = await fetch('https://www.bungie.net/Platform/App/OAuth/Token/', {
+            const token = await fetch('https://www.bungie.net/Platform/App/OAuth/Token/client_id=37316&grant_type=authorization_code&code=' + code, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Authorization': 'Basic MzczMTY6RmxMU3F2MzdSeTNIaTR4NERpclRrM2dpc1FXQWNURmloZmlKSFQ2U1B0OA==',
                     'X-API-Key': '3a85f7e1a4444ec1865efb39ef019313'
-                },
-                body: new URLSearchParams({
-                    'client_id': /*process.env.BUNGIE_CLIENT_ID*/ "37316",
-                    'grant_type': "authorization_code",
-                    'code': code
-                }).toString()
+                }//,
+                // body: new URLSearchParams({
+                //     'client_id': /*process.env.BUNGIE_CLIENT_ID*/ "37316",
+                //     'grant_type': "authorization_code",
+                //     'code': code
+                // }).toString()
             }).then(function (response) {
                 console.log("data", response);
                 return response.json();
