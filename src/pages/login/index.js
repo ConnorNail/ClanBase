@@ -27,7 +27,7 @@ export default function Login(code) {
                     'X-API-Key': apikey
                 },
                 body: new URLSearchParams({
-                    'client_id': /*process.env.BUNGIE_CLIENT_ID*/ clientid,
+                    'client_id': process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID /*clientid*/,
                     'grant_type': "authorization_code",
                     'code': code.code
                 }).toString()
