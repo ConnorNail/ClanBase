@@ -2,49 +2,25 @@ import { styled, useStyletron } from 'styletron-react'
 import DefaultTemplate from '../../components/DefaultLayout'
 import LoginButton from '../../components/LoginButton'
 import userLoggedIn from '../../functions/userLoggedIn'
+import getAccessToken from '../../functions/getAccessToken'
 import { Row, Col, Div, Text, Image, Container, Anchor, Icon } from "atomize";
 import React, { useEffect } from "react";
 
-const apikey = '3a85f7e1a4444ec1865efb39ef019313';
-const clientid = '37316';
-const clientsecret = 'FlLSqv37Ry3Hi4x4DirTk3gisQWAcTFihfiJHT6SPt8';
-
 export default function Login(code) {
     // an alternative hook based API
-    const [css] = useStyletron()
+    const [css] = useStyletron();
+
+    let loggedIn = false;
 
     if (userLoggedIn()) {
-        console.log("Logged In!");
+        loggedIn = true;
+        console.log("Logged In!", loggedIn);
     }
 
     useEffect(() => {
-
-        async function getData() {
-            const encodedString = Buffer.from(process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID + ':' + process.env.NEXT_PUBLIC_BUNGIE_SECRET).toString('base64');
-
-            const token = await fetch('https://www.bungie.net/Platform/App/OAuth/Token/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': 'Basic ' + encodedString,
-                    'X-API-Key': process.env.NEXT_PUBLIC_BUNGIE_API_KEY
-                },
-                body: new URLSearchParams({
-                    'client_id': process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID,
-                    'grant_type': "authorization_code",
-                    'code': code.code
-                }).toString()
-            }).then(function (response) {
-                console.log("data", response);
-                return response.json();
-            });
-            
-            localStorage.setItem("access_token", await token.access_token);
-            localStorage.setItem("refresh_token", await token.refresh_token);
-            localStorage.setItem("membership_is", await token.membership_id);
+        if (localStorage.getItem("access_token") == null || localStorage.getItem("access_token") == 'undefined') {
+            getAccessToken(code.code);
         }
-        getData()
-
     }, [])
 
     return (
@@ -58,7 +34,7 @@ export default function Login(code) {
 
 export async function getServerSideProps(context) {
     // try {
-        const { code } = context.query
+    const { code } = context.query
     // } catch (error) {
     //     const code = ''
     //     console.error(error)
