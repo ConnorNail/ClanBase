@@ -1,4 +1,5 @@
 import { styled, useStyletron } from 'styletron-react'
+import refreshAccessToken from '../../functions/refreshAccessToken'
 import { Button } from "atomize";
 
 const LoginButton = ({ children }) => {
@@ -16,7 +17,7 @@ const LoginButton = ({ children }) => {
             borderColor="info700"
             hoverBorderColor="info900"
             m={{ r: "0.5rem" }}
-            onClick={() => location.assign("https://www.bungie.net/en/OAuth/Authorize?client_id=37316&response_type=code")}
+            onClick={() => refreshAccessToken()/*location.assign("https://www.bungie.net/en/OAuth/Authorize?client_id=37316&response_type=code")*/}
         >
             Login
         </Button>

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 export default function refreshAccessToken() {
-
-    useEffect(() => {
         async function getData() {
             const encodedString = Buffer.from(process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID + ':' + process.env.NEXT_PUBLIC_BUNGIE_SECRET).toString('base64');
 
@@ -23,9 +21,8 @@ export default function refreshAccessToken() {
                 return response.json();
             });
 
+            console.log("data", token)
             localStorage.setItem("access_token", await token.access_token);
         }
         getData()
-    }, [])
-
 }
