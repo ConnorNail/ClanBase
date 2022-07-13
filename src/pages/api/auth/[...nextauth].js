@@ -14,22 +14,12 @@ export default NextAuth({
                 params: {
                     scope: '',
                 },
-            }
+            },
+            debug: true,
         }),
     ],
     debug: true,
     theme: {
         colorScheme: "dark"
-    },
-    cookies: {
-        pkceCodeVerifier: {
-          name: `${cookiePrefix}next-auth.pkce.code_verifier`,
-          options: {
-            httpOnly: true,
-            sameSite: 'lax',
-            path: '/',
-            secure: useSecureCookies
-          }
-        }
-      }
+    }
 })
