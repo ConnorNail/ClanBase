@@ -8,6 +8,7 @@ export default function Login(code) {
     // an alternative hook based API
     const [css] = useStyletron()
 
+    console.log(code.code)
 
     useEffect(() => {
         async function getData() {
@@ -21,7 +22,7 @@ export default function Login(code) {
                 body: new URLSearchParams({
                     'client_id': /*process.env.BUNGIE_CLIENT_ID*/ "37316",
                     'grant_type': "authorization_code",
-                    'code': code
+                    'code': code.code
                 }).toString()
             }).then(function (response) {
                 console.log("data", response);
