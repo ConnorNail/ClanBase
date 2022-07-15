@@ -1,8 +1,7 @@
 import { styled, useStyletron } from 'styletron-react'
-import refreshAccessToken from '../../functions/refreshAccessToken'
 import { Button } from "atomize";
 
-const LoginButton = ({ children }) => {
+const LoginButton = () => {
     const [css] = useStyletron()
     return (
         <Button

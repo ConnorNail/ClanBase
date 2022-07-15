@@ -13,18 +13,10 @@ export default function Login(code) {
 
     const router = useRouter();
 
-    console.log(code.code)
-
-    let loggedIn = false;
-
-    if (userLoggedIn()) {
-        loggedIn = true;
-        console.log("Logged In!", loggedIn);
-    }
-
     useEffect(() => {
         if (localStorage.getItem("access_token") == null || localStorage.getItem("access_token") == 'undefined') {
             getAccessToken(code.code);
+            router.push('/')
         } else {
             router.push('/')
         }
