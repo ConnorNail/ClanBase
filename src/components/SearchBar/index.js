@@ -7,7 +7,7 @@ import getAuthInfo from '../../functions/getAuthInfo'
 const SearchBar = () => {
     const [css] = useStyletron()
 
-    const router = useRouter()
+    const router = useRouter();
 
     const headers = getAuthInfo();
 

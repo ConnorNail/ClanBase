@@ -3,12 +3,15 @@ import DefaultTemplate from '../../components/DefaultLayout'
 import LoginButton from '../../components/LoginButton'
 import userLoggedIn from '../../functions/userLoggedIn'
 import getAccessToken from '../../functions/getAccessToken'
+import { useRouter } from 'next/router'
 import { Row, Col, Div, Text, Image, Container, Anchor, Icon } from "atomize";
 import React, { useEffect } from "react";
 
 export default function Login(code) {
     // an alternative hook based API
     const [css] = useStyletron();
+
+    const router = useRouter();
 
     let loggedIn = false;
 
@@ -20,6 +23,8 @@ export default function Login(code) {
     useEffect(() => {
         if (localStorage.getItem("access_token") == null || localStorage.getItem("access_token") == 'undefined') {
             getAccessToken(code.code);
+        } else {
+            router.push('/')
         }
     }, [])
 

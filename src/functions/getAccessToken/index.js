@@ -17,7 +17,6 @@ export default function getAccessToken(code) {
                     'code': code
                 }).toString()
             }).then(function (response) {
-                console.log("data", response);
                 return response.json();
             });
 
