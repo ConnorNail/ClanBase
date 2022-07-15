@@ -18,6 +18,7 @@ export default function Table({ columns, data }) {
     );
 
     return (
+        <Div h="45rem" overflow="hidden scroll" m="1rem">
         <table {...getTableProps()}>
             <thead>
                 {headerGroups.map(headerGroup => (
@@ -50,5 +51,6 @@ export default function Table({ columns, data }) {
                 })}
             </tbody>
         </table>
+        </Div>
     );
 }
