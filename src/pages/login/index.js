@@ -22,7 +22,7 @@ export default function Login(code) {
 
     useEffect(() => {
         if (localStorage.getItem("access_token") == null || localStorage.getItem("access_token") == 'undefined') {
-            getAccessToken(code.code);
+            getAccessToken(code.code, router);
         } else {
             router.push('/')
         }

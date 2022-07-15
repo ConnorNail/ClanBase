@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-export default function getAccessToken(code) {
+export default function getAccessToken(code, router) {
         async function getData() {
             const encodedString = Buffer.from(process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID + ':' + process.env.NEXT_PUBLIC_BUNGIE_SECRET).toString('base64');
 
@@ -23,6 +23,8 @@ export default function getAccessToken(code) {
             localStorage.setItem("access_token", await token.access_token);
             localStorage.setItem("refresh_token", await token.refresh_token);
             localStorage.setItem("membership_is", await token.membership_id);
+
+            router.push('/');
         }
         getData()
 }
