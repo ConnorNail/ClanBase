@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-const apikey = '3a85f7e1a4444ec1865efb39ef019313';
-const headers = { 'X-API-Key': apikey }
-
 export default function getClanMemberInfo(clanid, headers) {
 
     const [data, setData] = useState([]);
