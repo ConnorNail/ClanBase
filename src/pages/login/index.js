@@ -14,8 +14,12 @@ export default function Login(code) {
     const router = useRouter();
 
     useEffect(() => {
+        // If there is no valid access_token
         if (localStorage.getItem("access_token") == null || localStorage.getItem("access_token") == 'undefined' || typeof localStorage.getItem("access_token") == 'undefined') {
-            getAccessToken(code.code, router);
+            // If there is a code get access_token
+            if (code !== '') {
+                getAccessToken(code.code.code, router);
+            }
         } else {
             router.push('/')
         }
@@ -40,7 +44,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            code: code.code
+            code: code
         }
     }
 }
