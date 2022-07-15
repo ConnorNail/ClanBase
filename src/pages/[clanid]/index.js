@@ -19,7 +19,6 @@ export default function ClanPage({ clanId, name, about, motto, memberCount, clan
   const urlStart = 'https://www.bungie.net/'
 
   const headers = getAuthInfo();
-  console.log(getAuthInfo())
   
   const clanMemberInfo = getClanMemberInfo(clanId, headers)
   const clanMemberProfileInfo = getAllMembersProfile(clanMemberInfo, headers)

@@ -6,13 +6,16 @@ import setupRosterTable from "../functions/setupRosterTable";
 import setupRecentMemberTable from "../functions/setupRecentMemberTable";
 import getAllMembersProfile from '../functions/getAllMembersProfile';
 import Table from "../components/Table";
+import getAuthInfo from '../functions/getAuthInfo'
 
 export default function ClanPage() {
   // an alternative hook based API
   const [css] = useStyletron()
 
-  const clanMemberInfo = getClanMemberInfo(2084197)
-  const clanMemberProfileInfo = getAllMembersProfile(clanMemberInfo)
+  const headers = getAuthInfo();
+
+  const clanMemberInfo = getClanMemberInfo(2084197, headers)
+  const clanMemberProfileInfo = getAllMembersProfile(clanMemberInfo, headers)
   console.log(clanMemberProfileInfo)
   const [rosterColumns, rosterData] = setupRosterTable(clanMemberProfileInfo)
   const [recentColumns, recentData] = setupRecentMemberTable(clanMemberProfileInfo)
