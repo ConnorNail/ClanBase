@@ -22,7 +22,7 @@ export default function refreshAccessToken() {
                 return response.json();
             }).catch((error) => {
                 console.error('Error:', error);
-
+                location.assign("https://www.myclanbase.com/login")
             });
 
             console.log("data", token)
