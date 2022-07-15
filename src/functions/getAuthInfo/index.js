@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import refreshAccessToken from '../../functions/refreshAccessToken'
 
 export default function getAuthInfo() {
     const [headers, setHeaders] = useState({})
 
     useEffect(() => {
+        refreshAccessToken()
+
         if (localStorage.getItem("access_token") !== null && localStorage.getItem("access_token") !== 'undefined') {
             setHeaders({
                 'Authorization': 'Bearer ' + localStorage.getItem("access_token"),
