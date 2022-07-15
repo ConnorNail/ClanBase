@@ -4,9 +4,10 @@ import refreshAccessToken from '../../functions/refreshAccessToken'
 export default function getAuthInfo() {
     const [headers, setHeaders] = useState({})
 
-    useEffect(() => {
-        refreshAccessToken()
+    let tokenRefreshed = false;
+    tokenRefreshed = refreshAccessToken()
 
+    useEffect(() => {
         if (localStorage.getItem("access_token") !== null && localStorage.getItem("access_token") !== 'undefined') {
             setHeaders({
                 'Authorization': 'Bearer ' + localStorage.getItem("access_token"),
@@ -17,7 +18,7 @@ export default function getAuthInfo() {
                 'X-API-Key' : process.env.NEXT_PUBLIC_BUNGIE_API_KEY
             })
         }
-    }, [])
+    }, [tokenRefreshed])
 
     return headers;
 }

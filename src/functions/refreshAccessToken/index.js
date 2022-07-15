@@ -28,4 +28,6 @@ export default function refreshAccessToken() {
         localStorage.setItem("membership_is", await token.membership_id);
     }
     getData()
+
+    return true;
 }
