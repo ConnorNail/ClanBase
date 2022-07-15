@@ -7,15 +7,22 @@ import getAuthInfo from '../../functions/getAuthInfo'
 const SearchBar = () => {
     const [css] = useStyletron()
 
+    const [input, setInput] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
     const router = useRouter();
+
+    // Clear states on route change
+    const dynamicRoute = useRouter().asPath;
+    useEffect(() => setInput(''), [dynamicRoute]);
+    useEffect(() => setIsLoading(false), [dynamicRoute]);
 
     const headers = getAuthInfo(false, router);
 
-    const [input, setInput] = useState('')
-
     function handleSearch(e, button) {
         if (input.length > 2) {
-            search()
+            setIsLoading(true);
+            search();
             if (button) {
                 e.target.parentElement.firstChild.value = ''
             } else {
@@ -55,7 +62,7 @@ const SearchBar = () => {
             }}
             suffix={
                 <Icon
-                    name="Search"
+                    name={isLoading ? "Loading" : "Search"}
                     size="20px"
                     cursor="pointer"
                     color="#F1E9E6"
