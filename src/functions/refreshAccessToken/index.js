@@ -23,6 +23,8 @@ export default function refreshAccessToken() {
 
             console.log("data", token)
             localStorage.setItem("access_token", await token.access_token);
+            localStorage.setItem("refresh_token", await token.refresh_token);
+            localStorage.setItem("membership_is", await token.membership_id);
         }
         getData()
 }
