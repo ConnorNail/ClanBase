@@ -9,6 +9,8 @@ const SearchBar = () => {
 
     const router = useRouter()
 
+    const headers = getAuthInfo();
+
     const [input, setInput] = useState('')
 
     function handleSearch(e, button) {
@@ -21,9 +23,6 @@ const SearchBar = () => {
             }
         }
     }
-
-    console.log(getAuthInfo());
-    const headers = getAuthInfo();
 
     const search = async () => {
         await fetch('https://www.bungie.net/Platform/GroupV2/NameV2/', { method: 'post', headers, body: JSON.stringify({

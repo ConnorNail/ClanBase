@@ -6,6 +6,7 @@ import getClanMemberInfo from '../../functions/getClanMemberInfo';
 import setupRosterTable from "../../functions/setupRosterTable";
 import getAllMembersProfile from '../../functions/getAllMembersProfile';
 import Table from "../../components/Table";
+import getAuthInfo from '../../functions/getAuthInfo'
 import { Row, Col, Div, Text, Image, Container, Anchor, Icon } from "atomize";
 import Link from 'next/link'
 
@@ -16,8 +17,12 @@ export default function ClanPage({ clanId, name, about, motto, memberCount, clan
   const [css] = useStyletron()
 
   const urlStart = 'https://www.bungie.net/'
-  const clanMemberInfo = getClanMemberInfo(clanId)
-  const clanMemberProfileInfo = getAllMembersProfile(clanMemberInfo)
+
+  const headers = getAuthInfo();
+  console.log(getAuthInfo())
+  
+  const clanMemberInfo = getClanMemberInfo(clanId, headers)
+  const clanMemberProfileInfo = getAllMembersProfile(clanMemberInfo, headers)
   const [rosterColumns, rosterData] = setupRosterTable(clanMemberProfileInfo)
 
   return (
