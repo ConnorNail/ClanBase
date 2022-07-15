@@ -38,12 +38,7 @@ export default function Login(code) {
 }
 
 export async function getServerSideProps(context) {
-    // try {
-    const { code } = context.query
-    // } catch (error) {
-    //     const code = ''
-    //     console.error(error)
-    // }
+    const code = context.query
 
     return {
         props: {
