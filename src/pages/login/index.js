@@ -14,9 +14,8 @@ export default function Login(code) {
     const router = useRouter();
 
     useEffect(() => {
-        if (localStorage.getItem("access_token") == null || localStorage.getItem("access_token") == 'undefined') {
+        if (localStorage.getItem("access_token") == null || localStorage.getItem("access_token") == 'undefined' || typeof localStorage.getItem("access_token") == 'undefined') {
             getAccessToken(code.code);
-            router.push('/')
         } else {
             router.push('/')
         }
