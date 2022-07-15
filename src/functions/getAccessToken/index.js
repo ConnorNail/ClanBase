@@ -24,6 +24,8 @@ export default function getAccessToken(code, router) {
             localStorage.setItem("access_token", await token.access_token);
             localStorage.setItem("refresh_token", await token.refresh_token);
             localStorage.setItem("membership_is", await token.membership_id);
+
+            router.push('/')
         }
         getData()
     }
