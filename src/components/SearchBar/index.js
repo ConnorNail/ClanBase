@@ -2,12 +2,9 @@ import { styled, useStyletron } from 'styletron-react'
 import React, { useState, useEffect } from 'react';
 import { Input, Icon } from "atomize";
 import { useRouter } from 'next/router'
-import getAccessToken from '../../functions/getAuthInfo'
+import getAuthInfo from '../../functions/getAuthInfo'
 
-const apikey = '3a85f7e1a4444ec1865efb39ef019313';
-const headers = { 'X-API-Key' : apikey }
-
-const SearchBar = ({ children }) => {
+const SearchBar = () => {
     const [css] = useStyletron()
 
     const router = useRouter()
@@ -25,7 +22,8 @@ const SearchBar = ({ children }) => {
         }
     }
 
-    console.log(getAccessToken())
+    console.log(getAuthInfo());
+    const headers = getAuthInfo();
 
     const search = async () => {
         await fetch('https://www.bungie.net/Platform/GroupV2/NameV2/', { method: 'post', headers, body: JSON.stringify({
