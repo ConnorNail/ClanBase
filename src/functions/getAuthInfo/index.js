@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from "react";
 import refreshAccessToken from '../../functions/refreshAccessToken'
 
-export default function getAuthInfo() {
+export default function getAuthInfo(authNeeded, router) {
     const [headers, setHeaders] = useState({})
 
-    // let tokenRefreshed = false;
-    // tokenRefreshed = refreshAccessToken()
-
     useEffect(() => {
+        // If logged in refresh the access token and set the header
         if (localStorage.getItem("access_token") !== null && localStorage.getItem("access_token") !== 'undefined') {
-            // If logged in refresh the access token and set the header
             console.log("Logged In")
             refreshAccessToken()
             setHeaders({
                 'Authorization': 'Bearer ' + localStorage.getItem("access_token"),
-                'X-API-Key' : process.env.NEXT_PUBLIC_BUNGIE_API_KEY
+                'X-API-Key': process.env.NEXT_PUBLIC_BUNGIE_API_KEY
             })
         } else {
-            // If not logged in refresh the access token and set the header
+            // If not logged in
             console.log("NOT Logged In")
-            setHeaders({
-                'X-API-Key' : process.env.NEXT_PUBLIC_BUNGIE_API_KEY
-            })
+            // If authentication is needed route to login screen
+            if (authNeeded) {
+                router.push('/login')
+            } else {
+                // If authentication is not needed set the header
+                setHeaders({
+                    'X-API-Key': process.env.NEXT_PUBLIC_BUNGIE_API_KEY
+                })
+            }
         }
     }, [])
 

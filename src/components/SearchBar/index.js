@@ -1,7 +1,7 @@
 import { styled, useStyletron } from 'styletron-react'
 import React, { useState, useEffect } from 'react';
 import { Input, Icon } from "atomize";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import getAuthInfo from '../../functions/getAuthInfo'
 
 const SearchBar = () => {
@@ -9,7 +9,7 @@ const SearchBar = () => {
 
     const router = useRouter();
 
-    const headers = getAuthInfo();
+    const headers = getAuthInfo(false, router);
 
     const [input, setInput] = useState('')
 

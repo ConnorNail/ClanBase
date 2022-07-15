@@ -1,14 +1,15 @@
-import { styled, useStyletron } from 'styletron-react'
-import DefaultTemplate from '../../components/DefaultLayout'
-import InfoBox from '../../components/InfoBox'
-import SearchBar from '../../components/SearchBar'
+import { styled, useStyletron } from 'styletron-react';
+import DefaultTemplate from '../../components/DefaultLayout';
+import InfoBox from '../../components/InfoBox';
+import SearchBar from '../../components/SearchBar';
 import getClanMemberInfo from '../../functions/getClanMemberInfo';
 import setupRosterTable from "../../functions/setupRosterTable";
 import getAllMembersProfile from '../../functions/getAllMembersProfile';
 import Table from "../../components/Table";
-import getAuthInfo from '../../functions/getAuthInfo'
+import getAuthInfo from '../../functions/getAuthInfo';
+import { useRouter } from 'next/router';
 import { Row, Col, Div, Text, Image, Container, Anchor, Icon } from "atomize";
-import Link from 'next/link'
+import Link from 'next/link';
 
 const apikey = '3a85f7e1a4444ec1865efb39ef019313';
 const headers = { 'X-API-Key': apikey }
@@ -16,9 +17,11 @@ const headers = { 'X-API-Key': apikey }
 export default function ClanPage({ clanId, name, about, motto, memberCount, clanCallSign, d2ClanProgressions, clanBannerDetails }) {
   const [css] = useStyletron()
 
+  const router = useRouter();
+
   const urlStart = 'https://www.bungie.net/'
 
-  const headers = getAuthInfo();
+  const headers = getAuthInfo(true, router);
   
   const clanMemberInfo = getClanMemberInfo(clanId, headers)
   const clanMemberProfileInfo = getAllMembersProfile(clanMemberInfo, headers)

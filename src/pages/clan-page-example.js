@@ -6,13 +6,16 @@ import setupRosterTable from "../functions/setupRosterTable";
 import setupRecentMemberTable from "../functions/setupRecentMemberTable";
 import getAllMembersProfile from '../functions/getAllMembersProfile';
 import Table from "../components/Table";
-import getAuthInfo from '../functions/getAuthInfo'
+import getAuthInfo from '../functions/getAuthInfo';
+import { useRouter } from 'next/router';
 
 export default function ClanPage() {
   // an alternative hook based API
   const [css] = useStyletron()
 
-  const headers = getAuthInfo();
+  const router = useRouter();
+
+  const headers = getAuthInfo(false, router);
 
   const clanMemberInfo = getClanMemberInfo(2084197, headers)
   const clanMemberProfileInfo = getAllMembersProfile(clanMemberInfo, headers)

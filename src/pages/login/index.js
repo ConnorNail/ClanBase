@@ -21,6 +21,7 @@ export default function Login(code) {
                 getAccessToken(code.code.code, router);
             }
         } else {
+            // If there is a valid access_token route to home page
             router.push('/')
         }
     }, [])
@@ -35,12 +36,7 @@ export default function Login(code) {
 }
 
 export async function getServerSideProps(context) {
-    // try {
     const code = context.query
-    // } catch (error) {
-    //     const code = ''
-    //     console.error(error)
-    // }
 
     return {
         props: {
