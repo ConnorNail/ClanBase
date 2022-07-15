@@ -13,6 +13,8 @@ export default function Login(code) {
 
     const router = useRouter();
 
+    console.log(code.code)
+
     let loggedIn = false;
 
     if (userLoggedIn()) {
@@ -22,7 +24,7 @@ export default function Login(code) {
 
     useEffect(() => {
         if (localStorage.getItem("access_token") == null || localStorage.getItem("access_token") == 'undefined') {
-            getAccessToken(code.code, router);
+            getAccessToken(code.code);
         } else {
             router.push('/')
         }
@@ -38,11 +40,16 @@ export default function Login(code) {
 }
 
 export async function getServerSideProps(context) {
+    // try {
     const code = context.query
+    // } catch (error) {
+    //     const code = ''
+    //     console.error(error)
+    // }
 
     return {
         props: {
-            code: code
+            code: code.code
         }
     }
 }
