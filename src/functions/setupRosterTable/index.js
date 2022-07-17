@@ -24,10 +24,9 @@ export default function setupRosterTable(data) {
                         Header: "Name",
                         accessor: "bungieNetUserInfo.supplementalDisplayName",
                         Cell: ({ row }) => {
-
                             return (
                                 <>
-                                    {displayEmblemBackground(row.original.playerProfile, row.original.bungieNetUserInfo.supplementalDisplayName)}
+                                    {displayEmblemBackground(row.original.playerProfile, row.original.destinyUserInfo.LastSeenDisplayName)}
                                 </>
                             )
                         }
