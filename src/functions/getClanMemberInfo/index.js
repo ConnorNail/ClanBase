@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-export default function getClanMemberInfo(clanid, headers) {
-
+export default function getClanMemberInfo(clanid, headers, router) {
     const [data, setData] = useState([]);
+
+    // Clear states on route change
+    const dynamicRoute = router.asPath;
+    useEffect(() => setData([]), [dynamicRoute]);
 
     useEffect(() => {
         const url = 'https://www.bungie.net/Platform/GroupV2/' + clanid + '/Members/';
@@ -18,7 +21,7 @@ export default function getClanMemberInfo(clanid, headers) {
                 })
         }
         getData()
-    }, [headers])
+    }, [headers, dynamicRoute])
 
     return data
 }

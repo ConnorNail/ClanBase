@@ -23,8 +23,8 @@ export default function ClanPage({ clanId, name, about, motto, memberCount, clan
 
   const headers = getAuthInfo(false, router);
   
-  const clanMemberInfo = getClanMemberInfo(clanId, headers)
-  const clanMemberProfileInfo = getAllMembersProfile(clanMemberInfo, headers)
+  const clanMemberInfo = getClanMemberInfo(clanId, headers, router)
+  const clanMemberProfileInfo = getAllMembersProfile(clanMemberInfo, headers, router)
   const [rosterColumns, rosterData] = setupRosterTable(clanMemberProfileInfo)
 
   return (

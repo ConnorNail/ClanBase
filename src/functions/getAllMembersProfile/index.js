@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-export default function getAllMemberProfile(inputData, headers) {
-
+export default function getAllMemberProfile(inputData, headers, router) {
     const [data, setData] = useState([]);
+
+    // Clear states on route change
+    const dynamicRoute = router.asPath;
+    useEffect(() => setData([]), [dynamicRoute]);
 
     useEffect(() => {
 
@@ -26,7 +29,7 @@ export default function getAllMemberProfile(inputData, headers) {
         }
         getData()
         
-    }, [inputData, headers])
+    }, [inputData, headers, dynamicRoute])
 
     return data
 }

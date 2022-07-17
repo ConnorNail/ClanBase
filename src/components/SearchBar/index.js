@@ -13,7 +13,7 @@ const SearchBar = () => {
     const router = useRouter();
 
     // Clear states on route change
-    const dynamicRoute = useRouter().asPath;
+    const dynamicRoute = router.asPath;
     useEffect(() => setInput(''), [dynamicRoute]);
     useEffect(() => setIsLoading(false), [dynamicRoute]);
 

@@ -4,6 +4,10 @@ import refreshAccessToken from '../../functions/refreshAccessToken'
 export default function getAuthInfo(authNeeded, router) {
     const [headers, setHeaders] = useState({})
 
+    // Clear states on route change
+    const dynamicRoute = router.asPath;
+    useEffect(() => setHeaders({}), [dynamicRoute]);
+
     useEffect(() => {
         // If logged in refresh the access token and set the header
         if (localStorage.getItem("access_token") !== null && localStorage.getItem("access_token") !== 'undefined') {
@@ -26,7 +30,7 @@ export default function getAuthInfo(authNeeded, router) {
                 })
             }
         }
-    }, [])
+    }, [dynamicRoute])
 
     return headers;
 }
