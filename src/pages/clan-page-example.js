@@ -4,11 +4,13 @@ import { Row, Col, Div, Text } from "atomize";
 import getClanMemberInfo from '../functions/getClanMemberInfo';
 import setupRosterTable from "../functions/setupRosterTable";
 import setupRecentMemberTable from "../functions/setupRecentMemberTable";
+import setupMemberTime from "../functions/setupMemberTime";
 import getAllMembersProfile from '../functions/getAllMembersProfile';
 import getCurrentSeasonHash from '../functions/getCurrentSeasonHash';
 import getSeasonInfo from '../functions/getSeasonInfo';
 import createSubDateArray from '../functions/createSubDateArray';
 import getAllCharacterStats from '../functions/getAllCharacterStats';
+import formatTotalTime from '../functions/formatTotalTime';
 import Table from "../components/Table";
 import getAuthInfo from '../functions/getAuthInfo';
 import { useRouter } from 'next/router';
@@ -28,16 +30,21 @@ export default function ClanPage() {
   const clanMemberInfo = getClanMemberInfo(2084197, headers, router);
   const clanMemberProfileInfo = getAllMembersProfile(clanMemberInfo, headers, router);
   const clanMemberStatsInfo = getAllCharacterStats(clanMemberProfileInfo, dateArray, headers, router);
+  const clanMemberTimeInfo = formatTotalTime(clanMemberStatsInfo)
+
   const [rosterColumns, rosterData] = setupRosterTable(clanMemberProfileInfo);
   const [recentColumns, recentData] = setupRecentMemberTable(clanMemberProfileInfo);
-
-  console.log(clanMemberStatsInfo);
+  const [timeColumns, timeData] = setupMemberTime(clanMemberTimeInfo)
+  console.log(clanMemberTimeInfo)
 
   return (
     <DefaultTemplate>
       <Row>
         <Col>
           <Table columns={recentColumns} data={recentData}/>
+        </Col>
+        <Col>
+          <Table columns={timeColumns} data={timeData}/>
         </Col>
       </Row>
     </DefaultTemplate>

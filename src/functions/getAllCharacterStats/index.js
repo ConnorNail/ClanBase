@@ -40,16 +40,18 @@ export default function getAllCharacterStats(inputData, dates, headers, router) 
         })
 
         async function getData() {
-            await Promise.all(inputData.map((member, i, array) => {
+            let fetches = [];
+
+            inputData.map((member, i, array) => {
                 const membershipId = member.destinyUserInfo.membershipId;
                 const membershipType = member.destinyUserInfo.membershipType;
                 const characterIDs = member.playerProfile.profile.data.characterIds;
 
                 // Collect data for first character
                 let fullData = member;
-                characterIDs.forEach((characterID) => {
-                    dates.forEach((set) => {
-                        fetch('https://www.bungie.net/Platform/Destiny2/' + membershipType + '/Account/' + membershipId + '/Character/' + characterID + '/Stats/?periodType=Daily&groups=1&dayend=' + set[1] + '&daystart=' + set[0], { headers })
+                characterIDs.map((characterID) => {
+                    dates.map((set) => {
+                        fetches.push(fetch('https://www.bungie.net/Platform/Destiny2/' + membershipType + '/Account/' + membershipId + '/Character/' + characterID + '/Stats/?periodType=Daily&groups=1&dayend=' + set[1] + '&daystart=' + set[0], { headers })
                             .then((res) => res.json())
                             .then((data) => { return { playerStats: data.Response } })
                             .then((data) => {
@@ -64,14 +66,14 @@ export default function getAllCharacterStats(inputData, dates, headers, router) 
                             .catch((error) => {
                                 console.error('Error:', error);
                             })
-                    })
+                    )})
                 })
-
-                return fullData
-
-                // Loop through remaining characters and add data to existing structure
-            }))
+            })
+            
+            // Run all promises
+            await Promise.all(fetches)
             setData(inputData)
+
         }
         getData()
 
