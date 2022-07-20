@@ -49,10 +49,12 @@ function displayEmblemBackground(charInfo, children) {
     // If a valid colors found
     if (typeof colors !== 'undefined') {
         return (
-            <Div bg={'rgba(' + colors.red + ',' + colors.green + ',' + colors.blue + ',1)'} h="3rem" m={{l: '-1.5rem'}}>
+            <Div bg={'rgba(' + colors.red + ',' + colors.green + ',' + colors.blue + ',1)'} h="3rem" m={{l: '-4.24rem'}}>
+                <Div m={{l: '3rem'}}>
                 <Text textColor="white" p='1rem'>
                     {children}
                 </Text>
+                </Div>
             </Div>
         )
     } else {

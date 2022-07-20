@@ -43,6 +43,17 @@ export default function setupMemberTime(data) {
                         }
                     },
                     {
+                        Header: "Total Time",
+                        accessor: "playerStats.totalTime",
+                        Cell: ({ cell: { value } }) => {
+                            return (
+                                <>
+                                    {getDisplayTime(value)}
+                                </>
+                            )
+                        }
+                    },
+                    {
                         Header: "PvE Time",
                         accessor: "playerStats.allPvE.totalTime",
                         Cell: ({ cell: { value } }) => {

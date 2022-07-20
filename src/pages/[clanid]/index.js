@@ -4,7 +4,13 @@ import InfoBox from '../../components/InfoBox';
 import SearchBar from '../../components/SearchBar';
 import getClanMemberInfo from '../../functions/getClanMemberInfo';
 import setupRosterTable from "../../functions/setupRosterTable";
+import setupMemberTime from "../../functions/setupMemberTime";
 import getAllMembersProfile from '../../functions/getAllMembersProfile';
+import getCurrentSeasonHash from '../../functions/getCurrentSeasonHash';
+import getSeasonInfo from '../../functions/getSeasonInfo';
+import createSubDateArray from '../../functions/createSubDateArray';
+import getAllCharacterStats from '../../functions/getAllCharacterStats';
+import formatTotalTime from '../../functions/formatTotalTime';
 import Table from "../../components/Table";
 import getAuthInfo from '../../functions/getAuthInfo';
 import { useRouter } from 'next/router';
@@ -22,10 +28,18 @@ export default function ClanPage({ clanId, name, about, motto, memberCount, clan
   const urlStart = 'https://www.bungie.net/'
 
   const headers = getAuthInfo(false, router);
+
+  const currentSeasonHash = getCurrentSeasonHash(headers, router);
+  const currentSeasonInfo = getSeasonInfo(currentSeasonHash, headers, router);
+  const dateArray = createSubDateArray(currentSeasonInfo.startDate, currentSeasonInfo.endDate);
   
   const clanMemberInfo = getClanMemberInfo(clanId, headers, router)
   const clanMemberProfileInfo = getAllMembersProfile(clanMemberInfo, headers, router)
+  const clanMemberStatsInfo = getAllCharacterStats(clanMemberProfileInfo, dateArray, headers, router);
+  const clanMemberTimeInfo = formatTotalTime(clanMemberStatsInfo)
+
   const [rosterColumns, rosterData] = setupRosterTable(clanMemberProfileInfo)
+  const [timeColumns, timeData] = setupMemberTime(clanMemberTimeInfo)
 
   return (
     <DefaultTemplate>
@@ -93,7 +107,7 @@ export default function ClanPage({ clanId, name, about, motto, memberCount, clan
         </Row>
         <Row m={{ l: "2rem", r: "2rem" }}>
           <InfoBox>
-            <Table columns={rosterColumns} data={rosterData}/>
+            <Table columns={timeColumns} data={timeData}/>
           </InfoBox>
         </Row>
         <Row>
