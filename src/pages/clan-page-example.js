@@ -12,8 +12,10 @@ import createSubDateArray from '../functions/createSubDateArray';
 import getAllCharacterStats from '../functions/getAllCharacterStats';
 import formatTotalTime from '../functions/formatTotalTime';
 import Table from "../components/Table";
+import SmallTable from "../components/SmallTable";
 import getAuthInfo from '../functions/getAuthInfo';
 import { useRouter } from 'next/router';
+import Image from 'next/image'
 
 export default function ClanPage() {
   // an alternative hook based API
@@ -39,13 +41,21 @@ export default function ClanPage() {
 
   return (
     <DefaultTemplate>
+      <Image
+        src="/loading.gif"
+        width={250}
+        height={250}
+      />
       <Row>
         <Col>
-          <Table columns={recentColumns} data={recentData}/>
+          <SmallTable columns={recentColumns} data={recentData} />
         </Col>
         <Col>
-          <Table columns={timeColumns} data={timeData}/>
+          <Table columns={timeColumns} data={timeData} />
         </Col>
+      </Row>
+      <Row>
+        <Table columns={rosterColumns} data={rosterData} />
       </Row>
     </DefaultTemplate>
   )

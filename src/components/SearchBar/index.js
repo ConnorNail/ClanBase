@@ -54,6 +54,7 @@ const SearchBar = () => {
             borderColor="#F1E9E6"
             textColor="#F1E9E6"
             h="3rem"
+            m={{t: "2rem", b: "1rem"}}
             onInput={e => {setInput(e.target.value)}}
             onKeyPress={e => {
                 if (e.key === "Enter") {
