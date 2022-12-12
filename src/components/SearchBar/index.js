@@ -50,11 +50,14 @@ const SearchBar = () => {
         <Input
             placeholder="Enter Clan Name"
             rounded="circle"
-            bg="#E72F1DBF"
-            borderColor="#F1E9E6"
-            textColor="#F1E9E6"
-            h="3rem"
-            m={{t: "2rem", b: "1rem"}}
+            bg="cbRed"
+            borderColor="cbWhite"
+            hoverBorderColor="cbWhite"
+            foucsBorderColor="cbWhite"
+            textColor="cbWhite"
+            focusTextColor="cbWhite"
+            hoverTextColor="cbWhite"
+            h="2rem"
             onInput={e => {setInput(e.target.value)}}
             onKeyPress={e => {
                 if (e.key === "Enter") {
@@ -66,7 +69,7 @@ const SearchBar = () => {
                     name={isLoading ? "Loading" : "Search"}
                     size="20px"
                     cursor="pointer"
-                    color="#F1E9E6"
+                    color="cbWhite"
                     onClick={(e) => handleSearch(e, true)}
                     pos="absolute"
                     top="50%"

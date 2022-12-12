@@ -1,15 +1,21 @@
 import { styled, useStyletron } from 'styletron-react'
 import { ThemeProvider, Div } from "atomize";
 import AppHeader from '../../components/AppHeader'
+import AppFooter from '../../components/AppFooter'
+import theme from '../../theme'
 
 const DefaultLayout = ({ children }) => {
-    const [css] = useStyletron()
-    return (
-        <Div className="font-face-gm" m={{t: "-0.5rem", l: "-0.5rem", r: "-0.5rem"}} overflow="hidden">
-          <AppHeader />
-          {children}
-        </Div>
-    )
-  }
-  
-  export default DefaultLayout
+  const [css] = useStyletron()
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Div className="font-face-gm" m="-0.5rem" overflow="hidden" bg="cbRed">
+        <AppHeader />
+        {children}
+        <AppFooter />
+      </Div>
+    </ThemeProvider>
+  )
+}
+
+export default DefaultLayout

@@ -2,16 +2,14 @@
 import React, { useState } from 'react';
 import { Dropdown, Anchor, Div, Icon } from "atomize";
 import Link from 'next/link';
-
-
-const linkList = ["/2084197", "/4599535", "/test-table", "/clan-page-example"]
+import pageList from '../../components/pageList'
 
 const menuList = (
     <Div p={{ x: "1rem", y: "0.5rem" }} bg="brand900" shadow="4">
-        {["HOME", "CLAN COMPARISON", "TOURNAMENT BUILDER", "ABOUT"].map((name, index) => (
-            <Link href={linkList[index]}>
-                <Anchor d="block" p={{ y: "0.25rem" }} textSize="subheader" textColor="gray100" hoverTextColor="gray400" p={{ t: "0.5rem", b: "0.25rem" }}>
-                    {name}
+        {pageList.map((list, index) => (
+            <Link href={list.link}>
+                <Anchor d="block" p={{ y: "0.5rem", x: "0.5rem" }} textSize="subheader" textColor="gray100" hoverTextColor="gray400" >
+                    {list.name}
                 </Anchor>
             </Link>
         ))}
@@ -32,9 +30,9 @@ class MenuDropDown extends React.Component {
 
         return (
             <Dropdown
-                bg=""
-                focusBg=""
-                border=""
+                bg="transparent"
+                focusBg="transparent"
+                border="transparent"
                 h="5rem"
                 direction="bottomright"
                 isOpen={showDropdown}
