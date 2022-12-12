@@ -4,6 +4,7 @@ import { Div, Anchor, Button, Row, Col, Image, Icon } from "atomize";
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import SearchBar from '../../components/SearchBar'
+import MenuDropDown from '../../components/MenuDropDown'
 
 const apikey = '3a85f7e1a4444ec1865efb39ef019313';
 const headers = { 'X-API-Key': apikey }
@@ -17,14 +18,14 @@ const AppHeader = () => {
         <header>
             <Div bgImg="../redbar.svg" bgPos="top left" bgSize="cover" bgRepeat="no-repeat">
                 <Row>
-                    <Col size="2">
-                        <Div m={{ l: "1.5rem", t: "1.5rem" }}>
+                    <Col size="flex">
+                        <Div>
                             <Button m="1rem" h="auto" w="6rem" hoverShadow="4" p="0rem" bg="none" onClick={() => router.push("/")}>
                                 <Image src="../clanbaseLogo.svg" />
                             </Button>
                         </Div>
                     </Col>
-                    <Col size="6">
+                    <Col size="8" d={{ xs: "none", lg: "block" }}>
                         <Row transform="translate(0%, 100%)" maxW="50rem">
                             <Col>
                                 <Link href="/2084197">
@@ -48,6 +49,15 @@ const AppHeader = () => {
                             </Col>
                         </Row>
                     </Col>
+                    <Col ></Col>
+                    <Col size="flex" d={{ xs: "block", lg: "none" }} align="flex-end">
+                        <Row transform="translate(0%, 40%)" p={{ r: "2rem"}}>
+                            <MenuDropDown/>
+                        </Row>
+                    </Col>
+                    {/* <Col>
+                     <SearchBar/>
+                    </Col> */}
                 </Row>
 
             </Div>

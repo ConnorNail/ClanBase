@@ -1,0 +1,53 @@
+// Small Size Dropdown
+import React, { useState } from 'react';
+import { Dropdown, Anchor, Div, Icon } from "atomize";
+import Link from 'next/link';
+
+
+const linkList = ["/2084197", "/4599535", "/test-table", "/clan-page-example"]
+
+const menuList = (
+    <Div p={{ x: "1rem", y: "0.5rem" }} bg="brand900" shadow="4">
+        {["HOME", "CLAN COMPARISON", "TOURNAMENT BUILDER", "ABOUT"].map((name, index) => (
+            <Link href={linkList[index]}>
+                <Anchor d="block" p={{ y: "0.25rem" }} textSize="subheader" textColor="gray100" hoverTextColor="gray400" p={{ t: "0.5rem", b: "0.25rem" }}>
+                    {name}
+                </Anchor>
+            </Link>
+        ))}
+    </Div>
+);
+
+class MenuDropDown extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showDropdown: false,
+        };
+    }
+
+    render() {
+        const { showDropdown } = this.state;
+
+        return (
+            <Dropdown
+                bg=""
+                focusBg=""
+                border=""
+                h="5rem"
+                direction="bottomright"
+                isOpen={showDropdown}
+                onClick={() =>
+                    this.setState({ showDropdown: !showDropdown })
+                }
+                openSuffix={<Icon name="UpArrow" size="80px" color="gray100" />}
+                closeSuffix={<Icon name="Menu" size="80px" color="gray100" />}
+                menu={menuList}
+            >
+            </Dropdown>
+        );
+    }
+}
+
+export default MenuDropDown;
