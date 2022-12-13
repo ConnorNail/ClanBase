@@ -26,7 +26,7 @@ const AppHeader = () => {
                     <Col size="flex" d={{ xs: "none", md: "block" }}>
                         <Row p={{ t: "1.5rem" }}>
                             {pageList.map((list, index) => (
-                                <Col>
+                                <Col key={index}>
                                     <Link href={list.link}>
                                         <Anchor p={{ l: "2rem", r: "2rem" }} d="flex" flexDir="column" textSize="title" textAlign="center" textColor="cbWhite" hoverTextColor="black800">
                                             {list.name}

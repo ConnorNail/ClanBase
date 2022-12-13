@@ -53,7 +53,6 @@ const SearchBar = () => {
             bg="cbRed"
             borderColor="cbWhite"
             hoverBorderColor="cbWhite"
-            foucsBorderColor="cbWhite"
             textColor="cbWhite"
             focusTextColor="cbWhite"
             hoverTextColor="cbWhite"

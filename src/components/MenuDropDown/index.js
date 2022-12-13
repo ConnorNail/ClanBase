@@ -7,8 +7,8 @@ import pageList from '../../components/pageList'
 const menuList = (
     <Div p={{ x: "1rem", y: "0.5rem" }} bg="brand900" shadow="4">
         {pageList.map((list, index) => (
-            <Link href={list.link}>
-                <Anchor d="block" p={{ y: "0.5rem", x: "0.5rem" }} textSize="subheader" textColor="gray100" hoverTextColor="gray400" >
+            <Link href={list.link} key={index}>
+                <Anchor d="block" p={{ y: "0.5rem", x: "0.5rem" }} textSize="subheader" textColor="gray100" hoverTextColor="gray400">
                     {list.name}
                 </Anchor>
             </Link>

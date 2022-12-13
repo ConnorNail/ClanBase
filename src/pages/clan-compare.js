@@ -69,18 +69,18 @@ export default function Home() {
                     </Row>
                     <Row>
                         {data.map((clan, index) => (
-                            <Col>
+                            <Col key={index}>
                                 <ClanCard clanName={clan.clanName} stats={clan.stats} />
                             </Col>
                         ))}
                         <Col>
                             <InfoBox>
-                                <Div p={{ x: "1rem" }} h="25rem" d="flex" align="center">
+                                <Div p={{ x: "1rem" }} h="25rem" d="flex" align="center auto">
                                     <Col>
-                                    <Text textSize="subheader" p={{ b: "1rem" }}>
-                                        Add a Clan to Compare
-                                    </Text>
-                                    <SearchBar />
+                                        <Text textSize="title" p={{ b: "1rem" }} textAlign="center">
+                                            Add a Clan
+                                        </Text>
+                                        <SearchBar />
                                     </Col>
                                 </Div>
                             </InfoBox>
