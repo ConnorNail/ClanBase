@@ -13,7 +13,7 @@ const ClanCard = ({ clanName, stats }) => {
                 <Div bg="cbWhite" w="auto" h="0.1rem" m={{ y: "0.5rem" }}></Div>
                 {stats.map((stat, index) => (
                     <Row p={{ y: "0.5rem" }} key={index}>
-                        <Col size="9" >
+                        <Col size="8" >
                             <Text textSize="subtitle" >
                                 {stat.name}:
                             </Text>

@@ -3,7 +3,7 @@ import { Input, Icon } from "atomize";
 import { useRouter } from 'next/router';
 import getAuthInfo from '../../functions/getAuthInfo'
 
-const SearchBar = () => {
+const CompareSearchBar = () => {
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
@@ -16,10 +16,23 @@ const SearchBar = () => {
 
     const headers = getAuthInfo(false, router);
 
+    const queryKeys = Object.keys(router.query)
+    const nextQueryKey = "c" + queryKeys.length
+
+    const updateQuery = (newValue) => {
+        const newQuery = {}
+        newQuery[nextQueryKey] = encodeURI(newValue)
+        router.push({
+            pathname: '/clan-compare',
+            query: { ...router.query, ...newQuery },
+        });
+    };
+
     function handleSearch(e, button) {
         if (input.length > 2) {
             setIsLoading(true);
-            search();
+            // search(); // Uncoment when API is back up ***************************************
+            updateQuery(input) // Do not pass input but instead pass clanId once recieved from search() ***************************************
             if (button) {
                 e.target.parentElement.firstChild.value = ''
             } else {
@@ -77,4 +90,4 @@ const SearchBar = () => {
     )
   }
   
-  export default SearchBar
+  export default CompareSearchBar
