@@ -7,7 +7,7 @@ import LoginButton from '../components/LoginButton'
 import { useRouter } from 'next/router'
 import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
 
-export default function Home() {
+export default function clanCompare() {
     const router = useRouter()
 
     const maxCards = 7;
@@ -20,6 +20,7 @@ export default function Home() {
     // Temp data
     //**************************************************************
     const clan1Stats = {
+        clanId: "123124151123",
         clanName: "Clan 1",
         stats: [
             {
@@ -34,6 +35,7 @@ export default function Home() {
     }
 
     const clan2Stats = {
+        clanId: "22312415125",
         clanName: "Clan 2",
         stats: [
             {
@@ -48,6 +50,7 @@ export default function Home() {
     }
 
     const clan3Stats = {
+        clanId: "32312415125",
         clanName: "Clan 3",
         stats: [
             {
@@ -68,9 +71,19 @@ export default function Home() {
     ]
     //**************************************************************
 
+    // Count the number of queries
+    var clanCount = 0;
+    if (Array.isArray(queryObj.clanids)) {
+        clanCount = queryObj.clanids.length
+    } else if (typeof queryObj?.clanids !== 'undefined') {
+        clanCount = 1
+    } else {
+        clanCount = 0
+    }
+
     // Fetch clan data from API for each clan id. Do this with a function below
     const keys = Object.keys(queryObj)
-    for (let i = 0; i < keys.length; i++) {
+    for (let i = 0; i < clanCount; i++) {
         const clanId = queryObj[keys[i]]
 
         // Run function with clanId as an input. Return the data object
@@ -90,7 +103,7 @@ export default function Home() {
                     <Row>
                         {data.map((clan, index) => (
                             <Col key={index}>
-                                <ClanCard clanName={clan.clanName} stats={clan.stats} />
+                                <ClanCard clanId={clan.clanId} clanName={clan.clanName} stats={clan.stats} />
                             </Col>
                         ))}
                         {keys.length < maxCards ?
