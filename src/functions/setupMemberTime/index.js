@@ -37,7 +37,7 @@ export default function setupMemberTime(data) {
 
                             return (
                                 <>
-                                    {displayEmblemBackground(row.original.playerProfile, row.original.bungieNetUserInfo.supplementalDisplayName)}
+                                    {displayEmblemBackground(row.original.playerProfile, row.original.bungieNetUserInfo?.supplementalDisplayName)}
                                 </>
                             )
                         }
