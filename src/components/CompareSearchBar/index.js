@@ -39,13 +39,13 @@ const CompareSearchBar = () => {
     function handleSearch(e, button) {
         if (input.length > 2) {
             setIsLoading(true);
-            // search(); // Uncoment when API is back up ***************************************
+            search(); // Uncoment when API is back up ***************************************
             if (button) {
                 e.target.parentElement.firstChild.value = ''
             } else {
                 e.target.value = ''
             }
-            addQuery(input) // Do not pass input but instead pass clanId once recieved from search() ***************************************
+            // addQuery(input) // Do not pass input but instead pass clanId once recieved from search() ***************************************
         }
     }
 
@@ -58,8 +58,8 @@ const CompareSearchBar = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
-                router.push('/' + data.Response.detail.groupId)
+                console.log(data.Response.detail.groupId)
+                addQuery(data.Response.detail.groupId)
             })
             .catch((error) => {
                 console.log(error)
