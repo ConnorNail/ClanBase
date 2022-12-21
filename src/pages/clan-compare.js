@@ -1,9 +1,8 @@
-import { styled, useStyletron } from 'styletron-react'
 import DefaultTemplate from '../components/DefaultLayout'
 import ClanCard from '../components/ClanCard'
 import InfoBox from '../components/InfoBox'
 import CompareSearchBar from '../components/CompareSearchBar'
-import LoginButton from '../components/LoginButton'
+import getClanInfo from "../functions/getClanInfo";
 import { useRouter } from 'next/router'
 import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
 
@@ -73,23 +72,32 @@ export default function clanCompare() {
 
     // Count the number of queries
     var clanCount = 0;
+    const clanids = []
     if (Array.isArray(queryObj.clanids)) {
         clanCount = queryObj.clanids.length
+        clanids.push(...queryObj.clanids)
     } else if (typeof queryObj?.clanids !== 'undefined') {
         clanCount = 1
-    } else {
-        clanCount = 0
+        clanids.push(queryObj.clanids)
     }
+    
+    console.log(clanids)
+    console.log(getClanInfo(clanids))
 
     // Fetch clan data from API for each clan id. Do this with a function below
     const keys = Object.keys(queryObj)
+
     for (let i = 0; i < clanCount; i++) {
-        const clanId = queryObj[keys[i]]
+        clanids.push(queryObj.clanids[i])
 
         // Run function with clanId as an input. Return the data object
-        const clanData = clan1Stats // Replace with API call function ************************************************************
-        data.push(clanData)
+        // console.log(getClanInfo(clanids))
+        // const clanData = clan1Stats // Replace with API call function ************************************************************
+        // data.push(clanData)
     }
+    // console.log(clanids)
+    // console.log(getClanInfo([2084197, 4599535]))
+    // console.log(getClanInfo(clanids))
 
     return (
         <DefaultTemplate>

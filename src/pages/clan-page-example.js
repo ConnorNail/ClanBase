@@ -11,7 +11,7 @@ import SmallTable from "../components/SmallTable";
 import Image from 'next/image'
 
 export default function ClanPage() {
-
+  
   const clanMemberProfileInfo = getClanMemberProfileInfo();
   const clanMemberStatsInfo = getClanMemberStatsInfo(clanMemberProfileInfo);
   const clanMemberTimeInfo = formatTotalTime(clanMemberStatsInfo)
@@ -19,7 +19,6 @@ export default function ClanPage() {
   const [rosterColumns, rosterData] = setupRosterTable(clanMemberProfileInfo);
   const [recentColumns, recentData] = setupRecentMemberTable(clanMemberProfileInfo);
   const [timeColumns, timeData] = setupMemberTime(clanMemberTimeInfo)
-  console.log(clanMemberTimeInfo)
 
   return (
     <DefaultTemplate>

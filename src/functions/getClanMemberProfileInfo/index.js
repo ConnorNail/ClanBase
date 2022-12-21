@@ -4,7 +4,6 @@ import getAuthInfo from '../../functions/getAuthInfo';
 import { useRouter } from 'next/router';
 
 export default function getClanMemberProfileInfo() {
-
   const router = useRouter();
 
   const headers = getAuthInfo(false, router);
