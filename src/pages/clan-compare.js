@@ -14,12 +14,12 @@ export default function clanCompare() {
     // Get query string from URL
     const queryObj = router.query
 
-    const data = []
+    const clanids = []
 
     // Temp data
     //**************************************************************
     const clan1Stats = {
-        clanId: "123124151123",
+        clanId: "2084197",
         clanName: "Clan 1",
         stats: [
             {
@@ -34,7 +34,7 @@ export default function clanCompare() {
     }
 
     const clan2Stats = {
-        clanId: "22312415125",
+        clanId: "4599535",
         clanName: "Clan 2",
         stats: [
             {
@@ -65,14 +65,12 @@ export default function clanCompare() {
 
     const testData = [
         clan1Stats,
-        clan2Stats,
-        clan3Stats
+        clan2Stats
     ]
     //**************************************************************
 
     // Count the number of queries
     var clanCount = 0;
-    const clanids = []
     if (Array.isArray(queryObj.clanids)) {
         clanCount = queryObj.clanids.length
         clanids.push(...queryObj.clanids)
@@ -80,24 +78,6 @@ export default function clanCompare() {
         clanCount = 1
         clanids.push(queryObj.clanids)
     }
-    
-    console.log(clanids)
-    console.log(getClanInfo(clanids))
-
-    // Fetch clan data from API for each clan id. Do this with a function below
-    const keys = Object.keys(queryObj)
-
-    for (let i = 0; i < clanCount; i++) {
-        clanids.push(queryObj.clanids[i])
-
-        // Run function with clanId as an input. Return the data object
-        // console.log(getClanInfo(clanids))
-        // const clanData = clan1Stats // Replace with API call function ************************************************************
-        // data.push(clanData)
-    }
-    // console.log(clanids)
-    // console.log(getClanInfo([2084197, 4599535]))
-    // console.log(getClanInfo(clanids))
 
     return (
         <DefaultTemplate>
@@ -109,12 +89,12 @@ export default function clanCompare() {
                         </Text>
                     </Row>
                     <Row>
-                        {data.map((clan, index) => (
+                        {clanids.map((id, index) => (
                             <Col key={index}>
-                                <ClanCard clanId={clan.clanId} clanName={clan.clanName} stats={clan.stats} />
+                                <ClanCard clanId={id} />
                             </Col>
                         ))}
-                        {keys.length < maxCards ?
+                        {clanCount < maxCards ?
                             <Col>
                                 <InfoBox>
                                     <Div p={{ x: "1rem" }} h="25rem" d="flex" align="center auto">

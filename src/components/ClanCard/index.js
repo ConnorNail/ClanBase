@@ -1,8 +1,9 @@
 import { Div, Text, Row, Col, Button, Icon } from "atomize";
 import InfoBox from '../InfoBox'
 import { useRouter } from 'next/router';
+import getClanInfo from "../../functions/getClanInfo";
 
-const ClanCard = ({ clanId, clanName, stats }) => {
+const ClanCard = ({ clanId, stats }) => {
 
     const router = useRouter();
 
@@ -31,13 +32,15 @@ const ClanCard = ({ clanId, clanName, stats }) => {
         });
     };
 
+    const data = getClanInfo(clanId)
+
     return (
         <InfoBox>
             <Div p={{ x: "1rem" }} h="25rem">
                 <Row>
                     <Col d="flex" align="center">
                         <Text textSize="title">
-                            {clanName}
+                            {data?.Response?.detail?.name}
                         </Text>
                     </Col>
                     <Col size="flex">
@@ -56,7 +59,7 @@ const ClanCard = ({ clanId, clanName, stats }) => {
                     </Col>
                 </Row>
                 <Div bg="cbWhite" w="auto" h="0.1rem" m={{ y: "0.5rem" }}></Div>
-                {stats.map((stat, index) => (
+                {/* {stats.map((stat, index) => (
                     <Row p={{ y: "0.5rem" }} key={index}>
                         <Col size="8" >
                             <Text textSize="subtitle" >
@@ -69,7 +72,7 @@ const ClanCard = ({ clanId, clanName, stats }) => {
                             </Text>
                         </Col>
                     </Row>
-                ))}
+                ))} */}
             </Div>
         </InfoBox>
     )

@@ -58,7 +58,6 @@ const CompareSearchBar = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data.Response.detail.groupId)
                 addQuery(data.Response.detail.groupId)
             })
             .catch((error) => {
