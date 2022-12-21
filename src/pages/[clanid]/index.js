@@ -1,15 +1,10 @@
-import { styled, useStyletron } from 'styletron-react';
 import DefaultTemplate from '../../components/DefaultLayout';
 import InfoBox from '../../components/InfoBox';
 import SearchBar from '../../components/SearchBar';
-import getClanMemberInfo from '../../functions/getClanMemberInfo';
+import getClanMemberProfileInfo from '../../functions/getClanMemberProfileInfo';
+import getClanMemberStatsInfo from '../../functions/getClanMemberStatsInfo';
 import setupRosterTable from "../../functions/setupRosterTable";
 import setupMemberTime from "../../functions/setupMemberTime";
-import getAllMembersProfile from '../../functions/getAllMembersProfile';
-import getCurrentSeasonHash from '../../functions/getCurrentSeasonHash';
-import getSeasonInfo from '../../functions/getSeasonInfo';
-import createSubDateArray from '../../functions/createSubDateArray';
-import getAllCharacterStats from '../../functions/getAllCharacterStats';
 import formatTotalTime from '../../functions/formatTotalTime';
 import Table from "../../components/Table";
 import getAuthInfo from '../../functions/getAuthInfo';
@@ -21,21 +16,15 @@ const apikey = '3a85f7e1a4444ec1865efb39ef019313';
 const headers = { 'X-API-Key': apikey }
 
 export default function ClanPage({ clanId, name, about, motto, memberCount, clanCallSign, d2ClanProgressions, clanBannerDetails }) {
-  const [css] = useStyletron()
 
   const router = useRouter();
 
   const urlStart = 'https://www.bungie.net/'
 
   const headers = getAuthInfo(false, router);
-
-  const currentSeasonHash = getCurrentSeasonHash(headers, router);
-  const currentSeasonInfo = getSeasonInfo(currentSeasonHash, headers, router);
-  const dateArray = createSubDateArray(currentSeasonInfo.startDate, currentSeasonInfo.endDate);
   
-  const clanMemberInfo = getClanMemberInfo(clanId, headers, router)
-  const clanMemberProfileInfo = getAllMembersProfile(clanMemberInfo, headers, router)
-  const clanMemberStatsInfo = getAllCharacterStats(clanMemberProfileInfo, dateArray, headers, router);
+  const clanMemberProfileInfo = getClanMemberProfileInfo()
+  const clanMemberStatsInfo = getClanMemberStatsInfo(clanMemberProfileInfo);
   const clanMemberTimeInfo = formatTotalTime(clanMemberStatsInfo)
 
   const [rosterColumns, rosterData] = setupRosterTable(clanMemberProfileInfo)
