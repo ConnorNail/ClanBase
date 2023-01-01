@@ -1,27 +1,11 @@
-import React, { useState, useEffect } from "react";
+import useSWR from 'swr'
 
-export default function getCurrentSeasonHash(headers, router) {
-    const [data, setData] = useState([]);
+export default function getCurrentSeasonHash() {
+    const headers = { 'X-API-Key': process.env.NEXT_PUBLIC_BUNGIE_API_KEY }
 
-    // Clear states on route change
-    const dynamicRoute = router.asPath;
-    useEffect(() => setData([]), [dynamicRoute]);
+    const fetcher = ([url, header]) => fetch(url, { headers: header }).then((res) => res.json())
 
-    useEffect(() => {
-        const url = 'https://www.bungie.net/Platform/Settings/';
+    const { data, error } = useSWR(['https://www.bungie.net/Platform/Settings/', headers], fetcher )
 
-        async function getData() {
-            const out = fetch(url, { headers })
-                .then((res) => res.json())
-                .then((data) => {
-                    setData(data.Response.destiny2CoreSettings.currentSeasonHash)
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                })
-        }
-        getData()
-    }, [headers, dynamicRoute])
-
-    return data
+    return data?.Response?.destiny2CoreSettings?.currentSeasonHash
 }

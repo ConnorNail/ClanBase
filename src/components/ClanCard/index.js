@@ -32,7 +32,7 @@ const ClanCard = ({ clanId, stats }) => {
         });
     };
 
-    const data = getClanInfo(clanId)
+    const clanInfo = getClanInfo(clanId)
 
     return (
         <InfoBox>
@@ -40,7 +40,7 @@ const ClanCard = ({ clanId, stats }) => {
                 <Row>
                     <Col d="flex" align="center">
                         <Text textSize="title">
-                            {data?.Response?.detail?.name}
+                            {clanInfo?.Response?.detail?.name}
                         </Text>
                     </Col>
                     <Col size="flex">

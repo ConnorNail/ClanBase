@@ -1,35 +1,25 @@
-import React, { useState, useEffect } from "react";
+import useSWR from 'swr'
 
-export default function getAllMemberProfile(inputData, headers, router) {
-    const [data, setData] = useState([]);
+export default function getAllMembersProfile(playerData) {
+    const header = { 'X-API-Key': process.env.NEXT_PUBLIC_BUNGIE_API_KEY }
 
-    // Clear states on route change
-    const dynamicRoute = router.asPath;
-    useEffect(() => setData([]), [dynamicRoute]);
+    const getKey = () => {
+        let keys = []
+        if (playerData) {
+            for (let i = 0; i < playerData?.Response?.results.length; i++) {
+                const membershipType = playerData?.Response?.results[i]?.destinyUserInfo?.membershipType
+                const membershipId = playerData?.Response?.results[i]?.destinyUserInfo?.membershipId
 
-    useEffect(() => {
-
-        async function getData() {
-            await Promise.all(inputData.map((member, i, array) => {
-                const membershipId = member.destinyUserInfo.membershipId
-                const membershipType = member.destinyUserInfo.membershipType
-
-                return fetch('https://www.bungie.net/Platform/Destiny2/' + membershipType + '/Profile/' + membershipId + '/?components=100,200', { headers })
-                    .then((res) => res.json())
-                    .then((data) => { return { playerProfile: data.Response } })
-                    .then((data) => {
-                        array[i] = { ...member, ...data }
-                        console.log("update profiles")
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                    })
-            }))
-            setData(inputData)
+                keys.push('https://www.bungie.net/Platform/Destiny2/' + membershipType + '/Profile/' + membershipId + '/?components=100,200')
+            }
+            return keys
         }
-        getData()
-        
-    }, [inputData, headers, dynamicRoute])
+        return null
+    }
+
+    const { data } = useSWR(getKey, (keys) =>
+        Promise.all(keys.map((key) => fetch(key, { headers: header }).then((res) => res.json())))
+    )
 
     return data
 }

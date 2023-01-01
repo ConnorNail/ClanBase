@@ -2,22 +2,26 @@ import DefaultTemplate from '../components/DefaultLayout';
 import getAuthInfo from '../functions/getAuthInfo';
 import { useRouter } from 'next/router';
 import getClanInfo from "../functions/getClanInfo";
-import useSWR from 'swr'
+import getClanMemberInfo from "../functions/getClanMemberProfileInfo/getClanMemberInfo";
+import getAllMembersProfile from "../functions/getClanMemberProfileInfo/getAllMembersProfile";
+import getClanMemberProfileInfo from "../functions/getClanMemberProfileInfo";
+import getSeasonInfo from '../functions/getClanMemberStatsInfo/getSeasonInfo';
+import getCurrentSeasonHash from '../functions/getClanMemberStatsInfo/getCurrentSeasonHash';
 
 export default function Test() {
-    console.log(getClanInfo(2084197))
 
-    // if (error) return (
-    //     <DefaultTemplate>
-    //         <div>ERROR</div>
-    //     </DefaultTemplate>
-    // )
+    const data = getClanMemberProfileInfo(2084197)
 
-    // if (!data) return (
-    //     <DefaultTemplate>
-    //         <div>Loading...</div>
-    //     </DefaultTemplate>
-    // )
+    const seasonHash = getCurrentSeasonHash()
+    const season = getSeasonInfo(seasonHash)
+
+    console.log(data)
+
+    if (!data) return (
+        <DefaultTemplate>
+            <div>Loading...</div>
+        </DefaultTemplate>
+    )
 
     return (
         <DefaultTemplate>

@@ -5,7 +5,7 @@ import getAllCharacterStats from './getAllCharacterStats';
 import getAuthInfo from '../../functions/getAuthInfo';
 import { useRouter } from 'next/router';
 
-export default function ClanPage(clanMemberProfileInfo) {
+export default function getClanMemberStatsInfo(clanMemberProfileInfo) {
   const router = useRouter();
 
   const headers = getAuthInfo(false, router);

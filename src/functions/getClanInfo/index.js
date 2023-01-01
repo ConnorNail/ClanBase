@@ -1,6 +1,3 @@
-import { useState, useEffect } from "react";
-import getAuthInfo from '../../functions/getAuthInfo';
-import { useRouter } from 'next/router';
 import useSWR from 'swr'
 
 export default function getClanInfo( clanid ) {
