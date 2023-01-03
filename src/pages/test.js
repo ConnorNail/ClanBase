@@ -7,15 +7,19 @@ import getAllMembersProfile from "../functions/getClanMemberProfileInfo/getAllMe
 import getClanMemberProfileInfo from "../functions/getClanMemberProfileInfo";
 import getSeasonInfo from '../functions/getClanMemberStatsInfo/getSeasonInfo';
 import getCurrentSeasonHash from '../functions/getClanMemberStatsInfo/getCurrentSeasonHash';
+import getClanMembersAllTimeStats from "../functions/getClanMembersAllTimeStats";
 
 export default function Test() {
 
-    const data = getClanMemberProfileInfo(2084197)
+    const data0 = getClanMemberProfileInfo(2084197)
+    const data = getClanMemberInfo(2084197)
+    const data1 = getClanMembersAllTimeStats(data)
 
     const seasonHash = getCurrentSeasonHash()
     const season = getSeasonInfo(seasonHash)
 
     console.log(data)
+    console.log(data1)
 
     if (!data) return (
         <DefaultTemplate>
