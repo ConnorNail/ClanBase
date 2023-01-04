@@ -10,7 +10,7 @@ export default function getClanMembersAllTimeStats(playerData) {
                 const membershipType = playerData?.Response?.results[i]?.destinyUserInfo?.membershipType
                 const membershipId = playerData?.Response?.results[i]?.destinyUserInfo?.membershipId
 
-                keys.push('https://www.bungie.net/Platform/Destiny2/' + membershipType + '/Account/' + membershipId + '/Stats')
+                keys.push('https://www.bungie.net/Platform/Destiny2/' + membershipType + '/Account/' + membershipId + '/Character/0/Stats/')
             }
             return keys
         }

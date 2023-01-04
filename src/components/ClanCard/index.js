@@ -53,7 +53,7 @@ const ClanCard = ({ clanId, stats }) => {
             let memberCount = stats.length
             let averageKD = 0
             for (let i = 0; i < stats.length; i++) {
-                const kd = stats[i]?.Response?.mergedAllCharacters?.results?.allPvP?.allTime?.killsDeathsRatio?.basic?.value
+                const kd = stats[i]?.Response?.allPvP?.allTime?.killsDeathsRatio?.basic?.value
                 if (kd) {
                     averageKD += kd
                 } else {
@@ -77,6 +77,66 @@ const ClanCard = ({ clanId, stats }) => {
                 }
             }
             return clanFlawlessCards
+        }
+    }
+
+    // Calculate total raids completed
+    const totalClanRaids = (stats) => {
+        if (stats) {
+            let clanRaids = 0
+            for (let i = 0; i < stats.length; i++) {
+                const raids = stats[i]?.Response?.raid?.allTime?.activitiesCleared?.basic?.value
+                if (raids) {
+                    clanRaids += raids
+                }
+            }
+            return clanRaids
+        }
+    }
+
+    // Calculate total playtime
+    const totalPlaytime = (stats) => {
+        if (stats) {
+            let clanPlaytime = 0
+            for (let i = 0; i < stats.length; i++) {
+                const playtimePvE = stats[i]?.Response?.allPvE?.allTime?.secondsPlayed?.basic?.value
+                const playtimePvP = stats[i]?.Response?.allPvP?.allTime?.secondsPlayed?.basic?.value
+                
+                if (playtimePvE) {
+                    clanPlaytime += playtimePvE
+                }
+                if (playtimePvP) {
+                    clanPlaytime += playtimePvP
+                }
+            }
+            
+            const days = Math.floor(clanPlaytime % (3600*24*365) / (3600*24));
+            const years = Math.floor(clanPlaytime / (3600*24*365));
+
+            const daysDisplay = days > 0 ? days + (days == 1 ? " day " : " days ") : "";
+            const yearsDisplay = years > 0 ? years + (years == 1 ? " year " : " years ") : "";
+
+            return yearsDisplay + daysDisplay
+        }
+    }
+
+    // Calculate total activites completed
+    const totalActivitesCleared = (stats) => {
+        if (stats) {
+            let clanActivites = 0
+            for (let i = 0; i < stats.length; i++) {
+                const playtimePvE = stats[i]?.Response?.allPvE?.allTime?.activitiesCleared?.basic?.value
+                const playtimePvP = stats[i]?.Response?.allPvP?.allTime?.activitiesCleared?.basic?.value
+                
+                if (playtimePvE) {
+                    clanActivites += playtimePvE
+                }
+                if (playtimePvP) {
+                    clanActivites += playtimePvP
+                }
+            }
+
+            return clanActivites
         }
     }
 
@@ -110,20 +170,12 @@ const ClanCard = ({ clanId, stats }) => {
                 Average KD: {averageClanKD(clanMemberStats)}
                 <br/>
                 Total Flawless Trials Cards: {totalClanFlaslessCards(clanMemberProfiles)}
-                {/* {stats.map((stat, index) => (
-                    <Row p={{ y: "0.5rem" }} key={index}>
-                        <Col size="8" >
-                            <Text textSize="subtitle" >
-                                {stat.name}:
-                            </Text>
-                        </Col>
-                        <Col d="flex" align="center">
-                            <Text textSize="subtitle">
-                                {stat.value}
-                            </Text>
-                        </Col>
-                    </Row>
-                ))} */}
+                <br/>
+                Total Raids: {totalClanRaids(clanMemberStats)}
+                <br/>
+                Total Playtime: {totalPlaytime(clanMemberStats)}
+                <br/>
+                Activites Completed: {totalActivitesCleared(clanMemberStats)}
             </Div>
         </InfoBox>
     )
