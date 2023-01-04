@@ -10,14 +10,14 @@ export default function getAllMembersProfile(playerData) {
                 const membershipType = playerData?.Response?.results[i]?.destinyUserInfo?.membershipType
                 const membershipId = playerData?.Response?.results[i]?.destinyUserInfo?.membershipId
 
-                keys.push('https://www.bungie.net/Platform/Destiny2/' + membershipType + '/Profile/' + membershipId + '/?components=100,200')
+                keys.push('https://www.bungie.net/Platform/Destiny2/' + membershipType + '/Profile/' + membershipId + '/?components=100,200,1100')
             }
             return keys
         }
         return null
     }
 
-    const { data } = useSWR(getKey, (keys) =>
+    const { data, error } = useSWR(getKey, (keys) =>
         Promise.all(keys.map((key) => fetch(key, { headers: header }).then((res) => res.json())))
     )
 

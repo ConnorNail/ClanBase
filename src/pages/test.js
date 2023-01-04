@@ -13,13 +13,11 @@ export default function Test() {
 
     const data0 = getClanMemberProfileInfo(2084197)
     const data = getClanMemberInfo(2084197)
-    const data1 = getClanMembersAllTimeStats(data)
 
     const seasonHash = getCurrentSeasonHash()
     const season = getSeasonInfo(seasonHash)
 
-    console.log(data)
-    console.log(data1)
+    console.log(data0)
 
     if (!data) return (
         <DefaultTemplate>

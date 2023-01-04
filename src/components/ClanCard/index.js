@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import getClanInfo from "../../functions/getClanInfo";
 import getClanMemberInfo from "../../functions/getClanMemberProfileInfo/getClanMemberInfo";
 import getClanMembersAllTimeStats from "../../functions/getClanMembersAllTimeStats";
+import getAllMembersProfile from '../../functions/getClanMemberProfileInfo/getAllMembersProfile';
 
 const ClanCard = ({ clanId, stats }) => {
 
@@ -37,7 +38,14 @@ const ClanCard = ({ clanId, stats }) => {
     const clanInfo = getClanInfo(clanId)
     const clanMemberList = getClanMemberInfo(clanId)
     const clanMemberStats = getClanMembersAllTimeStats(clanMemberList)
-    console.log(clanMemberStats)
+    const clanMemberProfiles = getAllMembersProfile(clanMemberList)
+
+    // Total members
+    const memberCount = (stats) => {
+        if (stats) {
+            return stats?.Response?.detail?.memberCount
+        }
+    }
 
     // Calculate average clan KD
     const averageClanKD = (stats) => {
@@ -49,15 +57,28 @@ const ClanCard = ({ clanId, stats }) => {
                 if (kd) {
                     averageKD += kd
                 } else {
-                    console.log(stats[i]?.Response)
                     memberCount -= 1
                 }
             }
-            console.log(averageKD/memberCount)
             averageKD = averageKD/memberCount
             return averageKD.toFixed(2)
         }
     };
+
+    // Calculate total number of Flawless cards completed
+    const totalClanFlaslessCards = (stats) => {
+        if (stats) {
+            let clanFlawlessCards = 0
+            for (let i = 0; i < stats.length; i++) {
+                const flawlessCards = stats[i]?.Response?.metrics?.data?.metrics['1765255052']?.objectiveProgress?.progress
+                // console.log(flawlessCards)
+                if (flawlessCards) {
+                    clanFlawlessCards += flawlessCards
+                }
+            }
+            return clanFlawlessCards
+        }
+    }
 
     return (
         <InfoBox>
@@ -84,7 +105,11 @@ const ClanCard = ({ clanId, stats }) => {
                     </Col>
                 </Row>
                 <Div bg="cbWhite" w="auto" h="0.1rem" m={{ y: "0.5rem" }}></Div>
+                Members: {memberCount(clanInfo)}
+                <br/>
                 Average KD: {averageClanKD(clanMemberStats)}
+                <br/>
+                Total Flawless Trials Cards: {totalClanFlaslessCards(clanMemberProfiles)}
                 {/* {stats.map((stat, index) => (
                     <Row p={{ y: "0.5rem" }} key={index}>
                         <Col size="8" >
