@@ -5,7 +5,7 @@ const pageList = [
     },
     {
         name: "COMPARE",
-        link: "/4599535"
+        link: "/clan-compare"
     },
     {
         name: "TOOLS",

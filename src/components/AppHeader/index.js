@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import SearchBar from '../../components/SearchBar'
 import MenuDropDown from '../../components/MenuDropDown'
-import pageList from '../../components/pageList'
+import pageList from '../pageList'
 
 const AppHeader = () => {
     const [css] = useStyletron()
