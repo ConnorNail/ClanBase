@@ -9,71 +9,51 @@ import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
 export default function clanCompare() {
     const router = useRouter()
 
-    const maxCards = 7;
+    const maxCards = 4;
 
     // Get query string from URL
     const queryObj = router.query
 
     const clanids = []
 
-    // Temp data
-    //**************************************************************
-    const clan1Stats = {
-        clanId: "2084197",
-        clanName: "Clan 1",
-        stats: [
-            {
-                name: "Average KD",
-                value: "1.0"
-            },
-            {
-                name: "Total Raids Completed",
-                value: "5400"
-            },
-        ]
-    }
+    const removeQuery = (value) => {
+        const newQuery = router.query
+        const finalList = []
 
-    const clan2Stats = {
-        clanId: "4599535",
-        clanName: "Clan 2",
-        stats: [
-            {
-                name: "Average KD",
-                value: "1.2"
-            },
-            {
-                name: "Total Raids Completed",
-                value: "1000"
-            },
-        ]
-    }
+        // If no queries exist then do nothing
+        // If there is one query remove it
+        // If there are more than one querie then remove the specific one that was selected
+        if (Array.isArray(newQuery.clanids)) {
+            const index = newQuery.clanids.indexOf(value);
 
-    const clan3Stats = {
-        clanId: "32312415125",
-        clanName: "Clan 3",
-        stats: [
-            {
-                name: "Average KD",
-                value: "2.55"
-            },
-            {
-                name: "Total Raids Completed",
-                value: "11"
-            },
-        ]
-    }
+            if (index > -1) { // only splice array when item is found
+                newQuery.clanids.splice(index, 1); // 2nd parameter means remove one item only
+            }
 
-    const testData = [
-        clan1Stats,
-        clan2Stats
-    ]
-    //**************************************************************
+            finalList = newQuery.clanids
+        } else if (Object.keys(newQuery).length == 1) {
+            finalList = []
+        }
+
+        router.push({
+            pathname: '/clan-compare',
+            query: { clanids: finalList },
+        });
+    };
 
     // Count the number of queries
     var clanCount = 0;
     if (Array.isArray(queryObj.clanids)) {
         clanCount = queryObj.clanids.length
-        clanids.push(...queryObj.clanids)
+        // clanids.push(...queryObj.clanids)
+        for (let i = 0; i < clanCount; i++) {
+            if (clanids.includes(queryObj.clanids[i])) {
+                clanCount -= 1
+                removeQuery(queryObj.clanids[i])
+            } else {
+                clanids.push(queryObj.clanids[i])
+            }
+        }
     } else if (typeof queryObj?.clanids !== 'undefined') {
         clanCount = 1
         clanids.push(queryObj.clanids)
@@ -84,29 +64,27 @@ export default function clanCompare() {
             <Div p="2rem">
                 <Col>
                     <Row>
-                        <Text textSize="title" p={{ b: "1rem" }}>
-                            Clan Comparison
+                        <Text textSize="title" p={{ b: "1rem" }} textColor="cbWhite">
+                            CLAN COMPARE
                         </Text>
                     </Row>
-                    <Row>
+                    <Row d='flex'>
                         {clanids.map((id, index) => (
-                            <Col key={index}>
+                            <Div key={index}>
                                 <ClanCard clanId={id} />
-                            </Col>
+                            </Div>
                         ))}
                         {clanCount < maxCards ?
-                            <Col>
-                                <InfoBox>
-                                    <Div p={{ x: "1rem" }} h="25rem" d="flex" align="center auto">
-                                        <Col>
-                                            <Text textSize="title" p={{ b: "1rem" }} textAlign="center">
-                                                Add a Clan
-                                            </Text>
-                                            <CompareSearchBar />
-                                        </Col>
-                                    </Div>
-                                </InfoBox>
-                            </Col> :
+                            <InfoBox>
+                                <Div p={{ x: "1rem" }} h="25rem" w="14.5rem" d="flex" align="center auto">
+                                    <Col>
+                                        <Text textSize="title" p={{ b: "1rem" }} textAlign="center" textColor="cbWhite">
+                                            Add a Clan
+                                        </Text>
+                                        <CompareSearchBar />
+                                    </Col>
+                                </Div>
+                            </InfoBox> :
                             <></>
                         }
                     </Row>

@@ -68,8 +68,8 @@ const ClanCard = ({ clanId, stats }) => {
                     memberCountPvP -= 1
                 }
             }
-            averageKDPvE = averageKDPvE/memberCountPvE
-            averageKDPvP = averageKDPvP/memberCountPvP
+            averageKDPvE = averageKDPvE / memberCountPvE
+            averageKDPvP = averageKDPvP / memberCountPvP
             return [averageKDPvE.toFixed(2), averageKDPvP.toFixed(2)]
         }
     };
@@ -110,7 +110,7 @@ const ClanCard = ({ clanId, stats }) => {
             for (let i = 0; i < stats.length; i++) {
                 const playtimePvE = stats[i]?.Response?.allPvE?.allTime?.secondsPlayed?.basic?.value
                 const playtimePvP = stats[i]?.Response?.allPvP?.allTime?.secondsPlayed?.basic?.value
-                
+
                 if (playtimePvE) {
                     clanPlaytimePvE += playtimePvE
                 }
@@ -118,15 +118,15 @@ const ClanCard = ({ clanId, stats }) => {
                     clanPlaytimePvP += playtimePvP
                 }
             }
-            
-            const daysPvE = Math.floor(clanPlaytimePvE % (3600*24*365) / (3600*24));
-            const yearsPvE = Math.floor(clanPlaytimePvE / (3600*24*365));
+
+            const daysPvE = Math.floor(clanPlaytimePvE % (3600 * 24 * 365) / (3600 * 24));
+            const yearsPvE = Math.floor(clanPlaytimePvE / (3600 * 24 * 365));
 
             const daysDisplayPvE = daysPvE > 0 ? daysPvE + (daysPvE == 1 ? " day " : " days ") : "";
             const yearsDisplayPve = yearsPvE > 0 ? yearsPvE + (yearsPvE == 1 ? " year " : " years ") : "";
 
-            const daysPvP = Math.floor(clanPlaytimePvP % (3600*24*365) / (3600*24));
-            const yearsPvP = Math.floor(clanPlaytimePvP / (3600*24*365));
+            const daysPvP = Math.floor(clanPlaytimePvP % (3600 * 24 * 365) / (3600 * 24));
+            const yearsPvP = Math.floor(clanPlaytimePvP / (3600 * 24 * 365));
 
             const daysDisplayPvP = daysPvP > 0 ? daysPvP + (daysPvP == 1 ? " day " : " days ") : "";
             const yearsDisplayPvP = yearsPvP > 0 ? yearsPvP + (yearsPvP == 1 ? " year " : " years ") : "";
@@ -195,19 +195,38 @@ const ClanCard = ({ clanId, stats }) => {
         }
     }
 
+    const stat = (text, stat) => {
+        return (
+            <>
+                <Text textSize="paragraph" textColor="cbWhite" p={{ l: '1rem', r: '0.5rem' }} h="1.1rem">
+                    {text}
+                </Text>
+                {stat ?
+                    <Text textSize="paragraph" textColor="cbYellow" h="1rem">
+                        {stat}
+                    </Text> :
+                    <Icon name="Loading3" size="20px" color="cbWhite" transform='translateY(15%)' />
+                }
+            </>
+        )
+    }
+
     return (
         <InfoBox>
-            <Div p={{ x: "1rem" }} h="25rem">
+            <Div p={{ x: "1rem" }} h="25rem" minW="14.5rem">
                 <Row>
                     <Col d="flex" align="center">
-                        <Text textSize="title">
-                            {clanInfo?.Response?.detail?.name}
-                        </Text>
+                        {clanInfo?.Response?.detail?.name ?
+                            <Text textSize="title" textColor="cbWhite">
+                                {clanInfo?.Response?.detail?.name}
+                            </Text> :
+                            <Icon name="Loading3" size="24px" color="cbWhite" transform='translateY(15%)' />
+                        }
                     </Col>
                     <Col size="flex">
                         <Button
-                            h="2.5rem"
-                            w="2.5rem"
+                            h="2rem"
+                            w="2rem"
                             bg="danger700"
                             hoverBg="danger600"
                             rounded="circle"
@@ -219,42 +238,71 @@ const ClanCard = ({ clanId, stats }) => {
                         </Button>
                     </Col>
                 </Row>
+                <Row>
+                    <Text textSize="caption" textColor="cbWhite" p={{ l: '0.5rem', r: '0.5rem' }} h="1rem">
+                        Members
+                    </Text>
+                    {memberCount(clanInfo) ?
+                        <Text textSize="caption" textColor="cbYellow" h="1rem">
+                            {memberCount(clanInfo)}
+                        </Text> :
+                        <Icon name="Loading3" size="20px" color="cbWhite" transform='translateY(15%)' />
+                    }
+                </Row>
                 <Div bg="cbWhite" w="auto" h="0.1rem" m={{ y: "0.5rem" }}></Div>
-                Members: {memberCount(clanInfo)}
-                <br/>
-                <br/>
-                PvE
-                <br/>
-                Activites Completed: {totalActivitesCleared(clanMemberStats) ? totalActivitesCleared(clanMemberStats)[0] : null}
-                <br/>
-                Playtime: {totalPlaytime(clanMemberStats) ? totalPlaytime(clanMemberStats)[0] : null}
-                <br/>
-                Kills: {totalKills(clanMemberStats) ? totalKills(clanMemberStats)[0] : null}
-                <br/>
-                Deaths: {totalDeaths(clanMemberStats) ? totalDeaths(clanMemberStats)[0] : null}
-                <br/>
-                Average KD: {averageClanKD(clanMemberStats) ? averageClanKD(clanMemberStats)[0] : null}
-                <br/>
-                <br/>
+                <Row>
+                    <Text textSize="subheader" textColor="cbWhite" p={{ l: '0.5rem', b: '0.5rem' }} h="1rem">
+                        PvE
+                    </Text>
+                </Row>
+                <Row>
+                    {stat("Activites Completed:", totalActivitesCleared(clanMemberStats) ? totalActivitesCleared(clanMemberStats)[0] : null)}
+                </Row>
+                <Row>
+                    {stat("Playtime:", totalPlaytime(clanMemberStats) ? totalPlaytime(clanMemberStats)[0] : null)}
+                </Row>
+                <Row>
+                    {stat("Kills:", totalKills(clanMemberStats) ? totalKills(clanMemberStats)[0] : null)}
+                </Row>
+                <Row>
+                    {stat("Deaths:", totalDeaths(clanMemberStats) ? totalDeaths(clanMemberStats)[0] : null)}
+                </Row>
+                <Row>
+                    {stat("Average KD:", averageClanKD(clanMemberStats) ? averageClanKD(clanMemberStats)[0] : null)}
+                </Row>
 
-                PvP
-                <br/>
-                Activites Completed: {totalActivitesCleared(clanMemberStats) ? totalActivitesCleared(clanMemberStats)[1] : null}
-                <br/>
-                Playtime: {totalPlaytime(clanMemberStats) ? totalPlaytime(clanMemberStats)[1] : null}
-                <br/>
-                Kills: {totalKills(clanMemberStats) ? totalKills(clanMemberStats)[1] : null}
-                <br/>
-                Deaths: {totalDeaths(clanMemberStats) ? totalDeaths(clanMemberStats)[1] : null}
-                <br/>
-                Average KD: {averageClanKD(clanMemberStats) ? averageClanKD(clanMemberStats)[1] : null}
-                <br/>
-                <br/>
+                <Row>
+                    <Text textSize="subheader" textColor="cbWhite" p={{ l: '0.5rem', t: '0.5rem', b: '0.5rem' }} h="1rem">
+                        PvP
+                    </Text>
+                </Row>
+                <Row>
+                    {stat("Activites Completed:", totalActivitesCleared(clanMemberStats) ? totalActivitesCleared(clanMemberStats)[1] : null)}
+                </Row>
+                <Row>
+                    {stat("Playtime:", totalPlaytime(clanMemberStats) ? totalPlaytime(clanMemberStats)[1] : null)}
+                </Row>
+                <Row>
+                    {stat("Kills:", totalKills(clanMemberStats) ? totalKills(clanMemberStats)[1] : null)}
+                </Row>
+                <Row>
+                    {stat("Deaths:", totalDeaths(clanMemberStats) ? totalDeaths(clanMemberStats)[1] : null)}
+                </Row>
+                <Row>
+                    {stat("Average KD:", averageClanKD(clanMemberStats) ? averageClanKD(clanMemberStats)[1] : null)}
+                </Row>
 
-                
-                Total Flawless Trials Cards: {totalClanFlaslessCards(clanMemberProfiles)}
-                <br/>
-                Total Raids: {totalClanRaids(clanMemberStats)}
+                <Row>
+                    <Text textSize="subheader" textColor="cbWhite" p={{ l: '0.5rem', t: '0.5rem', b: '0.5rem' }} h="1rem">
+                        Endgame
+                    </Text>
+                </Row>
+                <Row>
+                    {stat("Total Raids:", totalClanRaids(clanMemberStats))}
+                </Row>
+                <Row>
+                    {stat("Total Flawless Cards:", totalClanFlaslessCards(clanMemberProfiles))}
+                </Row>
             </Div>
         </InfoBox>
     )
