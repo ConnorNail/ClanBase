@@ -6,7 +6,7 @@ import getClanInfo from "../functions/getClanInfo";
 import { useRouter } from 'next/router'
 import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
 
-export default function clanCompare() {
+export default function ClanCompare() {
     const router = useRouter()
 
     const maxCards = 4;
