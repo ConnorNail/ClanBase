@@ -6,7 +6,7 @@ export default function getClanInfo( clanid ) {
 
     const fetcher = ([url, header]) => fetch(url, {headers: header}).then((res) => res.json())
 
-    const { data, error } = useSWR( ['https://www.bungie.net/Platform/GroupV2/' + clanid + '/', headers], fetcher )
+    const { data, error } = useSWR( clanid ?  ['https://www.bungie.net/Platform/GroupV2/' + clanid + '/', headers] : null, fetcher )
 
     return data
 }

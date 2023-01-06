@@ -1,14 +1,13 @@
-import { styled, useStyletron } from 'styletron-react'
 import React, { useState } from 'react';
 import { Div, Anchor, Button, Row, Col, Image, Icon } from "atomize";
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import SearchBar from '../../components/SearchBar'
 import MenuDropDown from '../../components/MenuDropDown'
-import pageList from '../../components/pageList'
+import pageList from '../pageList'
+
 
 const AppHeader = () => {
-    const [css] = useStyletron()
 
     const router = useRouter()
 
