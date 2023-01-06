@@ -11,6 +11,9 @@ import getClanMembersAllTimeStats from "../functions/getClanMembersAllTimeStats"
 import getAllCharacterStats from '../functions/getClanMemberStatsInfo/getAllCharacterStats';
 import getClanBanner from '../functions/getClanBanner';
 import ClanBannerSimple from '../components/ClanBannerSimple'
+import InfoBox from '../components/InfoBox';
+import Bracket from '../components/BracketSimple';
+import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
 
 export default function Test() {
 
@@ -28,7 +31,11 @@ export default function Test() {
 
     return (
         <DefaultTemplate>
-            <ClanBannerSimple clanId={2084197}/>
+            <InfoBox bg={'cbGrey1'}>
+
+                wefhooewfoewowepepiuwehfpawueihfpawehwaphweafph
+            </InfoBox>
+            {/* <ClanBannerSimple clanId={2084197}/> */}
             <div>API TEST SUCCESSFUL</div>
         </DefaultTemplate>
     )

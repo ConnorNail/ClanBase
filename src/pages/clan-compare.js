@@ -62,20 +62,21 @@ export default function ClanCompare() {
     return (
         <DefaultTemplate>
             <Div p="2rem">
+                {/* <InfoBox bg="cbGrey1"> */}
                 <Col>
                     <Row>
-                        <Text textSize="title" p={{ b: "1rem" }} textColor="cbWhite">
+                        {/* <Text textSize="title" p={{ b: "1rem" }} textColor="cbWhite">
                             CLAN COMPARE
-                        </Text>
+                        </Text> */}
                     </Row>
-                    <Row d='flex'>
+                    <Row>
                         {clanids.map((id, index) => (
                             <Div key={index}>
                                 <ClanCard clanId={id} />
                             </Div>
                         ))}
                         {clanCount < maxCards ?
-                            <InfoBox>
+                            <InfoBox bg="cbGrey2">
                                 <Div p={{ x: "1rem" }} h="25rem" w="14.5rem" d="flex" align="center auto">
                                     <Col>
                                         <Text textSize="title" p={{ b: "1rem" }} textAlign="center" textColor="cbWhite">
@@ -89,6 +90,7 @@ export default function ClanCompare() {
                         }
                     </Row>
                 </Col>
+                {/* </InfoBox> */}
             </Div>
         </DefaultTemplate>
     )

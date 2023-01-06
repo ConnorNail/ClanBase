@@ -13,7 +13,7 @@ const AppHeader = () => {
 
     return (
         <header>
-            <Div bgImg="../redbar.svg" bgPos="top left" bgSize="cover" bgRepeat="no-repeat">
+            <Div bgImg="../redbar.svg" bgPos="top left" bgSize="cover" bgRepeat="no-repeat" border={{ b: "1px solid" }} borderColor="cbWhite" rounded="0 0 5px 5px">
                 <Row>
                     <Col size="flex">
                         <Div>
@@ -47,7 +47,11 @@ const AppHeader = () => {
                         </Row>
                     </Col>
                 </Row>
-
+            </Div>
+            <Div d="flex">
+                <Div border={{ x: "1.5px solid", b: "1.5px solid" }} borderColor="cbWhite" rounded="0 0 10px 10px" w="100%" h="1.5rem" m={{ x: "1rem" }} d="flex" justify="center" align="flex-end">
+                    <Div bg="cbWhite" w="50%" h="0.75rem" rounded="10px 10px 0 0"></Div>
+                </Div>
             </Div>
         </header>
     )

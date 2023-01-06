@@ -11,7 +11,12 @@ const AppFooter = () => {
 
     return (
         <footer>
-            <Div bg="cbRed">
+            <Div d="flex">
+                <Div border={{ x: "1.5px solid", t: "1.5px solid" }} borderColor="cbWhite" rounded="10px 10px 0 0" w="100%" h="1.5rem" m={{ x: "1rem" }} d="flex" justify="center" align="flex-start">
+                    <Div bg="cbWhite" w="50%" h="0.75rem" rounded="0 0 10px 10px"></Div>
+                </Div>
+            </Div>
+            <Div bg="cbRed" border={{ t: "1px solid" }} borderColor="cbWhite" rounded="5px 5px 0 0">
                 <Row p={{ t: "1rem", l: "2rem", r: "2rem" }}>
                     <Col>
                         <Text textColor="cbWhite" textSize="caption">

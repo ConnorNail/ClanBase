@@ -69,7 +69,7 @@ const CompareSearchBar = () => {
         <Input
             placeholder="Clan Name"
             rounded="circle"
-            bg="cbRed"
+            bg="cbGrey1"
             borderColor="cbWhite"
             hoverBorderColor="cbWhite"
             textColor="cbWhite"

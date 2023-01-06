@@ -9,7 +9,7 @@ const DefaultLayout = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Div className="font-face-gm" m="-0.5rem" overflow="hidden" bg="cbRed">
+      <Div className="font-face-gm" m="-0.5rem" overflow="hidden" bg="cbBlack">
         <AppHeader />
         {children}
         <AppFooter />

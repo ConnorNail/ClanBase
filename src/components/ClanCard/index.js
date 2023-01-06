@@ -5,6 +5,7 @@ import getClanInfo from "../../functions/getClanInfo";
 import getClanMemberInfo from "../../functions/getClanMemberProfileInfo/getClanMemberInfo";
 import getClanMembersAllTimeStats from "../../functions/getClanMembersAllTimeStats";
 import getAllMembersProfile from '../../functions/getClanMemberProfileInfo/getAllMembersProfile';
+import Bracket from "../BracketSimple";
 
 const ClanCard = ({ clanId, stats }) => {
 
@@ -202,7 +203,7 @@ const ClanCard = ({ clanId, stats }) => {
                     {text}
                 </Text>
                 {stat ?
-                    <Text textSize="paragraph" textColor="cbYellow" h="1rem">
+                    <Text textSize="paragraph" textColor="cbBlue" h="1rem">
                         {stat}
                     </Text> :
                     <Icon name="Loading3" size="20px" color="cbWhite" transform='translateY(15%)' />
@@ -212,8 +213,8 @@ const ClanCard = ({ clanId, stats }) => {
     }
 
     return (
-        <InfoBox>
-            <Div p={{ x: "1rem" }} h="25rem" minW="14.5rem">
+        <InfoBox bg="cbGrey2" h="100%">
+            <Div p={{ x: "1rem" }} minW="14.5rem">
                 <Row>
                     <Col d="flex" align="center">
                         {clanInfo?.Response?.detail?.name ?
@@ -227,14 +228,14 @@ const ClanCard = ({ clanId, stats }) => {
                         <Button
                             h="2rem"
                             w="2rem"
-                            bg="danger700"
-                            hoverBg="danger600"
+                            bg="cbGrey1"
+                            hoverBg="cbGrey3"
                             rounded="circle"
                             shadow="2"
                             hoverShadow="4"
                             onClick={(e) => removeQuery(clanId)}
                         >
-                            <Icon name="DeleteSolid" size="20px" color="cbWhite" />
+                            <Icon name="Cross" size="20px" color="cbWhite" />
                         </Button>
                     </Col>
                 </Row>
@@ -243,13 +244,13 @@ const ClanCard = ({ clanId, stats }) => {
                         Members
                     </Text>
                     {memberCount(clanInfo) ?
-                        <Text textSize="caption" textColor="cbYellow" h="1rem">
+                        <Text textSize="caption" textColor="cbBlue" h="1rem">
                             {memberCount(clanInfo)}
                         </Text> :
                         <Icon name="Loading3" size="20px" color="cbWhite" transform='translateY(15%)' />
                     }
                 </Row>
-                <Div bg="cbWhite" w="auto" h="0.1rem" m={{ y: "0.5rem" }}></Div>
+                <Bracket align="flex-start"/>
                 <Row>
                     <Text textSize="subheader" textColor="cbWhite" p={{ l: '0.5rem', b: '0.5rem' }} h="1rem">
                         PvE
@@ -303,6 +304,7 @@ const ClanCard = ({ clanId, stats }) => {
                 <Row>
                     {stat("Total Flawless Cards:", totalClanFlaslessCards(clanMemberProfiles))}
                 </Row>
+                <Bracket align="flex-end"/>
             </Div>
         </InfoBox>
     )

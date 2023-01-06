@@ -25,7 +25,7 @@ export default function Home() {
 
   return (
     <DefaultTemplate>
-      <Div h="100vh" bgImg="../destinybackground.png" bgPos="top" bgSize="auto" bgRepeat="no-repeat" m={{ l: "-0.5rem", r: "-0.5rem" }}>
+      <Div h="100vh" bgImg="../destinybackground.png" bgPos="top" bgSize="auto" bgRepeat="no-repeat" m={{ x: "-0.5rem", y: "-1.5rem" }}>
         <Div h="100vh" bgImg="../destinyimage1.png" bgPos="center" bgSize="auto" bgRepeat="no-repeat" d="flex">
           <Col size={{ xs: "0", md: "3" }}>
             <Div m={{ t: "5rem" }} d={{ xs: "none", md: "block" }}>
