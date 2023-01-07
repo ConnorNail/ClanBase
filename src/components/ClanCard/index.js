@@ -103,6 +103,20 @@ const ClanCard = ({ clanId, stats }) => {
         }
     }
 
+    // Calculate total GMs completed
+    const totalClanGMs = (stats) => {
+        if (stats) {
+            let clanGMs = 0
+            for (let i = 0; i < stats.length; i++) {
+                const gms = stats[i]?.Response?.profileRecords?.data?.records[3034652948]?.objectives[0]?.progress
+                if (gms) {
+                    clanGMs += gms
+                }
+            }
+            return clanGMs.toLocaleString()
+        }
+    }
+
     // Calculate total playtime
     const totalPlaytime = (stats) => {
         if (stats) {
@@ -132,7 +146,7 @@ const ClanCard = ({ clanId, stats }) => {
             const daysDisplayPvP = daysPvP > 0 ? daysPvP + (daysPvP == 1 ? " day " : " days ") : "";
             const yearsDisplayPvP = yearsPvP > 0 ? yearsPvP + (yearsPvP == 1 ? " year " : " years ") : "";
 
-            return [yearsDisplayPve + daysDisplayPvE, yearsDisplayPvP + daysDisplayPvP]
+            return clanPlaytimePvE+clanPlaytimePvP//[yearsDisplayPve + daysDisplayPvE, yearsDisplayPvP + daysDisplayPvP]
         }
     }
 
@@ -152,7 +166,7 @@ const ClanCard = ({ clanId, stats }) => {
                 }
             }
 
-            return [clanActivitesPvE.toLocaleString(), clanActivitesPvP.toLocaleString()]
+            return clanActivitesPvE+clanActivitesPvP//[clanActivitesPvE.toLocaleString(), clanActivitesPvP.toLocaleString()]
         }
     }
 
@@ -257,10 +271,10 @@ const ClanCard = ({ clanId, stats }) => {
                     </Text>
                 </Row>
                 <Row>
-                    {stat("Activites Completed:", totalActivitesCleared(clanMemberStats) ? totalActivitesCleared(clanMemberStats)[0] : null)}
+                    {stat("Activites Completed:", totalActivitesCleared(clanMemberStats) ? totalActivitesCleared(clanMemberStats) : null)}
                 </Row>
                 <Row>
-                    {stat("Playtime:", totalPlaytime(clanMemberStats) ? totalPlaytime(clanMemberStats)[0] : null)}
+                    {stat("Playtime:", totalPlaytime(clanMemberStats) ? totalPlaytime(clanMemberStats) : null)}
                 </Row>
                 <Row>
                     {stat("Kills:", totalKills(clanMemberStats) ? totalKills(clanMemberStats)[0] : null)}
@@ -278,10 +292,10 @@ const ClanCard = ({ clanId, stats }) => {
                     </Text>
                 </Row>
                 <Row>
-                    {stat("Activites Completed:", totalActivitesCleared(clanMemberStats) ? totalActivitesCleared(clanMemberStats)[1] : null)}
+                    {stat("Activites Completed:", totalActivitesCleared(clanMemberStats) ? totalActivitesCleared(clanMemberStats) : null)}
                 </Row>
                 <Row>
-                    {stat("Playtime:", totalPlaytime(clanMemberStats) ? totalPlaytime(clanMemberStats)[1] : null)}
+                    {stat("Playtime:", totalPlaytime(clanMemberStats) ? totalPlaytime(clanMemberStats) : null)}
                 </Row>
                 <Row>
                     {stat("Kills:", totalKills(clanMemberStats) ? totalKills(clanMemberStats)[1] : null)}
@@ -299,10 +313,10 @@ const ClanCard = ({ clanId, stats }) => {
                     </Text>
                 </Row>
                 <Row>
-                    {stat("Total Raids:", totalClanRaids(clanMemberStats))}
+                    {stat("Raids:", totalClanRaids(clanMemberStats))}
                 </Row>
                 <Row>
-                    {stat("Total Flawless Cards:", totalClanFlaslessCards(clanMemberProfiles))}
+                    {stat("Flawless Cards:", totalClanFlaslessCards(clanMemberProfiles))}
                 </Row>
                 <Bracket align="flex-end"/>
             </Div>
