@@ -146,7 +146,7 @@ const ClanCard = ({ clanId, stats }) => {
             const daysDisplayPvP = daysPvP > 0 ? daysPvP + (daysPvP == 1 ? " day " : " days ") : "";
             const yearsDisplayPvP = yearsPvP > 0 ? yearsPvP + (yearsPvP == 1 ? " year " : " years ") : "";
 
-            return clanPlaytimePvE+clanPlaytimePvP//[yearsDisplayPve + daysDisplayPvE, yearsDisplayPvP + daysDisplayPvP]
+            return [yearsDisplayPve + daysDisplayPvE, yearsDisplayPvP + daysDisplayPvP]
         }
     }
 
@@ -166,7 +166,7 @@ const ClanCard = ({ clanId, stats }) => {
                 }
             }
 
-            return clanActivitesPvE+clanActivitesPvP//[clanActivitesPvE.toLocaleString(), clanActivitesPvP.toLocaleString()]
+            return [clanActivitesPvE.toLocaleString(), clanActivitesPvP.toLocaleString()]
         }
     }
 
@@ -271,10 +271,10 @@ const ClanCard = ({ clanId, stats }) => {
                     </Text>
                 </Row>
                 <Row>
-                    {stat("Activites Completed:", totalActivitesCleared(clanMemberStats) ? totalActivitesCleared(clanMemberStats) : null)}
+                    {stat("Activites Completed:", totalActivitesCleared(clanMemberStats) ? totalActivitesCleared(clanMemberStats)[0] : null)}
                 </Row>
                 <Row>
-                    {stat("Playtime:", totalPlaytime(clanMemberStats) ? totalPlaytime(clanMemberStats) : null)}
+                    {stat("Playtime:", totalPlaytime(clanMemberStats) ? totalPlaytime(clanMemberStats)[0] : null)}
                 </Row>
                 <Row>
                     {stat("Kills:", totalKills(clanMemberStats) ? totalKills(clanMemberStats)[0] : null)}
@@ -292,10 +292,10 @@ const ClanCard = ({ clanId, stats }) => {
                     </Text>
                 </Row>
                 <Row>
-                    {stat("Activites Completed:", totalActivitesCleared(clanMemberStats) ? totalActivitesCleared(clanMemberStats) : null)}
+                    {stat("Activites Completed:", totalActivitesCleared(clanMemberStats) ? totalActivitesCleared(clanMemberStats)[1] : null)}
                 </Row>
                 <Row>
-                    {stat("Playtime:", totalPlaytime(clanMemberStats) ? totalPlaytime(clanMemberStats) : null)}
+                    {stat("Playtime:", totalPlaytime(clanMemberStats) ? totalPlaytime(clanMemberStats)[1] : null)}
                 </Row>
                 <Row>
                     {stat("Kills:", totalKills(clanMemberStats) ? totalKills(clanMemberStats)[1] : null)}
