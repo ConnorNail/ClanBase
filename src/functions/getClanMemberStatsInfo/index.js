@@ -4,11 +4,12 @@ import createSubDateArray from './createSubDateArray';
 import getAllCharacterStats from './getAllCharacterStats';
 import getAuthInfo from '../../functions/getAuthInfo';
 import { useRouter } from 'next/router';
+import getHeaders from '../getHeaders';
 
 export default function getClanMemberStatsInfo(clanMemberProfileInfo) {
   const router = useRouter();
 
-  const headers = getAuthInfo(false, router);
+  const headers = getHeaders(false)
 
   const currentSeasonHash = getCurrentSeasonHash(headers, router);
   const currentSeasonInfo = getSeasonInfo(currentSeasonHash, headers, router);

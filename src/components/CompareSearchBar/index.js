@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Input, Icon } from "atomize";
 import { useRouter } from 'next/router';
-import getAuthInfo from '../../functions/getAuthInfo'
+import getHeaders from '../../functions/getHeaders'
 
 const CompareSearchBar = () => {
     const [input, setInput] = useState('');
@@ -14,7 +14,7 @@ const CompareSearchBar = () => {
     useEffect(() => setInput(''), [dynamicRoute]);
     useEffect(() => setIsLoading(false), [dynamicRoute]);
 
-    const headers = getAuthInfo(false, router);
+    const headers = getHeaders(false);
 
     const addQuery = (newValue) => {
         const newQuery = []

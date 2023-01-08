@@ -1,7 +1,8 @@
 import useSWR from 'swr'
+import getHeaders from '../../getHeaders'
 
 export default function getCurrentSeasonHash() {
-    const headers = { 'X-API-Key': process.env.NEXT_PUBLIC_BUNGIE_API_KEY }
+    const headers = getHeaders(false)
 
     const fetcher = ([url, header]) => fetch(url, { headers: header }).then((res) => res.json())
 

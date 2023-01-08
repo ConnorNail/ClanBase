@@ -1,8 +1,9 @@
 import useSWR from 'swr'
+import getHeaders from '../getHeaders'
 
 export default function getClanBanner( clanInfo ) {
     
-    const headers = {'X-API-Key': process.env.NEXT_PUBLIC_BUNGIE_API_KEY}
+    const headers = getHeaders(false)
 
     const clanBannerData = clanInfo?.Response?.detail?.clanInfo?.clanBannerData
 

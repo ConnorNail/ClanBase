@@ -1,7 +1,8 @@
 import useSWR from 'swr'
+import getHeaders from '../../getHeaders'
 
 export default function getAllCharacterStats(playerProfiles) {
-    const header = { 'X-API-Key': process.env.NEXT_PUBLIC_BUNGIE_API_KEY }
+    const header = getHeaders(false)
     
     const getKey = () => {
         let keys = []

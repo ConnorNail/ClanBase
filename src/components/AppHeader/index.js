@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import SearchBar from '../../components/SearchBar'
 import MenuDropDown from '../../components/MenuDropDown'
 import pageList from '../pageList'
+import LoginButton from '../LoginButton';
 
 
 const AppHeader = () => {
@@ -41,6 +42,11 @@ const AppHeader = () => {
                         </Row>
                     </Col>
                     <Col ></Col>
+                    <Col size="flex" d={{ xs: "none", md: "block" }} align="flex-end">
+                        <Row transform="translate(0%, 40%)" p={{ r: "2rem" }}>
+                            <LoginButton/>
+                        </Row>
+                    </Col>
                     <Col size="flex" d={{ xs: "block", md: "none" }} align="flex-end">
                         <Row transform="translate(0%, 40%)" p={{ r: "2rem" }}>
                             <MenuDropDown />

@@ -1,7 +1,8 @@
 import useSWR from 'swr'
+import getHeaders from '../../getHeaders'
 
 export default function getClanMemberInfo(clanid) {
-    const header = { 'X-API-Key': process.env.NEXT_PUBLIC_BUNGIE_API_KEY }
+    const header = getHeaders(false)
 
     const fetcher = (url) => fetch(url, { headers: header }).then((res) => res.json())
 
