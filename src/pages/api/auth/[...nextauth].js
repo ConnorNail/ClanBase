@@ -97,8 +97,8 @@ export const authOptions = {
       }
 
       // Return previous token if the access token has not expired yet
-      if (Date.now() < token.accessTokenExpires) {
-        console.log('Access Token has not expired yet')
+      if (Date.now() < (token.accessTokenExpires - 300000)) {
+        console.log('Access Token has not expired yet', token.accessTokenExpires)
         return token
       }
 

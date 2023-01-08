@@ -146,7 +146,7 @@ const ClanCard = ({ clanId, stats }) => {
             const daysDisplayPvP = daysPvP > 0 ? daysPvP + (daysPvP == 1 ? " day " : " days ") : "";
             const yearsDisplayPvP = yearsPvP > 0 ? yearsPvP + (yearsPvP == 1 ? " year " : " years ") : "";
 
-            return [yearsDisplayPve + daysDisplayPvE, yearsDisplayPvP + daysDisplayPvP]
+            return [clanPlaytimePvE, clanPlaytimePvP]//[yearsDisplayPve + daysDisplayPvE, yearsDisplayPvP + daysDisplayPvP]
         }
     }
 
@@ -166,7 +166,7 @@ const ClanCard = ({ clanId, stats }) => {
                 }
             }
 
-            return [clanActivitesPvE.toLocaleString(), clanActivitesPvP.toLocaleString()]
+            return [clanActivitesPvE, clanActivitesPvP]//[clanActivitesPvE.toLocaleString(), clanActivitesPvP.toLocaleString()]
         }
     }
 
@@ -209,6 +209,63 @@ const ClanCard = ({ clanId, stats }) => {
             return [clanDeathsPvE.toLocaleString(), clanDeathsPvP.toLocaleString()]
         }
     }
+
+    // Calculated average strike duration
+    const averageStrikeDuration = (stats) => {
+        if (stats) {
+            let averageClanStrikeDuration = 0
+            let memberCount = stats.length
+            for (let i = 0; i < stats.length; i++) {
+                const averageStrikeDuration = stats[i]?.Response?.allStrikes?.allTime?.totalActivityDurationSeconds?.pga?.value
+                if (averageStrikeDuration) {
+                    averageClanStrikeDuration += averageStrikeDuration
+                } else {
+                    memberCount -= 1
+                }
+            }
+
+            averageClanStrikeDuration = averageClanStrikeDuration/memberCount
+
+            return averageClanStrikeDuration.toFixed()
+        }
+    }
+
+    // Calculate average win percentage
+    const averageClanWinPercentage = (stats) => {
+        if (stats) {
+            let memberCount = stats.length
+            let averageWP = 0
+            for (let i = 0; i < stats.length; i++) {
+                const activitiesEntered = stats[i]?.Response?.allPvP?.allTime?.activitiesEntered?.basic?.value
+                const activitesWon = stats[i]?.Response?.allPvP?.allTime?.activitiesWon?.basic?.value
+                if (activitiesEntered && activitesWon) {
+                    averageWP += activitesWon/activitiesEntered
+                } else {
+                    memberCount -= 1
+                }
+            }
+            averageWP = (averageWP / memberCount)
+            return averageWP.toFixed(4)
+        }
+    };
+
+    // Calculate average combat rating
+    const averageCombatRating = (stats) => {
+        if (stats) {
+            let memberCount = stats.length
+            let averageCR = 0
+            for (let i = 0; i < stats.length; i++) {
+                const combatRating = stats[i]?.Response?.allPvP?.allTime?.combatRating?.basic?.value
+                if (combatRating) {
+                    averageCR += combatRating
+                } else {
+                    memberCount -= 1
+                }
+            }
+            averageCR = averageCR / memberCount
+            return averageCR.toFixed(2)
+        }
+    };
 
     const stat = (text, stat) => {
         return (
@@ -285,6 +342,9 @@ const ClanCard = ({ clanId, stats }) => {
                 <Row>
                     {stat("Average KD:", averageClanKD(clanMemberStats) ? averageClanKD(clanMemberStats)[0] : null)}
                 </Row>
+                <Row>
+                    {stat("Average Strike Duration:", averageStrikeDuration(clanMemberStats))}
+                </Row>
 
                 <Row>
                     <Text textSize="subheader" textColor="cbWhite" p={{ l: '0.5rem', t: '0.5rem', b: '0.5rem' }} h="1rem">
@@ -305,6 +365,12 @@ const ClanCard = ({ clanId, stats }) => {
                 </Row>
                 <Row>
                     {stat("Average KD:", averageClanKD(clanMemberStats) ? averageClanKD(clanMemberStats)[1] : null)}
+                </Row>
+                <Row>
+                    {stat("Average Win Rate:", averageClanWinPercentage(clanMemberStats))}
+                </Row>
+                <Row>
+                    {stat("Average Combat Rating:", averageCombatRating(clanMemberStats))}
                 </Row>
 
                 <Row>
