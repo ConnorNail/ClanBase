@@ -94,14 +94,14 @@ export default function ClanPage() {
             </Col>
           </Row>
           <Row d="flex" justify="center">
-            <Div bg="cbWhite" w="90%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
+            <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
           </Row>
           <Row>
-            <Col d="flex" justify="center">
+            <Col d="flex" justify="center" size="auto">
               <ClanBannerSimple clanId={clanId} />
             </Col>
             <Col>
-              <ScrollBox>
+              <ScrollBox h={"19.2rem"}>
                 <Text style={{ whiteSpace: "pre-line" }} textSize="subheader" textColor="cbWhite">
                   {loadingValue(clanInfo?.Response?.detail?.about, "cbWhite")}
                 </Text>

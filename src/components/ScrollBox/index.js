@@ -1,8 +1,8 @@
 import { Div, Icon, Image } from "atomize";
 
-const ScrollBox = ({ children }) => {
+const ScrollBox = ({ children, h }) => {
     return (
-        <Div h="20rem" overflow="hidden auto" id="box" p={{r: "0.25rem"}}>
+        <Div h={h} overflow="hidden auto" id="box" p={{r: "0.25rem"}}>
             {children}
         </Div>
     )
