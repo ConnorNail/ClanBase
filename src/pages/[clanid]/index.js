@@ -54,7 +54,7 @@ export default function ClanPage() {
 
   return (
     <DefaultTemplate>
-      <Row d="flex" flexDir="column" m={{ x: "2rem" }}>
+      <Row d="flex" flexDir="column" m={{ x: "15rem" }}>
         <InfoBox bg="cbGrey2">
           <Row>
             <Col size="auto">
@@ -92,9 +92,12 @@ export default function ClanPage() {
                 <Icon name="Loading3" size="20px" color="cbBlue" />}
             </Col>
           </Row>
+          <Row d="flex" justify="center">
+            <Div bg="cbWhite" w="90%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
+          </Row>
           <Row>
-            <Col>
-              CLAN BANNER PLACEHOLDER
+            <Col d="flex" justify="center">
+              <ClanBannerSimple clanId={clanId}/>
             </Col>
             <Col>
               <Text style={{ whiteSpace: "pre-line" }} textSize="subheader" textColor="cbWhite">

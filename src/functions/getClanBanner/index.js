@@ -9,7 +9,7 @@ export default function getClanBanner( clanInfo ) {
 
     const fetcher = ([url, header]) => fetch(url, {headers: header}).then((res) => res.json())
 
-    const { data, error } = useSWR( ['https://www.bungie.net/Platform/Destiny2/Clan/ClanBannerDictionary/', headers], fetcher )
+    const { data, error } = useSWR(clanInfo ? ['https://www.bungie.net/Platform/Destiny2/Clan/ClanBannerDictionary/', headers] : null, fetcher )
 
     const clanBannerDetails = {
         clanDecalForegroundURL: data?.Response?.clanBannerDecals[clanBannerData?.decalId]?.foregroundPath,

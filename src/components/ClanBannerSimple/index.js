@@ -12,12 +12,19 @@ const ClanBannerSimple = ({ clanId }) => {
     const clanBannerData = getClanBanner(clanInfo)
     const urlStart = 'https://www.bungie.net/'
 
-    console.log(clanBannerData)
+    // console.log(clanBannerData)
 
     return (
-        <Container bgImg={urlStart + clanBannerData.clanDecalBackgroundURL} bgSize="cover" bgPos="center" w="25rem" h="25rem">
-            <Image src={urlStart + clanBannerData.clanDecalForegroundURL} alt="clan banner" />
-        </Container>
+        <>
+            {clanBannerData.clanDecalBackgroundURL && clanBannerData.clanDecalForegroundURL ?
+                <Div d="flex">
+                    <Div bgImg={urlStart + clanBannerData.clanDecalBackgroundURL} bgSize="cover" bgPos="center" border={{ x: "1.5px solid" }} borderColor="cbWhite" w="13rem" m={{ b: "auto" }}>
+                        <Image src={urlStart + clanBannerData.clanDecalForegroundURL} alt="clan banner" />
+                    </Div>
+                </Div>
+                :
+                <Icon name="Loading3" size="20px" color="cbGrey2" />}
+        </>
     )
 }
 
