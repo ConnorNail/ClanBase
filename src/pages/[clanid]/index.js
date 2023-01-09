@@ -17,6 +17,9 @@ import getClanMembersAllTimeStats from '../../functions/getClanMembersAllTimeSta
 import getAllMembersProfile from '../../functions/getClanMemberProfileInfo/getAllMembersProfile';
 import ClanBannerSimple from '../../components/clanBannerSimple';
 import ClanIconBox from '../../components/ClanIconBox';
+import calcClanStatScores from '../../functions/calcClanStatScores';
+import PvEIcon from '../../components/PvEIcon';
+import PvPIcon from '../../components/PvPIcon';
 
 export default function ClanPage() {
 
@@ -33,6 +36,8 @@ export default function ClanPage() {
   const clanMemberStats = getClanMembersAllTimeStats(clanMemberList)
   const clanMemberProfiles = getAllMembersProfile(clanMemberList)
 
+  const clanStatScores = calcClanStatScores(clanMemberStats, clanMemberProfiles)
+
   const loadingValue = (value, color) => {
     if (value || value == 0) {
       return (
@@ -47,20 +52,18 @@ export default function ClanPage() {
     }
   }
 
-  console.log(clanInfo?.Response?.detail?.memberCount)
-
   return (
     <DefaultTemplate>
       <Row d="flex" flexDir="column" m={{ x: "2rem" }}>
         <InfoBox bg="cbGrey2">
           <Row>
             <Col size="auto">
-              <Row m="0">
+              <Row m="0" minW="18rem">
                 <Text textSize="display1" textColor="cbWhite">
                   {loadingValue(clanInfo?.Response?.detail?.name, "cbWhite")} [{loadingValue(clanInfo?.Response?.detail?.clanInfo?.clanCallsign, "cbWhite")}]
                 </Text>
               </Row>
-              <Row m="0">
+              <Row m="0" minW="18rem">
                 <Text textSize="paragraph" textColor="cbGrey1">
                   "{loadingValue(clanInfo?.Response?.detail?.motto, "cbGrey1")}"
                 </Text>
@@ -72,11 +75,21 @@ export default function ClanPage() {
             <Col>
               CLAN SCORE PLACEHOLDER
             </Col>
-            <Col>
-              CLAN PvE SCORE PLACEHOLDER
+            <Col d="flex" align="center">
+              <PvEIcon />
+              {clanStatScores?.PvE ?
+                <Text textSize="heading" textColor="cbBlue">
+                  {clanStatScores?.PvE.toFixed()}
+                </Text> :
+                <Icon name="Loading3" size="20px" color="cbBlue" />}
             </Col>
-            <Col>
-              CLAN PvP SCORE PLACEHOLDER
+            <Col d="flex" align="center">
+              <PvPIcon />
+              {clanStatScores?.PvP ?
+                <Text textSize="heading" textColor="cbBlue">
+                  {clanStatScores?.PvP.toFixed()}
+                </Text> :
+                <Icon name="Loading3" size="20px" color="cbBlue" />}
             </Col>
           </Row>
           <Row>
