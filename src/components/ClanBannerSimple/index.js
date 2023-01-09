@@ -1,10 +1,5 @@
-import { Div, Text, Row, Col, Button, Icon, Image, Container } from "atomize";
-import InfoBox from '../InfoBox'
-import { useRouter } from 'next/router';
+import { Div, Icon, Image } from "atomize";
 import getClanInfo from "../../functions/getClanInfo";
-import getClanMemberInfo from "../../functions/getClanMemberProfileInfo/getClanMemberInfo";
-import getClanMembersAllTimeStats from "../../functions/getClanMembersAllTimeStats";
-import getAllMembersProfile from '../../functions/getClanMemberProfileInfo/getAllMembersProfile';
 import getClanBanner from "../../functions/getClanBanner";
 
 const ClanBannerSimple = ({ clanId }) => {

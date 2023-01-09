@@ -20,6 +20,7 @@ import ClanIconBox from '../../components/ClanIconBox';
 import calcClanStatScores from '../../functions/calcClanStatScores';
 import PvEIcon from '../../components/PvEIcon';
 import PvPIcon from '../../components/PvPIcon';
+import ScrollBox from '../../components/ScrollBox';
 
 export default function ClanPage() {
 
@@ -54,7 +55,7 @@ export default function ClanPage() {
 
   return (
     <DefaultTemplate>
-      <Row d="flex" flexDir="column" m={{ x: "15rem" }}>
+      <Row d="flex" flexDir="column" m={{ x: "2rem" }}>
         <InfoBox bg="cbGrey2">
           <Row>
             <Col size="auto">
@@ -97,12 +98,14 @@ export default function ClanPage() {
           </Row>
           <Row>
             <Col d="flex" justify="center">
-              <ClanBannerSimple clanId={clanId}/>
+              <ClanBannerSimple clanId={clanId} />
             </Col>
             <Col>
-              <Text style={{ whiteSpace: "pre-line" }} textSize="subheader" textColor="cbWhite">
-                {loadingValue(clanInfo?.Response?.detail?.about, "cbWhite")}
-              </Text>
+              <ScrollBox>
+                <Text style={{ whiteSpace: "pre-line" }} textSize="subheader" textColor="cbWhite">
+                  {loadingValue(clanInfo?.Response?.detail?.about, "cbWhite")}
+                </Text>
+              </ScrollBox>
             </Col>
             <Col>
               RECENT MEMBERS TABLE PLACEHOLDER
