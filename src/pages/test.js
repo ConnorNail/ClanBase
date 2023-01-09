@@ -1,5 +1,5 @@
 import DefaultTemplate from '../components/DefaultLayout';
-import getAuthInfo from '../functions/getAuthInfo';
+import getHeaders from '../functions/getHeaders';
 import { useRouter } from 'next/router';
 import getClanInfo from "../functions/getClanInfo";
 import getClanMemberInfo from "../functions/getClanMemberProfileInfo/getClanMemberInfo";
@@ -14,26 +14,30 @@ import ClanBannerSimple from '../components/ClanBannerSimple'
 import InfoBox from '../components/InfoBox';
 import Bracket from '../components/BracketSimple';
 import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
+import createSubDateArray from '../functions/getClanMemberStatsInfo/createSubDateArray';
+import calcMemberSeasonalTime from '../functions/calcMemberSeasonalTime';
 
 export default function Test() {
 
     const profiles = getClanMemberProfileInfo(2084197)
-    // const clanInfo = getClanInfo(2084197)
-    // const data = getClanBanner(clanInfo)
 
-    // console.log(data)
+    const currentSeasonHash = getCurrentSeasonHash();
+    const currentSeasonInfo = getSeasonInfo(currentSeasonHash);
+    const dateArray = createSubDateArray(currentSeasonInfo?.Response?.startDate, currentSeasonInfo?.Response?.endDate);
 
-    // if (!data) return (
-    //     <DefaultTemplate>
-    //         <div>Loading...</div>
-    //     </DefaultTemplate>
-    // )
+    const allCharacterStats = getAllCharacterStats(profiles, dateArray)
+
+    const memberSeasonalTime = calcMemberSeasonalTime(allCharacterStats, profiles)
+
+    console.log(memberSeasonalTime)
+
+    // console.log(allCharacterStats)
 
     return (
         <DefaultTemplate>
             <InfoBox bg={'cbGrey1'}>
 
-                wefhooewfoewowepepiuwehfpawueihfpawehwaphweafph
+                {allCharacterStats?.data ? "DONE!" : "LOADING"}
             </InfoBox>
             {/* <ClanBannerSimple clanId={2084197}/> */}
             <div>API TEST SUCCESSFUL</div>
