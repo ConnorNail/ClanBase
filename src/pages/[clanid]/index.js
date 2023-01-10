@@ -14,6 +14,7 @@ import PvEIcon from '../../components/PvEIcon';
 import PvPIcon from '../../components/PvPIcon';
 import ScrollBox from '../../components/ScrollBox';
 import TimeTable from '../../components/TimeTable';
+import ClanLevel from '../../components/ClanLevel';
 
 export default function ClanPage() {
 
@@ -106,9 +107,7 @@ export default function ClanPage() {
           </Row>
         </InfoBox>
         <InfoBox bg="cbGrey1">
-          <Row>
-            CLAN LEVEL PLACEHOLDER
-          </Row>
+              <ClanLevel clanInfo={clanInfo} />
         </InfoBox>
         <InfoBox bg="cbGrey1">
           <Text textColor="cbWhite" textSize="heading">

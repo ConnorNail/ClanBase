@@ -13,38 +13,30 @@ import getClanBanner from '../functions/getClanBanner';
 import ClanBannerSimple from '../components/ClanBannerSimple'
 import InfoBox from '../components/InfoBox';
 import Bracket from '../components/BracketSimple';
-import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
+import { Container, Button, Text, Row, Col, Image, Div, Icon } from "atomize";
 import createSubDateArray from '../functions/getClanMemberCharacterSeasonalTimeStats/createSubDateArray';
 import calcMemberSeasonalTime from '../functions/calcMemberSeasonalTime';
 import setupMemberTimeTable from '../functions/setupMemberTimeTable';
 import Table from '../components/Table';
 import getClanMemberCharacterSeasonalTimeStats from '../functions/getClanMemberCharacterSeasonalTimeStats';
 import TimeTable from '../components/TimeTable';
+import ClanLevel from '../components/ClanLevel';
 
 export default function Test() {
 
     const memberInfo = getClanMemberInfo(2084197)
     const profiles = getClanMemberProfileInfo(2084197)
+    const clanInfo = getClanInfo(2084197)
 
-    const memberSeasonalTime = getClanMemberCharacterSeasonalTimeStats(memberInfo, profiles)
+    console.log(clanInfo)
 
-    const [timeColumns, timeData] = setupMemberTimeTable(memberSeasonalTime)
-
-    // console.log(memberSeasonalTime)
-
-    // console.log(memberInfo)
+    
 
     return (
         <DefaultTemplate>
-            <InfoBox bg={'cbGrey2'}>
-
-                {memberSeasonalTime ? "DONE!" : "LOADING"}
-                {/* {timeData ? <Table columns={timeColumns} data={timeData} /> : null} */}
-                <TimeTable memberInfo={memberInfo} memberProfiles={profiles}/>
+            <InfoBox bg={'cbGrey1'}>
+                <ClanLevel clanInfo={clanInfo}/>
             </InfoBox>
-            
-            {/* <ClanBannerSimple clanId={2084197}/> */}
-            <div>API TEST SUCCESSFUL</div>
         </DefaultTemplate>
     )
 }

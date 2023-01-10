@@ -2,7 +2,7 @@ import { Div, Image } from "atomize";
 
 const InfoBox = ({ children, bg }) => {
     return (
-        <Div m="0.5rem" shadow="1" hoverShadow="4">
+        <Div m="0.5rem" shadow="1" hoverShadow="4" transition>
             <Div h="1.35rem" bg="cbGrey3" rounded="8px 8px 0px 0px" d="flex" align="center">
                 <Image src="../clanbaseLogoNoText.svg" h="auto" w="0.9rem" m={{ l: "0.75rem", t: "0.2rem" }}/>
                 <Div bg="cbBlack" h="0.7rem" w="2.25rem" rounded="xs" m={{ l: "auto", r: "0.4rem" }}></Div>
