@@ -25,22 +25,20 @@
     border-radius: 10px;
   }
 
-  #box::-webkit-scrollbar {
+  .scroller::-webkit-scrollbar {
     width: 7px;
   }
-  
-  /* Track */
-  #box::-webkit-scrollbar-track {
+
+  .scroller::-webkit-scrollbar-track {
     background: #F1E9E6;
     border: 2px solid transparent;
     background-clip: content-box;
   }
   
-  /* Handle */
-  #box::-webkit-scrollbar-thumb {
+  .scroller::-webkit-scrollbar-thumb {
     background: #F1E9E6;
     border-radius: 10px;
-    border-top: 50px solid transparent;
-    border-bottom: 50px solid transparent;
-    background-clip: content-box;
+    /* border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    background-clip: content-box; */
   }

@@ -3,8 +3,8 @@ import { Row, Col } from "atomize";
 import getClanMemberProfileInfo from '../functions/getClanMemberProfileInfo';
 import setupRosterTable from "../functions/setupRosterTable";
 import setupRecentMemberTable from "../functions/setupRecentMemberTable";
-import setupMemberTime from "../functions/setupMemberTime";
-import getClanMemberStatsInfo from '../functions/getClanMemberStatsInfo';
+// import setupMemberTime from "../functions/setupMemberTime";
+import getClanMemberStatsInfo from '../functions/getClanMemberCharacterSeasonalTimeStats';
 import formatTotalTime from '../functions/formatTotalTime';
 import Table from "../components/Table";
 import SmallTable from "../components/SmallTable";
@@ -17,8 +17,8 @@ export default function ClanPage() {
   const clanMemberTimeInfo = formatTotalTime(clanMemberStatsInfo)
 
   const [rosterColumns, rosterData] = setupRosterTable(clanMemberProfileInfo);
-  const [recentColumns, recentData] = setupRecentMemberTable(clanMemberProfileInfo);
-  const [timeColumns, timeData] = setupMemberTime(clanMemberTimeInfo)
+  // const [recentColumns, recentData] = setupRecentMemberTable(clanMemberProfileInfo);
+  // const [timeColumns, timeData] = setupMemberTime(clanMemberTimeInfo)
 
   return (
     <DefaultTemplate>

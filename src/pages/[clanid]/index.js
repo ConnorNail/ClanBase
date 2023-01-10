@@ -2,9 +2,8 @@ import DefaultTemplate from '../../components/DefaultLayout';
 import InfoBox from '../../components/InfoBox';
 import SearchBar from '../../components/SearchBar';
 import getClanMemberProfileInfo from '../../functions/getClanMemberProfileInfo';
-import getClanMemberStatsInfo from '../../functions/getClanMemberStatsInfo';
+import getClanMemberStatsInfo from '../../functions/getClanMemberCharacterSeasonalTimeStats';
 import setupRosterTable from "../../functions/setupRosterTable";
-import setupMemberTime from "../../functions/setupMemberTime";
 import formatTotalTime from '../../functions/formatTotalTime';
 import Table from "../../components/Table";
 import getHeaders from '../../functions/getHeaders';
@@ -21,6 +20,7 @@ import calcClanStatScores from '../../functions/calcClanStatScores';
 import PvEIcon from '../../components/PvEIcon';
 import PvPIcon from '../../components/PvPIcon';
 import ScrollBox from '../../components/ScrollBox';
+import TimeTable from '../../components/TimeTable';
 
 export default function ClanPage() {
 
@@ -116,6 +116,14 @@ export default function ClanPage() {
           <Row>
             CLAN LEVEL PLACEHOLDER
           </Row>
+        </InfoBox>
+        <InfoBox bg="cbGrey2">
+          <Text textColor="cbWhite" textSize="heading">
+            Seasonal Time Data
+          </Text>
+          <ScrollBox h={"19.2rem"}>
+            <TimeTable memberInfo={clanMemberList} memberProfiles={clanMemberProfiles} />
+          </ScrollBox>
         </InfoBox>
       </Row>
     </DefaultTemplate>

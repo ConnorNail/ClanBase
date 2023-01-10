@@ -2,14 +2,28 @@ import React, { useMemo } from "react";
 import { Div, Text } from "atomize";
 import { displayEmblem, displayEmblemBackground } from "../displayEmblem";
 
-export default function setupMemberTime(data) {
+export default function setupMemberTimeTable(data) {
 
     function getDisplayTime(seconds) {
+
+        const days = Math.trunc(seconds / 86400)
+        // const hours = Math.trunc((seconds % 86400) / 3600)
+        const hours = Math.trunc((seconds) / 3600)
+        const minutes = Math.trunc((seconds % 3600) / 60)
+
+        const displayDays = days > 1 ? days + " D " : (days > 0 ? days + " D " : "")
+        const displayHours = hours > 1 ? hours + " Hours " : (hours > 0 ? hours + " Hour " : "0 Hours")
+        const displayMinutes = minutes > 1 ? minutes + " M " : (minutes > 0 ? minutes + " M " : "0 M")
+
         return (
-            <Div bg="info600" rounded="xl" >
-                <Text textSize="body" m={{ l: "0.5rem", r: "0.5rem" }}>
-                    {Math.trunc(seconds / 86400) + 'd ' + Math.trunc((seconds % 86400) / 3600) + 'hr ' + Math.trunc((seconds % 3600) / 60) + 'm ' + seconds % 60 + 's'}
-                </Text>
+            <Div d="flex">
+                {/* <Div border={{ l: "1px solid" }} borderColor="cbBlue" w="0.1rem" m={{ y: "-0.25rem", r: "0.25rem" }}></Div> */}
+                <Div  h="2rem" w="100%" >
+                    <Text textSize="caption" textColor="cbWhite" p="0.4rem">
+                        {/* {displayDays + " " + displayHours + " " + displayMinutes} */}
+                        {displayHours}
+                    </Text>
+                </Div>
             </Div>
         )
     }
@@ -17,11 +31,11 @@ export default function setupMemberTime(data) {
     const columns = useMemo(
         () => [
             {
-                Header: "Info",
+                Header: " ",
                 columns: [
                     {
                         Header: "",
-                        accessor: "playerProfile",
+                        accessor: "characterProfiles",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -31,20 +45,20 @@ export default function setupMemberTime(data) {
                         }
                     },
                     {
-                        Header: "Name",
-                        accessor: "bungieNetUserInfo.supplementalDisplayName",
+                        Header: " ",
+                        accessor: "bungieInfo.supplementalDisplayName",
                         Cell: ({ row }) => {
 
                             return (
                                 <>
-                                    {displayEmblemBackground(row.original.playerProfile, row.original.bungieNetUserInfo?.supplementalDisplayName)}
+                                    {displayEmblemBackground(row?.original?.bungieInfo?.supplementalDisplayName, row?.original?.memberProfile?.data?.userInfo?.bungieGlobalDisplayName)}
                                 </>
                             )
                         }
                     },
                     {
                         Header: "Total Time",
-                        accessor: "playerStats.totalTime",
+                        accessor: "characterTime.allTime",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -55,7 +69,7 @@ export default function setupMemberTime(data) {
                     },
                     {
                         Header: "PvE Time",
-                        accessor: "playerStats.allPvE.totalTime",
+                        accessor: "characterTime.allPvE",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -66,7 +80,7 @@ export default function setupMemberTime(data) {
                     },
                     {
                         Header: "Competitive PvE Time",
-                        accessor: "playerStats.allPvECompetitive.totalTime",
+                        accessor: "characterTime.allPvECompetitive",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -77,7 +91,7 @@ export default function setupMemberTime(data) {
                     },
                     {
                         Header: "PvP Time",
-                        accessor: "playerStats.allPvP.totalTime",
+                        accessor: "characterTime.allPvP",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -88,7 +102,7 @@ export default function setupMemberTime(data) {
                     },
                     {
                         Header: "Strike Time",
-                        accessor: "playerStats.allStrikes.totalTime",
+                        accessor: "characterTime.allStrikes",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -99,7 +113,7 @@ export default function setupMemberTime(data) {
                     },
                     {
                         Header: "Patrol Time",
-                        accessor: "playerStats.patrol.totalTime",
+                        accessor: "characterTime.patrol",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -110,7 +124,7 @@ export default function setupMemberTime(data) {
                     },
                     {
                         Header: "Raid Time",
-                        accessor: "playerStats.raid.totalTime",
+                        accessor: "characterTime.raid",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -121,7 +135,7 @@ export default function setupMemberTime(data) {
                     },
                     {
                         Header: "Story Time",
-                        accessor: "playerStats.story.totalTime",
+                        accessor: "characterTime.story",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>

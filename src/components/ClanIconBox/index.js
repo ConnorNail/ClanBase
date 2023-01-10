@@ -1,21 +1,4 @@
-import DefaultTemplate from '../../components/DefaultLayout';
-import InfoBox from '../../components/InfoBox';
-import SearchBar from '../../components/SearchBar';
-import getClanMemberProfileInfo from '../../functions/getClanMemberProfileInfo';
-import getClanMemberStatsInfo from '../../functions/getClanMemberStatsInfo';
-import setupRosterTable from "../../functions/setupRosterTable";
-import setupMemberTime from "../../functions/setupMemberTime";
-import formatTotalTime from '../../functions/formatTotalTime';
-import Table from "../../components/Table";
-import getHeaders from '../../functions/getHeaders';
-import { useRouter } from 'next/router';
-import { Row, Col, Div, Text, Image, Container, Anchor, Icon } from "atomize";
-import Link from 'next/link';
-import getClanInfo from '../../functions/getClanInfo';
-import getClanMemberInfo from '../../functions/getClanMemberProfileInfo/getClanMemberInfo';
-import getClanMembersAllTimeStats from '../../functions/getClanMembersAllTimeStats';
-import getAllMembersProfile from '../../functions/getClanMemberProfileInfo/getAllMembersProfile';
-import ClanBannerSimple from '../../components/clanBannerSimple';
+import { Row, Div, Text, Icon } from "atomize";
 
 export default function ClanIconBox({clanInfo}) {
 

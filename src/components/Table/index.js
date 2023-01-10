@@ -1,6 +1,6 @@
 import React from "react";
 import { useTable, useSortBy } from "react-table";
-import { Div } from "atomize";
+import { Div, Text } from "atomize";
 
 export default function Table({ columns, data }) {
     // Use the useTable Hook to send the columns and data to build the table
@@ -18,32 +18,37 @@ export default function Table({ columns, data }) {
     );
 
     return (
-        <Div h="45rem" overflow="hidden scroll" m="1rem">
-        <table {...getTableProps()}>
-            <thead>
-                {headerGroups.map(headerGroup => (
-                    <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-                        {headerGroup.headers.map(column => (
-                            <th {...column.getHeaderProps(column.getSortByToggleProps())} key={column.id}>
-                                {column.render("Header")}
-                                <span>
+        <table {...getTableProps()} style={{borderCollapse: "collapse"}}>
+            <thead style={{fontSize: "15px"}}>
+                {headerGroups.map((headerGroup, headerI) => (
+                    <tr {...headerGroup.getHeaderGroupProps()} key={headerI}>
+                        {headerGroup.headers.map((column, columnI) => (
+                            <th {...column.getHeaderProps(column.getSortByToggleProps())} key={columnI} style={{padding: "0 1rem"}}>
+                                {/* <Div d="flex"> */}
+                                {/* <Div> */}
+                                    <Text textColor="cbWhite">
+                                        {column.render("Header")}
+                                    </Text>
+                                {/* </Div> */}
+                                <span key={columnI}>
                                     {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
                                 </span>
+                                {/* </Div> */}
                             </th>
                         ))}
                     </tr>
                 ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-                {rows.map((row, i) => {
+                {rows.map((row, rowI) => {
                     prepareRow(row);
                     return (
-                        <tr {...row.getRowProps()} key={row.id}>
-                            {row.cells.map(cell => {
-                                return <td {...cell.getCellProps()} key={cell.id}>
-                                    <Div m={{ l: "0.5rem", r: "0.5rem" }}>
+                        <tr {...row.getRowProps()} key={rowI}>
+                            {row.cells.map((cell, cellI) => {
+                                return <td {...cell.getCellProps()} key={cellI} style={{padding: "0 0", borderColor: "grey", borderStyle: "solid"}}>
+                                    {/* <Div> */}
                                         {cell.render("Cell")}
-                                    </Div>
+                                    {/* </Div> */}
                                 </td>;
                             })}
                         </tr>
@@ -51,6 +56,5 @@ export default function Table({ columns, data }) {
                 })}
             </tbody>
         </table>
-        </Div>
     );
 }

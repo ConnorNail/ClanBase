@@ -5,8 +5,8 @@ function getRecentChar(charInfo) {
     let char = 0;
     let date = '';
 
-    for (const character in charInfo.characters.data) {
-        const newDate = new Date(charInfo.characters.data[character].dateLastPlayed);
+    for (const character in charInfo?.data) {
+        const newDate = new Date(charInfo?.data[character]?.dateLastPlayed);
 
         // If the new date is more recent
         if (date == '' || date < newDate) {
@@ -23,51 +23,35 @@ function getRecentChar(charInfo) {
 
 function displayEmblem(charInfo) {
     // When passed character data will display an emblem
-    const path = charInfo?.characters.data[getRecentChar(charInfo)].emblemPath
+    const path = charInfo?.data[getRecentChar(charInfo)]?.emblemPath
 
     // If a valid path is found
     if (typeof path !== 'undefined') {
         return (
             <Div d="flex" flexDir="column" textAlign="center">
-                <Image h="3rem" w="3rem" src={'https://www.bungie.net/' + path}/>
+                <Image h="2rem" w="auto" src={'https://www.bungie.net/' + path} />
             </Div>
         )
     } else {
         // Else display default emblem "Make Us Proud"
         return (
             <Div d="flex" flexDir="column" textAlign="center">
-                <Image h="3rem" w="3rem" src={'https://www.bungie.net/common/destiny2_content/icons/871fa953ea81308c71bc3b9eb3bcd509.jpg'}/>
+                <Image h="2rem" w="auto" src={'https://www.bungie.net/common/destiny2_content/icons/871fa953ea81308c71bc3b9eb3bcd509.jpg'} />
             </Div>
         )
     }
 }
 
-function displayEmblemBackground(charInfo, children) {
-    // When passed character data will display an emblem
-    const colors = charInfo?.characters.data[getRecentChar(charInfo)].emblemColor
+function displayEmblemBackground(children, backup) {
 
-    // If a valid colors found
-    if (typeof colors !== 'undefined') {
-        return (
-            <Div bg={'rgba(' + colors.red + ',' + colors.green + ',' + colors.blue + ',1)'} h="3rem" m={{l: '-4.24rem'}}>
-                <Div m={{l: '3rem'}}>
-                <Text textColor="white" p='1rem'>
-                    {children}
-                </Text>
-                </Div>
-            </Div>
-        )
-    } else {
-        return (
-            // Else display default emblem background "Make Us Proud"
-            <Div bg={'rgba(11,55,147,1)'} h="3rem" m={{l: '-1.5rem'}}>
-                <Text textColor="white" p='1rem'>
-                    {children}
-                </Text>
-            </Div>
-        )
-    }
-    
+    return (
+        <Div bg="cbGrey1" h="2rem" m={{ l: '-2.2rem' }}>
+            <Text textColor="cbWhite" textSize="caption" p={{ l: '5rem', r: '0.75rem', t: '0.4rem' }}>
+                {children ? children : backup}
+            </Text>
+        </Div>
+    )
+
 }
 
-export {displayEmblem, displayEmblemBackground};
+export { displayEmblem, displayEmblemBackground };

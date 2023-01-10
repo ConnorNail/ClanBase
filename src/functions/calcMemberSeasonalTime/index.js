@@ -1,4 +1,4 @@
-export default function calcMemberSeasonalTime(allCharacterStats, playerProfiles) {
+export default function calcMemberSeasonalTime(allCharacterStats, playerProfiles, playerInfo) {
 
     if (allCharacterStats?.data && playerProfiles) {
         const characterCountArray = allCharacterStats?.characterCountArray
@@ -13,11 +13,14 @@ export default function calcMemberSeasonalTime(allCharacterStats, playerProfiles
         while (memberIndex < characterCountArray.length) {
 
             const memberProfile = playerProfiles[memberIndex]?.Response?.profile
+            const characterProfiles = playerProfiles[memberIndex]?.Response?.characters
+            const bungieInfo = playerInfo?.Response?.results[memberIndex]?.bungieNetUserInfo
+
 
             let characterArray = []
             // For each character
             for (let j = 0; j < characterCountArray[memberIndex] * dateCount; j++) {
-                const character = data[characterIndex]
+                const character = data[characterIndex + j]
                 characterArray.push(character)
             }
 
@@ -25,6 +28,8 @@ export default function calcMemberSeasonalTime(allCharacterStats, playerProfiles
 
             const entry = {
                 memberProfile,
+                characterProfiles,
+                bungieInfo,
                 characterTime
             }
 
@@ -40,8 +45,9 @@ export default function calcMemberSeasonalTime(allCharacterStats, playerProfiles
 }
 
 function mergeCharacters(characterArray) {
-    
+
     let totalTime = {
+        allTime: 0,
         allPvE: 0,
         allPvECompetitive: 0,
         allPvP: 0,
@@ -101,6 +107,8 @@ function mergeCharacters(characterArray) {
             }
         }
     }
+
+    totalTime.allTime = totalTime.allPvE + totalTime.allPvP
 
     return totalTime
 }
