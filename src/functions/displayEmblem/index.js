@@ -45,8 +45,8 @@ function displayEmblem(charInfo) {
 function displayEmblemBackground(children, backup) {
 
     return (
-        <Div bg="cbGrey1" h="2rem" m={{ l: '-2.2rem' }}>
-            <Text textColor="cbWhite" textSize="caption" p={{ l: '5rem', r: '0.75rem', t: '0.4rem' }}>
+        <Div bg="cbGrey2" h="2rem" m={{ l: '-2.2rem' }}>
+            <Text textColor="cbWhite" textSize="caption" p={{ l: '2.75rem', r: '0.75rem', t: '0.4rem' }}>
                 {children ? children : backup}
             </Text>
         </Div>

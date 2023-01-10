@@ -14,14 +14,17 @@ export default function setupMemberTimeTable(data) {
         const displayDays = days > 1 ? days + " D " : (days > 0 ? days + " D " : "")
         const displayHours = hours > 1 ? hours + " Hours " : (hours > 0 ? hours + " Hour " : "0 Hours")
         const displayMinutes = minutes > 1 ? minutes + " M " : (minutes > 0 ? minutes + " M " : "0 M")
+        const displayHourName = hours > 1 ? " Hours " : (hours > 0 ? " Hour " : " Hours")
 
         return (
             <Div d="flex">
                 {/* <Div border={{ l: "1px solid" }} borderColor="cbBlue" w="0.1rem" m={{ y: "-0.25rem", r: "0.25rem" }}></Div> */}
-                <Div  h="2rem" w="100%" >
-                    <Text textSize="caption" textColor="cbWhite" p="0.4rem">
-                        {/* {displayDays + " " + displayHours + " " + displayMinutes} */}
-                        {displayHours}
+                <Div  h="2rem" w="100%" d="flex">
+                <Text textSize="caption" textColor="cbBlue" p={{l: "0.4rem", y: "0.4rem", r: "0.25rem"}}>
+                        {hours}
+                    </Text>
+                    <Text textSize="caption" textColor="cbWhite" p={{r: "0.4rem", y: "0.4rem"}}>
+                        {displayHourName}
                     </Text>
                 </Div>
             </Div>
@@ -45,7 +48,7 @@ export default function setupMemberTimeTable(data) {
                         }
                     },
                     {
-                        Header: " ",
+                        Header: "Name",
                         accessor: "bungieInfo.supplementalDisplayName",
                         Cell: ({ row }) => {
 

@@ -56,7 +56,7 @@ export default function ClanPage() {
   return (
     <DefaultTemplate>
       <Row d="flex" flexDir="column" m={{ x: "2rem" }}>
-        <InfoBox bg="cbGrey2">
+        <InfoBox bg="cbGrey1">
           <Row>
             <Col size="auto">
               <Row m="0" minW="18rem">
@@ -65,8 +65,8 @@ export default function ClanPage() {
                 </Text>
               </Row>
               <Row m="0" minW="18rem">
-                <Text textSize="paragraph" textColor="cbGrey1">
-                  "{loadingValue(clanInfo?.Response?.detail?.motto, "cbGrey1")}"
+                <Text textSize="paragraph" textColor="cbGrey2">
+                  "{loadingValue(clanInfo?.Response?.detail?.motto, "cbGrey2")}"
                 </Text>
               </Row>
             </Col>
@@ -112,18 +112,26 @@ export default function ClanPage() {
             </Col>
           </Row>
         </InfoBox>
-        <InfoBox bg="cbGrey2">
+        <InfoBox bg="cbGrey1">
           <Row>
             CLAN LEVEL PLACEHOLDER
           </Row>
         </InfoBox>
-        <InfoBox bg="cbGrey2">
+        <InfoBox bg="cbGrey1">
           <Text textColor="cbWhite" textSize="heading">
             Seasonal Time Data
           </Text>
-          <ScrollBox h={"19.2rem"}>
-            <TimeTable memberInfo={clanMemberList} memberProfiles={clanMemberProfiles} />
+          <Row d="flex" justify="center">
+            <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
+          </Row>
+          <ScrollBox h={"35rem"}>
+            <Div>
+              <TimeTable memberInfo={clanMemberList} memberProfiles={clanMemberProfiles} />
+            </Div>
           </ScrollBox>
+          <Row d="flex" justify="center">
+            <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
+          </Row>
         </InfoBox>
       </Row>
     </DefaultTemplate>

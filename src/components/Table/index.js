@@ -1,6 +1,6 @@
 import React from "react";
 import { useTable, useSortBy } from "react-table";
-import { Div, Text } from "atomize";
+import { Div, Text, Icon } from "atomize";
 
 export default function Table({ columns, data }) {
     // Use the useTable Hook to send the columns and data to build the table
@@ -18,22 +18,22 @@ export default function Table({ columns, data }) {
     );
 
     return (
-        <table {...getTableProps()} style={{borderCollapse: "collapse"}}>
-            <thead style={{fontSize: "15px"}}>
+        <table {...getTableProps()} style={{ borderCollapse: "collapse" }}>
+            <thead style={{ fontSize: "15px" }}>
                 {headerGroups.map((headerGroup, headerI) => (
                     <tr {...headerGroup.getHeaderGroupProps()} key={headerI}>
                         {headerGroup.headers.map((column, columnI) => (
-                            <th {...column.getHeaderProps(column.getSortByToggleProps())} key={columnI} style={{padding: "0 1rem"}}>
-                                {/* <Div d="flex"> */}
-                                {/* <Div> */}
-                                    <Text textColor="cbWhite">
-                                        {column.render("Header")}
-                                    </Text>
-                                {/* </Div> */}
-                                <span key={columnI}>
-                                    {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
-                                </span>
-                                {/* </Div> */}
+                            <th {...column.getHeaderProps(column.getSortByToggleProps())} key={columnI} style={{ padding: "0 1rem" }}>
+                                <Div d="flex">
+                                    <Div>
+                                        <Text textColor="cbWhite">
+                                            {column.render("Header")}
+                                        </Text>
+                                    </Div>
+                                    <Div key={columnI}>
+                                        {column.isSorted ? (column.isSortedDesc ? <Icon name="DownArrow" size="20px" color="cbBlue" /> : <Icon name="UpArrow" size="20px" color="cbBlue" />) : ""}
+                                    </Div>
+                                </Div>
                             </th>
                         ))}
                     </tr>
@@ -45,9 +45,9 @@ export default function Table({ columns, data }) {
                     return (
                         <tr {...row.getRowProps()} key={rowI}>
                             {row.cells.map((cell, cellI) => {
-                                return <td {...cell.getCellProps()} key={cellI} style={{padding: "0 0", borderColor: "grey", borderStyle: "solid"}}>
+                                return <td {...cell.getCellProps()} key={cellI} style={{ padding: "0 0", borderColor: "grey", borderStyle: "solid" }}>
                                     {/* <Div> */}
-                                        {cell.render("Cell")}
+                                    {cell.render("Cell")}
                                     {/* </Div> */}
                                 </td>;
                             })}
