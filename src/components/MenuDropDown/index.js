@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Dropdown, Anchor, Div, Icon } from "atomize";
 import Link from 'next/link';
-import pageList from '../../functions/pageList'
+import { pageList } from '../pageList'
 
 const menuList = (
     <Div p={{ x: "1rem", y: "0.5rem" }} bg="brand900" shadow="4">
