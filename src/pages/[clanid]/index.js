@@ -66,7 +66,7 @@ export default function ClanPage() {
               </Row>
               <Row m="0" minW="18rem">
                 <Text textSize="paragraph" textColor="cbGrey2">
-                  "{loadingValue(clanInfo?.Response?.detail?.motto, "cbGrey2")}"
+                  &quot;{loadingValue(clanInfo?.Response?.detail?.motto, "cbGrey2")}&quot;
                 </Text>
               </Row>
             </Col>
