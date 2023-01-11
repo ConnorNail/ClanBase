@@ -2,7 +2,7 @@ import React from "react";
 import { useTable, useSortBy } from "react-table";
 import { Div, Text, Icon } from "atomize";
 
-export default function Table({ columns, data, defaultSort }) {
+export default function Table({ columns, data, defaultSort, desc }) {
     // Use the useTable Hook to send the columns and data to build the table
     const {
         getTableProps, // table props from react-table
@@ -17,7 +17,7 @@ export default function Table({ columns, data, defaultSort }) {
             sortBy: [
                 {
                     id: defaultSort,
-                    desc: true
+                    desc: desc
                 }
             ]
         }

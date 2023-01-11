@@ -55,7 +55,7 @@ export default function ClanPage() {
     <DefaultTemplate>
       <Div d="flex" justify="center">
         {/* <Row > */}
-          <Col size="10">
+        <Col size="10">
           <InfoBox bg="cbGrey1">
             <Row>
               <Col size="auto">
@@ -148,12 +148,14 @@ export default function ClanPage() {
               <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
             </Row>
           </InfoBox>
-          </Col>
-          <Col>
+        </Col>
+        <Col>
           <InfoBox bg="cbGrey1">
-                  <ClanRoster clanMemberInfo={clanMemberList} clanMemberProfiles={clanMemberProfiles} />
+            <ScrollBox h={"94rem"}>
+              <ClanRoster clanMemberInfo={clanMemberList} clanMemberProfiles={clanMemberProfiles} />
+            </ScrollBox>
           </InfoBox>
-          </Col>
+        </Col>
         {/* </Row> */}
       </Div>
     </DefaultTemplate>

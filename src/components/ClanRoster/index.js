@@ -32,7 +32,7 @@ export default function RecentlyJoinClanMembersTable({ clanMemberInfo, clanMembe
 
     return (
         <Div d="flex" justify="center" align="center">
-            {data.length != 0 ? <Table columns={columns} data={data} defaultSort={'isOnline'} /> : <Icon name="Loading3" size="75px" color="cbWhite" />}
+            {data.length != 0 ? <Table columns={columns} data={data} defaultSort={'isOnline'} desc={true} /> : <Icon name="Loading3" size="75px" color="cbWhite" />}
         </Div>
     )
 }

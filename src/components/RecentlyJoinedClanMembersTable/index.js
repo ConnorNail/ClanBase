@@ -62,7 +62,7 @@ export default function RecentlyJoinClanMembersTable({ clanMemberInfo }) {
 
     return (
         <Div d="flex" justify="center" align="center">
-            { data.length != 0 ? <Table columns={columns} data={data} /> : <Icon name="Loading3" size="75px" color="cbWhite"/>}
+            { data.length != 0 ? <Table columns={columns} data={data} defaultSort={'joinDate'} desc={true}/> : <Icon name="Loading3" size="75px" color="cbWhite"/>}
         </Div>
     )
 }
