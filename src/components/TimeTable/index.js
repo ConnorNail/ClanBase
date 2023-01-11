@@ -12,7 +12,7 @@ export default function TimeTable({ memberInfo, memberProfiles }) {
     return (
         <Div d="flex" justify="center" align="center">
             <Div maxW="55rem">
-            {timeData && timeColumns ? <Table columns={timeColumns} data={timeData} /> : <Icon name="Loading3" size="75px" color="cbWhite" m={{t: "13rem"}}/>}
+            {timeData && timeColumns ? <Table columns={timeColumns} data={timeData} /> : <Icon name="Loading3" size="75px" color="cbWhite"/>}
             </Div>
         </Div>
     )

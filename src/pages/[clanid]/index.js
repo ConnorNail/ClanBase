@@ -15,6 +15,8 @@ import PvPIcon from '../../components/PvPIcon';
 import ScrollBox from '../../components/ScrollBox';
 import TimeTable from '../../components/TimeTable';
 import ClanLevel from '../../components/ClanLevel';
+import ClanEngrams from '../../components/ClanEngrams';
+import ClanBannerPerks from '../../components/ClanBannerPerks';
 
 export default function ClanPage() {
 
@@ -107,7 +109,15 @@ export default function ClanPage() {
           </Row>
         </InfoBox>
         <InfoBox bg="cbGrey1">
-              <ClanLevel clanInfo={clanInfo} />
+          <ClanLevel clanInfo={clanInfo} />
+          <Text textColor="cbWhite" textSize="heading">
+            Clan Banner Perks
+          </Text>
+          <ClanBannerPerks memberProfiles={clanMemberProfiles} clanInfo={clanInfo} />
+          <Text textColor="cbWhite" textSize="heading">
+            Clan Engrams
+          </Text>
+          <ClanEngrams clanId={clanId} />
         </InfoBox>
         <InfoBox bg="cbGrey1">
           <Text textColor="cbWhite" textSize="heading">

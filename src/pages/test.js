@@ -21,21 +21,35 @@ import Table from '../components/Table';
 import getClanMemberCharacterSeasonalTimeStats from '../functions/getClanMemberCharacterSeasonalTimeStats';
 import TimeTable from '../components/TimeTable';
 import ClanLevel from '../components/ClanLevel';
+import useSWR from 'swr'
+import getClanBannerItem from '../functions/getClanBannerItem';
+import getClanBannerPerks from '../functions/getClanBannerPerks';
+import ClanBannerPerks from '../components/ClanBannerPerks';
+import getClanWeeklyRewards from '../functions/getClanWeeklyRewards';
+import getClanEngramMilestone from '../functions/getClanEngramMilestone';
+import getEngramIcon from '../functions/getEngramIcon';
+import EngramIcon from '../components/EngramIcon';
+import ClanEngrams from '../components/ClanEngrams';
 
 export default function Test() {
+
+    const seasonHash = getCurrentSeasonHash()
+    const seasonInfo = getSeasonInfo(seasonHash)
+
+    // console.log(seasonInfo)
 
     const memberInfo = getClanMemberInfo(2084197)
     const profiles = getClanMemberProfileInfo(2084197)
     const clanInfo = getClanInfo(2084197)
 
-    console.log(clanInfo)
-
-    
-
     return (
         <DefaultTemplate>
             <InfoBox bg={'cbGrey1'}>
-                <ClanLevel clanInfo={clanInfo}/>
+                <EngramIcon />
+                <Div>
+                    <ClanEngrams clanId={2084197} />
+                    <ClanBannerPerks memberProfiles={profiles} clanInfo={clanInfo} />
+                </Div>
             </InfoBox>
         </DefaultTemplate>
     )

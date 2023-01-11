@@ -11,7 +11,7 @@ export default function getAllMembersProfile(playerData) {
                 const membershipType = playerData?.Response?.results[i]?.destinyUserInfo?.membershipType
                 const membershipId = playerData?.Response?.results[i]?.destinyUserInfo?.membershipId
 
-                keys.push('https://www.bungie.net/Platform/Destiny2/' + membershipType + '/Profile/' + membershipId + '/?components=100,200,1100')
+                keys.push('https://www.bungie.net/Platform/Destiny2/' + membershipType + '/Profile/' + membershipId + '/?components=100,200,205,1100')
             }
             return keys
         }

@@ -1,4 +1,4 @@
-import { Text, Div, Icon } from "atomize";
+import { Text, Div, Icon, Row, Col } from "atomize";
 
 export default function ClanLevel({clanInfo}) {
 
@@ -47,7 +47,7 @@ export default function ClanLevel({clanInfo}) {
                     </Text>
                     <Text textColor="cbBlue" textSize="subheader">
                         {weeklyProgress && weeklyLimit ?
-                            weeklyProgress + '/' + weeklyLimit :
+                            weeklyProgress.toLocaleString() + '/' + weeklyLimit.toLocaleString() :
                             <Icon name="Loading3" size="20px" color="cbBlue" transform='translateY(15%)' />
                         }
                     </Text>
