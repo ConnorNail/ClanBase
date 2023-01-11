@@ -9,7 +9,9 @@ const theme = {
         cbGrey3: '#D9D9D9',
         cbBlack: '#000000',
         cbTransparent: 'rgba(0, 0, 0, 0)',
-        cbBlue: '#5DD7F2'
+        cbBlue: '#5DD7F2',
+        cbGreen: '#4af063',
+        cbRed: '#f03e1f'
     }
 };
 

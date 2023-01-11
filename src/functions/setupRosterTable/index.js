@@ -7,11 +7,11 @@ export default function setupRosterTable(data) {
     const columns = useMemo(
         () => [
             {
-                Header: "Info",
+                Header: " ",
                 columns: [
                     {
                         Header: "",
-                        accessor: "playerProfile",
+                        accessor: "characterProfiles",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -21,25 +21,26 @@ export default function setupRosterTable(data) {
                         }
                     },
                     {
-                        Header: "Name",
+                        Header: " ",
                         accessor: "bungieNetUserInfo.supplementalDisplayName",
                         Cell: ({ row }) => {
                             return (
                                 <>
-                                    {displayEmblemBackground(row.original.playerProfile, row.original.destinyUserInfo.LastSeenDisplayName)}
+                                    {displayEmblemBackground(row?.original?.bungieInfo?.supplementalDisplayName, row?.original?.memberProfile?.data?.userInfo?.bungieGlobalDisplayName)}
                                 </>
                             )
                         }
                     },
                     {
-                        Header: "Online",
+                        Header: " ",
                         accessor: "isOnline",
                         Cell: ({ cell: { value } }) => {
                             return (
-                                <Div bg={value ? "success600" : "danger600"} rounded="xl" >
-                                    <Text textSize="body" m={{ l: "0.5rem", r: "0.5rem" }}>
-                                        {value ? 'Online' : 'Offline'}
+                                <Div d="flex" justify="center" align="center">
+                                    <Text textSize="caption" textColor="cbWhite" p={{ x: "0.4rem", y: "0.4rem"}}>
+                                        {value}
                                     </Text>
+                                    <Text bg={value == "Online" ? "success600" : "brand700"} h="0.5rem" w="0.5rem" rounded="circle" m={{ y: "0", r: "0.4rem"}}></Text>
                                 </Div>
                             )
                         }

@@ -18,6 +18,7 @@ import ClanLevel from '../../components/ClanLevel';
 import ClanEngrams from '../../components/ClanEngrams';
 import ClanBannerPerks from '../../components/ClanBannerPerks';
 import RecentlyJoinClanMembersTable from '../../components/RecentlyJoinedClanMembersTable';
+import ClanRoster from '../../components/ClanRoster';
 
 export default function ClanPage() {
 
@@ -53,7 +54,8 @@ export default function ClanPage() {
   return (
     <DefaultTemplate>
       <Div d="flex" justify="center">
-        <Row d="flex" flexDir="column" m={{ x: "2rem" }} maxW="60rem">
+        {/* <Row > */}
+          <Col size="10">
           <InfoBox bg="cbGrey1">
             <Row>
               <Col size="auto">
@@ -146,7 +148,13 @@ export default function ClanPage() {
               <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
             </Row>
           </InfoBox>
-        </Row>
+          </Col>
+          <Col>
+          <InfoBox bg="cbGrey1">
+                  <ClanRoster clanMemberInfo={clanMemberList} clanMemberProfiles={clanMemberProfiles} />
+          </InfoBox>
+          </Col>
+        {/* </Row> */}
       </Div>
     </DefaultTemplate>
   )

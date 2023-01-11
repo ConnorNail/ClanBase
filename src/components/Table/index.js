@@ -2,7 +2,7 @@ import React from "react";
 import { useTable, useSortBy } from "react-table";
 import { Div, Text, Icon } from "atomize";
 
-export default function Table({ columns, data }) {
+export default function Table({ columns, data, defaultSort }) {
     // Use the useTable Hook to send the columns and data to build the table
     const {
         getTableProps, // table props from react-table
@@ -12,7 +12,15 @@ export default function Table({ columns, data }) {
         prepareRow // Prepare the row (this function needs to be called for each row before getting the row props)
     } = useTable({
         columns,
-        data
+        data,
+        initialState: {
+            sortBy: [
+                {
+                    id: defaultSort,
+                    desc: true
+                }
+            ]
+        }
     },
         useSortBy
     );
@@ -31,7 +39,7 @@ export default function Table({ columns, data }) {
                                         </Text>
                                     </Div>
                                     <Div key={columnI}>
-                                        {column.isSorted ? (column.isSortedDesc ? <Icon name="DownArrow" size="20px" color="cbBlue" /> : <Icon name="UpArrow" size="20px" color="cbBlue" />) : ""}
+                                        {defaultSort ? null : column.isSorted ? (column.isSortedDesc ? <Icon name="DownArrow" size="20px" color="cbBlue" /> : <Icon name="UpArrow" size="20px" color="cbBlue" />) : ""}
                                     </Div>
                                 </Div>
                             </th>
