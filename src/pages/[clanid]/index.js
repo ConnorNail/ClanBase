@@ -52,100 +52,102 @@ export default function ClanPage() {
 
   return (
     <DefaultTemplate>
-      <Row d="flex" flexDir="column" m={{ x: "2rem" }}>
-        <InfoBox bg="cbGrey1">
-          <Row>
-            <Col size="auto">
-              <Row m="0" minW="18rem">
-                <Text textSize="display1" textColor="cbWhite">
-                  {loadingValue(clanInfo?.Response?.detail?.name, "cbWhite")} [{loadingValue(clanInfo?.Response?.detail?.clanInfo?.clanCallsign, "cbWhite")}]
-                </Text>
-              </Row>
-              <Row m="0" minW="18rem">
-                <Text textSize="paragraph" textColor="cbGrey2">
-                  &quot;{loadingValue(clanInfo?.Response?.detail?.motto, "cbGrey2")}&quot;
-                </Text>
-              </Row>
-            </Col>
-            <Col size="auto">
-              <ClanIconBox clanInfo={clanInfo}></ClanIconBox>
-            </Col>
-            <Col>
-              CLAN SCORE PLACEHOLDER
-            </Col>
-            <Col d="flex" align="center">
-              <PvEIcon />
-              {clanStatScores?.PvE ?
-                <Text textSize="heading" textColor="cbBlue">
-                  {clanStatScores?.PvE.toFixed()}
-                </Text> :
-                <Icon name="Loading3" size="20px" color="cbBlue" />}
-            </Col>
-            <Col d="flex" align="center">
-              <PvPIcon />
-              {clanStatScores?.PvP ?
-                <Text textSize="heading" textColor="cbBlue">
-                  {clanStatScores?.PvP.toFixed()}
-                </Text> :
-                <Icon name="Loading3" size="20px" color="cbBlue" />}
-            </Col>
-          </Row>
-          <Row d="flex" justify="center">
-            <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
-          </Row>
-          <Row>
-            <Col d="flex" justify="center" size="auto">
-              <ClanBannerSimple clanId={clanId} />
-            </Col>
-            <Col>
-              <ScrollBox h={"19.2rem"}>
-                <Text style={{ whiteSpace: "pre-line" }} textSize="subheader" textColor="cbWhite">
-                  {loadingValue(clanInfo?.Response?.detail?.about, "cbWhite")}
-                </Text>
-              </ScrollBox>
-            </Col>
-            <Col size="auto">
-              <Row minW="19rem">
-                <Text textColor="cbWhite" textSize="heading">
-                  Recent Members
-                </Text>
-              </Row>
-              <Row minW="19rem" d="flex" justify="center" align="center">
-                <Div m={{ t: "0.5rem", r: "1rem" }}>
-                  <RecentlyJoinClanMembersTable clanMemberInfo={clanMemberList} />
-                </Div>
-              </Row>
-            </Col>
-          </Row>
-        </InfoBox>
-        <InfoBox bg="cbGrey1">
-          <ClanLevel clanInfo={clanInfo} />
-          <Text textColor="cbWhite" textSize="heading">
-            Clan Banner Perks
-          </Text>
-          <ClanBannerPerks memberProfiles={clanMemberProfiles} clanInfo={clanInfo} />
-          <Text textColor="cbWhite" textSize="heading">
-            Clan Engrams
-          </Text>
-          <ClanEngrams clanId={clanId} />
-        </InfoBox>
-        <InfoBox bg="cbGrey1">
-          <Text textColor="cbWhite" textSize="heading">
-            Seasonal Time Data
-          </Text>
-          <Row d="flex" justify="center">
-            <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
-          </Row>
-          <ScrollBox h={"35rem"}>
-            <Div>
-              <TimeTable memberInfo={clanMemberList} memberProfiles={clanMemberProfiles} />
-            </Div>
-          </ScrollBox>
-          <Row d="flex" justify="center">
-            <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
-          </Row>
-        </InfoBox>
-      </Row>
+      <Div d="flex" justify="center">
+        <Row d="flex" flexDir="column" m={{ x: "2rem" }} maxW="60rem">
+          <InfoBox bg="cbGrey1">
+            <Row>
+              <Col size="auto">
+                <Row m="0" minW="18rem">
+                  <Text textSize="display1" textColor="cbWhite">
+                    {loadingValue(clanInfo?.Response?.detail?.name, "cbWhite")} [{loadingValue(clanInfo?.Response?.detail?.clanInfo?.clanCallsign, "cbWhite")}]
+                  </Text>
+                </Row>
+                <Row m="0" minW="18rem">
+                  <Text textSize="paragraph" textColor="cbGrey2">
+                    &quot;{loadingValue(clanInfo?.Response?.detail?.motto, "cbGrey2")}&quot;
+                  </Text>
+                </Row>
+              </Col>
+              <Col size="auto">
+                <ClanIconBox clanInfo={clanInfo}></ClanIconBox>
+              </Col>
+              <Col>
+                CLAN SCORE PLACEHOLDER
+              </Col>
+              <Col d="flex" align="center">
+                <PvEIcon />
+                {clanStatScores?.PvE ?
+                  <Text textSize="heading" textColor="cbBlue">
+                    {clanStatScores?.PvE.toFixed()}
+                  </Text> :
+                  <Icon name="Loading3" size="20px" color="cbBlue" />}
+              </Col>
+              <Col d="flex" align="center">
+                <PvPIcon />
+                {clanStatScores?.PvP ?
+                  <Text textSize="heading" textColor="cbBlue">
+                    {clanStatScores?.PvP.toFixed()}
+                  </Text> :
+                  <Icon name="Loading3" size="20px" color="cbBlue" />}
+              </Col>
+            </Row>
+            <Row d="flex" justify="center">
+              <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
+            </Row>
+            <Row>
+              <Col d="flex" justify="center" size="auto">
+                <ClanBannerSimple clanId={clanId} />
+              </Col>
+              <Col>
+                <ScrollBox h={"19.2rem"}>
+                  <Text style={{ whiteSpace: "pre-line" }} textSize="subheader" textColor="cbWhite">
+                    {loadingValue(clanInfo?.Response?.detail?.about, "cbWhite")}
+                  </Text>
+                </ScrollBox>
+              </Col>
+              <Col size="auto">
+                <Row minW="19rem">
+                  <Text textColor="cbWhite" textSize="heading">
+                    Recent Members
+                  </Text>
+                </Row>
+                <Row minW="19rem" d="flex" justify="center" align="center">
+                  <Div m={{ t: "0.5rem", r: "1rem" }}>
+                    <RecentlyJoinClanMembersTable clanMemberInfo={clanMemberList} />
+                  </Div>
+                </Row>
+              </Col>
+            </Row>
+          </InfoBox>
+          <InfoBox bg="cbGrey1">
+            <ClanLevel clanInfo={clanInfo} />
+            <Text textColor="cbWhite" textSize="heading">
+              Clan Banner Perks
+            </Text>
+            <ClanBannerPerks memberProfiles={clanMemberProfiles} clanInfo={clanInfo} />
+            <Text textColor="cbWhite" textSize="heading">
+              Clan Engrams
+            </Text>
+            <ClanEngrams clanId={clanId} />
+          </InfoBox>
+          <InfoBox bg="cbGrey1">
+            <Text textColor="cbWhite" textSize="heading">
+              Seasonal Time Data
+            </Text>
+            <Row d="flex" justify="center">
+              <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
+            </Row>
+            <ScrollBox h={"35rem"}>
+              <Div>
+                <TimeTable memberInfo={clanMemberList} memberProfiles={clanMemberProfiles} />
+              </Div>
+            </ScrollBox>
+            <Row d="flex" justify="center">
+              <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
+            </Row>
+          </InfoBox>
+        </Row>
+      </Div>
     </DefaultTemplate>
   )
 }
