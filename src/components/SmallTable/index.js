@@ -1,6 +1,6 @@
 import React from "react";
 import { useTable, useSortBy, usePagination } from "react-table";
-import { Div } from "atomize";
+import { Div, Icon, Text } from "atomize";
 
 export default function SmallTable({ columns, data }) {
     // Use the useTable Hook to send the columns and data to build the table
@@ -15,7 +15,7 @@ export default function SmallTable({ columns, data }) {
         data,
         initialState: {
             pageIndex:1,
-            pageSize: 3,
+            pageSize: 5,
             sortBy: [
                 {
                     id: 'joinDate',
@@ -29,38 +29,43 @@ export default function SmallTable({ columns, data }) {
     );
 
     return (
-        <Div m="1rem">
-            <table {...getTableProps()}>
-                <thead>
-                    {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-                            {headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps()} key={column.id}>
-                                    {column.render("Header")}
-                                    <span>
-                                    </span>
-                                </th>
-                            ))}
+        <table {...getTableProps()} style={{ borderCollapse: "collapse" }}>
+            <thead style={{ fontSize: "15px" }}>
+                {headerGroups.map((headerGroup, headerI) => (
+                    <tr {...headerGroup.getHeaderGroupProps()} key={headerI}>
+                        {headerGroup.headers.map((column, columnI) => (
+                            <th {...column.getHeaderProps(column.getSortByToggleProps())} key={columnI} style={{ padding: "0 1rem" }}>
+                                <Div d="flex">
+                                    <Div>
+                                        <Text textColor="cbWhite">
+                                            {column.render("Header")}
+                                        </Text>
+                                    </Div>
+                                    <Div key={columnI}>
+                                        {column.isSorted ? (column.isSortedDesc ? <Icon name="DownArrow" size="20px" color="cbBlue" /> : <Icon name="UpArrow" size="20px" color="cbBlue" />) : ""}
+                                    </Div>
+                                </Div>
+                            </th>
+                        ))}
+                    </tr>
+                ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+                {page.map((row, rowI) => {
+                    prepareRow(row);
+                    return (
+                        <tr {...row.getRowProps()} key={rowI}>
+                            {row.cells.map((cell, cellI) => {
+                                return <td {...cell.getCellProps()} key={cellI} style={{ padding: "0 0", borderColor: "grey", borderStyle: "solid" }}>
+                                    {/* <Div> */}
+                                    {cell.render("Cell")}
+                                    {/* </Div> */}
+                                </td>;
+                            })}
                         </tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {page.map((row, i) => {
-                        prepareRow(row);
-                        return (
-                            <tr {...row.getRowProps()} key={row.id}>
-                                {row.cells.map(cell => {
-                                    return <td {...cell.getCellProps()} key={cell.id}>
-                                        <Div m={{ l: "0.5rem", r: "0.5rem" }}>
-                                            {cell.render("Cell")}
-                                        </Div>
-                                    </td>;
-                                })}
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-        </Div>
+                    );
+                })}
+            </tbody>
+        </table>
     );
 }

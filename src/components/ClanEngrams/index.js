@@ -35,7 +35,7 @@ export default function ClanEngrams({ clanId }) {
 
     return (
         <Div d="flex" justify="center">
-            {clanRewards ?
+            {clanWeeklyRewards && clanWeeklyRewards ?
                 clanRewards.map((reward, index) => (
                     <Div key={index} m={{ x: "1rem" }} w="4rem" d="flex" flexDir="column" align="center" rounded="md" border="3px solid" borderColor={levelsCompletedStyle[reward?.rewardEntryHash]}>
                         <Image h="3rem" w="3rem" src={urlStart + reward?.displayProperties?.icon} />

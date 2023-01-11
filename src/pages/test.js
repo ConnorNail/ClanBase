@@ -30,6 +30,7 @@ import getClanEngramMilestone from '../functions/getClanEngramMilestone';
 import getEngramIcon from '../functions/getEngramIcon';
 import EngramIcon from '../components/EngramIcon';
 import ClanEngrams from '../components/ClanEngrams';
+import RecentlyJoinClanMembers from '../components/RecentlyJoinedClanMembersTable';
 
 export default function Test() {
 
@@ -45,11 +46,7 @@ export default function Test() {
     return (
         <DefaultTemplate>
             <InfoBox bg={'cbGrey1'}>
-                <EngramIcon />
-                <Div>
-                    <ClanEngrams clanId={2084197} />
-                    <ClanBannerPerks memberProfiles={profiles} clanInfo={clanInfo} />
-                </Div>
+                <RecentlyJoinClanMembers clanMemberInfo={memberInfo} />
             </InfoBox>
         </DefaultTemplate>
     )

@@ -5,13 +5,25 @@ import { displayEmblem, displayEmblemBackground } from "../displayEmblem";
 export default function setupRecentMemberTable(data) {
 
     function displayDate(date) {
-        const prettyDate = new Date(date).toLocaleString()
+        const joinedDate = new Date(date)
+        const currentTime = new Date()
+        const diffTime = Math.abs(currentTime - joinedDate)
+        const daysAgo = Math.trunc(diffTime / 1000 / 60 / 60 / 24)
+        const dateDisplay = daysAgo > 1 ? " Days Ago " : (daysAgo > 0 ? " Day Ago " : " Days Ago")
 
         return (
-            <Div bg="info600" rounded="xl" >
-                <Text textSize="body" m={{ l: "0.5rem", r: "0.5rem" }}>
-                    {prettyDate}
-                </Text>
+            <Div d="flex">
+                <Div h="2rem" w="100%" d="flex">
+                    <Text textSize="caption" textColor="cbWhite" p={{ l: "0.4rem", y: "0.4rem"}}>
+                        Joined
+                    </Text>
+                    <Text textSize="caption" textColor="cbBlue" p={{ l: "0.25rem", y: "0.4rem", r: "0.25rem" }}>
+                        {daysAgo}
+                    </Text>
+                    <Text textSize="caption" textColor="cbWhite" p={{ r: "0.4rem", y: "0.4rem" }}>
+                        {dateDisplay}
+                    </Text>
+                </Div>
             </Div>
         )
     }
@@ -19,11 +31,11 @@ export default function setupRecentMemberTable(data) {
     const columns = useMemo(
         () => [
             {
-                Header: "Info",
+                Header: " ",
                 columns: [
                     {
                         Header: "",
-                        accessor: "playerProfile",
+                        accessor: "characterProfiles",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -33,19 +45,19 @@ export default function setupRecentMemberTable(data) {
                         }
                     },
                     {
-                        Header: "Name",
+                        Header: " ",
                         accessor: "bungieNetUserInfo.supplementalDisplayName",
                         Cell: ({ row }) => {
 
                             return (
                                 <>
-                                    {displayEmblemBackground(row.original.playerProfile, row.original.bungieNetUserInfo.supplementalDisplayName)}
+                                    {displayEmblemBackground(row?.original?.bungieInfo?.supplementalDisplayName, row?.original?.memberProfile?.data?.userInfo?.bungieGlobalDisplayName)}
                                 </>
                             )
                         }
                     },
                     {
-                        Header: "Joined On",
+                        Header: " ",
                         accessor: "joinDate",
                         Cell: ({ cell: { value } }) => {
                             return (

@@ -17,6 +17,7 @@ import TimeTable from '../../components/TimeTable';
 import ClanLevel from '../../components/ClanLevel';
 import ClanEngrams from '../../components/ClanEngrams';
 import ClanBannerPerks from '../../components/ClanBannerPerks';
+import RecentlyJoinClanMembersTable from '../../components/RecentlyJoinedClanMembersTable';
 
 export default function ClanPage() {
 
@@ -103,8 +104,17 @@ export default function ClanPage() {
                 </Text>
               </ScrollBox>
             </Col>
-            <Col>
-              RECENT MEMBERS TABLE PLACEHOLDER
+            <Col size="auto">
+              <Row minW="19rem">
+                <Text textColor="cbWhite" textSize="heading">
+                  Recent Members
+                </Text>
+              </Row>
+              <Row minW="19rem" d="flex" justify="center" align="center">
+                <Div m={{ t: "0.5rem", r: "1rem" }}>
+                  <RecentlyJoinClanMembersTable clanMemberInfo={clanMemberList} />
+                </Div>
+              </Row>
             </Col>
           </Row>
         </InfoBox>
