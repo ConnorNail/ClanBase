@@ -340,7 +340,7 @@ const ClanCard = ({ clanId, stats }) => {
                     {stat("Deaths:", totalDeaths(clanMemberStats) ? totalDeaths(clanMemberStats)[0] : null)}
                 </Row>
                 <Row>
-                    {stat("Average KD:", averageClanKD(clanMemberStats) ? averageClanKD(clanMemberStats)[0] : null)}
+                    {stat("Average K/D:", averageClanKD(clanMemberStats) ? averageClanKD(clanMemberStats)[0] : null)}
                 </Row>
                 <Row>
                     {stat("Average Strike Duration:", averageStrikeDuration(clanMemberStats))}
@@ -364,7 +364,7 @@ const ClanCard = ({ clanId, stats }) => {
                     {stat("Deaths:", totalDeaths(clanMemberStats) ? totalDeaths(clanMemberStats)[1] : null)}
                 </Row>
                 <Row>
-                    {stat("Average KD:", averageClanKD(clanMemberStats) ? averageClanKD(clanMemberStats)[1] : null)}
+                    {stat("Average K/D:", averageClanKD(clanMemberStats) ? averageClanKD(clanMemberStats)[1] : null)}
                 </Row>
                 <Row>
                     {stat("Average Win Rate:", averageClanWinPercentage(clanMemberStats))}

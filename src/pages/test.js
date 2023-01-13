@@ -32,6 +32,7 @@ import EngramIcon from '../components/EngramIcon';
 import ClanEngrams from '../components/ClanEngrams';
 import RecentlyJoinClanMembers from '../components/RecentlyJoinedClanMembersTable';
 import ClanRoster from '../components/ClanRoster';
+import MemberStatCard from '../components/MemberStatCard';
 
 export default function Test() {
 
@@ -46,10 +47,13 @@ export default function Test() {
 
     return (
         <DefaultTemplate>
-            <InfoBox bg={'cbGrey1'}>
-                {/* <RecentlyJoinClanMembers clanMemberInfo={memberInfo} /> */}
-                <ClanRoster clanMemberInfo={memberInfo} clanMemberProfiles={profiles} />
-            </InfoBox>
+            <Div maxW="40rem">
+                <InfoBox bg={'cbGrey1'}>
+                    <MemberStatCard />
+                    {/* <RecentlyJoinClanMembers clanMemberInfo={memberInfo} /> */}
+                    {/* <ClanRoster clanMemberInfo={memberInfo} clanMemberProfiles={profiles} /> */}
+                </InfoBox>
+            </Div>
         </DefaultTemplate>
     )
 }
