@@ -56,17 +56,34 @@ const MemberStatCard = ({ timeData, membersInfo, membersProfiles, membersAllTime
 
     const [selectedValue, setSelectedValue] = useState('PvE');
 
+    const loadingValue = (value, color, size) => {
+        if (value || value == 0) {
+            return (
+                <>
+                    {value}
+                </>
+            )
+        } else {
+            return (
+                <Icon name="Loading3" size={size} color={color} transform='translateY(15%)' />
+            )
+        }
+    }
+
     return (
         <Div d="flex" flexDir="column" p={{ x: "1rem" }} h="45rem">
             <Row>
-                <Col>
-                <MemberSearchBar memberInfo={membersInfo} memberProfiles={membersProfiles} setMemberIndex={setMemberIndex}/>
+                <Col d="flex" justify="center">
+                    {membersInfo && membersProfiles ?
+                        <MemberSearchBar memberInfo={membersInfo} memberProfiles={membersProfiles} setMemberIndex={setMemberIndex} />
+                        :
+                        <Icon name="Loading3" size="40px" color="cbWhite" transform='translateY(15%)' />}
                 </Col>
             </Row>
             <Row bg="cbWhite" h="0.1rem" w="100%" m="0.1rem"></Row>
             <Row>
                 <Text textSize="heading" textColor="cbWhite">
-                    {displayName}
+                    {loadingValue(displayName, "cbWhite", "45px")}
                 </Text>
             </Row>
             <Row>
@@ -75,7 +92,7 @@ const MemberStatCard = ({ timeData, membersInfo, membersProfiles, membersAllTime
                         Last Online:
                     </Text>
                     <Text textSize="subheader" textColor="cbBlue" m={{ x: "0.25rem" }}>
-                        {lastOnlineDate}
+                        {loadingValue(lastOnlineDate, "cbBlue", "30px")}
                     </Text>
                 </Col>
                 <Col d="flex" justify="center" flexDir="column">
@@ -84,7 +101,7 @@ const MemberStatCard = ({ timeData, membersInfo, membersProfiles, membersAllTime
                             Time Played (All Time):
                         </Text>
                         <Text textSize="body" textColor="cbBlue" m={{ y: "0rem", x: "0.25rem" }}>
-                            {allTimePlayed}
+                            {loadingValue(allTimePlayed, "cbBlue", "25px")}
                         </Text>
                     </Row>
                     <Row>
@@ -92,10 +109,10 @@ const MemberStatCard = ({ timeData, membersInfo, membersProfiles, membersAllTime
                             Time Played (Seasonal):
                         </Text>
                         <Text textSize="body" textColor="cbBlue" m={{ y: "0rem", x: "0.25rem" }}>
-                            {seasonTimePlayed}
+                            {loadingValue(seasonTimePlayed, "cbBlue", "25px")}
                         </Text>
                         <Text textSize="body" textColor="cbGrey2" m={{ y: "0rem" }}>
-                            {seasonTimePercentage}%
+                            {loadingValue(seasonTimePercentage, "cbGrey2", "25px")}%
                         </Text>
                     </Row>
                 </Col>
@@ -113,7 +130,7 @@ const MemberStatCard = ({ timeData, membersInfo, membersProfiles, membersAllTime
             <Bracket align="flex-start" />
 
             <Div>
-                <Row>
+                <Row d="flex" justify="center">
                     {cleanDataPvE && cleanDataPvP ?
                         <AreaChart width={550} height={400} data={selectedValue == 'PvE' ? cleanDataPvE[memberIndex] : cleanDataPvP[memberIndex]} margin={{ top: 30, bottom: 55, right: 15 }}>
                             <defs>
@@ -128,7 +145,7 @@ const MemberStatCard = ({ timeData, membersInfo, membersProfiles, membersAllTime
                             <Tooltip />
                         </AreaChart>
                         :
-                        null}
+                        <Icon name="Loading3" size="75px" color="cbWhite" transform='translateY(15%)' />}
                 </Row>
             </Div>
             <Bracket align="flex-end" />

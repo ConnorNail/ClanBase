@@ -79,9 +79,6 @@ export default function ClanPage() {
                   <Col size="auto">
                     <ClanIconBox clanInfo={clanInfo}></ClanIconBox>
                   </Col>
-                  <Col>
-                    CLAN SCORE PLACEHOLDER
-                  </Col>
                   <Col d="flex" align="center">
                     <PvEIcon />
                     {clanStatScores?.PvE ?
@@ -97,6 +94,9 @@ export default function ClanPage() {
                         {clanStatScores?.PvP.toFixed()}
                       </Text> :
                       <Icon name="Loading3" size="20px" color="cbBlue" />}
+                  </Col>
+                  <Col d="flex" align="center">
+                    JOIN CLAN BUTTON PLACEHOLDER
                   </Col>
                 </Row>
                 <Row d="flex" justify="center">

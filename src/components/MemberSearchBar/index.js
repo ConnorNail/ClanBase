@@ -18,8 +18,6 @@ const MemberSearchBar = ({ memberInfo, memberProfiles, setMemberIndex }) => {
         const memberInfoList = memberInfo?.Response?.results
         const memberProfileList = memberProfiles
 
-        
-
         // Creat list of names
         const names = []
         for (let i = 0; i < memberInfoList.length; i++) {
