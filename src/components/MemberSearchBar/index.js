@@ -2,12 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { Input, Icon, Dropdown, Div, Anchor, Col } from "atomize";
 
 const MemberSearchBar = ({ memberInfo, memberProfiles, setMemberIndex }) => {
+    const [input, setInput] = useState('');
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    // Close dropdown when empty
+    useEffect(() => {
+        if (input.length > 0) {
+            setShowDropdown(true)
+        } else {
+            setShowDropdown(false)
+        }
+    }, [input]);
+    
     if (memberInfo && memberProfiles) {
         const memberInfoList = memberInfo?.Response?.results
         const memberProfileList = memberProfiles
 
-        const [input, setInput] = useState('');
-        const [showDropdown, setShowDropdown] = useState(false);
+        
 
         // Creat list of names
         const names = []
@@ -51,15 +62,6 @@ const MemberSearchBar = ({ memberInfo, memberProfiles, setMemberIndex }) => {
             setInput(e.target.value)
             setShowDropdown(true);
         }
-
-        // Close dropdown when empty
-        useEffect(() => {
-            if (input.length > 0) {
-                setShowDropdown(true)
-            } else {
-                setShowDropdown(false)
-            }
-        }, [input]);
 
         return (
             <>
