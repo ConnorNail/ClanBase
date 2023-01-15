@@ -1,14 +1,14 @@
 // Styling Radiobox
-import { Checkbox, Label } from "atomize";
+import { Radiobox, Label } from "atomize";
 import React, { useState } from 'react';
 
-export default function CustomRadios({selectedValuePvE, setSelectedValuePvE, selectedValuePvP, setSelectedValuePvP}) {
+export default function CustomRadios({selectedValue, setSelectedValue }) {
     return (
         <>
             <Label textColor="cbWhite" p= "0.25rem" >
-                <Checkbox
-                    onChange={() => setSelectedValuePvE(!selectedValuePvE)}
-                    checked={selectedValuePvE === true}
+                <Radiobox
+                    onChange={() => setSelectedValue("PvE")}
+                    checked={selectedValue == 'PvE'}
                     inactiveColor="cbGrey3"
                     activeColor="cbBlue"
                     size="22px"
@@ -16,9 +16,9 @@ export default function CustomRadios({selectedValuePvE, setSelectedValuePvE, sel
                 PvE
             </Label>
             <Label textColor="cbWhite" p= "0.25rem" >
-                <Checkbox
-                    onChange={() => setSelectedValuePvP(!selectedValuePvP)}
-                    checked={selectedValuePvP === true}
+                <Radiobox
+                    onChange={() => setSelectedValue("PvP")}
+                    checked={selectedValue == 'PvP'}
                     inactiveColor="cbGrey3"
                     activeColor="cbBlue"
                     size="22px"

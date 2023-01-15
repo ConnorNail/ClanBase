@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
-import { Div, Text, Image } from "atomize";
+import { Div, Text, Button } from "atomize";
 import { displayEmblem, displayEmblemBackground } from "../displayEmblem";
 
-export default function setupRosterTable(data) {
+export default function setupRosterTable(data, memberIndex, setMemberIndex) {
 
     const columns = useMemo(
         () => [
@@ -33,15 +33,48 @@ export default function setupRosterTable(data) {
                     },
                     {
                         Header: " ",
-                        accessor: "isOnline",
-                        Cell: ({ cell: { value } }) => {
+                        accessor: "daysSinceLastPlayed",
+                        Cell: ({ row }) => {
                             return (
-                                <Div d="flex" justify="center" align="center">
-                                    <Text textSize="caption" textColor="cbWhite" p={{ x: "0.4rem", y: "0.4rem"}}>
-                                        {value}
-                                    </Text>
-                                    <Text bg={value == "Online" ? "success600" : "brand700"} h="0.5rem" w="0.5rem" rounded="circle" m={{ y: "0", r: "0.4rem"}}></Text>
-                                </Div>
+                                <>
+                                    {row?.original?.isOnline == "Online" ?
+                                        <Div d="flex" justify="center" align="center">
+                                            <Text textSize="caption" textColor="cbWhite" p={{ x: "0.4rem", y: "0.4rem" }}>
+                                                {row?.original?.isOnline}
+                                            </Text>
+                                            <Text bg="cbGreen" h="0.5rem" w="0.5rem" rounded="circle" m={{ y: "0", r: "0.4rem" }}></Text>
+                                        </Div>
+                                        :
+                                        <Div d="flex" justify="center" align="center">
+                                            <Text textSize="caption" textColor="cbBlue" p={{ l: "0.4rem", y: "0.4rem" }}>
+                                                {row?.original?.daysSinceLastPlayed}
+                                            </Text>
+                                            <Text textSize="caption" textColor="cbWhite" p={{ x: "0.4rem", y: "0.4rem" }}>
+                                                days ago
+                                            </Text>
+                                        </Div>}
+                                </>
+                            )
+                        }
+                    },
+                    {
+                        Header: "",
+                        accessor: "button",
+                        Cell: ({ row }) => {
+                            return (
+                                <Button
+                                    h="2rem"
+                                    textSize="caption"
+                                    textColor="cbWhite"
+                                    hoverTextColor="cbBlue"
+                                    bg="cbGrey2"
+                                    hoverBg="cbGrey1"
+                                    rounded="0"
+                                    id={row?.id}
+                                    onClick={(a) => setMemberIndex(a?.target?.id)}
+                                >
+                                    Stats
+                                </Button>
                             )
                         }
                     },

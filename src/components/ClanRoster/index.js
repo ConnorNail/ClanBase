@@ -2,7 +2,7 @@ import { Text, Div, Image, Icon, Row, Col } from "atomize";
 import Table from "../Table";
 import setupRosterTable from "../../functions/setupRosterTable";
 
-export default function RecentlyJoinClanMembersTable({ clanMemberInfo, clanMemberProfiles }) {
+export default function RecentlyJoinClanMembersTable({ clanMemberInfo, clanMemberProfiles, memberIndex, setMemberIndex }) {
 
     let fullMemberData = []
     const clanMemberInfoList = clanMemberInfo?.Response?.results
@@ -14,7 +14,6 @@ export default function RecentlyJoinClanMembersTable({ clanMemberInfo, clanMembe
             const bungieInfo = clanMemberInfoList[i]?.bungieNetUserInfo
             const isOnline = clanMemberInfoList[i]?.isOnline === true ? "Online" : "Offline"
 
-            console.log(isOnline)
             const entry = {
                 memberProfile,
                 characterProfiles,
@@ -22,17 +21,21 @@ export default function RecentlyJoinClanMembersTable({ clanMemberInfo, clanMembe
                 isOnline
             }
 
+            // Format date for roster table
+            const date = new Date()
+            const memberDate = new Date(entry.memberProfile.data.dateLastPlayed)
+            const dateDiff = Math.trunc((date - memberDate) / 1000 / 60 / 60 / 24)
+            entry.daysSinceLastPlayed = isOnline == "Online" ? -1 : dateDiff
+
             fullMemberData.push(entry)
         }
-
-        console.log(fullMemberData)
     }
 
-    const [columns, data] = setupRosterTable(fullMemberData)
+    const [columns, data] = setupRosterTable(fullMemberData, memberIndex, setMemberIndex)
 
     return (
         <Div d="flex" justify="center" align="center">
-            {data.length != 0 ? <Table columns={columns} data={data} defaultSort={'isOnline'} desc={true} /> : <Icon name="Loading3" size="75px" color="cbWhite" />}
+            {data.length != 0 ? <Table columns={columns} data={data} defaultSort={'daysSinceLastPlayed'} desc={false} /> : <Icon name="Loading3" size="75px" color="cbWhite" />}
         </Div>
     )
 }

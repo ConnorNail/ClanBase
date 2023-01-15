@@ -33,26 +33,41 @@ import ClanEngrams from '../components/ClanEngrams';
 import RecentlyJoinClanMembers from '../components/RecentlyJoinedClanMembersTable';
 import ClanRoster from '../components/ClanRoster';
 import MemberStatCard from '../components/MemberStatCard';
+import calcMemberSeasonalActivityTime from '../functions/calcMemberSeasonalActivityTime';
+import React, { useState } from 'react';
 
 export default function Test() {
 
-    const seasonHash = getCurrentSeasonHash()
-    const seasonInfo = getSeasonInfo(seasonHash)
-
-    // console.log(seasonInfo)
+    const [memberIndex, setMemberIndex] = useState(0);
 
     const memberInfo = getClanMemberInfo(2084197)
     const profiles = getClanMemberProfileInfo(2084197)
     const clanInfo = getClanInfo(2084197)
+    const clanMemberStats = getClanMembersAllTimeStats(memberInfo)
+
+    const currentSeasonHash = getCurrentSeasonHash();
+    const currentSeasonInfo = getSeasonInfo(currentSeasonHash);
+    const dateArray = createSubDateArray(currentSeasonInfo?.Response?.startDate, currentSeasonInfo?.Response?.endDate);
+
+    const allCharacterStats = getAllCharacterStats(profiles, dateArray)
+
+    const activityData = calcMemberSeasonalActivityTime(allCharacterStats, profiles, memberInfo)
+
+    // console.log(activityData)
 
     return (
         <DefaultTemplate>
-            <Div maxW="40rem">
-                <InfoBox bg={'cbGrey1'}>
-                    <MemberStatCard />
-                    {/* <RecentlyJoinClanMembers clanMemberInfo={memberInfo} /> */}
-                    {/* <ClanRoster clanMemberInfo={memberInfo} clanMemberProfiles={profiles} /> */}
-                </InfoBox>
+            <Div d="flex">
+                <Div m="0.5rem">
+                    <InfoBox bg={'cbGrey1'}>
+                        <ClanRoster clanMemberInfo={memberInfo} clanMemberProfiles={profiles} memberIndex={memberIndex} setMemberIndex={setMemberIndex} />
+                    </InfoBox>
+                </Div>
+                <Div m="0.5rem">
+                    <InfoBox bg={'cbGrey1'}>
+                        <MemberStatCard timeData={activityData} membersInfo={memberInfo} membersProfiles={profiles} membersAllTimeStats={clanMemberStats} memberIndex={memberIndex} setMemberIndex={setMemberIndex} />
+                    </InfoBox>
+                </Div>
             </Div>
         </DefaultTemplate>
     )
