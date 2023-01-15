@@ -54,7 +54,7 @@ export default function setupMemberTimeTable(data) {
                     },
                     {
                         Header: "Total Time",
-                        accessor: "characterTime.allTime",
+                        accessor: "characterTime.seasonal.allTime",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -65,7 +65,7 @@ export default function setupMemberTimeTable(data) {
                     },
                     {
                         Header: "PvE Time",
-                        accessor: "characterTime.allPvE",
+                        accessor: "characterTime.seasonal.allPvE",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -76,7 +76,7 @@ export default function setupMemberTimeTable(data) {
                     },
                     {
                         Header: "Competitive PvE Time",
-                        accessor: "characterTime.allPvECompetitive",
+                        accessor: "characterTime.seasonal.allPvECompetitive",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -87,7 +87,7 @@ export default function setupMemberTimeTable(data) {
                     },
                     {
                         Header: "PvP Time",
-                        accessor: "characterTime.allPvP",
+                        accessor: "characterTime.seasonal.allPvP",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -98,7 +98,7 @@ export default function setupMemberTimeTable(data) {
                     },
                     {
                         Header: "Strike Time",
-                        accessor: "characterTime.allStrikes",
+                        accessor: "characterTime.seasonal.allStrikes",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -109,7 +109,7 @@ export default function setupMemberTimeTable(data) {
                     },
                     {
                         Header: "Patrol Time",
-                        accessor: "characterTime.patrol",
+                        accessor: "characterTime.seasonal.patrol",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -120,7 +120,7 @@ export default function setupMemberTimeTable(data) {
                     },
                     {
                         Header: "Raid Time",
-                        accessor: "characterTime.raid",
+                        accessor: "characterTime.seasonal.raid",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>
@@ -131,7 +131,7 @@ export default function setupMemberTimeTable(data) {
                     },
                     {
                         Header: "Story Time",
-                        accessor: "characterTime.story",
+                        accessor: "characterTime.seasonal.story",
                         Cell: ({ cell: { value } }) => {
                             return (
                                 <>

@@ -57,7 +57,7 @@ const MemberStatCard = ({ timeData, membersInfo, membersProfiles, membersAllTime
     const [selectedValue, setSelectedValue] = useState('PvE');
 
     return (
-        <Div d="flex" flexDir="column" p={{ x: "1rem" }}>
+        <Div d="flex" flexDir="column" p={{ x: "1rem" }} h="45rem">
             <Row>
                 <Col>
                 <MemberSearchBar memberInfo={membersInfo} memberProfiles={membersProfiles} setMemberIndex={setMemberIndex}/>
@@ -115,7 +115,7 @@ const MemberStatCard = ({ timeData, membersInfo, membersProfiles, membersAllTime
             <Div>
                 <Row>
                     {cleanDataPvE && cleanDataPvP ?
-                        <AreaChart width={550} height={400} data={selectedValue == 'PvE' ? cleanDataPvE[memberIndex] : cleanDataPvP[memberIndex]} margin={{ top: 30, bottom: 55, right: 15, left: -25 }}>
+                        <AreaChart width={550} height={400} data={selectedValue == 'PvE' ? cleanDataPvE[memberIndex] : cleanDataPvP[memberIndex]} margin={{ top: 30, bottom: 55, right: 15 }}>
                             <defs>
                                 <linearGradient id="colorTime" x1="0" y1="0" x2="0" y2="1">
                                     <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />

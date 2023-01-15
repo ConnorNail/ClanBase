@@ -1,11 +1,8 @@
 import Table from '../../components/Table';
-import getClanMemberCharacterSeasonalTimeStats from '../../functions/getClanMemberCharacterSeasonalTimeStats';
 import setupMemberTimeTable from '../../functions/setupMemberTimeTable';
 import { Div, Icon } from "atomize";
 
-export default function TimeTable({ memberInfo, memberProfiles }) {
-
-    const memberSeasonalTime = getClanMemberCharacterSeasonalTimeStats(memberInfo, memberProfiles)
+export default function TimeTable({ memberSeasonalTime }) {
 
     const [timeColumns, timeData] = setupMemberTimeTable(memberSeasonalTime)
 
