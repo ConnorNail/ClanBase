@@ -35,8 +35,11 @@ import ClanRoster from '../components/ClanRoster';
 import MemberStatCard from '../components/MemberStatCard';
 import calcMemberSeasonalActivityTime from '../functions/calcMemberSeasonalActivityTime';
 import React, { useState } from 'react';
+import JoinClanButton from '../components/JoinClanButton';
+import { useSession } from "next-auth/react";
 
 export default function Test() {
+    const { data, status } = useSession()
 
     const [memberIndex, setMemberIndex] = useState(0);
 
@@ -57,7 +60,7 @@ export default function Test() {
 
     return (
         <DefaultTemplate>
-            <Div d="flex">
+            {/* <Div d="flex">
                 <Div m="0.5rem">
                     <InfoBox bg={'cbGrey1'}>
                         <ClanRoster clanMemberInfo={memberInfo} clanMemberProfiles={profiles} memberIndex={memberIndex} setMemberIndex={setMemberIndex} />
@@ -68,7 +71,7 @@ export default function Test() {
                         <MemberStatCard timeData={activityData} membersInfo={memberInfo} membersProfiles={profiles} membersAllTimeStats={clanMemberStats} memberIndex={memberIndex} setMemberIndex={setMemberIndex} />
                     </InfoBox>
                 </Div>
-            </Div>
+            </Div> */}
         </DefaultTemplate>
     )
 }

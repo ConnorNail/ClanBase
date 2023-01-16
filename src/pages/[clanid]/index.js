@@ -21,6 +21,7 @@ import RecentlyJoinClanMembersTable from '../../components/RecentlyJoinedClanMem
 import ClanRoster from '../../components/ClanRoster';
 import getClanMemberCharacterSeasonalTimeStats from '../../functions/getClanMemberCharacterSeasonalTimeStats';
 import MemberStatCard from '../../components/MemberStatCard';
+import JoinClanButton from '../../components/JoinClanButton';
 
 export default function ClanPage() {
 
@@ -96,7 +97,6 @@ export default function ClanPage() {
                       <Icon name="Loading3" size="20px" color="cbBlue" />}
                   </Col>
                   <Col d="flex" align="center">
-                    JOIN CLAN BUTTON PLACEHOLDER
                   </Col>
                 </Row>
                 <Row d="flex" justify="center">
