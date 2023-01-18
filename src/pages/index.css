@@ -1,7 +1,8 @@
 @font-face {
     font-family: "NimbusSans";
     src: local("NimbusSans"),
-     url("../fonts/Nimbus-Sans-D-OT-Bold_32747.ttf") format("truetype");
+     /* url("../fonts/Nimbus-Sans-D-OT-Bold_32747.ttf") format("truetype"); */
+     url("../fonts/Montserrat-Regular.ttf") format("truetype");
     font-weight: bold;
   }
   

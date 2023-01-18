@@ -60,9 +60,9 @@ export default function ClanPage() {
     <DefaultTemplate>
       <Div d="flex" justify="center">
         {/* <Row > */}
-        <Col size="10">
+        <Col size="11">
           <Row>
-            <Col>
+            <Col size="8">
               <InfoBox bg="cbGrey1">
                 <Row>
                   <Col size="auto">
@@ -113,18 +113,23 @@ export default function ClanPage() {
                       </Text>
                     </ScrollBox>
                   </Col>
-                  <Col size="auto">
-                    <Row minW="19rem">
-                      <Text textColor="cbWhite" textSize="heading">
-                        Recent Members
-                      </Text>
-                    </Row>
-                    <Row minW="19rem" d="flex" justify="center" align="center">
-                      <Div m={{ t: "0.5rem", r: "1rem" }}>
-                        <RecentlyJoinClanMembersTable clanMemberInfo={clanMemberList} />
-                      </Div>
-                    </Row>
-                  </Col>
+                </Row>
+                <Row d="flex" justify="center">
+                  <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
+                </Row>
+              </InfoBox>
+            </Col>
+            <Col>
+              <InfoBox bg="cbGrey1">
+                <Row minW="10rem">
+                  <Text textColor="cbWhite" textSize="heading">
+                    Recent Members
+                  </Text>
+                </Row>
+                <Row minW="10rem" d="flex" justify="center" align="center">
+                  <Div m={{ t: "0.5rem", r: "1rem" }}>
+                    <RecentlyJoinClanMembersTable clanMemberInfo={clanMemberList} />
+                  </Div>
                 </Row>
               </InfoBox>
             </Col>
