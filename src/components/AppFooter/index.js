@@ -33,13 +33,13 @@ const AppFooter = () => {
                 </Row>
                 <Row p={{ l: "2rem", b: "0.5rem" }}>
                     <Button m="0.5rem" h="1.5rem" w="1.5rem" p="0rem" shadow="5" bg="none" onClick={() => location.assign("https://twitter.com/clanbasedev")}>
-                        <Image src="twitter.svg" alt="twitter" />
+                        <Image src="/twitter.svg" alt="twitter" />
                     </Button>
                     <Button m="0.5rem" h="1.5rem" w="1.5rem" p="0.3rem" shadow="5" bg="#5865F2" onClick={() => location.assign("https://discord.gg/WDQC97ybAV")}>
-                        <Image src="discord.svg" alt="discord" />
+                        <Image src="/discord.svg" alt="discord" />
                     </Button>
                     <Button m="0.5rem" h="1.5rem" w="1.5rem" p="0.3rem" shadow="5" bg="#FF424D" onClick={() => location.assign("https://www.patreon.com/clanbase")}>
-                        <Image src="patreon.png" alt="patreon" />
+                        <Image src="/patreon.png" alt="patreon" />
                     </Button>
                 </Row>
             </Div>

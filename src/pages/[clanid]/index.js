@@ -21,7 +21,6 @@ import RecentlyJoinClanMembersTable from '../../components/RecentlyJoinedClanMem
 import ClanRoster from '../../components/ClanRoster';
 import getClanMemberCharacterSeasonalTimeStats from '../../functions/getClanMemberCharacterSeasonalTimeStats';
 import MemberStatCard from '../../components/MemberStatCard';
-import JoinClanButton from '../../components/JoinClanButton';
 
 export default function ClanPage() {
 

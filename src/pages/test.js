@@ -37,24 +37,25 @@ import calcMemberSeasonalActivityTime from '../functions/calcMemberSeasonalActiv
 import React, { useState } from 'react';
 import JoinClanButton from '../components/JoinClanButton';
 import { useSession } from "next-auth/react";
+import PlayerSearchBar from '../components/PlayerSearchBar';
 
 export default function Test() {
-    const { data, status } = useSession()
+    // const { data, status } = useSession()
 
-    const [memberIndex, setMemberIndex] = useState(0);
+    // const [memberIndex, setMemberIndex] = useState(0);
 
-    const memberInfo = getClanMemberInfo(2084197)
-    const profiles = getClanMemberProfileInfo(2084197)
-    const clanInfo = getClanInfo(2084197)
-    const clanMemberStats = getClanMembersAllTimeStats(memberInfo)
+    // const memberInfo = getClanMemberInfo(2084197)
+    // const profiles = getClanMemberProfileInfo(2084197)
+    // const clanInfo = getClanInfo(2084197)
+    // const clanMemberStats = getClanMembersAllTimeStats(memberInfo)
 
-    const currentSeasonHash = getCurrentSeasonHash();
-    const currentSeasonInfo = getSeasonInfo(currentSeasonHash);
-    const dateArray = createSubDateArray(currentSeasonInfo?.Response?.startDate, currentSeasonInfo?.Response?.endDate);
+    // const currentSeasonHash = getCurrentSeasonHash();
+    // const currentSeasonInfo = getSeasonInfo(currentSeasonHash);
+    // const dateArray = createSubDateArray(currentSeasonInfo?.Response?.startDate, currentSeasonInfo?.Response?.endDate);
 
-    const allCharacterStats = getAllCharacterStats(profiles, dateArray)
+    // const allCharacterStats = getAllCharacterStats(profiles, dateArray)
 
-    const activityData = calcMemberSeasonalActivityTime(allCharacterStats, profiles, memberInfo)
+    // const activityData = calcMemberSeasonalActivityTime(allCharacterStats, profiles, memberInfo)
 
     // console.log(activityData)
 
@@ -72,6 +73,11 @@ export default function Test() {
                     </InfoBox>
                 </Div>
             </Div> */}
+            <Div h ="100rem">
+            <InfoBox bg={'cbGrey1'}>
+                <PlayerSearchBar />
+            </InfoBox>
+            </Div>
         </DefaultTemplate>
     )
 }

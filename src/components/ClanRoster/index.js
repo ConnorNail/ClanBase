@@ -2,7 +2,7 @@ import { Text, Div, Image, Icon, Row, Col } from "atomize";
 import Table from "../Table";
 import setupRosterTable from "../../functions/setupRosterTable";
 
-export default function RecentlyJoinClanMembersTable({ clanMemberInfo, clanMemberProfiles, memberIndex, setMemberIndex }) {
+export default function ClanRoster({ clanMemberInfo, clanMemberProfiles, memberIndex, setMemberIndex }) {
 
     let fullMemberData = []
     const clanMemberInfoList = clanMemberInfo?.Response?.results
