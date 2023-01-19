@@ -81,8 +81,8 @@ function PlayerCard({ playerInfo, searchMode }) {
     return (
         <>
             {display ?
-                <Div bg="cbGrey2" rounded="md" m="0.5rem" d="flex" align="center">
-                    <Image h="2.5rem" w="auto" src={pfp()} />
+                <Div bg="cbGrey2" rounded="md" m="0.5rem" d="flex" align="center" shadow="2" hoverShadow="4">
+                    <Image h="2.5rem" w="auto" rounded="md" src={pfp()} />
                     <Text textColor="cbWhite" textSize="paragraph" m={{ y: "0", l: "0.5rem" }}>
                         {playerInfo?.bungieGlobalDisplayName}
                     </Text>

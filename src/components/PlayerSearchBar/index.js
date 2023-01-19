@@ -75,7 +75,9 @@ const PlayerSearchBar = () => {
             />
             <Div p={{ x: "1rem", y: "0.5rem" }} bg="cbGrey1" h="40rem" d="flex" flexDir="column" flexWrap="wrap">
                 {suggestions ? suggestions.map((suggestion, index) => (
-                    <PlayerCard playerInfo={suggestion} searchMode={searchMode}/>
+                    <Div key={index}>
+                        <PlayerCard playerInfo={suggestion} searchMode={searchMode}/>
+                    </Div>
                 ))
                     :
                     null}
