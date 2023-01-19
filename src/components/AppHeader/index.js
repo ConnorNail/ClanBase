@@ -55,8 +55,8 @@ const AppHeader = () => {
                 </Row>
             </Div>
             <Div d="flex">
-                <Div border={{ x: "1.5px solid", b: "1.5px solid" }} borderColor="cbWhite" rounded="0 0 10px 10px" w="100%" h="1.5rem" m={{ x: "1rem" }} d="flex" justify="center" align="flex-end">
-                    <Div bg="cbWhite" w="50%" h="0.75rem" rounded="10px 10px 0 0"></Div>
+                <Div border={{ x: "1.5px solid", t: "1.5px solid" }} borderColor="cbWhite" rounded="10px 10px 0 0" w="100%" h="1.5rem" m={{ t: "1rem", x: "1rem" }} d="flex" justify="center" align="flex-start">
+                    <Div bg="cbWhite" w="50%" h="0.75rem" rounded="0 0 10px 10px"></Div>
                 </Div>
             </Div>
         </header>

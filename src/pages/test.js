@@ -75,7 +75,7 @@ export default function Test() {
             </Div> */}
             <Div h ="100rem">
             <InfoBox bg={'cbGrey1'}>
-                <PlayerSearchBar />
+                <PlayerSearchBar clanId={4993341}/>
             </InfoBox>
             </Div>
         </DefaultTemplate>

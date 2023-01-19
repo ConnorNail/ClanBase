@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Button, Div, Text, Image } from "atomize";
 import getPlayerProfile from '../../functions/getPlayerProfile';
 import getBungieNetUserById from '../../functions/getBungieNetUserById';
+import sendIndividualGroupInvite from '../../functions/sendIndividualGroupInvite';
+import InviteButton from '../InviteButton';
 
 function getRecentChar(charInfo) {
     // When passed an object of characters will find the characterId of the most recently played character
@@ -23,7 +25,7 @@ function getRecentChar(charInfo) {
     return char
 }
 
-function PlayerCard({ playerInfo, searchMode }) {
+function PlayerCard({ clanId, playerInfo, searchMode }) {
     const [sendInvite, setSendInvite] = useState(false);
 
     // useEffect(() => {
@@ -42,6 +44,7 @@ function PlayerCard({ playerInfo, searchMode }) {
         memberType = playerInfo?.destinyMemberships[0]?.crossSaveOverride
         if (memberType == 0) {
             membershipId = playerInfo?.destinyMemberships[0]?.membershipId
+            memberType = playerInfo?.destinyMemberships[0]?.membershipType
         } else {
             for (let i = 0; i < playerInfo?.destinyMemberships.length; i++) {
                 if (playerInfo?.destinyMemberships[i]?.membershipType == memberType) {
@@ -53,6 +56,7 @@ function PlayerCard({ playerInfo, searchMode }) {
         memberType = playerInfo?.crossSaveOverride
         if (playerInfo?.membershipType == memberType || memberType == 0) {
             membershipId = playerInfo?.membershipId
+            memberType = playerInfo?.membershipType
         } else {
             display = false
         }
@@ -69,7 +73,8 @@ function PlayerCard({ playerInfo, searchMode }) {
 
     const bungiePath = bungieInfo?.Response?.profilePicturePath
 
-    // Send invite
+    console.log(playerInfo)
+    console.log(playerProfile)
 
     // Decide on pfp path
     const pfp = () => {
@@ -93,11 +98,7 @@ function PlayerCard({ playerInfo, searchMode }) {
                     <Text textColor="cbGrey1" textSize="body" m={{ y: "0" }}>
                         #{playerInfo?.bungieGlobalDisplayNameCode}
                     </Text>
-                    <Button bg="cbGrey2" m={{ l: "auto" }} textSize="subheader" textColor="cbGrey3" hoverTextColor="cbBlue"
-                        onClick={() => setSendInvite(true)}
-                    >
-                        Invite
-                    </Button>
+                    <InviteButton membershipId={membershipId} memberType={memberType} clanId={clanId}/>
                 </Div>
                 :
                 null}
