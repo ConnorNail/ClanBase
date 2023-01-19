@@ -40,14 +40,18 @@ function PlayerCard({ playerInfo, searchMode }) {
     let membershipId
     if (searchMode == 'Bungie') {
         memberType = playerInfo?.destinyMemberships[0]?.crossSaveOverride
-        for (let i = 0; i < playerInfo?.destinyMemberships.length; i++) {
-            if (playerInfo?.destinyMemberships[i]?.membershipType == memberType) {
-                membershipId = playerInfo?.destinyMemberships[i]?.membershipId
+        if (memberType == 0) {
+            membershipId = playerInfo?.destinyMemberships[0]?.membershipId
+        } else {
+            for (let i = 0; i < playerInfo?.destinyMemberships.length; i++) {
+                if (playerInfo?.destinyMemberships[i]?.membershipType == memberType) {
+                    membershipId = playerInfo?.destinyMemberships[i]?.membershipId
+                }
             }
         }
     } else if (searchMode == 'D2') {
         memberType = playerInfo?.crossSaveOverride
-        if (playerInfo?.membershipType == memberType) {
+        if (playerInfo?.membershipType == memberType || memberType == 0) {
             membershipId = playerInfo?.membershipId
         } else {
             display = false
@@ -90,7 +94,7 @@ function PlayerCard({ playerInfo, searchMode }) {
                         #{playerInfo?.bungieGlobalDisplayNameCode}
                     </Text>
                     <Button bg="cbGrey2" m={{ l: "auto" }} textSize="subheader" textColor="cbGrey3" hoverTextColor="cbBlue"
-                    onClick={() => setSendInvite(true)}
+                        onClick={() => setSendInvite(true)}
                     >
                         Invite
                     </Button>
