@@ -60,12 +60,12 @@ function PlayerCard({ clanId, playerInfo, searchMode }) {
     return (
         <>
             {display ?
-                <Div bg="cbGrey2" rounded="md" m="0.5rem" d="flex" align="center" shadow="2" hoverShadow="4">
+                <Div bg="cbGrey1" rounded="md" m="0.5rem" d="flex" align="center" shadow="2" hoverShadow="4">
                     <Image h="2.5rem" w="auto" rounded="md" src={pfp()} />
                     <Text textColor="cbWhite" textSize="paragraph" m={{ y: "0", l: "0.5rem" }}>
                         {playerInfo?.bungieGlobalDisplayName}
                     </Text>
-                    <Text textColor="cbGrey1" textSize="body" m={{ y: "0" }}>
+                    <Text textColor="cbGrey2" textSize="body" m={{ y: "0" }}>
                         #{playerInfo?.bungieGlobalDisplayNameCode}
                     </Text>
                     <InviteButton membershipId={membershipId} memberType={memberType} clanId={clanId} />

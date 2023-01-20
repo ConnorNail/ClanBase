@@ -73,7 +73,7 @@ const PlayerSearchBar = ({clanId}) => {
                 value={input}
                 onChange={e => { handleSearch(e) }}
             />
-            <Div p={{ x: "1rem", y: "0.5rem" }} bg="cbGrey1" h="40rem" d="flex" flexDir="column" flexWrap="wrap">
+            <Div p={{ x: "1rem", y: "0.5rem" }} h="40rem" d="flex" flexDir="column" flexWrap="wrap">
                 {suggestions ? suggestions.map((suggestion, index) => (
                     <Div key={index}>
                         <PlayerCard clanId={clanId} playerInfo={suggestion} searchMode={searchMode}/>

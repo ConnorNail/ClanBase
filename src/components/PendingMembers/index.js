@@ -5,23 +5,24 @@ import getHeaders from '../../functions/getHeaders'
 import useSWRMutation from 'swr/mutation'
 import PlayerCard from '../PlayerCard';
 import getInvitedIndividuals from '../../functions/getInvitedIndividuals';
-import InvitedPlayerCard from '../InvitedPlayerCard';
+import PendingPlayerCard from '../PendingPlayerCard';
+import getPendingMemberships from '../../functions/getPendingMemberships';
 
-const InvitedMembers = ({ clanId }) => {
+const PendingMembers = ({ clanId }) => {
 
-    const invitedMembers = getInvitedIndividuals(clanId)
-    const memberList = invitedMembers?.Response?.results
+    const pendingMembers = getPendingMemberships(clanId)
+    const memberList = pendingMembers?.Response?.results
 
     return (
-        <Div p={{ x: "1rem", y: "0.5rem" }} h="40rem" d="flex" flexDir="column" flexWrap="wrap">
+        <Div p={{ x: "1rem", y: "0.5rem" }} d="flex" flexDir="column" flexWrap="wrap">
             <Text textColor="cbWhite" textSize="heading">
-                Pending Invitations
+                Pending Members
             </Text>
             {memberList ?
                 memberList.length > 0 ?
                     memberList.map((member, index) => (
                         <Div key={index}>
-                            <InvitedPlayerCard clanId={clanId} playerInfo={member} />
+                            <PendingPlayerCard clanId={clanId} playerInfo={member} />
                         </Div>
                     ))
                     :
@@ -34,4 +35,4 @@ const InvitedMembers = ({ clanId }) => {
     )
 }
 
-export default InvitedMembers
+export default PendingMembers

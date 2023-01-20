@@ -11,8 +11,12 @@ import getGroupsForMember from "../functions/getGroupsForMember";
 import findMemberType from '../functions/findMemberType';
 import InvitedMembers from '../components/InvitedMembers';
 import PlayerSearchBar from '../components/PlayerSearchBar';
+import PendingMembers from '../components/PendingMembers';
+import React, { useState, useEffect } from 'react';
 
 export default function Admin() {
+    const [tab, setTab] = useState('General')
+
     const { data, status } = useSession()
 
     const ids = getIdsForCurrentUser(data)
@@ -33,11 +37,11 @@ export default function Admin() {
             if (memberType == 5) {
                 return (
                     <>
-                    <InvitedMembers clanId={clanId}/>
-                    <PlayerSearchBar clanId={clanId}/>
-                    <Text textColor="cbWhite">
-                        FOUNDER SETTINGS PLACEHOLDER FOR {clanId}
-                    </Text>
+                        {/* <InvitedMembers clanId={clanId} />
+                        <PlayerSearchBar clanId={clanId} /> */}
+                        <Text textColor="cbWhite">
+                            FOUNDER SETTINGS PLACEHOLDER FOR {clanId}
+                        </Text>
                     </>
                 )
             } else if (memberType == 3) {
@@ -58,13 +62,87 @@ export default function Admin() {
         }
     }
 
+    function AdminMenuButtons({ children, toggleValue, m }) {
+        return (
+            <Button
+                bg="cbGrey2"
+                textColor={tab == toggleValue ? "cbWhite" : "cbGrey1"}
+                textSize="subheader"
+                hoverTextColor="cbWhite"
+                shadow={tab == toggleValue ? "4" : "2"}
+                hoverShadow="4" m={m}
+                onClick={() => setTab(toggleValue)}
+            >
+                {children}
+            </Button>
+        )
+    }
+
+    function AdminTabs() {
+        return (
+            <Div d="flex" align="center">
+                <AdminMenuButtons toggleValue={'General'} m={{ r: "0.5rem" }}>
+                    General
+                </AdminMenuButtons>
+                <Div bg="cbWhite" h="3rem" w="0.1rem" />
+                <AdminMenuButtons toggleValue={'Invites'} m={{ x: "0.5rem" }}>
+                    Invitations
+                </AdminMenuButtons>
+                <Div bg="cbWhite" h="3rem" w="0.1rem" />
+                <AdminMenuButtons toggleValue={'Bans'} m={{ x: "0.5rem" }}>
+                    Ban List
+                </AdminMenuButtons>
+                <Div bg="cbWhite" h="3rem" w="0.1rem" />
+                <AdminMenuButtons toggleValue={'Culture'} m={{ x: "0.5rem" }}>
+                    Culture Settings
+                </AdminMenuButtons>
+                <Div bg="cbWhite" h="3rem" w="0.1rem" />
+                <AdminMenuButtons toggleValue={'Settings'} m={{ x: "0.5rem" }}>
+                    General Settings
+                </AdminMenuButtons>
+            </Div>
+        )
+    }
+
+    function AdminTabContent() {
+        switch (tab) {
+            case 'General':
+                return (
+                    <Div d="flex">
+                        <Col>
+                            <InfoBox bg={'cbGrey2'}>
+                                <PendingMembers clanId={clanId} />
+                            </InfoBox>
+                        </Col>
+                    </Div>
+                )
+            case 'Invites':
+                return (
+                    <Div d="flex">
+                        <Col size="4">
+                            <InfoBox bg={'cbGrey2'}>
+                                <InvitedMembers clanId={clanId} />
+                            </InfoBox>
+                        </Col>
+                        <Col>
+                            <InfoBox bg={'cbGrey2'}>
+                                <PlayerSearchBar clanId={clanId} />
+                            </InfoBox>
+                        </Col>
+                    </Div>
+                )
+        }
+    }
+
     return (
         <DefaultTemplate>
             <Div d="flex" justify="center">
                 <Col size="11">
                     <InfoBox bg={'cbGrey1'}>
+                        <AdminTabs />
+
                         {status == 'authenticated' ?
-                            adminDetails()
+                            <AdminTabContent />
                             :
                             <Text textColor="cbWhite">
                                 Sign in to see clan details

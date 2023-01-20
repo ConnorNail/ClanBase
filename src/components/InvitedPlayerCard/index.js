@@ -25,7 +25,6 @@ export default function InvitedPlayerCard({ clanId, playerInfo }) {
     // Send invite
     const cancel = cancelIndividualGroupInvite(membershipId, membershipType, clanId, cancelInvite)
     let canceled = false
-    console.log(cancel)
 
     if (cancel?.ErrorCode == 1) {
         canceled = true
@@ -44,15 +43,15 @@ export default function InvitedPlayerCard({ clanId, playerInfo }) {
     return (
         <>
             {!canceled ?
-                <Div bg="cbGrey2" rounded="md" m="0.5rem" d="flex" align="center" shadow="2" hoverShadow="4">
+                <Div bg="cbGrey1" rounded="md" m="0.5rem" d="flex" align="center" shadow="2" hoverShadow="4">
                     <Image h="2.5rem" w="auto" rounded="md" src={pfp()} />
                     <Text textColor="cbWhite" textSize="paragraph" m={{ y: "0", l: "0.5rem" }}>
                         {playerInfo?.destinyUserInfo?.bungieGlobalDisplayName}
                     </Text>
-                    <Text textColor="cbGrey1" textSize="body" m={{ y: "0" }}>
+                    <Text textColor="cbGrey2" textSize="body" m={{ y: "0" }}>
                         #{playerInfo?.destinyUserInfo?.bungieGlobalDisplayNameCode}
                     </Text>
-                    <Button bg="cbGrey2" m={{ l: "auto" }} textSize="subheader" textColor="cbGrey3" hoverTextColor={"cbBlue"}
+                    <Button bg="cbGrey1" m={{ l: "auto" }} textSize="subheader" textColor="cbGrey3" hoverTextColor={"cbBlue"}
                         onClick={() => setCancelInvite(true)}
                     >
                         Cancel Invite
