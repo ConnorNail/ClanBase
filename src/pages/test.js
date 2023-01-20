@@ -38,6 +38,7 @@ import React, { useState } from 'react';
 import JoinClanButton from '../components/JoinClanButton';
 import { useSession } from "next-auth/react";
 import PlayerSearchBar from '../components/PlayerSearchBar';
+import InvitedMembers from '../components/InvitedMembers';
 
 export default function Test() {
     // const { data, status } = useSession()
@@ -73,10 +74,13 @@ export default function Test() {
                     </InfoBox>
                 </Div>
             </Div> */}
-            <Div h ="100rem">
-            <InfoBox bg={'cbGrey1'}>
-                <PlayerSearchBar clanId={4993341}/>
-            </InfoBox>
+            <Div h="100rem">
+                <InfoBox bg={'cbGrey1'}>
+                    <PlayerSearchBar clanId={4993341} />
+                </InfoBox>
+                <InfoBox bg={'cbGrey1'}>
+                    <InvitedMembers clanId={4993341} />
+                </InfoBox>
             </Div>
         </DefaultTemplate>
     )

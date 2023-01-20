@@ -9,6 +9,8 @@ import { useSession, signIn, signOut } from "next-auth/react"
 import getIdsForCurrentUser from "../functions/getIdsForCurrentUser";
 import getGroupsForMember from "../functions/getGroupsForMember";
 import findMemberType from '../functions/findMemberType';
+import InvitedMembers from '../components/InvitedMembers';
+import PlayerSearchBar from '../components/PlayerSearchBar';
 
 export default function Admin() {
     const { data, status } = useSession()
@@ -30,9 +32,13 @@ export default function Admin() {
         if (memberType || memberType == 0) {
             if (memberType == 5) {
                 return (
+                    <>
+                    <InvitedMembers clanId={clanId}/>
+                    <PlayerSearchBar clanId={clanId}/>
                     <Text textColor="cbWhite">
                         FOUNDER SETTINGS PLACEHOLDER FOR {clanId}
                     </Text>
+                    </>
                 )
             } else if (memberType == 3) {
                 return (

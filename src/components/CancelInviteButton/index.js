@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Button, Div, Text, Image } from "atomize";
 import getPlayerProfile from '../../functions/getPlayerProfile';
 import getBungieNetUserById from '../../functions/getBungieNetUserById';
-import sendIndividualGroupInvite from '../../functions/sendIndividualGroupInvite';
+import cancelIndividualGroupInvite from '../../functions/cancelIndividualGroupInvite';
 
-function InviteButton({ membershipId, memberType, clanId }) {
-    const [sendInvite, setSendInvite] = useState(false);
+function CancelInviteButton({ membershipId, memberType, clanId }) {
+    const [cancelInvite, setCancelInvite] = useState(false);
 
     let pending = false
 
     // Send invite
-    const invite = sendIndividualGroupInvite(membershipId, memberType, clanId, sendInvite)
+    const invite = cancelIndividualGroupInvite(membershipId, memberType, clanId, cancelInvite)
 
     if (membershipId && memberType) {
 
@@ -22,14 +22,13 @@ function InviteButton({ membershipId, memberType, clanId }) {
 
         return (
             <Button bg="cbGrey2" m={{ l: "auto" }} textSize="subheader" textColor="cbGrey3" hoverTextColor={pending ? "cbGrey3" : "cbBlue"}
-                onClick={() => setSendInvite(true)}
+                onClick={() => setCancelInvite(true)}
             >
-                {pending == true ? 'Pending' : 'Invite'}
+                {pending == true ? 'Pending' : 'Cancel Invite'}
             </Button>
-
         )
     }
     return null
 }
 
-export default InviteButton
+export default CancelInviteButton

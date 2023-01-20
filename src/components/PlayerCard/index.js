@@ -1,38 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Div, Text, Image } from "atomize";
+import { Notification, Icon, Div, Text, Image } from "atomize";
 import getPlayerProfile from '../../functions/getPlayerProfile';
 import getBungieNetUserById from '../../functions/getBungieNetUserById';
-import sendIndividualGroupInvite from '../../functions/sendIndividualGroupInvite';
 import InviteButton from '../InviteButton';
-
-function getRecentChar(charInfo) {
-    // When passed an object of characters will find the characterId of the most recently played character
-    let char = 0;
-    let date = '';
-
-    for (const character in charInfo?.data) {
-        const newDate = new Date(charInfo?.data[character]?.dateLastPlayed);
-
-        // If the new date is more recent
-        if (date == '' || date < newDate) {
-            // Save the character date
-            date = newDate;
-
-            // Save characterId
-            char = character;
-        }
-    }
-    return char
-}
+import getRecentChar from '../../functions/getRecentChar';
 
 function PlayerCard({ clanId, playerInfo, searchMode }) {
-    const [sendInvite, setSendInvite] = useState(false);
-
-    // useEffect(() => {
-    //     console.log(sendInvite)
-    //     setSendInvite(false)
-    // }, [sendInvite]);
-
     const baseURL = 'https://www.bungie.net/'
     const defaultIcon = 'https://www.bungie.net/img/profile/avatars/default_avatar.gif'
 
@@ -73,9 +46,6 @@ function PlayerCard({ clanId, playerInfo, searchMode }) {
 
     const bungiePath = bungieInfo?.Response?.profilePicturePath
 
-    console.log(playerInfo)
-    console.log(playerProfile)
-
     // Decide on pfp path
     const pfp = () => {
         if (d2Path) {
@@ -98,7 +68,7 @@ function PlayerCard({ clanId, playerInfo, searchMode }) {
                     <Text textColor="cbGrey1" textSize="body" m={{ y: "0" }}>
                         #{playerInfo?.bungieGlobalDisplayNameCode}
                     </Text>
-                    <InviteButton membershipId={membershipId} memberType={memberType} clanId={clanId}/>
+                    <InviteButton membershipId={membershipId} memberType={memberType} clanId={clanId} />
                 </Div>
                 :
                 null}
