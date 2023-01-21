@@ -12,6 +12,7 @@ import findMemberType from '../functions/findMemberType';
 import InvitedMembers from '../components/InvitedMembers';
 import PlayerSearchBar from '../components/PlayerSearchBar';
 import PendingMembers from '../components/PendingMembers';
+import BannedMembers from '../components/BannedMembers';
 import React, { useState, useEffect } from 'react';
 
 export default function Admin() {
@@ -127,6 +128,16 @@ export default function Admin() {
                         <Col>
                             <InfoBox bg={'cbGrey2'}>
                                 <PlayerSearchBar clanId={clanId} />
+                            </InfoBox>
+                        </Col>
+                    </Div>
+                )
+            case 'Bans':
+                return (
+                    <Div d="flex">
+                        <Col>
+                            <InfoBox bg={'cbGrey2'}>
+                                <BannedMembers clanId={clanId} />
                             </InfoBox>
                         </Col>
                     </Div>

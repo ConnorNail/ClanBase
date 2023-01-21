@@ -9,12 +9,11 @@ import approvePendingMembers from '../../functions/approvePendingMembers';
 import denyPendingMembers from '../../functions/denyPendingMembers';
 import CenterModal from '../CenterModal';
 import banMembers from '../../functions/banMember';
+import unbanMembers from '../../functions/unbanMember';
 
-export default function PendingPlayerCard({ clanId, playerInfo }) {
-    const [banModal, setBanModal] = useState(false)
-    const [banPending, setBanPending] = useState(false);
-    const [denyPending, setDenyPending] = useState(false);
-    const [approvePending, setApprovePending] = useState(false);
+export default function BannedPlayerCard({ clanId, playerInfo }) {
+    const [unbanModal, setUnbanModal] = useState(false)
+    const [unbanPending, setUnbanPending] = useState(false);
 
     const baseURL = 'https://www.bungie.net/'
     const defaultIcon = 'https://www.bungie.net/img/profile/avatars/default_avatar.gif'
@@ -22,9 +21,6 @@ export default function PendingPlayerCard({ clanId, playerInfo }) {
     // Member info
     const membershipId = playerInfo?.destinyUserInfo?.membershipId
     const membershipType = playerInfo?.destinyUserInfo?.membershipType
-    const displayName = playerInfo?.destinyUserInfo?.displayName
-    const bungieGlobalDisplayName = playerInfo?.destinyUserInfo?.bungieGlobalDisplayName
-    const bungieGlobalDisplayNameCode = playerInfo?.destinyUserInfo?.bungieGlobalDisplayNameCode
 
     // Get destiny profile
     const playerProfile = getPlayerProfile(membershipId, membershipType)
@@ -33,12 +29,10 @@ export default function PendingPlayerCard({ clanId, playerInfo }) {
     const d2Path = charInfo?.data[getRecentChar(charInfo)]?.emblemPath
 
     // Send invite
-    const ban = banMembers(membershipId, membershipType, clanId, banPending)
-    const deny = denyPendingMembers(membershipId, membershipType, displayName, bungieGlobalDisplayName, bungieGlobalDisplayNameCode, clanId, denyPending)
-    const approve = approvePendingMembers(membershipId, membershipType, clanId, approvePending)
+    const unban = unbanMembers(membershipId, membershipType, clanId, unbanPending)
     let handled = false
 
-    if (approve?.ErrorCode == 1 || deny?.ErrorCode == 1 || ban?.ErrorCode == 1) {
+    if (unban?.ErrorCode == 1) {
         handled = true
     } else {
         // Unable to complete action
@@ -64,32 +58,22 @@ export default function PendingPlayerCard({ clanId, playerInfo }) {
                         #{playerInfo?.destinyUserInfo?.bungieGlobalDisplayNameCode}
                     </Text>
                     <Button bg="cbGrey1" m={{ l: "auto" }} textSize="subheader" textColor="cbGrey3" hoverTextColor={"cbBlue"}
-                        onClick={() => setBanModal(true)}
+                        onClick={() => setUnbanModal(true)}
                     >
-                        Ban
-                    </Button>
-                    <Button bg="cbGrey1" textSize="subheader" textColor="cbGrey3" hoverTextColor={"cbBlue"}
-                        onClick={() => setDenyPending(true)}
-                    >
-                        Deny
-                    </Button>
-                    <Button bg="cbGrey1" textSize="subheader" textColor="cbGrey3" hoverTextColor={"cbBlue"}
-                        onClick={() => setApprovePending(true)}
-                    >
-                        Approve
+                        Unban
                     </Button>
                 </Div>
                 :
                 null}
             <CenterModal
-                isOpen={banModal}
-                onClose={() => setBanModal(false)}
+                isOpen={unbanModal}
+                onClose={() => setUnbanModal(false)}
                 onSubmit={() => {
-                    setBanPending(true)
-                    setBanModal(false)
+                    setUnbanPending(true)
+                    setUnbanModal(false)
                 }}
             >
-                Are you sure you want to ban {playerInfo?.destinyUserInfo?.bungieGlobalDisplayName}#{playerInfo?.destinyUserInfo?.bungieGlobalDisplayNameCode}?
+                Are you sure you want to unban {playerInfo?.destinyUserInfo?.bungieGlobalDisplayName}#{playerInfo?.destinyUserInfo?.bungieGlobalDisplayNameCode}?
             </CenterModal>
         </>
     )
