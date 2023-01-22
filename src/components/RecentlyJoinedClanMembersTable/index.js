@@ -13,7 +13,7 @@ export default function RecentlyJoinClanMembersTable({ clanMemberInfo }) {
     let newMemberIndices = []
 
     // Find the newest members and add to newMembers
-    if (clanMemberInfo) {
+    if (allMembers) {
         for (let i = 0; i < newMemberCount; i++) {
             let newestTime = 0
             let newMemberIndex

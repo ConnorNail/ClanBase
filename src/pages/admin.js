@@ -14,6 +14,7 @@ import PlayerSearchBar from '../components/PlayerSearchBar';
 import PendingMembers from '../components/PendingMembers';
 import BannedMembers from '../components/BannedMembers';
 import React, { useState, useEffect } from 'react';
+import AdminRoster from '../components/AdminRoster';
 
 export default function Admin() {
     const [tab, setTab] = useState('General')
@@ -113,6 +114,7 @@ export default function Admin() {
                         <Col>
                             <InfoBox bg={'cbGrey2'}>
                                 <PendingMembers clanId={clanId} />
+                                <AdminRoster clanId={clanId} curentMemberType={memberType}/>
                             </InfoBox>
                         </Col>
                     </Div>

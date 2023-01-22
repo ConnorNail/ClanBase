@@ -1,12 +1,4 @@
-import React, { useState, useEffect } from 'react';
 import { Input, Icon, Dropdown, Div, Anchor, Col, Text, Image } from "atomize";
-import getPlayer from '../../functions/getPlayer';
-import getHeaders from '../../functions/getHeaders'
-import useSWRMutation from 'swr/mutation'
-import PlayerCard from '../PlayerCard';
-import getInvitedIndividuals from '../../functions/getInvitedIndividuals';
-import PendingPlayerCard from '../PendingPlayerCard';
-import getPendingMemberships from '../../functions/getPendingMemberships';
 import getBannedMembers from '../../functions/getBannedMembers';
 import BannedPlayerCard from '../BannedPlayerCard';
 

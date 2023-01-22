@@ -33,7 +33,8 @@ export default function ClanPage() {
   const [memberIndex, setMemberIndex] = useState(0);
 
   const clanInfo = getClanInfo(clanId)
-  const clanMemberList = getClanMemberInfo(clanId)
+  const { data: clanMemberList } = getClanMemberInfo(clanId)
+  console.log(clanMemberList)
   const clanMemberStats = getClanMembersAllTimeStats(clanMemberList)
   const clanMemberProfiles = getAllMembersProfile(clanMemberList)
 

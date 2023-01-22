@@ -37,7 +37,7 @@ const ClanCard = ({ clanId, stats }) => {
     };
 
     const clanInfo = getClanInfo(clanId)
-    const clanMemberList = getClanMemberInfo(clanId)
+    const { data: clanMemberList } = getClanMemberInfo(clanId)
     const clanMemberStats = getClanMembersAllTimeStats(clanMemberList)
     const clanMemberProfiles = getAllMembersProfile(clanMemberList)
 
