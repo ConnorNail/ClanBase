@@ -5,6 +5,8 @@ async function refreshAccessToken(token) {
   console.log("Refreshing Access Token")
 
   try {
+    console.log(process.env.NEXT_PUBLIC_BUNGIE_API_KEY)
+
     const encodedString = 'MzczMTY6RmxMU3F2MzdSeTNIaTR4NERpclRrM2dpc1FXQWNURmloZmlKSFQ2U1B0OA=='//Buffer.from(process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID + ':' + process.env.NEXT_PUBLIC_BUNGIE_SECRET).toString('base64');
 
     const response = await fetch('https://www.bungie.net/Platform/App/OAuth/Token/', {
