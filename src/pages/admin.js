@@ -16,6 +16,7 @@ import BannedMembers from '../components/BannedMembers';
 import React, { useState, useEffect } from 'react';
 import AdminRoster from '../components/AdminRoster';
 import CultureSettings from '../components/CultureSettings';
+import GeneralSettings from '../components/GeneralSettings';
 
 export default function Admin() {
     const [tab, setTab] = useState('General')
@@ -151,6 +152,16 @@ export default function Admin() {
                         <Col>
                             <InfoBox bg={'cbGrey2'}>
                                 <CultureSettings groupInfo={groupInfo} clanId={clanId} />
+                            </InfoBox>
+                        </Col>
+                    </Div>
+                )
+            case 'Settings':
+                return (
+                    <Div d="flex">
+                        <Col>
+                            <InfoBox bg={'cbGrey2'}>
+                                <GeneralSettings groupInfo={groupInfo} clanId={clanId} />
                             </InfoBox>
                         </Col>
                     </Div>

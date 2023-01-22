@@ -1,12 +1,13 @@
-import { Input, Icon, Dropdown, Div, Textarea, Col, Text, Inpu, Button } from "atomize";
+import { Input, Icon, Dropdown, Div, Textarea, Text, Inpu, Button } from "atomize";
 import React, { useState, useEffect } from 'react';
 import editGroupCultureSettings from "../../functions/editGroupCultureSettings";
 import WarningNotification from "../WarningNotification";
 import SuccessNotification from "../SuccessNotification";
 
-export default function CultureSettings({ groupInfo, clanId }) {
+export default function GeneralSettings({ groupInfo, clanId }) {
     const [pendingSave, setPendingSave] = useState(false)
-    const [clanName, setClanName] = useState(groupInfo?.Response?.results[0]?.group?.name)
+    const [clanJoinOptionsOpen, setClanJoinOptionsOpen] = useState(false)
+    const [clanJoinOptions, setClanJoinOptions] = useState(groupInfo?.Response?.results[0]?.group?.name)
     const [callsign, setCallsign] = useState(groupInfo?.Response?.results[0]?.group?.clanInfo?.clanCallsign)
     const [motto, setMotto] = useState(groupInfo?.Response?.results[0]?.group?.motto)
     const [about, setAbout] = useState(groupInfo?.Response?.results[0]?.group?.about)
@@ -16,12 +17,12 @@ export default function CultureSettings({ groupInfo, clanId }) {
 
     // Persist clan name in local storage
     useEffect(() => {
-        const data = window.localStorage.getItem('CLAN_NAME');
-        if (data !== null) setClanName(JSON.parse(data));
+        const data = window.localStorage.getItem('JOIN_OPTIONS');
+        if (data !== null) setClanJoinOptions(JSON.parse(data));
     }, []);
     useEffect(() => {
-        window.localStorage.setItem('CLAN_NAME', JSON.stringify(clanName));
-    }, [clanName]);
+        window.localStorage.setItem('JOIN_OPTIONS', JSON.stringify(clanJoinOptions));
+    }, [clanJoinOptions]);
 
     // Persist callsign in local storage
     useEffect(() => {
@@ -50,22 +51,22 @@ export default function CultureSettings({ groupInfo, clanId }) {
         window.localStorage.setItem('ABOUT_US', JSON.stringify(about));
     }, [about]);
 
-    const groupCultureSettings = editGroupCultureSettings(clanName, callsign, motto, about, clanId, pendingSave, setPendingSave)
+    // const groupCultureSettings = editGroupCultureSettings(clanName, callsign, motto, about, clanId, pendingSave, setPendingSave)
 
-    useEffect(() => {
-        if (groupCultureSettings) {
-            if (groupCultureSettings?.ErrorCode == 1) {
-                // Successful
-                setSuccess(true)
-            } else if (groupCultureSettings?.MessageData?.ThrottleSecondsRemaining != 0) {
-                // Time remaining before next request can be made
-                setThrottle(true)
-            } else {
-                // Unable to complete action
-                setWarning(true)
-            }
-        }
-    }, [groupCultureSettings])
+    // useEffect(() => {
+    //     if (groupCultureSettings) {
+    //         if (groupCultureSettings?.ErrorCode == 1) {
+    //             // Successful
+    //             setSuccess(true)
+    //         } else if (groupCultureSettings?.MessageData?.ThrottleSecondsRemaining != 0) {
+    //             // Time remaining before next request can be made
+    //             setThrottle(true)
+    //         } else {
+    //             // Unable to complete action
+    //             setWarning(true)
+    //         }
+    //     }
+    // }, [groupCultureSettings])
 
     // Blur the text field
     const onKeyDown = (event) => {
@@ -78,27 +79,35 @@ export default function CultureSettings({ groupInfo, clanId }) {
         <>
             <Div p={{ x: "1rem", y: "0.5rem" }} d="flex" flexDir="column" flexWrap="wrap">
                 <Text textColor="cbWhite" textSize="heading">
-                    Culture Settings
+                    General Settings
                 </Text>
                 <Div m={{ x: "1rem" }}>
                     <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
-                        Clan Name
+                        Clan Join Options
                     </Text>
-                    <Input
-                        placeholder={'Clan Name'}
+                    <Dropdown
+                        isOpen={clanJoinOptionsOpen}
+                        onClick={() => setClanJoinOptionsOpen(!clanJoinOptionsOpen)}
+                        menu={
+                            <Div>
+                                test
+                            </Div>
+                        }
                         m={{ x: "1rem", b: "1rem" }}
                         bg='cbGrey1'
+                        focusBg="cbGrey1"
                         border="0px solid"
                         textColor="cbWhite"
                         textSize="subheader"
                         fontFamily="Primary"
-                        value={clanName}
-                        onChange={e => setClanName((e.target.value).slice(0, 25))}
-                        onKeyDown={onKeyDown}
-                    />
+                        openSuffix={<Icon name="Up" color="info700" size="16px" />}
+                        closeSuffix={<Icon name="Down" color="info700" size="16px" />}
+                    >
+                        Customized Dropdown
+                    </Dropdown>
 
                     <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
-                        Callsign
+                        New Member Level
                     </Text>
                     <Input
                         placeholder={'Callsign'}
@@ -114,7 +123,7 @@ export default function CultureSettings({ groupInfo, clanId }) {
                     />
 
                     <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
-                        Clan Motto
+                        Clan Language
                     </Text>
                     <Input
                         placeholder={'Clan Motto'}
@@ -130,7 +139,7 @@ export default function CultureSettings({ groupInfo, clanId }) {
                     />
 
                     <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
-                        About Us
+                        Level Required for Guided Games
                     </Text>
                     <Textarea
                         placeholder={'About Us'}
@@ -167,7 +176,7 @@ export default function CultureSettings({ groupInfo, clanId }) {
                 ERROR
                 <br />
                 <br />
-                Please wait {groupCultureSettings?.MessageData?.ThrottleSecondsRemaining} minutes before trying again.
+                {/* Please wait {groupCultureSettings?.MessageData?.ThrottleSecondsRemaining} minutes before trying again. */}
             </WarningNotification>
         </>
     )
