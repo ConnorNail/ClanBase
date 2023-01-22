@@ -5,7 +5,6 @@ async function refreshAccessToken(token) {
   console.log("Refreshing Access Token")
 
   try {
-    console.log(process.env.NEXT_PUBLIC_BUNGIE_API_KEY)
 
     const encodedString = 'MzczMTY6RmxMU3F2MzdSeTNIaTR4NERpclRrM2dpc1FXQWNURmloZmlKSFQ2U1B0OA=='//Buffer.from(process.env.NEXT_PUBLIC_BUNGIE_CLIENT_ID + ':' + process.env.NEXT_PUBLIC_BUNGIE_SECRET).toString('base64');
 
@@ -74,6 +73,9 @@ export const authOptions = {
       session.user.id = token.id;
       session.accessToken = token.accessToken;
 
+
+      console.log(process.env.NEXT_PUBLIC_BUNGIE_API_KEY)
+      console.log(session)
       session.user = token.user
       session.error = token.error
 
