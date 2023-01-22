@@ -75,6 +75,7 @@ const CompareSearchBar = () => {
             textColor="cbWhite"
             focusTextColor="cbWhite"
             hoverTextColor="cbWhite"
+            fontFamily="Primary"
             h="2rem"
             onInput={e => { setInput(e.target.value) }}
             onKeyPress={e => {

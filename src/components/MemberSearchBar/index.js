@@ -84,6 +84,7 @@ const MemberSearchBar = ({ memberInfo, memberProfiles, setMemberIndex }) => {
                             textColor="cbWhite"
                             focusTextColor="cbWhite"
                             hoverTextColor="cbWhite"
+                            fontFamily="Primary"
                             h="2rem"
                             value={input}
                             onChange={e => { handleSearch(e) }}
