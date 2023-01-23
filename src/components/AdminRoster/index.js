@@ -9,8 +9,6 @@ const AdminRoster = ({ clanId, curentMemberType }) => {
     const memberList = members?.Response?.results
     const memberCount = memberList ? memberList.length : null
 
-    console.log(members)
-
     // Sort into roles
     let memberBeginnerList
     let memberMemberList

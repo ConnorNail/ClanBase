@@ -35,6 +35,14 @@ export default function Admin() {
 
     // If true then admins can send invites
     const invitePermissionOverride = clanInfo?.Response?.detail?.features?.invitePermissionOverride
+    const updateCulturePermissionOverride = clanInfo?.Response?.detail?.features?.updateCulturePermissionOverride
+
+    // If the clan required approval show pending
+    const canSeePending = clanInfo?.Response?.detail?.membershipOption == 0 ? true : false
+
+    // Allow invites
+    const canSendInvites = !invitePermissionOverride && memberType == 3 ? false : true
+    const canEditCulture = !updateCulturePermissionOverride && memberType == 3 ? false : true
 
     const adminDetails = () => {
         if (memberType || memberType == 0) {
@@ -88,22 +96,50 @@ export default function Admin() {
                 <AdminMenuButtons toggleValue={'General'} m={{ r: "0.5rem" }}>
                     General
                 </AdminMenuButtons>
-                <Div bg="cbWhite" h="3rem" w="0.1rem" />
-                <AdminMenuButtons toggleValue={'Invites'} m={{ x: "0.5rem" }}>
-                    Invitations
-                </AdminMenuButtons>
+                {canSeePending ?
+                    <>
+                        <Div bg="cbWhite" h="3rem" w="0.1rem" />
+                        <AdminMenuButtons toggleValue={'Pending'} m={{ x: "0.5rem" }}>
+                            Pending
+                        </AdminMenuButtons>
+                    </>
+                    :
+                    null
+                }
+                {canSendInvites ?
+                    <>
+                        <Div bg="cbWhite" h="3rem" w="0.1rem" />
+                        <AdminMenuButtons toggleValue={'Invites'} m={{ x: "0.5rem" }}>
+                            Invitations
+                        </AdminMenuButtons>
+                    </>
+                    :
+                    null
+                }
                 <Div bg="cbWhite" h="3rem" w="0.1rem" />
                 <AdminMenuButtons toggleValue={'Bans'} m={{ x: "0.5rem" }}>
                     Ban List
                 </AdminMenuButtons>
-                <Div bg="cbWhite" h="3rem" w="0.1rem" />
-                <AdminMenuButtons toggleValue={'Culture'} m={{ x: "0.5rem" }}>
-                    Culture Settings
-                </AdminMenuButtons>
-                <Div bg="cbWhite" h="3rem" w="0.1rem" />
-                <AdminMenuButtons toggleValue={'Settings'} m={{ x: "0.5rem" }}>
-                    General Settings
-                </AdminMenuButtons>
+                {canEditCulture ?
+                    <>
+                        <Div bg="cbWhite" h="3rem" w="0.1rem" />
+                        <AdminMenuButtons toggleValue={'Culture'} m={{ x: "0.5rem" }}>
+                            Culture Settings
+                        </AdminMenuButtons>
+                    </>
+                    :
+                    null
+                }
+                {memberType == 5 ?
+                    <>
+                        <Div bg="cbWhite" h="3rem" w="0.1rem" />
+                        <AdminMenuButtons toggleValue={'Settings'} m={{ x: "0.5rem" }}>
+                            General Settings
+                        </AdminMenuButtons>
+                    </>
+                    :
+                    null
+                }
             </Div>
         )
     }
@@ -115,8 +151,17 @@ export default function Admin() {
                     <Div d="flex">
                         <Col>
                             <InfoBox bg={'cbGrey2'}>
+                                <AdminRoster clanId={clanId} curentMemberType={memberType} />
+                            </InfoBox>
+                        </Col>
+                    </Div>
+                )
+            case 'Pending':
+                return (
+                    <Div d="flex">
+                        <Col>
+                            <InfoBox bg={'cbGrey2'}>
                                 <PendingMembers clanId={clanId} />
-                                <AdminRoster clanId={clanId} curentMemberType={memberType}/>
                             </InfoBox>
                         </Col>
                     </Div>
