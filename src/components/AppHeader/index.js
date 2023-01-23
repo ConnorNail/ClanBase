@@ -19,7 +19,7 @@ const AppHeader = () => {
                     <Col size="flex">
                         <Div>
                             <Button m="1rem" h="auto" w="6rem" hoverShadow="4" p="0rem" bg="none" onClick={() => router.push("/")}>
-                                <Image src="../clanbaseLogo.svg" />
+                                <Image src="../clanbaseLogo.svg" alt="ClanBase Logo"/>
                             </Button>
                         </Div>
                     </Col>

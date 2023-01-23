@@ -1,21 +1,33 @@
-import { Input, Icon, Dropdown, Div, Textarea, Text, Inpu, Button } from "atomize";
+import { Input, Icon, Dropdown, Div, Textarea, Text, Anchor, Button } from "atomize";
 import React, { useState, useEffect } from 'react';
 import editGroupCultureSettings from "../../functions/editGroupCultureSettings";
 import WarningNotification from "../WarningNotification";
 import SuccessNotification from "../SuccessNotification";
+import getAvailableLocales from "../../functions/getAvailableLocales";
+import DropdownSelect from "../DropdownSelect";
+import CustomCheckbox from "../CustomCheckbox";
+import editGroupGeneralSettings from "../../functions/editGroupGeneralSettings";
 
 export default function GeneralSettings({ groupInfo, clanId }) {
     const [pendingSave, setPendingSave] = useState(false)
-    const [clanJoinOptionsOpen, setClanJoinOptionsOpen] = useState(false)
-    const [clanJoinOptions, setClanJoinOptions] = useState(groupInfo?.Response?.results[0]?.group?.name)
-    const [callsign, setCallsign] = useState(groupInfo?.Response?.results[0]?.group?.clanInfo?.clanCallsign)
-    const [motto, setMotto] = useState(groupInfo?.Response?.results[0]?.group?.motto)
-    const [about, setAbout] = useState(groupInfo?.Response?.results[0]?.group?.about)
+
+    const [clanJoinOptions, setClanJoinOptions] = useState(groupInfo?.Response?.results[0]?.group?.membershipOption)
+    const [newMemberOptions, setNewMemberOptions] = useState(groupInfo?.Response?.results[0]?.group?.features?.joinLevel)
+    const [language, setLanguage] = useState(groupInfo?.Response?.results[0]?.group?.locale)
+    const [gg, setGG] = useState(groupInfo?.Response?.results[0]?.group?.features?.hostGuidedGamePermissionOverride)
+
+    const [adminSendInvites, setAdminSendInvites] = useState(groupInfo?.Response?.results[0]?.group?.features?.invitePermissionOverride)
+    const [adminEditCulture, setAdminEditCulture] = useState(groupInfo?.Response?.results[0]?.group?.features?.updateCulturePermissionOverride)
+    const [adminsEditBanner, setAdminsEditBanner] = useState(groupInfo?.Response?.results[0]?.group?.features?.updateBannerPermissionOverride)
+
     const [success, setSuccess] = useState(false);
     const [warning, setWarning] = useState(false);
     const [throttle, setThrottle] = useState(false);
 
-    // Persist clan name in local storage
+    // Get languages
+    const allLanguages = getAvailableLocales()
+
+    // Persist join options in local storage
     useEffect(() => {
         const data = window.localStorage.getItem('JOIN_OPTIONS');
         if (data !== null) setClanJoinOptions(JSON.parse(data));
@@ -24,56 +36,145 @@ export default function GeneralSettings({ groupInfo, clanId }) {
         window.localStorage.setItem('JOIN_OPTIONS', JSON.stringify(clanJoinOptions));
     }, [clanJoinOptions]);
 
-    // Persist callsign in local storage
+    // Persist new member options in local storage
     useEffect(() => {
-        const data = window.localStorage.getItem('CALLSIGN');
-        if (data !== null) setCallsign(JSON.parse(data));
+        const data = window.localStorage.getItem('NEW_MEMBER_OPTIONS');
+        if (data !== null) setNewMemberOptions(JSON.parse(data));
     }, []);
     useEffect(() => {
-        window.localStorage.setItem('CALLSIGN', JSON.stringify(callsign));
-    }, [callsign]);
+        window.localStorage.setItem('NEW_MEMBER_OPTIONS', JSON.stringify(newMemberOptions));
+    }, [newMemberOptions]);
 
-    // Persist motto in local storage
+    // Persist language in local storage
     useEffect(() => {
-        const data = window.localStorage.getItem('MOTTO');
-        if (data !== null) setMotto(JSON.parse(data));
+        const data = window.localStorage.getItem('LANGUAGE');
+        if (data !== null) setLanguage(JSON.parse(data));
     }, []);
     useEffect(() => {
-        window.localStorage.setItem('MOTTO', JSON.stringify(motto));
-    }, [motto]);
+        window.localStorage.setItem('LANGUAGE', JSON.stringify(language));
+    }, [language]);
 
     // Persist about us in local storage
     useEffect(() => {
-        const data = window.localStorage.getItem('ABOUT_US');
-        if (data !== null) setAbout(JSON.parse(data));
+        const data = window.localStorage.getItem('GG_OPTIONS');
+        if (data !== null) setGG(JSON.parse(data));
     }, []);
     useEffect(() => {
-        window.localStorage.setItem('ABOUT_US', JSON.stringify(about));
-    }, [about]);
+        window.localStorage.setItem('GG_OPTIONS', JSON.stringify(gg));
+    }, [gg]);
 
-    // const groupCultureSettings = editGroupCultureSettings(clanName, callsign, motto, about, clanId, pendingSave, setPendingSave)
+    // Persist admin invite options in local storage
+    useEffect(() => {
+        const data = window.localStorage.getItem('ADMIN_INVITE_OPTIONS');
+        if (data !== null) setAdminSendInvites(JSON.parse(data));
+    }, []);
+    useEffect(() => {
+        window.localStorage.setItem('ADMIN_INVITE_OPTIONS', JSON.stringify(adminSendInvites));
+    }, [adminSendInvites]);
 
-    // useEffect(() => {
-    //     if (groupCultureSettings) {
-    //         if (groupCultureSettings?.ErrorCode == 1) {
-    //             // Successful
-    //             setSuccess(true)
-    //         } else if (groupCultureSettings?.MessageData?.ThrottleSecondsRemaining != 0) {
-    //             // Time remaining before next request can be made
-    //             setThrottle(true)
-    //         } else {
-    //             // Unable to complete action
-    //             setWarning(true)
-    //         }
-    //     }
-    // }, [groupCultureSettings])
+    // Persist admin edit culture options in local storage
+    useEffect(() => {
+        const data = window.localStorage.getItem('ADMIN_CULTURE_OPTIONS');
+        if (data !== null) setAdminEditCulture(JSON.parse(data));
+    }, []);
+    useEffect(() => {
+        window.localStorage.setItem('ADMIN_CULTURE_OPTIONS', JSON.stringify(adminEditCulture));
+    }, [adminEditCulture]);
 
-    // Blur the text field
-    const onKeyDown = (event) => {
-        if (event.key === "Enter" || event.key === "Escape") {
-            event.target.blur();
+    // Persist admin edit banner options in local storage
+    useEffect(() => {
+        const data = window.localStorage.getItem('ADMIN_BANNER_OPTIONS');
+        if (data !== null) setAdminsEditBanner(JSON.parse(data));
+    }, []);
+    useEffect(() => {
+        window.localStorage.setItem('ADMIN_BANNER_OPTIONS', JSON.stringify(adminsEditBanner));
+    }, [adminsEditBanner]);
+
+    const { generalSettings, founderSettings } = editGroupGeneralSettings(clanJoinOptions, newMemberOptions, language, gg, adminSendInvites, adminEditCulture, adminsEditBanner, clanId, pendingSave, setPendingSave)
+
+    useEffect(() => {
+        if (generalSettings || founderSettings) {
+            if (generalSettings?.ErrorCode == 1 && founderSettings?.ErrorCode == 1) {
+                // Successful
+                setSuccess(true)
+            } else if (generalSettings?.MessageData?.ThrottleSecondsRemaining != 0 || founderSettings?.MessageData?.ThrottleSecondsRemaining != 0) {
+                // Time remaining before next request can be made
+                setThrottle(true)
+            } else {
+                // Unable to complete action
+                setWarning(true)
+            }
+        }
+    }, [generalSettings, founderSettings])
+
+    const displayJoinOptions = (value) => {
+        switch (value) {
+            case 0:
+                return 'Approval Required'
+            case 1:
+                return 'Open Membership'
+            case 2:
+                return 'Invite Only'
         }
     }
+
+    const displayMembershipLevel = (value) => {
+        switch (value) {
+            case 1:
+                return 'Beginner'
+            case 2:
+                return 'Member'
+        }
+    }
+
+    const displayLanguages = (value) => {
+        switch (value) {
+            case "de":
+                return "Deutsch"
+            case "en":
+                return "English"
+            case "es":
+                return "Español"
+            case "es-mx":
+                return "Español (México)"
+            case "fr":
+                return "Français"
+            case "it":
+                return "Italiano"
+            case "ja":
+                return "日本語"
+            case "ko":
+                return "한국어"
+            case "pl":
+                return "Polski"
+            case "pt-br":
+                return "Português (Brasil)"
+            case "ru":
+                return "Русский"
+            case "zh-chs":
+                return "简体中文"
+            case "zh-cht":
+                return "繁體中文"
+        }
+    }
+
+    const joinOptions = [0, 1, 2]
+
+    const memberOptionsList = [1, 2]
+
+    const languageList = (language) => {
+        if (language) {
+            let lans = []
+            Object.keys(language).forEach(key => {
+                lans.push(language[key])
+            })
+            return lans
+        } else {
+            return null
+        }
+    }
+
+    const ggList = [1, 2]
 
     return (
         <>
@@ -82,78 +183,40 @@ export default function GeneralSettings({ groupInfo, clanId }) {
                     General Settings
                 </Text>
                 <Div m={{ x: "1rem" }}>
-                    <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
-                        Clan Join Options
-                    </Text>
-                    <Dropdown
-                        isOpen={clanJoinOptionsOpen}
-                        onClick={() => setClanJoinOptionsOpen(!clanJoinOptionsOpen)}
-                        menu={
-                            <Div>
-                                test
-                            </Div>
-                        }
-                        m={{ x: "1rem", b: "1rem" }}
-                        bg='cbGrey1'
-                        focusBg="cbGrey1"
-                        border="0px solid"
-                        textColor="cbWhite"
-                        textSize="subheader"
-                        fontFamily="Primary"
-                        openSuffix={<Icon name="Up" color="info700" size="16px" />}
-                        closeSuffix={<Icon name="Down" color="info700" size="16px" />}
-                    >
-                        Customized Dropdown
-                    </Dropdown>
+                    <Div m={{ b: "1.5rem" }}>
+                        <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
+                            Clan Join Options
+                        </Text>
+                        {/* <DropdownSelect open={clanJoinOptionsOpen} setOpen={setClanJoinOptionsOpen} label={displayJoinOptions(clanJoinOptions)} items={joinOptionsMenu()} /> */}
+                        <DropdownSelect value={clanJoinOptions} setValue={setClanJoinOptions} list={joinOptions} display={displayJoinOptions} />
 
-                    <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
-                        New Member Level
-                    </Text>
-                    <Input
-                        placeholder={'Callsign'}
-                        m={{ x: "1rem", b: "1rem" }}
-                        bg='cbGrey1'
-                        border="0px solid"
-                        textColor="cbWhite"
-                        textSize="subheader"
-                        fontFamily="Primary"
-                        value={callsign}
-                        onChange={e => setCallsign((e.target.value).slice(0, 4))}
-                        onKeyDown={onKeyDown}
-                    />
+                        <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
+                            New Member Level
+                        </Text>
+                        <DropdownSelect value={newMemberOptions} setValue={setNewMemberOptions} list={memberOptionsList} display={displayMembershipLevel} />
 
-                    <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
-                        Clan Language
-                    </Text>
-                    <Input
-                        placeholder={'Clan Motto'}
-                        m={{ x: "1rem", b: "1rem" }}
-                        bg='cbGrey1'
-                        border="0px solid"
-                        textColor="cbWhite"
-                        textSize="subheader"
-                        fontFamily="Primary"
-                        value={motto}
-                        onChange={e => setMotto((e.target.value).slice(0, 100))}
-                        onKeyDown={onKeyDown}
-                    />
+                        <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
+                            Clan Language
+                        </Text>
+                        <DropdownSelect value={language} setValue={setLanguage} list={languageList(allLanguages?.Response)} display={displayLanguages} />
 
-                    <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
-                        Level Required for Guided Games
-                    </Text>
-                    <Textarea
-                        placeholder={'About Us'}
-                        m={{ x: "1rem", b: "1rem" }}
-                        bg='cbGrey1'
-                        border="0px solid"
-                        textColor="cbWhite"
-                        textSize="subheader"
-                        maxW="5rem"
-                        fontFamily="Primary"
-                        value={about}
-                        onChange={e => setAbout((e.target.value).slice(0, 1000))}
-                        onKeyDown={onKeyDown}
-                    />
+                        <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
+                            Level Required for Guided Games
+                        </Text>
+                        <DropdownSelect value={gg} setValue={setGG} list={ggList} display={displayMembershipLevel} />
+                    </Div>
+
+                    <Div>
+                        <CustomCheckbox toggleState={adminSendInvites} setToggleState={setAdminSendInvites}>
+                            Allow Admins to Send Clan Invites
+                        </CustomCheckbox>
+                        <CustomCheckbox toggleState={adminEditCulture} setToggleState={setAdminEditCulture}>
+                            Allow Admins to Edit Clan Culture Settings
+                        </CustomCheckbox>
+                        <CustomCheckbox toggleState={adminsEditBanner} setToggleState={setAdminsEditBanner}>
+                            Allow Admins to Edit the Clan Banner
+                        </CustomCheckbox>
+                    </Div>
 
                     <Button bg="cbGrey1" textColor="cbWhite" hoverTextColor="cbBlue" textSize="subheader" m={{ t: "1.5rem" }} onClick={() => setPendingSave(true)}>
                         Save

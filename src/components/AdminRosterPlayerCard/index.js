@@ -98,7 +98,7 @@ export default function AdminRosterPlayerCard({ clanId, playerInfo, curentMember
         <>
             <Div bg="cbGrey1" rounded="md" m="0.5rem" shadow="2" hoverShadow="4">
                 <Row d="flex" align="center">
-                    <Image h="3rem" w="auto" rounded="md" src={pfp()} />
+                    <Image h="3rem" w="auto" rounded="md" src={pfp()} alt=""/>
                     <Text textColor="cbWhite" textSize="subheader" m={{ y: "0", l: "0.5rem" }}>
                         {playerInfo?.destinyUserInfo?.bungieGlobalDisplayName}
                     </Text>
