@@ -1,5 +1,5 @@
 import { Input, Icon, Dropdown, Div, Anchor, Col, Text, Image } from "atomize";
-import getBannedMembers from '../../functions/getBannedMembers';
+import getBannedMembers from '../../functions/useGetBannedMembers';
 import BannedPlayerCard from '../BannedPlayerCard';
 
 const BannedMembers = ({ clanId }) => {

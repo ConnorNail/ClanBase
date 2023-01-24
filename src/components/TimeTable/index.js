@@ -1,5 +1,5 @@
 import Table from '../../components/Table';
-import setupMemberTimeTable from '../../functions/setupMemberTimeTable';
+import setupMemberTimeTable from '../../functions/useSetupMemberTimeTable';
 import { Div, Icon } from "atomize";
 
 export default function TimeTable({ memberSeasonalTime }) {

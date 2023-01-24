@@ -1,6 +1,6 @@
 import { Div, Icon, Image } from "atomize";
-import getClanInfo from "../../functions/getClanInfo";
-import getClanBanner from "../../functions/getClanBanner";
+import getClanInfo from "../../functions/useGetClanInfo";
+import getClanBanner from "../../functions/useGetClanBanner";
 
 const ClanBannerSimple = ({ clanId }) => {
     const clanInfo = getClanInfo(clanId)

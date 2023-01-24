@@ -1,6 +1,6 @@
 import { Text, Div, Image, Icon, Row, Col } from "atomize";
-import getClanWeeklyRewards from "../../functions/getClanWeeklyRewards";
-import getClanEngramMilestone from "../../functions/getClanEngramMilestone";
+import getClanWeeklyRewards from "../../functions/useGetClanWeeklyRewards";
+import getClanEngramMilestone from "../../functions/useGetClanEngramMilestone";
 
 export default function ClanEngrams({ clanId }) {
 

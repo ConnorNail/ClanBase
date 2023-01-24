@@ -1,6 +1,6 @@
 import { Input, Icon, Dropdown, Div, Textarea, Col, Text, Inpu, Button } from "atomize";
 import React, { useState, useEffect } from 'react';
-import editGroupCultureSettings from "../../functions/editGroupCultureSettings";
+import editGroupCultureSettings from "../../functions/useEditGroupCultureSettings";
 import WarningNotification from "../WarningNotification";
 import SuccessNotification from "../SuccessNotification";
 

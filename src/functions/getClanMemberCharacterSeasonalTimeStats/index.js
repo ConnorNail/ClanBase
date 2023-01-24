@@ -1,7 +1,7 @@
-import getCurrentSeasonHash from './getCurrentSeasonHash';
-import getSeasonInfo from './getSeasonInfo';
+import getCurrentSeasonHash from './useGetCurrentSeasonHash';
+import getSeasonInfo from './useGetSeasonInfo';
 import createSubDateArray from './createSubDateArray';
-import getAllCharacterStats from './getAllCharacterStats';
+import getAllCharacterStats from './useGetAllCharacterStats';
 import calcMemberSeasonalTime from '../calcMemberSeasonalTime';
 import calcMemberSeasonalActivityTime from '../calcMemberSeasonalActivityTime';
 

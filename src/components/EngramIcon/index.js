@@ -1,5 +1,5 @@
 import { Image, Icon } from "atomize";
-import getEngramIcon from "../../functions/getEngramIcon";
+import getEngramIcon from "../../functions/useGetEngramIcon";
 
 const EngramIcon = () => {
     const engramItem = getEngramIcon(66825403)

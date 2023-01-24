@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Div, Text, Image } from "atomize";
-import getPlayerProfile from '../../functions/getPlayerProfile';
-import getBungieNetUserById from '../../functions/getBungieNetUserById';
-import cancelIndividualGroupInvite from '../../functions/cancelIndividualGroupInvite';
+import cancelIndividualGroupInvite from '../../functions/useCancelIndividualGroupInvite';
 
 function CancelInviteButton({ membershipId, memberType, clanId }) {
     const [cancelInvite, setCancelInvite] = useState(false);

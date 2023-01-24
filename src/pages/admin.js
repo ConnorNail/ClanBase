@@ -1,13 +1,10 @@
 import DefaultTemplate from '../components/DefaultLayout'
-import ClanCard from '../components/ClanCard'
 import InfoBox from '../components/InfoBox'
-import CompareSearchBar from '../components/CompareSearchBar'
-import getClanInfo from "../functions/getClanInfo";
-import { useRouter } from 'next/router'
+import getClanInfo from "../functions/useGetClanInfo";
 import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
 import { useSession, signIn, signOut } from "next-auth/react"
 import getIdsForCurrentUser from "../functions/getIdsForCurrentUser";
-import getGroupsForMember from "../functions/getGroupsForMember";
+import getGroupsForMember from "../functions/useGetGroupsForMember";
 import findMemberType from '../functions/findMemberType';
 import InvitedMembers from '../components/InvitedMembers';
 import PlayerSearchBar from '../components/PlayerSearchBar';

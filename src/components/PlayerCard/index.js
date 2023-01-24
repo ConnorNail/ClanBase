@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Notification, Icon, Div, Text, Image } from "atomize";
-import getPlayerProfile from '../../functions/getPlayerProfile';
-import getBungieNetUserById from '../../functions/getBungieNetUserById';
+import getPlayerProfile from '../../functions/useGetPlayerProfile';
+import getBungieNetUserById from '../../functions/useGetBungieNetUserById';
 import InviteButton from '../InviteButton';
 import getRecentChar from '../../functions/getRecentChar';
 

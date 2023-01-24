@@ -1,6 +1,6 @@
 import { Text, Div, Image, Icon, Row, Col } from "atomize";
-import setupRecentMemberTable from "../../functions/setupRecentMemberTable";
-import getAllMembersProfile from "../../functions/getClanMemberProfileInfo/getAllMembersProfile";
+import setupRecentMemberTable from "../../functions/useSetupRecentMemberTable";
+import getAllMembersProfile from "../../functions/getClanMemberProfileInfo/useGetAllMembersProfile";
 import Table from "../Table";
 
 export default function RecentlyJoinClanMembersTable({ clanMemberInfo }) {

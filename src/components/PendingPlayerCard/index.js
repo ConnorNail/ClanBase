@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Icon, Div, Text, Image } from "atomize";
-import getPlayerProfile from '../../functions/getPlayerProfile';
-import getBungieNetUserById from '../../functions/getBungieNetUserById';
-import CancelInviteButton from '../CancelInviteButton';
+import getPlayerProfile from '../../functions/useGetPlayerProfile';
 import getRecentChar from '../../functions/getRecentChar';
-import cancelIndividualGroupInvite from '../../functions/cancelIndividualGroupInvite';
-import approvePendingMembers from '../../functions/approvePendingMembers';
-import denyPendingMembers from '../../functions/denyPendingMembers';
+import approvePendingMembers from '../../functions/useApprovePendingMembers';
+import denyPendingMembers from '../../functions/useDenyPendingMembers';
 import CenterModal from '../CenterModal';
-import banMembers from '../../functions/banMember';
+import banMembers from '../../functions/useBanMember';
 
 export default function PendingPlayerCard({ clanId, playerInfo }) {
     const [banModal, setBanModal] = useState(false)

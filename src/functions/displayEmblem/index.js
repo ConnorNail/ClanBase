@@ -29,14 +29,14 @@ function displayEmblem(charInfo) {
     if (typeof path !== 'undefined') {
         return (
             <Div d="flex" flexDir="column" textAlign="center">
-                <Image h="2rem" w="auto" src={'https://www.bungie.net/' + path} />
+                <Image h="2rem" w="auto" src={'https://www.bungie.net/' + path} alt=""/>
             </Div>
         )
     } else {
         // Else display default emblem "Make Us Proud"
         return (
             <Div d="flex" flexDir="column" textAlign="center">
-                <Image h="2rem" w="auto" src={'https://www.bungie.net/common/destiny2_content/icons/871fa953ea81308c71bc3b9eb3bcd509.jpg'} />
+                <Image h="2rem" w="auto" src={'https://www.bungie.net/common/destiny2_content/icons/871fa953ea81308c71bc3b9eb3bcd509.jpg'} alt=""/>
             </Div>
         )
     }

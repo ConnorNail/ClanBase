@@ -1,12 +1,11 @@
 import { Input, Icon, Dropdown, Div, Textarea, Text, Anchor, Button } from "atomize";
 import React, { useState, useEffect } from 'react';
-import editGroupCultureSettings from "../../functions/editGroupCultureSettings";
 import WarningNotification from "../WarningNotification";
 import SuccessNotification from "../SuccessNotification";
-import getAvailableLocales from "../../functions/getAvailableLocales";
+import getAvailableLocales from "../../functions/useGetAvailableLocales";
 import DropdownSelect from "../DropdownSelect";
 import CustomCheckbox from "../CustomCheckbox";
-import editGroupGeneralSettings from "../../functions/editGroupGeneralSettings";
+import editGroupGeneralSettings from "../../functions/useEditGroupGeneralSettings";
 
 export default function GeneralSettings({ groupInfo, clanId }) {
     const [pendingSave, setPendingSave] = useState(false)

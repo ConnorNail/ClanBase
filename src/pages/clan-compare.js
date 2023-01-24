@@ -2,7 +2,6 @@ import DefaultTemplate from '../components/DefaultLayout'
 import ClanCard from '../components/ClanCard'
 import InfoBox from '../components/InfoBox'
 import CompareSearchBar from '../components/CompareSearchBar'
-import getClanInfo from "../functions/getClanInfo";
 import { useRouter } from 'next/router'
 import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
 

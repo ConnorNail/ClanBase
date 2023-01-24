@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Input, Icon } from "atomize";
 import { useRouter } from 'next/router';
-import getHeaders from '../../functions/getHeaders'
+import getHeaders from '../../functions/useGetHeaders'
 
 const SearchBar = () => {
     const [input, setInput] = useState('');

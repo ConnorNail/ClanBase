@@ -1,6 +1,6 @@
 import { Input, Icon, Dropdown, Div, Anchor, Col, Text, Image } from "atomize";
 import BannedPlayerCard from '../BannedPlayerCard';
-import getClanMemberInfo from "../../functions/getClanMemberProfileInfo/getClanMemberInfo";
+import getClanMemberInfo from "../../functions/getClanMemberProfileInfo/useGetClanMemberInfo";
 import AdminRosterPlayerCard from "../AdminRosterPlayerCard";
 
 const AdminRoster = ({ clanId, curentMemberType }) => {

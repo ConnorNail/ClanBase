@@ -1,4 +1,4 @@
-import getAdminsAndFounderOfGroup from "../getAdminsAndFounderOfGroup"
+import getAdminsAndFounderOfGroup from "../useGetAdminsAndFounderOfGroup"
 
 export default function findMemberType(clanId, currentIds) {
     // Get a list of the admins and founder

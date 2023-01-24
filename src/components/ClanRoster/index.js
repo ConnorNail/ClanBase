@@ -1,6 +1,6 @@
 import { Text, Div, Image, Icon, Row, Col } from "atomize";
 import Table from "../Table";
-import setupRosterTable from "../../functions/setupRosterTable";
+import setupRosterTable from "../../functions/useSetupRosterTable";
 
 export default function ClanRoster({ clanMemberInfo, clanMemberProfiles, memberIndex, setMemberIndex }) {
 

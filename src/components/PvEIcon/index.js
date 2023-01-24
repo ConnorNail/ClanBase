@@ -1,5 +1,5 @@
 import { Image, Icon } from "atomize";
-import getActivityIcon from "../../functions/getActivityIcon";
+import getActivityIcon from "../../functions/useGetActivityIcon";
 
 const PvEIcon = () => {
     const activityIcon = getActivityIcon(4110605575)

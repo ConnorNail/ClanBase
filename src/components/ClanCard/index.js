@@ -1,10 +1,10 @@
 import { Div, Text, Row, Col, Button, Icon } from "atomize";
 import InfoBox from '../InfoBox'
 import { useRouter } from 'next/router';
-import getClanInfo from "../../functions/getClanInfo";
-import getClanMemberInfo from "../../functions/getClanMemberProfileInfo/getClanMemberInfo";
-import getClanMembersAllTimeStats from "../../functions/getClanMembersAllTimeStats";
-import getAllMembersProfile from '../../functions/getClanMemberProfileInfo/getAllMembersProfile';
+import getClanInfo from "../../functions/useGetClanInfo";
+import getClanMemberInfo from "../../functions/getClanMemberProfileInfo/useGetClanMemberInfo";
+import getClanMembersAllTimeStats from "../../functions/useGetClanMembersAllTimeStats";
+import getAllMembersProfile from '../../functions/getClanMemberProfileInfo/useGetAllMembersProfile';
 import Bracket from "../BracketSimple";
 
 const ClanCard = ({ clanId, stats }) => {

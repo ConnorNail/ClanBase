@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Row, Div, Text, Image } from "atomize";
-import getPlayerProfile from '../../functions/getPlayerProfile';
-import getBungieNetUserById from '../../functions/getBungieNetUserById';
-import CancelInviteButton from '../CancelInviteButton';
+import getPlayerProfile from '../../functions/useGetPlayerProfile';
 import getRecentChar from '../../functions/getRecentChar';
-import cancelIndividualGroupInvite from '../../functions/cancelIndividualGroupInvite';
-import approvePendingMembers from '../../functions/approvePendingMembers';
-import denyPendingMembers from '../../functions/denyPendingMembers';
 import CenterModal from '../CenterModal';
-import banMembers from '../../functions/banMember';
-import kickMember from '../../functions/kickMember';
-import editGroupMembership from '../../functions/editGroupMembership';
+import banMembers from '../../functions/useBanMember';
+import kickMember from '../../functions/useKickMember';
+import editGroupMembership from '../../functions/useEditGroupMembership';
 import SuccessNotification from '../SuccessNotification';
 import WarningNotification from '../WarningNotification';
-import promoteToFounder from '../../functions/promoteToFounder';
 
 export default function AdminRosterPlayerCard({ clanId, playerInfo, curentMemberType, mutate }) {
     const [banModal, setBanModal] = useState(false)

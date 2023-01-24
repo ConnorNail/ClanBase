@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Input, Icon, Dropdown, Div, Anchor, Col, Text, Image } from "atomize";
-import getPlayer from '../../functions/getPlayer';
-import getHeaders from '../../functions/getHeaders'
+import getPlayer from '../../functions/useGetPlayer';
+import getHeaders from '../../functions/useGetHeaders'
 import useSWRMutation from 'swr/mutation'
 import PlayerCard from '../PlayerCard';
-import getInvitedIndividuals from '../../functions/getInvitedIndividuals';
+import getInvitedIndividuals from '../../functions/useGetInvitedIndividuals';
 import PendingPlayerCard from '../PendingPlayerCard';
-import getPendingMemberships from '../../functions/getPendingMemberships';
+import getPendingMemberships from '../../functions/useGetPendingMemberships';
 
 const PendingMembers = ({ clanId }) => {
 

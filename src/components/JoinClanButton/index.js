@@ -1,7 +1,7 @@
 import { Div, Image, Button } from "atomize";
 import { useSession } from "next-auth/react";
 import getIdsForCurrentUser from "../../functions/getIdsForCurrentUser";
-import getGroupsForMember from "../../functions/getGroupsForMember";
+import getGroupsForMember from "../../functions/useGetGroupsForMember";
 
 const JoinClanButton = ({ clanInfo }) => {
     const { data, status } = useSession()

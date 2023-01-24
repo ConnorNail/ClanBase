@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Div, Text, Image } from "atomize";
-import getPlayerProfile from '../../functions/getPlayerProfile';
-import getBungieNetUserById from '../../functions/getBungieNetUserById';
-import sendIndividualGroupInvite from '../../functions/sendIndividualGroupInvite';
+import sendIndividualGroupInvite from '../../functions/useSendIndividualGroupInvite';
 
 function InviteButton({ membershipId, memberType, clanId }) {
     const [sendInvite, setSendInvite] = useState(false);

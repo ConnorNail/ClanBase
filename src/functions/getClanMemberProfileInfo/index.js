@@ -1,5 +1,5 @@
-import getClanMemberInfo from './getClanMemberInfo';
-import getAllMembersProfile from './getAllMembersProfile';
+import getClanMemberInfo from './useGetClanMemberInfo';
+import getAllMembersProfile from './useGetAllMembersProfile';
 
 export default function getClanMemberProfileInfo(clanid) {
 

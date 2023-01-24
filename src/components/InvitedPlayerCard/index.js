@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Icon, Div, Text, Image } from "atomize";
-import getPlayerProfile from '../../functions/getPlayerProfile';
-import getBungieNetUserById from '../../functions/getBungieNetUserById';
-import CancelInviteButton from '../CancelInviteButton';
+import getPlayerProfile from '../../functions/useGetPlayerProfile';
 import getRecentChar from '../../functions/getRecentChar';
-import cancelIndividualGroupInvite from '../../functions/cancelIndividualGroupInvite';
+import cancelIndividualGroupInvite from '../../functions/useCancelIndividualGroupInvite';
 
 export default function InvitedPlayerCard({ clanId, playerInfo }) {
     const [cancelInvite, setCancelInvite] = useState(false);

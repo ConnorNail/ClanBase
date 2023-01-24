@@ -1,6 +1,6 @@
 import { Text, Div, Image, Icon, Row, Col } from "atomize";
-import getClanBannerItem from "../../functions/getClanBannerItem";
-import getClanBannerPerks from "../../functions/getClanBannerPerks";
+import getClanBannerItem from "../../functions/useGetClanBannerItem";
+import getClanBannerPerks from "../../functions/useGetClanBannerPerks";
 
 export default function ClanLevel({ memberProfiles, clanInfo }) {
 

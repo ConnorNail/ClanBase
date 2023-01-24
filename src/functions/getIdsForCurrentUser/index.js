@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import getHeaders from '../getHeaders'
+import getHeaders from '../useGetHeaders'
 
 export default function getIdsForCurrentUser(userData) {
     
