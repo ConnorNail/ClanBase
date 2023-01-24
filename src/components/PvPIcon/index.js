@@ -9,7 +9,7 @@ const PvPIcon = () => {
     return (
         <>
             {activityIcon ?
-                <Image src={iconPath} h="3rem" w="auto" m={{ b: "0.25rem" }} />
+                <Image src={iconPath} h="3rem" w="auto" m={{ b: "0.25rem" }} alt="PvP Icon"/>
                 :
                 <Icon name="Loading3" size="20px" color="cbGrey2" />}
         </>

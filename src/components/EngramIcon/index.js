@@ -9,7 +9,7 @@ const EngramIcon = () => {
     return (
         <>
             {engramItem ?
-                <Image src={iconPath} h="3rem" w="auto" m={{ b: "0.25rem" }} />
+                <Image src={iconPath} h="3rem" w="auto" m={{ b: "0.25rem" }} alt="engram"/>
                 :
                 <Icon name="Loading3" size="20px" color="cbGrey2" />}
         </>

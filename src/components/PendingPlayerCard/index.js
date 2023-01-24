@@ -56,7 +56,7 @@ export default function PendingPlayerCard({ clanId, playerInfo }) {
         <>
             {!handled ?
                 <Div bg="cbGrey1" rounded="md" m="0.5rem" d="flex" align="center" shadow="2" hoverShadow="4">
-                    <Image h="2.5rem" w="auto" rounded="md" src={pfp()} />
+                    <Image h="2.5rem" w="auto" rounded="md" src={pfp()} alt="player icon"/>
                     <Text textColor="cbWhite" textSize="paragraph" m={{ y: "0", l: "0.5rem" }}>
                         {playerInfo?.destinyUserInfo?.bungieGlobalDisplayName}
                     </Text>

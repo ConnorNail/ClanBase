@@ -42,7 +42,7 @@ export default function ClanLevel({ memberProfiles, clanInfo }) {
                 clanBannerPerks.map((perk, index) => (
                     index != 5 ?
                         <Div key={index} m={{ x: "1rem" }} w="4rem" d="flex" flexDir="column" align="center" rounded="md" border="3px solid" borderColor={levelsCompletedStyle[index]}>
-                            <Image h="3rem" w="3rem" src={urlStart + perk?.Response?.displayProperties?.icon} />
+                            <Image h="3rem" w="3rem" src={urlStart + perk?.Response?.displayProperties?.icon} alt="clan banner perks"/>
                             <Text textAlign="center" textColor="cbWhite" textSize="caption">
                                 {perk?.Response?.displayProperties?.name}
                             </Text>
