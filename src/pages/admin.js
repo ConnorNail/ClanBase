@@ -1,7 +1,7 @@
 import DefaultTemplate from '../components/DefaultLayout'
 import InfoBox from '../components/InfoBox'
 import getClanInfo from "../functions/useGetClanInfo";
-import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
+import { Button, Text, Row, Col, Div } from "atomize";
 import { useSession, signIn, signOut } from "next-auth/react"
 import getIdsForCurrentUser from "../functions/getIdsForCurrentUser";
 import getGroupsForMember from "../functions/useGetGroupsForMember";
@@ -40,36 +40,6 @@ export default function Admin() {
     // Allow invites
     const canSendInvites = !invitePermissionOverride && memberType == 3 ? false : true
     const canEditCulture = !updateCulturePermissionOverride && memberType == 3 ? false : true
-
-    const adminDetails = () => {
-        if (memberType || memberType == 0) {
-            if (memberType == 5) {
-                return (
-                    <>
-                        {/* <InvitedMembers clanId={clanId} />
-                        <PlayerSearchBar clanId={clanId} /> */}
-                        <Text textColor="cbWhite">
-                            FOUNDER SETTINGS PLACEHOLDER FOR {clanId}
-                        </Text>
-                    </>
-                )
-            } else if (memberType == 3) {
-                return (
-                    <Text textColor="cbWhite">
-                        ADMIN SETTINGS PLACEHOLDER FOR {clanId}
-                    </Text>
-                )
-            } else {
-                return (
-                    <Text textColor="cbWhite">
-                        You are not in leadership for a clan
-                    </Text>
-                )
-            }
-        } else {
-            return 'loading'
-        }
-    }
 
     function AdminMenuButtons({ children, toggleValue, m }) {
         return (
@@ -165,17 +135,13 @@ export default function Admin() {
                 )
             case 'Invites':
                 return (
-                    <Div d="flex">
-                        <Col size="4">
-                            <InfoBox bg={'cbGrey2'}>
-                                <InvitedMembers clanId={clanId} />
-                            </InfoBox>
-                        </Col>
-                        <Col>
-                            <InfoBox bg={'cbGrey2'}>
-                                <PlayerSearchBar clanId={clanId} />
-                            </InfoBox>
-                        </Col>
+                    <Div d="flex" flexDir="column">
+                        <InfoBox bg={'cbGrey2'} m={{x: "1rem", t: "1rem", b: "0.5rem"}}>
+                            <InvitedMembers clanId={clanId} />
+                        </InfoBox>
+                        <InfoBox bg={'cbGrey2'} m={{x: "1rem", t: "0.5rem", b: "1rem"}}>
+                            <PlayerSearchBar clanId={clanId} />
+                        </InfoBox>
                     </Div>
                 )
             case 'Bans':
@@ -215,9 +181,8 @@ export default function Admin() {
         <DefaultTemplate>
             <Div d="flex" justify="center">
                 <Col size="11">
-                    <InfoBox bg={'cbGrey1'}>
+                    <InfoBox bg={'cbGrey1'} minH="40rem">
                         <AdminTabs />
-
                         {status == 'authenticated' ?
                             <AdminTabContent />
                             :

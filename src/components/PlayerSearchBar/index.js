@@ -5,7 +5,7 @@ import getHeaders from '../../functions/useGetHeaders'
 import useSWRMutation from 'swr/mutation'
 import PlayerCard from '../PlayerCard';
 
-const PlayerSearchBar = ({clanId}) => {
+const PlayerSearchBar = ({ clanId }) => {
     const header = getHeaders(false)
 
     const [input, setInput] = useState('');
@@ -59,7 +59,10 @@ const PlayerSearchBar = ({clanId}) => {
     }
 
     return (
-        <Div>
+        <Div p={{ x: "1rem", y: "0.5rem" }}>
+            <Text textColor="cbWhite" textSize="heading">
+                Invite Players
+            </Text>
             <Input
                 placeholder="Guardian Name"
                 rounded="circle"
@@ -74,14 +77,17 @@ const PlayerSearchBar = ({clanId}) => {
                 value={input}
                 onChange={e => { handleSearch(e) }}
             />
-            <Div p={{ x: "1rem", y: "0.5rem" }} h="40rem" d="flex" flexDir="column" flexWrap="wrap">
-                {suggestions ? suggestions.map((suggestion, index) => (
-                    <Div key={index}>
-                        <PlayerCard clanId={clanId} playerInfo={suggestion} searchMode={searchMode}/>
-                    </Div>
-                ))
-                    :
-                    null}
+            <Div h="33rem">
+                <Div p={{ x: "1rem", y: "0.5rem" }} minW="0" d="flex" flexDir="row" flexWrap="wrap">
+                    {suggestions ? suggestions.map((suggestion, index) => (
+                        <Div key={index} style={{ flex: '0 0 33%' }}>
+                            <PlayerCard clanId={clanId} playerInfo={suggestion} searchMode={searchMode} />
+                        </Div>
+                    ))
+                        :
+                        null
+                    }
+                </Div>
             </Div>
         </Div>
     )
