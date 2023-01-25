@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next-auth/mongodb-adapter": "^1.1.1",
     "atomize": "^1.0.28",
+    "mongodb": "^4.13.0",
     "next": "^12.2.5",
-    "next-auth": "^4.18.7",
+    "next-auth": "^4.18.10",
     "prop-types": "^15.6.0",
     "react": "^18.1.0",
     "react-dom": "18.1.0",

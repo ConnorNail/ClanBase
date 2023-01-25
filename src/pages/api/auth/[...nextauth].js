@@ -1,5 +1,7 @@
 import NextAuth from "next-auth"
 import BungieProvider from "next-auth/providers/bungie";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
+import clientPromise from "./lib/mongodb"
 
 async function refreshAccessToken(token) {
   console.log("Refreshing Access Token")
@@ -67,6 +69,7 @@ export const authOptions = {
       },
     }),
   ],
+  adapter: MongoDBAdapter(clientPromise),
   callbacks: {
     async session({ session, token, user }) {
       session.user.id = token.id;
