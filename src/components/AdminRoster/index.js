@@ -72,7 +72,7 @@ const AdminRoster = ({ clanId, curentMemberType }) => {
     return (
         <Div p={{ x: "1rem", y: "0.5rem" }} d="flex" flexDir="column" flexWrap="wrap">
             <Text textColor="cbWhite" textSize="heading">
-                Roster ({memberCount ? memberCount : null}/100)
+                Roster ({memberCount ? memberCount + '/100' : <Icon name="Loading3" size="20px" color="cbWhite" />})
             </Text>
             <Roster list={memberFounderList} name={'Founder'} />
             <Roster list={memberActingFounderList} name={'Acting Founder'} />

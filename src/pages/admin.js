@@ -1,7 +1,7 @@
 import DefaultTemplate from '../components/DefaultLayout'
 import InfoBox from '../components/InfoBox'
 import useGetClanInfoImut from "../functions/useGetClanInfoImut";
-import { Button, Text, Row, Col, Div } from "atomize";
+import { Button, Text, Row, Col, Div, Dropdown, Icon, Anchor } from "atomize";
 import { useSession, signIn, signOut } from "next-auth/react"
 import getIdsForCurrentUser from "../functions/getIdsForCurrentUser";
 import getGroupsForMember from "../functions/useGetGroupsForMember";
@@ -18,11 +18,11 @@ import useGetUserInfo from '../functions/useGetUserInfo';
 
 export default function Admin() {
     const [tab, setTab] = useState('General')
+    const [showDropdown, setShowDropdown] = useState(false)
 
     const { data, status } = useSession()
 
     const userData = useGetUserInfo(status)
-    console.log(userData)
 
     const ids = getIdsForCurrentUser(userData)
     const groupInfo = getGroupsForMember(ids.membershipId, ids.membershipType)
@@ -45,15 +45,19 @@ export default function Admin() {
     const canSendInvites = !invitePermissionOverride && memberType == 3 ? false : true
     const canEditCulture = !updateCulturePermissionOverride && memberType == 3 ? false : true
 
-    function AdminMenuButtons({ children, toggleValue, m }) {
+    function AdminMenuButtons({ children, toggleValue }) {
         return (
             <Button
+                flexGrow="1"
                 bg="cbGrey2"
                 textColor={tab == toggleValue ? "cbWhite" : "cbGrey1"}
                 textSize="subheader"
                 hoverTextColor="cbWhite"
                 shadow={tab == toggleValue ? "4" : "2"}
-                hoverShadow="4" m={m}
+                hoverShadow="4"
+                m="0.5rem"
+                h="3rem"
+                style={{lineHeight: "normal"}}
                 onClick={() => setTab(toggleValue)}
             >
                 {children}
@@ -61,58 +65,80 @@ export default function Admin() {
         )
     }
 
-    function AdminTabs() {
-        return (
-            <Div d="flex" align="center">
-                <AdminMenuButtons toggleValue={'General'} m={{ r: "0.5rem" }}>
-                    General
-                </AdminMenuButtons>
-                {canSeePending ?
-                    <>
-                        <Div bg="cbWhite" h="3rem" w="0.1rem" />
-                        <AdminMenuButtons toggleValue={'Pending'} m={{ x: "0.5rem" }}>
-                            Pending
-                        </AdminMenuButtons>
-                    </>
-                    :
-                    null
-                }
-                {canSendInvites ?
-                    <>
-                        <Div bg="cbWhite" h="3rem" w="0.1rem" />
-                        <AdminMenuButtons toggleValue={'Invites'} m={{ x: "0.5rem" }}>
-                            Invitations
-                        </AdminMenuButtons>
-                    </>
-                    :
-                    null
-                }
-                <Div bg="cbWhite" h="3rem" w="0.1rem" />
-                <AdminMenuButtons toggleValue={'Bans'} m={{ x: "0.5rem" }}>
-                    Ban List
-                </AdminMenuButtons>
-                {canEditCulture ?
-                    <>
-                        <Div bg="cbWhite" h="3rem" w="0.1rem" />
-                        <AdminMenuButtons toggleValue={'Culture'} m={{ x: "0.5rem" }}>
-                            Culture Settings
-                        </AdminMenuButtons>
-                    </>
-                    :
-                    null
-                }
-                {memberType == 5 ?
-                    <>
-                        <Div bg="cbWhite" h="3rem" w="0.1rem" />
-                        <AdminMenuButtons toggleValue={'Settings'} m={{ x: "0.5rem" }}>
-                            General Settings
-                        </AdminMenuButtons>
-                    </>
-                    :
-                    null
-                }
+    function AdminDropdown({tabList}) {
+        const menuList = (
+            <Div bg="cbGrey2" m={{ t: "-0.25rem" }} rounded="0 0 5px 5px">
+                {tabList.map((tabName, index) => (
+                    <Div>
+                        <Anchor
+                        textSize="subheader"
+                        textColor="cbWhite"
+                        p={{x: "2rem", y: "0.5rem"}}
+                        onClick={() => {
+                            setShowDropdown(false)
+                            setTab(tabName)
+                        }}
+                        >
+                            {tabName}
+                        </Anchor>
+                    </Div>
+                ))}
             </Div>
         )
+
+        return (
+            <Div d={{ xs: "block", md: "none" }} m="0.5rem">
+                <Dropdown
+                    bg="cbGrey2"
+                    focusBg="cbGrey2"
+                    border="cbGrey2"
+                    h="3rem"
+                    direction="bottomright"
+                    textSize="subheader"
+                    textColor="cbWhite"
+                    isOpen={showDropdown}
+                    onClick={() => setShowDropdown(currentState => !currentState)}
+                    openSuffix={<Icon name="UpArrow" size="30px" color="gray100" />}
+                    closeSuffix={<Icon name="Menu" size="30px" color="gray100" />}
+                    menu={menuList}
+                >
+                    {tab}
+                </Dropdown>
+            </Div>
+        )
+    }
+
+    function AdminTabs({ tabList }) {
+        return (
+            <Div align="center" d={{ xs: "none", md: "flex" }}>
+                {tabList.map((tabName, index) => (
+                    <>
+                        {index != 0 ? <Div bg="cbWhite" h="3rem" w="0.1rem" /> : null}
+                        <AdminMenuButtons toggleValue={tabName}>
+                            {tabName}
+                        </AdminMenuButtons>
+                    </>
+                ))}
+            </Div>
+        )
+    }
+
+    const availableTabs = () => {
+        let tabList = ['General']
+        if (canSeePending) {
+            tabList.push('Pending')
+        }
+        if (canSendInvites) {
+            tabList.push('Invitations')
+        }
+        tabList.push('Bans')
+        if (canEditCulture) {
+            tabList.push('Culture Settings')
+        }
+        if (memberType == 5) {
+            tabList.push('General Settings')
+        }
+        return tabList
     }
 
     function AdminTabContent() {
@@ -137,7 +163,7 @@ export default function Admin() {
                         </Col>
                     </Div>
                 )
-            case 'Invites':
+            case 'Invitations':
                 return (
                     <Div d="flex" flexDir="column">
                         <InfoBox bg={'cbGrey2'} m={{ x: "1rem", t: "1rem", b: "0.5rem" }}>
@@ -158,7 +184,7 @@ export default function Admin() {
                         </Col>
                     </Div>
                 )
-            case 'Culture':
+            case 'Culture Settings':
                 return (
                     <Div d="flex">
                         <Col>
@@ -168,7 +194,7 @@ export default function Admin() {
                         </Col>
                     </Div>
                 )
-            case 'Settings':
+            case 'General Settings':
                 return (
                     <Div d="flex">
                         <Col>
@@ -188,7 +214,8 @@ export default function Admin() {
                     <InfoBox bg={'cbGrey1'} minH="40rem">
                         {clanId && groupInfo ?
                             <>
-                                <AdminTabs />
+                                <AdminTabs tabList={availableTabs()} />
+                                <AdminDropdown tabList={availableTabs()}/>
                                 {status == 'authenticated' ?
                                     <AdminTabContent />
                                     :

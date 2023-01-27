@@ -92,17 +92,17 @@ export default function AdminRosterPlayerCard({ clanId, playerInfo, curentMember
         <>
             <Div bg="cbGrey1" rounded="md" m="0.5rem" shadow="2" hoverShadow="4">
                 <Row d="flex" align="center">
-                    <Image h="3rem" w="auto" rounded="md" src={pfp()} alt=""/>
-                    <Text textColor="cbWhite" textSize="subheader" m={{ y: "0", l: "0.5rem" }}>
+                    <Image h={{ xs: "2rem", md: "3rem" }} w="auto" rounded="md" src={pfp()} alt=""/>
+                    <Text textColor="cbWhite" textSize={{ xs: "body", md: "subheader" }} m={{ y: "0", l: "0.5rem" }}>
                         {playerInfo?.destinyUserInfo?.bungieGlobalDisplayName}
                     </Text>
-                    <Text textColor="cbGrey2" textSize="paragraph" m={{ y: "0" }}>
+                    <Text textColor="cbGrey2" textSize={{ xs: "body", md: "paragraph" }} m={{ y: "0" }}>
                         #{playerInfo?.destinyUserInfo?.bungieGlobalDisplayNameCode}
                     </Text>
                 </Row>
-                <Row d="flex" align="center">
+                <Row d="flex" align="center" m={{x: 0}} >
                     {canKickBan() ?
-                        <Button bg="cbGrey1" m={{ l: "0.5rem" }} textSize="subheader" textColor="cbGrey3" hoverTextColor={"cbBlue"}
+                        <Button bg="cbGrey1" textSize={{ xs: "paragraph", md: "subheader" }} h="auto" textColor="cbGrey3" hoverTextColor={"cbBlue"}
                             onClick={() => setBanModal(true)}
                         >
                             Ban
@@ -110,7 +110,7 @@ export default function AdminRosterPlayerCard({ clanId, playerInfo, curentMember
                         :
                         null}
                     {canKickBan() ?
-                        <Button bg="cbGrey1" textSize="subheader" textColor="cbGrey3" hoverTextColor={"cbBlue"}
+                        <Button bg="cbGrey1" textSize={{ xs: "paragraph", md: "subheader" }} h="auto" textColor="cbGrey3" hoverTextColor={"cbBlue"}
                             onClick={() => setKickPending(true)}
                         >
                             Kick
@@ -118,7 +118,7 @@ export default function AdminRosterPlayerCard({ clanId, playerInfo, curentMember
                         :
                         null}
                     {canDemote() ?
-                        <Button bg="cbGrey1" textSize="subheader" textColor="cbGrey3" hoverTextColor={"cbBlue"}
+                        <Button bg="cbGrey1" textSize={{ xs: "paragraph", md: "subheader" }} h="auto" textColor="cbGrey3" hoverTextColor={"cbBlue"}
                             onClick={() => setDemotePending(true)}
                         >
                             Demote
@@ -126,7 +126,7 @@ export default function AdminRosterPlayerCard({ clanId, playerInfo, curentMember
                         :
                         null}
                     {canPromote() ?
-                        <Button bg="cbGrey1" textSize="subheader" textColor="cbGrey3" hoverTextColor={"cbBlue"}
+                        <Button bg="cbGrey1" textSize={{ xs: "paragraph", md: "subheader" }} h="auto" textColor="cbGrey3" hoverTextColor={"cbBlue"}
                             onClick={() => setPromotePending(true)}
                         >
                             Promote
