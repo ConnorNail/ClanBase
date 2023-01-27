@@ -3,7 +3,7 @@ import getHeaders from '../useGetHeaders'
 
 export default function getIdsForCurrentUser(userData) {
     
-    userData = userData?.user?.response
+    userData = userData?.Response
 
     let membershipId = null
     let membershipType = null

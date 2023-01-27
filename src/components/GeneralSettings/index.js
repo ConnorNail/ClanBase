@@ -7,17 +7,28 @@ import DropdownSelect from "../DropdownSelect";
 import CustomCheckbox from "../CustomCheckbox";
 import editGroupGeneralSettings from "../../functions/useEditGroupGeneralSettings";
 
+function checkStored(dataName) {
+    const data = window.localStorage.getItem(dataName);
+    if (data !== null) {
+        return JSON.parse(data)
+    } else {
+        return null
+    }
+}
+
 export default function GeneralSettings({ groupInfo, clanId }) {
     const [pendingSave, setPendingSave] = useState(false)
 
-    const [clanJoinOptions, setClanJoinOptions] = useState(groupInfo?.Response?.results[0]?.group?.membershipOption)
-    const [newMemberOptions, setNewMemberOptions] = useState(groupInfo?.Response?.results[0]?.group?.features?.joinLevel)
-    const [language, setLanguage] = useState(groupInfo?.Response?.results[0]?.group?.locale)
-    const [gg, setGG] = useState(groupInfo?.Response?.results[0]?.group?.features?.hostGuidedGamePermissionOverride)
+    const [clanJoinOptions, setClanJoinOptions] = useState(checkStored('JOIN_OPTIONS') !== null ? checkStored('JOIN_OPTIONS') : groupInfo?.Response?.results[0]?.group?.membershipOption)
+    const [newMemberOptions, setNewMemberOptions] = useState(checkStored('NEW_MEMBER_OPTIONS') !== null ? checkStored('NEW_MEMBER_OPTIONS') : groupInfo?.Response?.results[0]?.group?.features?.joinLevel)
+    const [language, setLanguage] = useState(checkStored('LANGUAGE') !== null ? checkStored('LANGUAGE') : groupInfo?.Response?.results[0]?.group?.locale)
+    const [gg, setGG] = useState(checkStored('GG_OPTIONS') !== null ? checkStored('GG_OPTIONS') : groupInfo?.Response?.results[0]?.group?.features?.hostGuidedGamePermissionOverride)
 
-    const [adminSendInvites, setAdminSendInvites] = useState(groupInfo?.Response?.results[0]?.group?.features?.invitePermissionOverride)
-    const [adminEditCulture, setAdminEditCulture] = useState(groupInfo?.Response?.results[0]?.group?.features?.updateCulturePermissionOverride)
-    const [adminsEditBanner, setAdminsEditBanner] = useState(groupInfo?.Response?.results[0]?.group?.features?.updateBannerPermissionOverride)
+    const [adminSendInvites, setAdminSendInvites] = useState(checkStored('ADMIN_INVITE_OPTIONS') !== null ? checkStored('ADMIN_INVITE_OPTIONS') : groupInfo?.Response?.results[0]?.group?.features?.invitePermissionOverride)
+    const [adminEditCulture, setAdminEditCulture] = useState(checkStored('ADMIN_CULTURE_OPTIONS') !== null ? checkStored('ADMIN_CULTURE_OPTIONS') : groupInfo?.Response?.results[0]?.group?.features?.updateCulturePermissionOverride)
+    const [adminsEditBanner, setAdminsEditBanner] = useState(checkStored('ADMIN_BANNER_OPTIONS') !== null ? checkStored('ADMIN_BANNER_OPTIONS') : groupInfo?.Response?.results[0]?.group?.features?.updateBannerPermissionOverride)
+    
+    console.log(groupInfo)
 
     const [success, setSuccess] = useState(false);
     const [warning, setWarning] = useState(false);
@@ -28,63 +39,35 @@ export default function GeneralSettings({ groupInfo, clanId }) {
 
     // Persist join options in local storage
     useEffect(() => {
-        const data = window.localStorage.getItem('JOIN_OPTIONS');
-        if (data !== null) setClanJoinOptions(JSON.parse(data));
-    }, []);
-    useEffect(() => {
         window.localStorage.setItem('JOIN_OPTIONS', JSON.stringify(clanJoinOptions));
     }, [clanJoinOptions]);
 
     // Persist new member options in local storage
-    useEffect(() => {
-        const data = window.localStorage.getItem('NEW_MEMBER_OPTIONS');
-        if (data !== null) setNewMemberOptions(JSON.parse(data));
-    }, []);
     useEffect(() => {
         window.localStorage.setItem('NEW_MEMBER_OPTIONS', JSON.stringify(newMemberOptions));
     }, [newMemberOptions]);
 
     // Persist language in local storage
     useEffect(() => {
-        const data = window.localStorage.getItem('LANGUAGE');
-        if (data !== null) setLanguage(JSON.parse(data));
-    }, []);
-    useEffect(() => {
         window.localStorage.setItem('LANGUAGE', JSON.stringify(language));
     }, [language]);
 
     // Persist about us in local storage
-    useEffect(() => {
-        const data = window.localStorage.getItem('GG_OPTIONS');
-        if (data !== null) setGG(JSON.parse(data));
-    }, []);
     useEffect(() => {
         window.localStorage.setItem('GG_OPTIONS', JSON.stringify(gg));
     }, [gg]);
 
     // Persist admin invite options in local storage
     useEffect(() => {
-        const data = window.localStorage.getItem('ADMIN_INVITE_OPTIONS');
-        if (data !== null) setAdminSendInvites(JSON.parse(data));
-    }, []);
-    useEffect(() => {
         window.localStorage.setItem('ADMIN_INVITE_OPTIONS', JSON.stringify(adminSendInvites));
     }, [adminSendInvites]);
 
     // Persist admin edit culture options in local storage
     useEffect(() => {
-        const data = window.localStorage.getItem('ADMIN_CULTURE_OPTIONS');
-        if (data !== null) setAdminEditCulture(JSON.parse(data));
-    }, []);
-    useEffect(() => {
         window.localStorage.setItem('ADMIN_CULTURE_OPTIONS', JSON.stringify(adminEditCulture));
     }, [adminEditCulture]);
 
     // Persist admin edit banner options in local storage
-    useEffect(() => {
-        const data = window.localStorage.getItem('ADMIN_BANNER_OPTIONS');
-        if (data !== null) setAdminsEditBanner(JSON.parse(data));
-    }, []);
     useEffect(() => {
         window.localStorage.setItem('ADMIN_BANNER_OPTIONS', JSON.stringify(adminsEditBanner));
     }, [adminsEditBanner]);
@@ -99,7 +82,7 @@ export default function GeneralSettings({ groupInfo, clanId }) {
             } else if (generalSettings?.MessageData?.ThrottleSecondsRemaining != 0 || founderSettings?.MessageData?.ThrottleSecondsRemaining != 0) {
                 // Time remaining before next request can be made
                 setThrottle(true)
-            } else {
+            } else if (generalSettings?.ErrorCode != 1 || founderSettings?.ErrorCode != 1) {
                 // Unable to complete action
                 setWarning(true)
             }
@@ -238,7 +221,7 @@ export default function GeneralSettings({ groupInfo, clanId }) {
                 ERROR
                 <br />
                 <br />
-                {/* Please wait {groupCultureSettings?.MessageData?.ThrottleSecondsRemaining} minutes before trying again. */}
+                Please wait wait a few minutes before trying again.
             </WarningNotification>
         </>
     )

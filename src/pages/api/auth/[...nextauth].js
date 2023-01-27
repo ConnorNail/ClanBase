@@ -1,7 +1,10 @@
 import NextAuth from "next-auth"
 import BungieProvider from "next-auth/providers/bungie";
+import DiscordProvider from "next-auth/providers/discord";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from "./lib/mongodb"
+
+const scopes = ['identify'].join(' ')
 
 async function refreshAccessToken(token) {
   console.log("Refreshing Access Token")
@@ -68,8 +71,15 @@ export const authOptions = {
         },
       },
     }),
+    DiscordProvider({
+      clientId: process.env.DISCORD_CLIENT_ID,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET,
+      authorization: {params: {scope: scopes}},
+    })
   ],
-  adapter: MongoDBAdapter(clientPromise),
+  session: {
+    strategy: "jwt"
+  },
   callbacks: {
     async session({ session, token, user }) {
       session.user.id = token.id;

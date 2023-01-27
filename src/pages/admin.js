@@ -1,6 +1,6 @@
 import DefaultTemplate from '../components/DefaultLayout'
 import InfoBox from '../components/InfoBox'
-import getClanInfo from "../functions/useGetClanInfo";
+import useGetClanInfoImut from "../functions/useGetClanInfoImut";
 import { Button, Text, Row, Col, Div } from "atomize";
 import { useSession, signIn, signOut } from "next-auth/react"
 import getIdsForCurrentUser from "../functions/getIdsForCurrentUser";
@@ -14,18 +14,22 @@ import React, { useState, useEffect } from 'react';
 import AdminRoster from '../components/AdminRoster';
 import CultureSettings from '../components/CultureSettings';
 import GeneralSettings from '../components/GeneralSettings';
+import useGetUserInfo from '../functions/useGetUserInfo';
 
 export default function Admin() {
     const [tab, setTab] = useState('General')
 
     const { data, status } = useSession()
 
-    const ids = getIdsForCurrentUser(data)
+    const userData = useGetUserInfo(status)
+    console.log(userData)
+
+    const ids = getIdsForCurrentUser(userData)
     const groupInfo = getGroupsForMember(ids.membershipId, ids.membershipType)
 
     const clanId = groupInfo ? groupInfo?.Response?.results[0]?.group?.groupId : null
 
-    const clanInfo = getClanInfo(clanId)
+    const clanInfo = useGetClanInfoImut(clanId)
 
     // If member is admin (3) or founder (5)
     const memberType = findMemberType(clanId, ids)
@@ -136,10 +140,10 @@ export default function Admin() {
             case 'Invites':
                 return (
                     <Div d="flex" flexDir="column">
-                        <InfoBox bg={'cbGrey2'} m={{x: "1rem", t: "1rem", b: "0.5rem"}}>
+                        <InfoBox bg={'cbGrey2'} m={{ x: "1rem", t: "1rem", b: "0.5rem" }}>
                             <InvitedMembers clanId={clanId} />
                         </InfoBox>
-                        <InfoBox bg={'cbGrey2'} m={{x: "1rem", t: "0.5rem", b: "1rem"}}>
+                        <InfoBox bg={'cbGrey2'} m={{ x: "1rem", t: "0.5rem", b: "1rem" }}>
                             <PlayerSearchBar clanId={clanId} />
                         </InfoBox>
                     </Div>
@@ -182,13 +186,18 @@ export default function Admin() {
             <Div d="flex" justify="center">
                 <Col size="11">
                     <InfoBox bg={'cbGrey1'} minH="40rem">
-                        <AdminTabs />
-                        {status == 'authenticated' ?
-                            <AdminTabContent />
+                        {clanId && groupInfo ?
+                            <>
+                                <AdminTabs />
+                                {status == 'authenticated' ?
+                                    <AdminTabContent />
+                                    :
+                                    <Text textColor="cbWhite">
+                                        Sign in to see clan details
+                                    </Text>}
+                            </>
                             :
-                            <Text textColor="cbWhite">
-                                Sign in to see clan details
-                            </Text>}
+                            null}
                     </InfoBox>
                 </Col>
             </Div>

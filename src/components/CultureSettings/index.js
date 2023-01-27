@@ -4,48 +4,43 @@ import editGroupCultureSettings from "../../functions/useEditGroupCultureSetting
 import WarningNotification from "../WarningNotification";
 import SuccessNotification from "../SuccessNotification";
 
+function checkStored(dataName) {
+    const data = window.localStorage.getItem(dataName);
+    if (data !== null) {
+        return JSON.parse(data)
+    } else {
+        return null
+    }
+}
+
 export default function CultureSettings({ groupInfo, clanId }) {
     const [pendingSave, setPendingSave] = useState(false)
-    const [clanName, setClanName] = useState(groupInfo?.Response?.results[0]?.group?.name)
-    const [callsign, setCallsign] = useState(groupInfo?.Response?.results[0]?.group?.clanInfo?.clanCallsign)
-    const [motto, setMotto] = useState(groupInfo?.Response?.results[0]?.group?.motto)
-    const [about, setAbout] = useState(groupInfo?.Response?.results[0]?.group?.about)
+
+    const [clanName, setClanName] = useState(checkStored('CLAN_NAME') !== null ? checkStored('CLAN_NAME') : groupInfo?.Response?.results[0]?.group?.name)
+    const [callsign, setCallsign] = useState(checkStored('CALLSIGN') !== null ? checkStored('CALLSIGN') : groupInfo?.Response?.results[0]?.group?.clanInfo?.clanCallsign)
+    const [motto, setMotto] = useState(checkStored('MOTTO') !== null ? checkStored('MOTTO') : groupInfo?.Response?.results[0]?.group?.motto)
+    const [about, setAbout] = useState(checkStored('ABOUT_US') !== null ? checkStored('ABOUT_US') : groupInfo?.Response?.results[0]?.group?.about)
+
     const [success, setSuccess] = useState(false);
     const [warning, setWarning] = useState(false);
     const [throttle, setThrottle] = useState(false);
 
     // Persist clan name in local storage
     useEffect(() => {
-        const data = window.localStorage.getItem('CLAN_NAME');
-        if (data !== null) setClanName(JSON.parse(data));
-    }, []);
-    useEffect(() => {
         window.localStorage.setItem('CLAN_NAME', JSON.stringify(clanName));
     }, [clanName]);
 
     // Persist callsign in local storage
-    useEffect(() => {
-        const data = window.localStorage.getItem('CALLSIGN');
-        if (data !== null) setCallsign(JSON.parse(data));
-    }, []);
     useEffect(() => {
         window.localStorage.setItem('CALLSIGN', JSON.stringify(callsign));
     }, [callsign]);
 
     // Persist motto in local storage
     useEffect(() => {
-        const data = window.localStorage.getItem('MOTTO');
-        if (data !== null) setMotto(JSON.parse(data));
-    }, []);
-    useEffect(() => {
         window.localStorage.setItem('MOTTO', JSON.stringify(motto));
     }, [motto]);
 
     // Persist about us in local storage
-    useEffect(() => {
-        const data = window.localStorage.getItem('ABOUT_US');
-        if (data !== null) setAbout(JSON.parse(data));
-    }, []);
     useEffect(() => {
         window.localStorage.setItem('ABOUT_US', JSON.stringify(about));
     }, [about]);
@@ -143,7 +138,6 @@ export default function CultureSettings({ groupInfo, clanId }) {
                         fontFamily="Primary"
                         value={about}
                         onChange={e => setAbout((e.target.value).slice(0, 1000))}
-                        onKeyDown={onKeyDown}
                     />
 
                     <Button bg="cbGrey1" textColor="cbWhite" hoverTextColor="cbBlue" textSize="subheader" m={{ t: "1.5rem" }} onClick={() => setPendingSave(true)}>

@@ -2,6 +2,7 @@ import { styled, useStyletron } from 'styletron-react'
 import DefaultTemplate from '../components/DefaultLayout'
 import SearchBar from '../components/SearchBar'
 import LoginButton from '../components/LoginButton'
+import LoginButtonDiscord from '../components/LoginButtonDiscord'
 import { useRouter } from 'next/router'
 import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
 
@@ -66,6 +67,7 @@ export default function Home() {
                 <Text textSize="display1" textAlign="center" textColor="white" pos="absolute">SIGN IN</Text>
               </Button>
               <LoginButton />
+              <LoginButtonDiscord />
             </Row>
 
             <Row d={{ xs: "flex", md: "none" }} flexDir="column" align="center">
