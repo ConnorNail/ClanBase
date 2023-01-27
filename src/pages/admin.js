@@ -69,7 +69,7 @@ export default function Admin() {
         const menuList = (
             <Div bg="cbGrey2" m={{ t: "-0.25rem" }} rounded="0 0 5px 5px">
                 {tabList.map((tabName, index) => (
-                    <Div>
+                    <Div key={index}>
                         <Anchor
                         textSize="subheader"
                         textColor="cbWhite"
@@ -112,12 +112,12 @@ export default function Admin() {
         return (
             <Div align="center" d={{ xs: "none", md: "flex" }}>
                 {tabList.map((tabName, index) => (
-                    <>
+                    <Div key={index}>
                         {index != 0 ? <Div bg="cbWhite" h="3rem" w="0.1rem" /> : null}
                         <AdminMenuButtons toggleValue={tabName}>
                             {tabName}
                         </AdminMenuButtons>
-                    </>
+                    </Div>
                 ))}
             </Div>
         )
