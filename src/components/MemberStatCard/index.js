@@ -2,7 +2,7 @@ import { Div, Text, Row, Col, Button, Icon, Input } from "atomize";
 import Bracket from "../BracketSimple";
 import CustomRadios from "../CustomRadios";
 import React, { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, AreaChart, Area } from 'recharts';
+import { ResponsiveContainer, Label, XAxis, YAxis, Tooltip, AreaChart, Area } from 'recharts';
 import MemberSearchBar from "../MemberSearchBar";
 import setupMemberTimeChart from "../../functions/setupMemberTimeChart";
 
@@ -87,34 +87,38 @@ const MemberStatCard = ({ timeData, membersInfo, membersProfiles, membersAllTime
                 </Text>
             </Row>
             <Row>
-                <Col d="flex" align="center" size="5">
-                    <Text textSize="subheader" textColor="cbWhite">
-                        Last Online:
-                    </Text>
-                    <Text textSize="subheader" textColor="cbBlue" m={{ x: "0.25rem" }}>
-                        {loadingValue(lastOnlineDate, "cbBlue", "30px")}
-                    </Text>
+                <Col>
+                    <Div w="13rem" d="flex" align="center">
+                        <Text textSize="subheader" textColor="cbWhite">
+                            Last Online:
+                        </Text>
+                        <Text textSize="subheader" textColor="cbBlue" m={{ x: "0.25rem" }}>
+                            {loadingValue(lastOnlineDate, "cbBlue", "30px")}
+                        </Text>
+                    </Div>
                 </Col>
-                <Col d="flex" justify="center" flexDir="column">
-                    <Row>
-                        <Text textSize="body" textColor="cbWhite">
-                            Time Played (All Time):
-                        </Text>
-                        <Text textSize="body" textColor="cbBlue" m={{ y: "0rem", x: "0.25rem" }}>
-                            {loadingValue(allTimePlayed, "cbBlue", "25px")}
-                        </Text>
-                    </Row>
-                    <Row>
-                        <Text textSize="body" textColor="cbWhite">
-                            Time Played (Seasonal):
-                        </Text>
-                        <Text textSize="body" textColor="cbBlue" m={{ y: "0rem", x: "0.25rem" }}>
-                            {loadingValue(seasonTimePlayed, "cbBlue", "25px")}
-                        </Text>
-                        <Text textSize="body" textColor="cbGrey2" m={{ y: "0rem" }}>
-                            {loadingValue(seasonTimePercentage, "cbGrey2", "25px")}%
-                        </Text>
-                    </Row>
+                <Col d="flex">
+                    <Div d="flex" justify="center" flexDir="column" w="20rem">
+                        <Row m="0">
+                            <Text textSize="body" textColor="cbWhite">
+                                Time Played (All Time):
+                            </Text>
+                            <Text textSize="body" textColor="cbBlue" m={{ y: "0rem", x: "0.25rem" }}>
+                                {loadingValue(allTimePlayed, "cbBlue", "25px")}
+                            </Text>
+                        </Row>
+                        <Row m="0">
+                            <Text textSize="body" textColor="cbWhite">
+                                Time Played (Seasonal):
+                            </Text>
+                            <Text textSize="body" textColor="cbBlue" m={{ y: "0rem", x: "0.25rem" }}>
+                                {loadingValue(seasonTimePlayed, "cbBlue", "25px")}
+                            </Text>
+                            <Text textSize="body" textColor="cbGrey2" m={{ y: "0rem" }}>
+                                {loadingValue(seasonTimePercentage, "cbGrey2", "25px")}%
+                            </Text>
+                        </Row>
+                    </Div>
                 </Col>
             </Row>
             <Row bg="cbWhite" h="0.1rem" w="100%" m="0.1rem"></Row>
@@ -132,18 +136,24 @@ const MemberStatCard = ({ timeData, membersInfo, membersProfiles, membersAllTime
             <Div>
                 <Row d="flex" justify="center">
                     {cleanDataPvE && cleanDataPvP ?
-                        <AreaChart width={550} height={400} data={selectedValue == 'PvE' ? cleanDataPvE[memberIndex] : cleanDataPvP[memberIndex]} margin={{ top: 30, bottom: 55, right: 15 }}>
-                            <defs>
-                                <linearGradient id="colorTime" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                                    <stop offset="100%" stopColor="#8884d8" stopOpacity={0.1} />
-                                </linearGradient>
-                            </defs>
-                            <Area type="monotone" dataKey="time" stroke="#5DD7F2" strokeWidth="3" fill="url(#colorTime)" />
-                            <XAxis angle="-45" textAnchor="end" dataKey="date" stroke="#D9D9D9" interval="preserveEnd" />
-                            <YAxis stroke="#D9D9D9" />
-                            <Tooltip />
-                        </AreaChart>
+                        <Div w={{ xs: "20rem", sm: "35rem" }} h="25rem">
+                            <ResponsiveContainer >
+                                <AreaChart data={selectedValue == 'PvE' ? cleanDataPvE[memberIndex] : cleanDataPvP[memberIndex]} margin={{ top: 30, bottom: 55, right: 15, left: 10 }}>
+                                    <defs>
+                                        <linearGradient id="colorTime" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                                            <stop offset="100%" stopColor="#8884d8" stopOpacity={0.1} />
+                                        </linearGradient>
+                                    </defs>
+                                    <Area type="monotone" dataKey="time" stroke="#5DD7F2" strokeWidth="3" fill="url(#colorTime)" />
+                                    <XAxis angle="-45" textAnchor="end" dataKey="date" stroke="#D9D9D9" interval="preserveEnd" />
+                                    <YAxis stroke="#D9D9D9" label={{}}>
+                                        <Label value="Time [hrs]" angle="-90" position="insideLeft" style={{ textAnchor: 'middle', fontSize: '80%', fill: '#D9D9D9' }} />
+                                    </YAxis>
+                                    <Tooltip />
+                                </AreaChart>
+                            </ResponsiveContainer>
+                        </Div>
                         :
                         <Icon name="Loading3" size="75px" color="cbWhite" transform='translateY(15%)' />}
                 </Row>

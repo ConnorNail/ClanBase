@@ -22,6 +22,7 @@ import ClanRoster from '../../components/ClanRoster';
 import getClanMemberCharacterSeasonalTimeStats from '../../functions/getClanMemberCharacterSeasonalTimeStats';
 import MemberStatCard from '../../components/MemberStatCard';
 import ClanPageMain from '../../components/ClanPageMain';
+import ClanRosterMini from '../../components/ClanRosterMini';
 
 export default function ClanPage() {
 
@@ -40,7 +41,7 @@ export default function ClanPage() {
 
   const clanStatScores = calcClanStatScores(clanMemberStats, clanMemberProfiles)
 
-  // const memberSeasonalTimeStats = getClanMemberCharacterSeasonalTimeStats(clanMemberList, clanMemberProfiles)
+  const memberSeasonalTimeStats = getClanMemberCharacterSeasonalTimeStats(clanMemberList, clanMemberProfiles)
 
   const loadingValue = (value, color) => {
     if (value || value == 0) {
@@ -61,10 +62,10 @@ export default function ClanPage() {
       <Div d="flex" justify="center">
         {/* <Row > */}
         <Col size="11">
-          <Row m={{ y: "1rem" }}>
+          <Row>
             <Col>
-              <InfoBox bg="cbGrey1">
-                <ClanPageMain clanId={clanId} clanInfo={clanInfo} clanStatScores={clanStatScores} router={router}/>
+              <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>
+                <ClanPageMain clanId={clanId} clanInfo={clanInfo} clanStatScores={clanStatScores} router={router} />
               </InfoBox>
             </Col>
             {/* <Col>
@@ -82,9 +83,9 @@ export default function ClanPage() {
               </InfoBox>
             </Col> */}
           </Row>
-          <Row m={{ y: "1rem" }}>
+          <Row>
             <Col>
-              <InfoBox bg="cbGrey1">
+              <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>
                 <Text textColor="cbWhite" textSize="heading" p={{ x: "0.5rem" }}>
                   Clan Banner Perks
                 </Text>
@@ -93,7 +94,7 @@ export default function ClanPage() {
               </InfoBox>
             </Col>
           </Row>
-          {/* <Row>
+          {/* <Row m={{ y: "1rem" }}>
             <Col>
               <InfoBox bg="cbGrey1">
                 <Text textColor="cbWhite" textSize="heading">
@@ -112,21 +113,35 @@ export default function ClanPage() {
                 </Row>
               </InfoBox>
             </Col>
-          </Row>
+          </Row> */}
           <Row>
             <Col>
-              <InfoBox bg="cbGrey1">
-                <ScrollBox h={"45rem"}>
-                  <ClanRoster clanMemberInfo={clanMemberList} clanMemberProfiles={clanMemberProfiles} memberIndex={memberIndex} setMemberIndex={setMemberIndex} />
+              <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>
+                <Text textColor="cbWhite" textSize="heading" p={{ x: "0.5rem" }}>
+                  Roster
+                </Text>
+                <Row d="flex" justify="center">
+                  <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
+                </Row>
+                <ScrollBox h={"40.3rem"}>
+                  <Div d={{xs: "none", sm: "block"}}>
+                    <ClanRoster clanMemberInfo={clanMemberList} clanMemberProfiles={clanMemberProfiles} memberIndex={memberIndex} setMemberIndex={setMemberIndex} />
+                  </Div>
+                  <Div d={{xs: "block", sm: "none"}}>
+                    <ClanRosterMini clanMemberInfo={clanMemberList} clanMemberProfiles={clanMemberProfiles} />
+                  </Div>
                 </ScrollBox>
+                <Row d="flex" justify="center">
+                  <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
+                </Row>
               </InfoBox>
             </Col>
             <Col>
-              <InfoBox bg={'cbGrey1'}>
+              <InfoBox bg={'cbGrey1'} m={{ y: "0.5rem" }}>
                 <MemberStatCard timeData={memberSeasonalTimeStats} membersInfo={clanMemberList} membersProfiles={clanMemberProfiles} membersAllTimeStats={clanMemberStats} memberIndex={memberIndex} setMemberIndex={setMemberIndex} />
               </InfoBox>
             </Col>
-          </Row> */}
+          </Row>
         </Col>
         {/* </Row> */}
       </Div >

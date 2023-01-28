@@ -50,7 +50,7 @@ export default function useSetupRosterTable(data, memberIndex, setMemberIndex) {
                                                 {row?.original?.daysSinceLastPlayed}
                                             </Text>
                                             <Text textSize="caption" textColor="cbWhite" p={{ x: "0.4rem", y: "0.4rem" }}>
-                                                days ago
+                                                {row?.original?.daysSinceLastPlayed == 1 ? 'day ago' : 'days ago'}
                                             </Text>
                                         </Div>}
                                 </>
