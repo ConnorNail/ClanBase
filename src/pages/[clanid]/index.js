@@ -21,6 +21,7 @@ import RecentlyJoinClanMembersTable from '../../components/RecentlyJoinedClanMem
 import ClanRoster from '../../components/ClanRoster';
 import getClanMemberCharacterSeasonalTimeStats from '../../functions/getClanMemberCharacterSeasonalTimeStats';
 import MemberStatCard from '../../components/MemberStatCard';
+import ClanPageMain from '../../components/ClanPageMain';
 
 export default function ClanPage() {
 
@@ -34,13 +35,12 @@ export default function ClanPage() {
 
   const clanInfo = getClanInfo(clanId)
   const { data: clanMemberList } = getClanMemberInfo(clanId)
-  console.log(clanMemberList)
   const clanMemberStats = getClanMembersAllTimeStats(clanMemberList)
   const clanMemberProfiles = getAllMembersProfile(clanMemberList)
 
   const clanStatScores = calcClanStatScores(clanMemberStats, clanMemberProfiles)
 
-  const memberSeasonalTimeStats = getClanMemberCharacterSeasonalTimeStats(clanMemberList, clanMemberProfiles)
+  // const memberSeasonalTimeStats = getClanMemberCharacterSeasonalTimeStats(clanMemberList, clanMemberProfiles)
 
   const loadingValue = (value, color) => {
     if (value || value == 0) {
@@ -62,64 +62,12 @@ export default function ClanPage() {
         {/* <Row > */}
         <Col size="11">
           <Row>
-            <Col size="8">
+            <Col>
               <InfoBox bg="cbGrey1">
-                <Row>
-                  <Col size="auto">
-                    <Row m="0" minW="18rem">
-                      <Text textSize="display1" textColor="cbWhite">
-                        {loadingValue(clanInfo?.Response?.detail?.name, "cbWhite")} [{loadingValue(clanInfo?.Response?.detail?.clanInfo?.clanCallsign, "cbWhite")}]
-                      </Text>
-                    </Row>
-                    <Row m="0" minW="18rem">
-                      <Text textSize="paragraph" textColor="cbGrey2">
-                        &quot;{loadingValue(clanInfo?.Response?.detail?.motto, "cbGrey2")}&quot;
-                      </Text>
-                    </Row>
-                  </Col>
-                  <Col size="auto">
-                    <ClanIconBox clanInfo={clanInfo}></ClanIconBox>
-                  </Col>
-                  <Col d="flex" align="center">
-                    <PvEIcon />
-                    {clanStatScores?.PvE ?
-                      <Text textSize="heading" textColor="cbBlue">
-                        {clanStatScores?.PvE.toFixed()}
-                      </Text> :
-                      <Icon name="Loading3" size="20px" color="cbBlue" />}
-                  </Col>
-                  <Col d="flex" align="center">
-                    <PvPIcon />
-                    {clanStatScores?.PvP ?
-                      <Text textSize="heading" textColor="cbBlue">
-                        {clanStatScores?.PvP.toFixed()}
-                      </Text> :
-                      <Icon name="Loading3" size="20px" color="cbBlue" />}
-                  </Col>
-                  <Col d="flex" align="center">
-                  </Col>
-                </Row>
-                <Row d="flex" justify="center">
-                  <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
-                </Row>
-                <Row>
-                  <Col d="flex" justify="center" size="auto">
-                    <ClanBannerSimple clanId={clanId} />
-                  </Col>
-                  <Col>
-                    <ScrollBox h={"19.2rem"}>
-                      <Text style={{ whiteSpace: "pre-line" }} textSize="subheader" textColor="cbWhite">
-                        {loadingValue(clanInfo?.Response?.detail?.about, "cbWhite")}
-                      </Text>
-                    </ScrollBox>
-                  </Col>
-                </Row>
-                <Row d="flex" justify="center">
-                  <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
-                </Row>
+                <ClanPageMain clanId={clanId} clanInfo={clanInfo} clanStatScores={clanStatScores}/>
               </InfoBox>
             </Col>
-            <Col>
+            {/* <Col>
               <InfoBox bg="cbGrey1">
                 <Row minW="10rem">
                   <Text textColor="cbWhite" textSize="heading">
@@ -132,9 +80,9 @@ export default function ClanPage() {
                   </Div>
                 </Row>
               </InfoBox>
-            </Col>
+            </Col> */}
           </Row>
-          <Row>
+          {/* <Row>
             <Col>
               <InfoBox bg="cbGrey1">
                 <ClanLevel clanInfo={clanInfo} />
@@ -182,10 +130,10 @@ export default function ClanPage() {
                 <MemberStatCard timeData={memberSeasonalTimeStats} membersInfo={clanMemberList} membersProfiles={clanMemberProfiles} membersAllTimeStats={clanMemberStats} memberIndex={memberIndex} setMemberIndex={setMemberIndex} />
               </InfoBox>
             </Col>
-          </Row>
+          </Row> */}
         </Col>
         {/* </Row> */}
-      </Div>
-    </DefaultTemplate>
+      </Div >
+    </DefaultTemplate >
   )
 }

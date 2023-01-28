@@ -55,7 +55,7 @@ export default function ClanIconBox({clanInfo}) {
     }
 
     return (
-        <>
+        <Div w="10rem">
             <Row m="0">
                 <Div d="flex">
                     <Icon name="User" size="20px" color="cbWhite" transform='translateY(5%)' m={{ r: "0.25rem" }} />
@@ -75,6 +75,6 @@ export default function ClanIconBox({clanInfo}) {
                     </Text>
                 </Div>
             </Row>
-        </>
+        </Div>
     )
 }
