@@ -32,6 +32,8 @@ export default function Admin() {
     const clanId = groupInfo ? groupInfo?.Response?.results[0]?.group?.groupId : null
 
     const clanInfo = useGetClanInfoImut(clanId)
+    const clanName = clanInfo?.Response?.detail?.name
+    const clanCallsign = clanInfo?.Response?.detail?.clanInfo?.clanCallsign
 
     // Pending member count
     const pendingMembers = useGetPendingMemberships(clanId)
@@ -231,8 +233,11 @@ export default function Admin() {
             <Div d="flex" justify="center">
                 <Col size="11">
                     <InfoBox bg={'cbGrey1'} minH="40rem">
-                        {clanId && groupInfo ?
+                        {clanId ?
                             <>
+                                <Text textColor="cbWhite" textSize="display1" m="0.5rem">
+                                    {clanName ? clanName : <Icon name="Loading3" size="25px" color="cbWhite" />} [{clanCallsign ? clanCallsign : <Icon name="Loading3" size="25px" color="cbWhite" />}]
+                                </Text>
                                 <AdminTabs tabList={availableTabs()} />
                                 <AdminDropdown tabList={availableTabs()} />
                                 {status == 'authenticated' ?
@@ -243,7 +248,10 @@ export default function Admin() {
                                     </Text>}
                             </>
                             :
-                            null}
+                            <Text textColor="cbWhite" m="0.5rem" textSize="subheader">
+                                Sign in to see clan details
+                            </Text>
+                        }
                     </InfoBox>
                 </Col>
             </Div>
