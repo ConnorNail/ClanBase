@@ -1,8 +1,6 @@
 import NextAuth from "next-auth"
 import BungieProvider from "next-auth/providers/bungie";
 import DiscordProvider from "next-auth/providers/discord";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
-import clientPromise from "./lib/mongodb"
 
 const scopes = ['identify'].join(' ')
 
@@ -72,8 +70,8 @@ export const authOptions = {
       },
     }),
     DiscordProvider({
-      clientId: process.env.DISCORD_CLIENT_ID,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET,
+      clientId: process.env.NEXT_DISCORD_CLIENT_ID,
+      clientSecret: process.env.NEXT_DISCORD_CLIENT_SECRET,
       authorization: {params: {scope: scopes}},
     })
   ],
