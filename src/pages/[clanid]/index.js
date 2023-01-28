@@ -61,10 +61,10 @@ export default function ClanPage() {
       <Div d="flex" justify="center">
         {/* <Row > */}
         <Col size="11">
-          <Row>
+          <Row m={{ y: "1rem" }}>
             <Col>
               <InfoBox bg="cbGrey1">
-                <ClanPageMain clanId={clanId} clanInfo={clanInfo} clanStatScores={clanStatScores}/>
+                <ClanPageMain clanId={clanId} clanInfo={clanInfo} clanStatScores={clanStatScores} router={router}/>
               </InfoBox>
             </Col>
             {/* <Col>
@@ -82,22 +82,18 @@ export default function ClanPage() {
               </InfoBox>
             </Col> */}
           </Row>
-          {/* <Row>
+          <Row m={{ y: "1rem" }}>
             <Col>
               <InfoBox bg="cbGrey1">
-                <ClanLevel clanInfo={clanInfo} />
-                <Text textColor="cbWhite" textSize="heading">
+                <Text textColor="cbWhite" textSize="heading" p={{ x: "0.5rem" }}>
                   Clan Banner Perks
                 </Text>
+                <ClanLevel clanInfo={clanInfo} />
                 <ClanBannerPerks memberProfiles={clanMemberProfiles} clanInfo={clanInfo} />
-                <Text textColor="cbWhite" textSize="heading">
-                  Clan Engrams
-                </Text>
-                <ClanEngrams clanId={clanId} />
               </InfoBox>
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
             <Col>
               <InfoBox bg="cbGrey1">
                 <Text textColor="cbWhite" textSize="heading">

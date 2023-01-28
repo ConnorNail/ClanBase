@@ -37,12 +37,12 @@ export default function ClanLevel({ memberProfiles, clanInfo }) {
     }
 
     return (
-        <Div d="flex" justify="center">
+        <Div d="flex" justify="center" flexWrap="wrap">
             {clanBannerPerks ?
                 clanBannerPerks.map((perk, index) => (
                     index != 5 ?
-                        <Div key={index} m={{ x: "1rem" }} w="4rem" d="flex" flexDir="column" align="center" rounded="md" border="3px solid" borderColor={levelsCompletedStyle[index]}>
-                            <Image h="3rem" w="3rem" src={urlStart + perk?.Response?.displayProperties?.icon} alt="clan banner perks"/>
+                        <Div key={index} m="1rem" w="4rem" d="flex" flexDir="column" align="center" rounded="md" border="3px solid" borderColor={levelsCompletedStyle[index]}>
+                            <Image h={{ xs: "2.5rem", md: "3rem" }} w="auto" src={urlStart + perk?.Response?.displayProperties?.icon} alt="clan banner perk"/>
                             <Text textAlign="center" textColor="cbWhite" textSize="caption">
                                 {perk?.Response?.displayProperties?.name}
                             </Text>

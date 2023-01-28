@@ -8,7 +8,7 @@ import ScrollBox from '../../components/ScrollBox';
 import ClanBannerSimple from '../../components/ClanBannerSimple';
 import ClanEngrams from '../../components/ClanEngrams';
 
-export default function ClanPageMain({ clanId, clanInfo, clanStatScores }) {
+export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router }) {
     const loadingValue = (value, color) => {
         if (value || value == 0) {
             return (
@@ -31,7 +31,7 @@ export default function ClanPageMain({ clanId, clanInfo, clanStatScores }) {
                         <Text textSize={{ xs: "heading", md: "display1" }} textColor="cbWhite" p={{ x: "0.5rem" }}>
                             {loadingValue(clanInfo?.Response?.detail?.name, "cbWhite")} [{loadingValue(clanInfo?.Response?.detail?.clanInfo?.clanCallsign, "cbWhite")}]
                         </Text>
-                        <Icon name="Settings" size="25px" color="cbBlue" hoverColor="cbGrey3" cursor="pointer" />
+                        <Icon name="Settings" size="25px" color="cbBlue" hoverColor="cbGrey3" cursor="pointer" onClick={() => router.push('/admin')}/>
                     </Row>
                     <Row m="0" minW="18rem">
                         <Text textSize="paragraph" textColor="cbGrey2" p={{ x: "0.5rem" }}>
