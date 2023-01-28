@@ -77,6 +77,7 @@ export const authOptions = {
       authorization: {params: {scope: scopes}},
     })
   ],
+  debug: true,
   session: {
     strategy: "jwt"
   },
