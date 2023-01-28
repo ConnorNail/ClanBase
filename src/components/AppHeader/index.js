@@ -42,7 +42,7 @@ const AppHeader = () => {
                         </Row>
                     </Col>
                     <Col ></Col>
-                    <Col size="flex" d={{ xs: "none", md: "block" }} align="flex-end">
+                    <Col size="flex" align="flex-end">
                         <Row transform="translate(0%, 40%)" p={{ r: "2rem" }}>
                             <LoginButton/>
                         </Row>
