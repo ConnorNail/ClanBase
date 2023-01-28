@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Input, Icon, Dropdown, Div, Anchor, Col, Text, Image } from "atomize";
 import getInvitedIndividuals from '../../functions/useGetInvitedIndividuals';
 import InvitedPlayerCard from '../InvitedPlayerCard';
+import ScrollBox from '../ScrollBox';
 
 const InvitedMembers = ({ clanId }) => {
 
@@ -9,23 +10,27 @@ const InvitedMembers = ({ clanId }) => {
     const memberList = invitedMembers?.Response?.results
 
     return (
-        <Div p={{ x: "1rem", y: "0.5rem" }} h="40rem" d="flex" flexDir="column" flexWrap="wrap">
-            <Text textColor="cbWhite" textSize="heading">
+        <Div h="18rem" p={{ x: "1rem", y: "0.5rem" }}>
+            <Text textColor="cbWhite" textSize={{ xs: "title", md: "heading" }}>
                 Pending Invitations
             </Text>
-            {memberList ?
-                memberList.length > 0 ?
-                    memberList.map((member, index) => (
-                        <Div key={index}>
-                            <InvitedPlayerCard clanId={clanId} playerInfo={member} />
+            <ScrollBox h={"14.5rem"}>
+                {memberList ?
+                    memberList.length > 0 ?
+                        <Div d="flex" flexDir="row" flexWrap="wrap">
+                            {memberList.map((member, index) => (
+                                <Div key={index} style={{ flex: '1 1 50%' }}>
+                                    <InvitedPlayerCard clanId={clanId} playerInfo={member} />
+                                </Div>
+                            ))}
                         </Div>
-                    ))
+                        :
+                        <Text textColor="cbWhite" textSize="subheader">
+                            No Pending Members
+                        </Text>
                     :
-                    <Text textColor="cbWhite" textSize="subheader">
-                        No Pending Members
-                    </Text>
-                :
-                null}
+                    null}
+            </ScrollBox>
         </Div>
     )
 }

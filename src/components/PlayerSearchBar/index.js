@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Input, Icon, Dropdown, Div, Anchor, Col, Text, Image } from "atomize";
-import getPlayer from '../../functions/useGetPlayer';
 import getHeaders from '../../functions/useGetHeaders'
 import useSWRMutation from 'swr/mutation'
 import PlayerCard from '../PlayerCard';
+import ScrollBox from '../ScrollBox';
 
 const PlayerSearchBar = ({ clanId }) => {
     const header = getHeaders(false)
@@ -78,16 +78,18 @@ const PlayerSearchBar = ({ clanId }) => {
                 onChange={e => { handleSearch(e) }}
             />
             <Div h="33rem">
-                <Div p={{ x: "1rem", y: "0.5rem" }} minW="0" d="flex" flexDir="row" flexWrap="wrap">
-                    {suggestions ? suggestions.map((suggestion, index) => (
-                        <Div key={index} style={{ flex: '0 0 33%' }}>
-                            <PlayerCard clanId={clanId} playerInfo={suggestion} searchMode={searchMode} />
-                        </Div>
-                    ))
-                        :
-                        null
-                    }
-                </Div>
+                <ScrollBox h={"33rem"}>
+                    <Div p={{ x: "1rem", y: "0.5rem" }} d="flex" flexDir="row" flexWrap="wrap">
+                        {suggestions ? suggestions.map((suggestion, index) => (
+                            <Div key={index} style={{ flex: '1 1 33%' }}>
+                                <PlayerCard clanId={clanId} playerInfo={suggestion} searchMode={searchMode} />
+                            </Div>
+                        ))
+                            :
+                            null
+                        }
+                    </Div>
+                </ScrollBox>
             </Div>
         </Div>
     )

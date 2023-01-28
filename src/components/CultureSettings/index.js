@@ -72,77 +72,98 @@ export default function CultureSettings({ groupInfo, clanId }) {
     return (
         <>
             <Div p={{ x: "1rem", y: "0.5rem" }} d="flex" flexDir="column" flexWrap="wrap">
-                <Text textColor="cbWhite" textSize="heading">
-                    Culture Settings
-                </Text>
+                <Div m={{ b: "0.5rem" }}>
+                    <Text textColor="cbWhite" textSize="heading">
+                        Culture Settings
+                    </Text>
+                </Div>
                 <Div m={{ x: "1rem" }}>
-                    <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
-                        Clan Name
-                    </Text>
-                    <Input
-                        placeholder={'Clan Name'}
-                        m={{ x: "1rem", b: "1rem" }}
-                        bg='cbGrey1'
-                        border="0px solid"
-                        textColor="cbWhite"
-                        textSize="subheader"
-                        fontFamily="Primary"
-                        value={clanName}
-                        onChange={e => setClanName((e.target.value).slice(0, 25))}
-                        onKeyDown={onKeyDown}
-                    />
+                    <Div d={{ xs: "block", md: "flex"}} align="center" m={{ y: "0.5rem" }}>
+                        <Text textColor="cbWhite" textSize="subheader" minW="6rem">
+                            Clan Name
+                        </Text>
+                        <Div flexGrow="1">
+                            <Input
+                                placeholder={'Clan Name'}
+                                m={{ x: "0.5rem" }}
+                                h="2rem"
+                                bg='cbGrey1'
+                                border="0px solid"
+                                textColor="cbWhite"
+                                textSize="paragraph"
+                                fontFamily="Primary"
+                                value={clanName}
+                                onChange={e => setClanName((e.target.value).slice(0, 25))}
+                                onKeyDown={onKeyDown}
+                            />
+                        </Div>
+                    </Div>
 
-                    <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
-                        Callsign
-                    </Text>
-                    <Input
-                        placeholder={'Callsign'}
-                        m={{ x: "1rem", b: "1rem" }}
-                        bg='cbGrey1'
-                        border="0px solid"
-                        textColor="cbWhite"
-                        textSize="subheader"
-                        fontFamily="Primary"
-                        value={callsign}
-                        onChange={e => setCallsign((e.target.value).slice(0, 4))}
-                        onKeyDown={onKeyDown}
-                    />
+                    <Div d={{ xs: "block", md: "flex"}} align="center" m={{ y: "0.5rem" }}>
+                        <Text textColor="cbWhite" textSize="subheader" minW="6rem">
+                            Callsign
+                        </Text>
+                        <Div flexGrow="1">
+                            <Input
+                                placeholder={'Callsign'}
+                                m={{ x: "0.5rem" }}
+                                h="2rem"
+                                bg='cbGrey1'
+                                border="0px solid"
+                                textColor="cbWhite"
+                                textSize="paragraph"
+                                fontFamily="Primary"
+                                value={callsign}
+                                onChange={e => setCallsign((e.target.value).slice(0, 4))}
+                                onKeyDown={onKeyDown}
+                            />
+                        </Div>
+                    </Div>
 
-                    <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
-                        Clan Motto
-                    </Text>
-                    <Input
-                        placeholder={'Clan Motto'}
-                        m={{ x: "1rem", b: "1rem" }}
-                        bg='cbGrey1'
-                        border="0px solid"
-                        textColor="cbWhite"
-                        textSize="subheader"
-                        fontFamily="Primary"
-                        value={motto}
-                        onChange={e => setMotto((e.target.value).slice(0, 100))}
-                        onKeyDown={onKeyDown}
-                    />
+                    <Div d={{ xs: "block", md: "flex"}} align="center" m={{ y: "0.5rem" }}>
+                        <Text textColor="cbWhite" textSize="subheader" minW="6rem">
+                            Clan Motto
+                        </Text>
+                        <Div flexGrow="1">
+                            <Input
+                                placeholder={'Clan Motto'}
+                                m={{ x: "0.5rem" }}
+                                h="2rem"
+                                bg='cbGrey1'
+                                border="0px solid"
+                                textColor="cbWhite"
+                                textSize="paragraph"
+                                fontFamily="Primary"
+                                value={motto}
+                                onChange={e => setMotto((e.target.value).slice(0, 100))}
+                                onKeyDown={onKeyDown}
+                            />
+                        </Div>
+                    </Div>
 
-                    <Text textColor="cbWhite" textSize="title" m={{ y: "0.5rem" }}>
-                        About Us
-                    </Text>
-                    <Textarea
-                        placeholder={'About Us'}
-                        m={{ x: "1rem", b: "1rem" }}
-                        bg='cbGrey1'
-                        border="0px solid"
-                        textColor="cbWhite"
-                        textSize="subheader"
-                        maxW="5rem"
-                        fontFamily="Primary"
-                        value={about}
-                        onChange={e => setAbout((e.target.value).slice(0, 1000))}
-                    />
+                    <Div m={{ y: "1rem" }}>
+                        <Text textColor="cbWhite" textSize="subheader" m={{ b: "0.5rem" }}>
+                            About Us
+                        </Text>
+                        <Textarea
+                            placeholder={'About Us'}
+                            m={{ x: "0.5rem" }}
+                            bg='cbGrey1'
+                            border="0px solid"
+                            textColor="cbWhite"
+                            textSize="paragraph"
+                            maxW="5rem"
+                            fontFamily="Primary"
+                            value={about}
+                            onChange={e => setAbout((e.target.value).slice(0, 1000))}
+                        />
+                    </Div>
 
-                    <Button bg="cbGrey1" textColor="cbWhite" hoverTextColor="cbBlue" textSize="subheader" m={{ t: "1.5rem" }} onClick={() => setPendingSave(true)}>
-                        Save
-                    </Button>
+                    <Div d="flex" justify="flex-end" m={{ t: "1.5rem" }}>
+                        <Button bg="cbGrey1" textColor="cbWhite" hoverTextColor="cbBlue" textSize="subheader" onClick={() => setPendingSave(true)}>
+                            Save
+                        </Button>
+                    </Div>
                 </Div>
             </Div>
             <SuccessNotification success={success} setSuccess={setSuccess}>

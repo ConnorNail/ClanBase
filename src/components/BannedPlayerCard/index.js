@@ -43,19 +43,23 @@ export default function BannedPlayerCard({ clanId, playerInfo }) {
     return (
         <>
             {!handled ?
-                <Div bg="cbGrey1" rounded="md" m="0.5rem" d="flex" align="center" shadow="2" hoverShadow="4">
-                    <Image h="2.5rem" w="auto" rounded="md" src={pfp()} alt=""/>
-                    <Text textColor="cbWhite" textSize="paragraph" m={{ y: "0", l: "0.5rem" }}>
-                        {playerInfo?.destinyUserInfo?.bungieGlobalDisplayName}
-                    </Text>
-                    <Text textColor="cbGrey2" textSize="body" m={{ y: "0" }}>
-                        #{playerInfo?.destinyUserInfo?.bungieGlobalDisplayNameCode}
-                    </Text>
-                    <Button bg="cbGrey1" m={{ l: "auto" }} textSize="subheader" textColor="cbGrey3" hoverTextColor={"cbBlue"}
-                        onClick={() => setUnbanModal(true)}
-                    >
-                        Unban
-                    </Button>
+                <Div bg="cbGrey1" rounded="md" m="0.5rem" d="flex" align="center" flexWrap="wrap" shadow="2" hoverShadow="4">
+                    <Div d="flex" align="center">
+                        <Image h="2.5rem" w="auto" rounded="md" src={pfp()} alt="" />
+                        <Text textColor="cbWhite" textSize="paragraph" m={{ y: "0", l: "0.5rem" }}>
+                            {playerInfo?.destinyUserInfo?.bungieGlobalDisplayName}
+                        </Text>
+                        <Text textColor="cbGrey2" textSize="body" m={{ y: "0" }}>
+                            #{playerInfo?.destinyUserInfo?.bungieGlobalDisplayNameCode}
+                        </Text>
+                    </Div>
+                    <Div d="flex" align="center" m={{sm: "0 0 0 auto" }}>
+                        <Button bg="cbGrey1" textSize="subheader" textColor="cbGrey3" hoverTextColor={"cbBlue"}
+                            onClick={() => setUnbanModal(true)}
+                        >
+                            Unban
+                        </Button>
+                    </Div>
                 </Div>
                 :
                 null}

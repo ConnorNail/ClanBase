@@ -52,29 +52,33 @@ export default function PendingPlayerCard({ clanId, playerInfo }) {
     return (
         <>
             {!handled ?
-                <Div bg="cbGrey1" rounded="md" m="0.5rem" d="flex" align="center" shadow="2" hoverShadow="4">
-                    <Image h="2.5rem" w="auto" rounded="md" src={pfp()} alt="player icon"/>
-                    <Text textColor="cbWhite" textSize="paragraph" m={{ y: "0", l: "0.5rem" }}>
-                        {playerInfo?.destinyUserInfo?.bungieGlobalDisplayName}
-                    </Text>
-                    <Text textColor="cbGrey2" textSize="body" m={{ y: "0" }}>
-                        #{playerInfo?.destinyUserInfo?.bungieGlobalDisplayNameCode}
-                    </Text>
-                    <Button bg="cbGrey1" m={{ l: "auto" }} textSize="subheader" textColor="cbGrey3" hoverTextColor={"cbBlue"}
-                        onClick={() => setBanModal(true)}
-                    >
-                        Ban
-                    </Button>
-                    <Button bg="cbGrey1" textSize="subheader" textColor="cbGrey3" hoverTextColor={"cbBlue"}
-                        onClick={() => setDenyPending(true)}
-                    >
-                        Deny
-                    </Button>
-                    <Button bg="cbGrey1" textSize="subheader" textColor="cbGrey3" hoverTextColor={"cbBlue"}
-                        onClick={() => setApprovePending(true)}
-                    >
-                        Approve
-                    </Button>
+                <Div bg="cbGrey1" rounded="md" m="0.5rem" shadow="2" hoverShadow="4" d="flex" align="center" flexWrap="wrap">
+                    <Div d="flex" align="center">
+                        <Image h={{ xs: "2rem", md: "2.5rem" }} w="auto" rounded="md" src={pfp()} alt="player icon" />
+                        <Text textColor="cbWhite" textSize={{ xs: "body", md: "paragraph" }} m={{ y: "0", l: "0.5rem" }}>
+                            {playerInfo?.destinyUserInfo?.bungieGlobalDisplayName}
+                        </Text>
+                        <Text textColor="cbGrey2" textSize="body" m={{ y: "0" }}>
+                            #{playerInfo?.destinyUserInfo?.bungieGlobalDisplayNameCode}
+                        </Text>
+                    </Div>
+                    <Div d="flex" align="center" m={{sm: "0 0 0 auto" }}>
+                        <Button bg="cbGrey1" textSize={{ xs: "body", md: "paragraph" }} textColor="cbGrey3" hoverTextColor={"cbBlue"} h={{ xs: "2rem", md: "2.5rem" }}
+                            onClick={() => setBanModal(true)}
+                        >
+                            Ban
+                        </Button>
+                        <Button bg="cbGrey1" textSize={{ xs: "body", md: "paragraph" }} textColor="cbGrey3" hoverTextColor={"cbBlue"} h={{ xs: "2rem", md: "2.5rem" }}
+                            onClick={() => setDenyPending(true)}
+                        >
+                            Deny
+                        </Button>
+                        <Button bg="cbGrey1" textSize={{ xs: "body", md: "paragraph" }} textColor="cbGrey3" hoverTextColor={"cbBlue"} h={{ xs: "2rem", md: "2.5rem" }}
+                            onClick={() => setApprovePending(true)}
+                        >
+                            Approve
+                        </Button>
+                    </Div>
                 </Div>
                 :
                 null}

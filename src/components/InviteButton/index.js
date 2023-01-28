@@ -19,12 +19,11 @@ function InviteButton({ membershipId, memberType, clanId }) {
         }
 
         return (
-            <Button bg="cbGrey1" m={{ l: "auto" }} textSize="subheader" textColor="cbGrey3" hoverTextColor={pending ? "cbGrey3" : "cbBlue"}
+            <Button bg="cbGrey1" m={{ sm: "0 0 0 auto" }} textSize={{ xs: "body", md: "paragraph" }} textColor="cbGrey3" hoverTextColor={pending ? "cbGrey3" : "cbBlue"} h={{ xs: "2rem", md: "2.5rem" }}
                 onClick={() => setSendInvite(true)}
             >
                 {pending == true ? 'Pending' : 'Invite'}
             </Button>
-
         )
     }
     return null

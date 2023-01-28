@@ -9,7 +9,7 @@ const DropdownSelect = ({ value, setValue, list, display }) => {
             return (
                 <>
                     {list.map((item, index) => (
-                        <Anchor key={index} textColor="cbGrey2" hoverTextColor="cbBlue" textSize="subheader" m={{ y: "0.5rem" }}
+                        <Anchor key={index} textColor="cbGrey2" hoverTextColor="cbBlue" textSize="paragraph" m={{ y: "0.5rem" }}
                             onClick={() => {
                                 setValue(item)
                                 setOpen(false)
@@ -34,10 +34,11 @@ const DropdownSelect = ({ value, setValue, list, display }) => {
                 </Div>
             }
             bg='cbGrey1'
+            h="2rem"
             focusBg="cbGrey1"
             border="0px solid"
             textColor="cbWhite"
-            textSize="subheader"
+            textSize="paragraph"
             fontFamily="Primary"
             openSuffix={<Icon name="UpArrow" size="20px" color="cbBlue" />}
             closeSuffix={<Icon name="DownArrow" size="20px" color="cbBlue" />}

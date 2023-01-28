@@ -15,10 +15,12 @@ import AdminRoster from '../components/AdminRoster';
 import CultureSettings from '../components/CultureSettings';
 import GeneralSettings from '../components/GeneralSettings';
 import useGetUserInfo from '../functions/useGetUserInfo';
+import useGetPendingMemberships from '../functions/useGetPendingMemberships';
 
 export default function Admin() {
     const [tab, setTab] = useState('General')
     const [showDropdown, setShowDropdown] = useState(false)
+    const [pending, setPending] = useState(0)
 
     const { data, status } = useSession()
 
@@ -30,6 +32,10 @@ export default function Admin() {
     const clanId = groupInfo ? groupInfo?.Response?.results[0]?.group?.groupId : null
 
     const clanInfo = useGetClanInfoImut(clanId)
+
+    // Pending member count
+    const pendingMembers = useGetPendingMemberships(clanId)
+    const pendingMemberCount = pendingMembers?.Response?.results.length
 
     // If member is admin (3) or founder (5)
     const memberType = findMemberType(clanId, ids)
@@ -45,9 +51,10 @@ export default function Admin() {
     const canSendInvites = !invitePermissionOverride && memberType == 3 ? false : true
     const canEditCulture = !updateCulturePermissionOverride && memberType == 3 ? false : true
 
-    function AdminMenuButtons({ children, toggleValue }) {
+    function AdminMenuButtons({ children, toggleValue, index }) {
         return (
             <Button
+                index={index}
                 flexGrow="1"
                 bg="cbGrey2"
                 textColor={tab == toggleValue ? "cbWhite" : "cbGrey1"}
@@ -57,27 +64,37 @@ export default function Admin() {
                 hoverShadow="4"
                 m="0.5rem"
                 h="3rem"
-                style={{lineHeight: "normal"}}
+                style={{ lineHeight: "normal" }}
                 onClick={() => setTab(toggleValue)}
             >
                 {children}
+                {children == 'Pending' && pendingMemberCount > 0 ?
+                    <Div m={{ l: "0.5rem" }} bg="cbBlue" w="1.35rem" h="1.35rem" rounded="circle">
+                        <Text textColor="cbGrey2" textSize="body">
+                            {pendingMemberCount}
+                        </Text>
+                    </Div>
+                    :
+                    null
+                }
             </Button>
         )
     }
 
-    function AdminDropdown({tabList}) {
+    function AdminDropdown({ tabList }) {
         const menuList = (
             <Div bg="cbGrey2" m={{ t: "-0.25rem" }} rounded="0 0 5px 5px">
                 {tabList.map((tabName, index) => (
                     <Div key={index}>
                         <Anchor
-                        textSize="subheader"
-                        textColor="cbWhite"
-                        p={{x: "2rem", y: "0.5rem"}}
-                        onClick={() => {
-                            setShowDropdown(false)
-                            setTab(tabName)
-                        }}
+                            textSize="subheader"
+                            textColor="cbWhite"
+                            hoverTextColor="cbWhite"
+                            p={{ x: "2rem", y: "0.5rem" }}
+                            onClick={() => {
+                                setShowDropdown(false)
+                                setTab(tabName)
+                            }}
                         >
                             {tabName}
                         </Anchor>
@@ -112,12 +129,12 @@ export default function Admin() {
         return (
             <Div align="center" d={{ xs: "none", md: "flex" }}>
                 {tabList.map((tabName, index) => (
-                    <Div key={index}>
-                        {index != 0 ? <Div bg="cbWhite" h="3rem" w="0.1rem" /> : null}
-                        <AdminMenuButtons toggleValue={tabName}>
+                    <>
+                        {index != 0 ? <Div bg="cbWhite" h="3rem" w="0.1rem" index={index} /> : null}
+                        <AdminMenuButtons toggleValue={tabName} index={index}>
                             {tabName}
                         </AdminMenuButtons>
-                    </Div>
+                    </>
                 ))}
             </Div>
         )
@@ -166,12 +183,14 @@ export default function Admin() {
             case 'Invitations':
                 return (
                     <Div d="flex" flexDir="column">
-                        <InfoBox bg={'cbGrey2'} m={{ x: "1rem", t: "1rem", b: "0.5rem" }}>
-                            <InvitedMembers clanId={clanId} />
-                        </InfoBox>
-                        <InfoBox bg={'cbGrey2'} m={{ x: "1rem", t: "0.5rem", b: "1rem" }}>
-                            <PlayerSearchBar clanId={clanId} />
-                        </InfoBox>
+                        <Col>
+                            <InfoBox bg={'cbGrey2'} m={{ b: "0.5rem" }}>
+                                <InvitedMembers clanId={clanId} />
+                            </InfoBox>
+                            <InfoBox bg={'cbGrey2'} m={{ b: "1rem" }}>
+                                <PlayerSearchBar clanId={clanId} />
+                            </InfoBox>
+                        </Col>
                     </Div>
                 )
             case 'Bans':
@@ -215,7 +234,7 @@ export default function Admin() {
                         {clanId && groupInfo ?
                             <>
                                 <AdminTabs tabList={availableTabs()} />
-                                <AdminDropdown tabList={availableTabs()}/>
+                                <AdminDropdown tabList={availableTabs()} />
                                 {status == 'authenticated' ?
                                     <AdminTabContent />
                                     :
