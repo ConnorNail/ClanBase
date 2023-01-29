@@ -123,7 +123,7 @@ export default function ClanPage() {
               </InfoBox>
             </Col>
           </Row>
-          <Row m={{ y: "1rem" }}>
+          <Row>
             <Col>
               <InfoBox bg="cbGrey1">
                 <Text textColor="cbWhite" textSize="heading">

@@ -142,8 +142,7 @@ export default function useSetupMemberTimeTable(data) {
                     },
                 ]
             }
-        ],
-        [data]
+        ]
     );
 
     return [columns, data]

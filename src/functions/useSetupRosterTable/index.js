@@ -80,8 +80,7 @@ export default function useSetupRosterTable(data, memberIndex, setMemberIndex) {
                     },
                 ]
             }
-        ],
-        []
+        ]
     );
 
     return [columns, data]

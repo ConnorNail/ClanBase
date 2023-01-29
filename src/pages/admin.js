@@ -53,10 +53,9 @@ export default function Admin() {
     const canSendInvites = !invitePermissionOverride && memberType == 3 ? false : true
     const canEditCulture = !updateCulturePermissionOverride && memberType == 3 ? false : true
 
-    function AdminMenuButtons({ children, toggleValue, index }) {
+    function AdminMenuButtons({ children, toggleValue }) {
         return (
             <Button
-                index={index}
                 flexGrow="1"
                 bg="cbGrey2"
                 textColor={tab == toggleValue ? "cbWhite" : "cbGrey1"}
@@ -131,12 +130,12 @@ export default function Admin() {
         return (
             <Div align="center" d={{ xs: "none", md: "flex" }}>
                 {tabList.map((tabName, index) => (
-                    <>
-                        {index != 0 ? <Div bg="cbWhite" h="3rem" w="0.1rem" index={index} /> : null}
-                        <AdminMenuButtons toggleValue={tabName} index={index}>
+                    <Div align="center" d={{ xs: "none", md: "flex" }} flexGrow="1" key={index}>
+                        {index != 0 ? <Div bg="cbWhite" h="3rem" w="0.1rem" /> : null}
+                        <AdminMenuButtons toggleValue={tabName}>
                             {tabName}
                         </AdminMenuButtons>
-                    </>
+                    </Div>
                 ))}
             </Div>
         )
