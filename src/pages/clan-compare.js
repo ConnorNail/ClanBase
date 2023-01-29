@@ -68,14 +68,14 @@ export default function ClanCompare() {
                             CLAN COMPARE
                         </Text> */}
                     </Row>
-                    <Row>
+                    <Row d="flex" justify="center">
                         {clanids.map((id, index) => (
                             <Div key={index}>
                                 <ClanCard clanId={id} />
                             </Div>
                         ))}
                         {clanCount < maxCards ?
-                            <InfoBox bg="cbGrey2">
+                            <InfoBox bg="cbGrey1" m="0.5rem">
                                 <Div p={{ x: "1rem" }} h="25rem" w="14.5rem" d="flex" align="center auto">
                                     <Col>
                                         <Text textSize="title" p={{ b: "1rem" }} textAlign="center" textColor="cbWhite">

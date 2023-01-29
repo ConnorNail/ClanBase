@@ -23,7 +23,7 @@ export default function ClanRoster({ clanMemberInfo, clanMemberProfiles, memberI
 
             // Format date for roster table
             const date = new Date()
-            const memberDate = new Date(entry.memberProfile.data.dateLastPlayed)
+            const memberDate = entry?.memberProfile?.data?.dateLastPlayed ? new Date(entry.memberProfile.data.dateLastPlayed) : null
             const dateDiff = Math.trunc((date - memberDate) / 1000 / 60 / 60 / 24)
             entry.daysSinceLastPlayed = isOnline == "Online" ? -1 : dateDiff
 

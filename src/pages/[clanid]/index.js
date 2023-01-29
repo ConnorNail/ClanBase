@@ -123,7 +123,7 @@ export default function ClanPage() {
               </InfoBox>
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
             <Col>
               <InfoBox bg="cbGrey1">
                 <Text textColor="cbWhite" textSize="heading">
@@ -149,7 +149,7 @@ export default function ClanPage() {
                 </Row>
               </InfoBox>
             </Col>
-          </Row>
+          </Row> */}
         </Col>
       </Div >
     </DefaultTemplate >

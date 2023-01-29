@@ -1,4 +1,4 @@
-import { Div, Text, Row, Col, Button, Icon } from "atomize";
+import { Div, Text, Row, Col, Button, Icon, Anchor } from "atomize";
 import InfoBox from '../InfoBox'
 import { useRouter } from 'next/router';
 import getClanInfo from "../../functions/useGetClanInfo";
@@ -6,6 +6,7 @@ import getClanMemberInfo from "../../functions/getClanMemberProfileInfo/useGetCl
 import getClanMembersAllTimeStats from "../../functions/useGetClanMembersAllTimeStats";
 import getAllMembersProfile from '../../functions/getClanMemberProfileInfo/useGetAllMembersProfile';
 import Bracket from "../BracketSimple";
+import Link from 'next/link'
 
 const ClanCard = ({ clanId, stats }) => {
 
@@ -146,7 +147,7 @@ const ClanCard = ({ clanId, stats }) => {
             const daysDisplayPvP = daysPvP > 0 ? daysPvP + (daysPvP == 1 ? " day " : " days ") : "";
             const yearsDisplayPvP = yearsPvP > 0 ? yearsPvP + (yearsPvP == 1 ? " year " : " years ") : "";
 
-            return [clanPlaytimePvE, clanPlaytimePvP]//[yearsDisplayPve + daysDisplayPvE, yearsDisplayPvP + daysDisplayPvP]
+            return [yearsDisplayPve + daysDisplayPvE, yearsDisplayPvP + daysDisplayPvP]
         }
     }
 
@@ -166,7 +167,7 @@ const ClanCard = ({ clanId, stats }) => {
                 }
             }
 
-            return [clanActivitesPvE, clanActivitesPvP]//[clanActivitesPvE.toLocaleString(), clanActivitesPvP.toLocaleString()]
+            return [clanActivitesPvE.toLocaleString(), clanActivitesPvP.toLocaleString()]
         }
     }
 
@@ -284,14 +285,16 @@ const ClanCard = ({ clanId, stats }) => {
     }
 
     return (
-        <InfoBox bg="cbGrey2" h="100%">
+        <InfoBox bg="cbGrey1" h="100%" m="0.5rem">
             <Div p={{ x: "1rem" }} minW="14.5rem">
                 <Row>
                     <Col d="flex" align="center">
                         {clanInfo?.Response?.detail?.name ?
-                            <Text textSize="title" textColor="cbWhite">
+                        <Link href={"/" + clanId}>
+                            <Anchor textSize="title" textColor="cbWhite" hoverTextColor="cbBlue">
                                 {clanInfo?.Response?.detail?.name}
-                            </Text> :
+                            </Anchor> 
+                            </Link>:
                             <Icon name="Loading3" size="24px" color="cbWhite" transform='translateY(15%)' />
                         }
                     </Col>
@@ -299,7 +302,7 @@ const ClanCard = ({ clanId, stats }) => {
                         <Button
                             h="2rem"
                             w="2rem"
-                            bg="cbGrey1"
+                            bg="cbGrey2"
                             hoverBg="cbGrey3"
                             rounded="circle"
                             shadow="2"
