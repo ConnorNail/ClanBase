@@ -71,7 +71,7 @@ const MemberStatCard = ({ timeData, membersInfo, membersProfiles, membersAllTime
     }
 
     return (
-        <Div d="flex" flexDir="column" p={{ x: "1rem" }} h="45rem">
+        <Div d="flex" flexDir="column" p={{ x: "1rem" }} minH="45rem">
             <Row>
                 <Col d="flex" justify="center">
                     {membersInfo && membersProfiles ?
@@ -124,7 +124,7 @@ const MemberStatCard = ({ timeData, membersInfo, membersProfiles, membersAllTime
             <Row bg="cbWhite" h="0.1rem" w="100%" m="0.1rem"></Row>
             <Row>
                 <Text textSize="title" textColor="cbGrey3" p={{ t: "0.25rem" }}>
-                    Seasonal Time
+                    Seasonal Hours Played
                 </Text>
             </Row>
             <Row>
@@ -138,7 +138,7 @@ const MemberStatCard = ({ timeData, membersInfo, membersProfiles, membersAllTime
                     {cleanDataPvE && cleanDataPvP ?
                         <Div w={{ xs: "20rem", sm: "35rem" }} h="25rem">
                             <ResponsiveContainer >
-                                <AreaChart data={selectedValue == 'PvE' ? cleanDataPvE[memberIndex] : cleanDataPvP[memberIndex]} margin={{ top: 30, bottom: 55, right: 15, left: 10 }}>
+                                <AreaChart data={selectedValue == 'PvE' ? cleanDataPvE[memberIndex] : cleanDataPvP[memberIndex]} margin={{ top: 30, bottom: 50, right: 25 }}>
                                     <defs>
                                         <linearGradient id="colorTime" x1="0" y1="0" x2="0" y2="1">
                                             <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
@@ -148,7 +148,7 @@ const MemberStatCard = ({ timeData, membersInfo, membersProfiles, membersAllTime
                                     <Area type="monotone" dataKey="time" stroke="#5DD7F2" strokeWidth="3" fill="url(#colorTime)" />
                                     <XAxis angle="-45" textAnchor="end" dataKey="date" stroke="#D9D9D9" interval="preserveEnd" />
                                     <YAxis stroke="#D9D9D9" label={{}}>
-                                        <Label value="Time [hrs]" angle="-90" position="insideLeft" style={{ textAnchor: 'middle', fontSize: '80%', fill: '#D9D9D9' }} />
+                                        {/* <Label value="hours" angle="-90" position="insideLeft" style={{ textAnchor: 'middle', fontSize: '80%', fill: '#D9D9D9' }} /> */}
                                     </YAxis>
                                     <Tooltip />
                                 </AreaChart>

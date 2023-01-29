@@ -60,7 +60,6 @@ export default function ClanPage() {
   return (
     <DefaultTemplate>
       <Div d="flex" justify="center">
-        {/* <Row > */}
         <Col size="11">
           <Row>
             <Col>
@@ -94,26 +93,6 @@ export default function ClanPage() {
               </InfoBox>
             </Col>
           </Row>
-          {/* <Row m={{ y: "1rem" }}>
-            <Col>
-              <InfoBox bg="cbGrey1">
-                <Text textColor="cbWhite" textSize="heading">
-                  Seasonal Time Data
-                </Text>
-                <Row d="flex" justify="center">
-                  <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
-                </Row>
-                <ScrollBox h={"35rem"}>
-                  <Div>
-                    <TimeTable memberSeasonalTime={memberSeasonalTimeStats} />
-                  </Div>
-                </ScrollBox>
-                <Row d="flex" justify="center">
-                  <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
-                </Row>
-              </InfoBox>
-            </Col>
-          </Row> */}
           <Row>
             <Col>
               <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>
@@ -123,14 +102,16 @@ export default function ClanPage() {
                 <Row d="flex" justify="center">
                   <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
                 </Row>
-                <ScrollBox h={"40.3rem"}>
-                  <Div d={{xs: "none", sm: "block"}}>
-                    <ClanRoster clanMemberInfo={clanMemberList} clanMemberProfiles={clanMemberProfiles} memberIndex={memberIndex} setMemberIndex={setMemberIndex} />
-                  </Div>
-                  <Div d={{xs: "block", sm: "none"}}>
-                    <ClanRosterMini clanMemberInfo={clanMemberList} clanMemberProfiles={clanMemberProfiles} />
-                  </Div>
-                </ScrollBox>
+                <Div h="40.3rem">
+                  <ScrollBox h={"40rem"}>
+                    <Div d={{ xs: "none", sm: "block" }}>
+                      <ClanRoster clanMemberInfo={clanMemberList} clanMemberProfiles={clanMemberProfiles} memberIndex={memberIndex} setMemberIndex={setMemberIndex} />
+                    </Div>
+                    <Div d={{ xs: "block", sm: "none" }}>
+                      <ClanRosterMini clanMemberInfo={clanMemberList} clanMemberProfiles={clanMemberProfiles} />
+                    </Div>
+                  </ScrollBox>
+                </Div>
                 <Row d="flex" justify="center">
                   <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
                 </Row>
@@ -142,8 +123,34 @@ export default function ClanPage() {
               </InfoBox>
             </Col>
           </Row>
+          <Row m={{ y: "1rem" }}>
+            <Col>
+              <InfoBox bg="cbGrey1">
+                <Text textColor="cbWhite" textSize="heading">
+                  Seasonal Time Data
+                </Text>
+                <Row d="flex" justify="center">
+                  <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
+                </Row>
+                <Div d={{ xs: "none", lg: "block" }}>
+                  <ScrollBox h={"35rem"}>
+                    <Div>
+                      <TimeTable memberSeasonalTime={memberSeasonalTimeStats} />
+                    </Div>
+                  </ScrollBox>
+                </Div>
+                <Div d={{ xs: "block", lg: "none" }}>
+                  <Text textColor="cbWhite" textSize="paragraph" p={{ x: "0.5rem" }}>
+                    Data table is available on larger devices
+                  </Text>
+                </Div>
+                <Row d="flex" justify="center">
+                  <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
+                </Row>
+              </InfoBox>
+            </Col>
+          </Row>
         </Col>
-        {/* </Row> */}
       </Div >
     </DefaultTemplate >
   )
