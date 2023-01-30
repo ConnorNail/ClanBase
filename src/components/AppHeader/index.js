@@ -14,38 +14,37 @@ const AppHeader = () => {
 
     return (
         <header>
-            <Div bgImg="../redbar.svg" bgPos="top left" bgSize="cover" bgRepeat="no-repeat" border={{ b: "1px solid" }} borderColor="cbWhite" rounded="0 0 5px 5px">
+            <Div bg="cbRed" border={{ b: "1px solid" }} borderColor="cbWhite">
                 <Row>
-                    <Col size="flex">
+                    <Col size="auto">
                         <Div>
-                            <Button m="1rem" h="auto" w="6rem" hoverShadow="4" p="0rem" bg="none" onClick={() => router.push("/")}>
+                            <Button m="1rem" h="auto" w="4rem" hoverShadow="4" p="0rem" bg="none" onClick={() => router.push("/")}>
                                 <Image src="../clanbaseLogo.svg" alt="ClanBase Logo"/>
                             </Button>
                         </Div>
                     </Col>
-                    <Col size="flex" d={{ xs: "none", md: "block" }}>
-                        <Row p={{ t: "1.5rem" }}>
+                    <Col size="auto" d={{ xs: "none", md: "block" }}>
+                        <Row>
                             {pageList.map((list, index) => (
-                                <Col key={index}>
+                                <Div key={index}>
                                     <Link href={list.link}>
-                                        <Anchor p={{ l: "2rem", r: "2rem" }} d="flex" flexDir="column" textSize="title" textAlign="center" textColor="cbWhite" hoverTextColor="black800">
+                                        <Anchor p={{ x: "2rem" }} textSize="title" textAlign="center" textColor="cbWhite" hoverTextColor="cbBlue">
                                             {list.name}
                                         </Anchor>
                                     </Link>
-                                </Col>
+                                </Div>
                             ))}
                         </Row>
-                        <Row p={{ t: "1.5rem" }}>
+                        <Row>
                             <Col>
                                 <SearchBar />
                             </Col>
                         </Row>
                     </Col>
-                    <Col ></Col>
-                    <Col size="flex" align="flex-end">
-                        <Row transform="translate(0%, 40%)" p={{ r: "2rem" }}>
+                    <Col d="flex" justify="flex-end">
+                        <Div m="1rem">
                             <LoginButton/>
-                        </Row>
+                        </Div>
                     </Col>
                     <Col size="flex" d={{ xs: "block", md: "none" }} align="flex-end">
                         <Row transform="translate(0%, 40%)" p={{ r: "2rem" }}>

@@ -10,16 +10,16 @@ export default class MyApp extends App {
     const { Component, pageProps: { session, ...pageProps } } = this.props
     return (
       <SessionProvider session={session}>
-        <StyletronProvider value={styletron}>
-          <SWRConfig
-            value={{
-              revalidateOnFocus: false,
-              refreshInterval: 900000
-            }}
-          >
+        <SWRConfig
+          value={{
+            revalidateOnFocus: false,
+            refreshInterval: 900000
+          }}
+        >
+          <StyletronProvider value={styletron}>
             <Component {...pageProps} />
-          </SWRConfig>
-        </StyletronProvider>
+          </StyletronProvider>
+        </SWRConfig>
       </SessionProvider>
     )
   }

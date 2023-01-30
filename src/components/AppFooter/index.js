@@ -16,7 +16,7 @@ const AppFooter = () => {
                     <Div bg="cbWhite" w="50%" h="0.75rem" rounded="10px 10px 0 0"></Div>
                 </Div>
             </Div>
-            <Div bg="cbRed" border={{ t: "1px solid" }} borderColor="cbWhite" rounded="5px 5px 0 0">
+            <Div bg="cbRed" border={{ t: "1px solid" }} borderColor="cbWhite">
                 <Row p={{ t: "1rem", l: "2rem", r: "2rem" }}>
                     <Col>
                         <Text textColor="cbWhite" textSize="caption">

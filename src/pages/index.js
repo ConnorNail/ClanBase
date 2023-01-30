@@ -1,4 +1,3 @@
-import { styled, useStyletron } from 'styletron-react'
 import DefaultTemplate from '../components/DefaultLayout'
 import SearchBar from '../components/SearchBar'
 import LoginButton from '../components/LoginButton'
@@ -6,28 +5,13 @@ import LoginButtonDiscord from '../components/LoginButtonDiscord'
 import { useRouter } from 'next/router'
 import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
 
-// statically styled component
-const Title = styled('h1', {
-  color: 'red',
-  fontSize: '82px',
-})
-
-// dynamically styled component
-const SubTitle = styled('h2', ({ $size }) => ({
-  color: 'blue',
-  fontSize: `${$size}px`,
-}))
-
 export default function Home() {
-  // an alternative hook based API
-  const [css] = useStyletron()
-
   const router = useRouter()
 
   return (
     <DefaultTemplate>
-      <Div h="100vh" bgImg="../destinybackground.png" bgPos="top" bgSize="auto" bgRepeat="no-repeat" m={{ x: "-0.5rem", y: "-1.5rem" }}>
-        <Div h="100vh" bgImg="../destinyimage1.png" bgPos="center" bgSize="auto" bgRepeat="no-repeat" d="flex">
+      <Div h="100vh" bgImg="../destinybackground.jpg" bgPos="top" bgSize="auto" bgRepeat="no-repeat" m={{ x: "-0.5rem", y: "-2.5rem" }}>
+        <Div h="100vh" bgPos="center" d="flex">
           <Col size={{ xs: "0", md: "3" }}>
             <Div m={{ t: "5rem" }} d={{ xs: "none", md: "block" }}>
               <Div bg="cbWhite" h="3rem" w="0.1rem" m={{ l: "2.3rem" }}></Div>
@@ -45,7 +29,7 @@ export default function Home() {
           </Col>
 
           <Col size={{ xs: "12", md: "6" }}>
-            <Row d="flex" flexDir="column" align="center">
+            <Row d="flex" flexDir="column" align="center" p={{t: "3rem"}}>
               <Text textSize="title" textAlign="center" textWeight="500" textColor="cbWhite" m={{ t: "3rem", b: "0rem" }}>
                 WELCOME TO
               </Text>
