@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Dropdown, Anchor, Div, Icon } from "atomize";
 import Link from 'next/link';
-import pageList from '../../functions/pageList';
+import pageList from '../../functions/usePageList';
 
 export default function MenuDropDown() {
     const [showDropdown, setShowDropdown] = useState(false)

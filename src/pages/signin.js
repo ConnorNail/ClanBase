@@ -5,7 +5,7 @@ import InfoBox from '../components/InfoBox';
 import LoginButton from '../components/LoginButton';
 import { useRouter } from 'next/router'
 
-export default function privacy() {
+export default function Signin() {
   const { data: session, status } = useSession()
   const router = useRouter()
   

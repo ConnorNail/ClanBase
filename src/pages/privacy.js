@@ -2,7 +2,7 @@ import DefaultTemplate from '../components/DefaultLayout'
 import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
 import InfoBox from '../components/InfoBox';
 
-export default function privacy() {
+export default function Privacy() {
 
   return (
     <DefaultTemplate>

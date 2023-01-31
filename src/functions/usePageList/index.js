@@ -3,7 +3,7 @@ import getIdsForCurrentUser from "../getIdsForCurrentUser"
 import useGetUserInfo from "../useGetUserInfo"
 import getGroupsForMember from "../useGetGroupsForMember"
 
-const pageList = () => {
+const usePageList = () => {
     const { data, status } = useSession()
 
     const userData = useGetUserInfo(status)
@@ -29,4 +29,4 @@ const pageList = () => {
     ]
 }
 
-export default pageList;
+export default usePageList;
