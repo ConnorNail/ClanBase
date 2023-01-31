@@ -2,50 +2,37 @@
 import React, { useState } from 'react';
 import { Dropdown, Anchor, Div, Icon } from "atomize";
 import Link from 'next/link';
-import pageList from '../../functions/pageList'
+import pageList from '../../functions/pageList';
 
-const menuList = (
-    <Div p={{ x: "1rem", y: "0.5rem" }} bg="brand900" shadow="4">
-        {pageList.map((list, index) => (
-            <Link href={list.link} key={index}>
-                <Anchor d="block" p={{ y: "0.5rem", x: "0.5rem" }} textSize="subheader" textColor="gray100" hoverTextColor="gray400">
-                    {list.name}
-                </Anchor>
-            </Link>
-        ))}
-    </Div>
-);
+export default function MenuDropDown() {
+    const [showDropdown, setShowDropdown] = useState(false)
+    const pages = pageList()
 
-class MenuDropDown extends React.Component {
-    constructor(props) {
-        super(props);
+    const menuList = (
+        <Div p={{ x: "1rem", y: "0.5rem" }} bg="cbRed" shadow="4" rounded="0 0 5px 5px">
+            {pages.map((list, index) => (
+                <Link href={list.link} key={index}>
+                    <Anchor d="block" p={{ y: "0.5rem", x: "0.5rem" }} textSize="subheader" textColor="cbWhite" hoverTextColor="cbBlue" style={{ whiteSpace: "nowrap" }}>
+                        {list.name}
+                    </Anchor>
+                </Link>
+            ))}
+        </Div>
+    );
 
-        this.state = {
-            showDropdown: false,
-        };
-    }
-
-    render() {
-        const { showDropdown } = this.state;
-
-        return (
-            <Dropdown
-                bg="transparent"
-                focusBg="transparent"
-                border="transparent"
-                h="5rem"
-                direction="bottomright"
-                isOpen={showDropdown}
-                onClick={() =>
-                    this.setState({ showDropdown: !showDropdown })
-                }
-                openSuffix={<Icon name="UpArrow" size="80px" color="gray100" />}
-                closeSuffix={<Icon name="Menu" size="80px" color="gray100" />}
-                menu={menuList}
-            >
-            </Dropdown>
-        );
-    }
+    return (
+        <Dropdown
+            bg="transparent"
+            focusBg="transparent"
+            border="transparent"
+            h="3rem"
+            direction="bottomleft"
+            isOpen={showDropdown}
+            onClick={() => setShowDropdown(curentState => !curentState)}
+            openSuffix={<Icon name="UpArrow" size="50px" color="cbWhite" />}
+            closeSuffix={<Icon name="Menu" size="50px" color="cbWhite" />}
+            menu={menuList}
+        >
+        </Dropdown>
+    )
 }
-
-export default MenuDropDown;

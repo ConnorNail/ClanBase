@@ -9,47 +9,54 @@ import LoginButton from '../LoginButton';
 
 
 const AppHeader = () => {
-
     const router = useRouter()
+    const pages = pageList()
 
     return (
         <header>
             <Div bg="cbRed" border={{ b: "1px solid" }} borderColor="cbWhite">
                 <Row>
-                    <Col size="auto">
+                    <Col size="auto" d={{ xs: "flex", lg: "none" }} align="center">
+                        <Div m={{ x: "0.5rem" }}>
+                            <MenuDropDown />
+                        </Div>
+                    </Col>
+                    <Col d={{ xs: "none", lg: "block" }}>
                         <Div>
-                            <Button m="1rem" h="auto" w="4rem" hoverShadow="4" p="0rem" bg="none" onClick={() => router.push("/")}>
-                                <Image src="../clanbaseLogo.svg" alt="ClanBase Logo"/>
+                            <Button m="1rem" h="auto" w="4rem" p="0rem" bg="none" onClick={() => router.push("/")}>
+                                <Image src="../clanbaseLogo.svg" alt="ClanBase Logo" />
                             </Button>
                         </Div>
                     </Col>
-                    <Col size="auto" d={{ xs: "none", md: "block" }}>
-                        <Row>
-                            {pageList.map((list, index) => (
-                                <Div key={index}>
-                                    <Link href={list.link}>
-                                        <Anchor p={{ x: "2rem" }} textSize="title" textAlign="center" textColor="cbWhite" hoverTextColor="cbBlue">
-                                            {list.name}
-                                        </Anchor>
-                                    </Link>
-                                </Div>
-                            ))}
-                        </Row>
-                        <Row>
-                            <Col>
-                                <SearchBar />
-                            </Col>
-                        </Row>
-                    </Col>
-                    <Col d="flex" justify="flex-end">
-                        <Div m="1rem">
-                            <LoginButton/>
+                    <Col size="auto" d={{ xs: "none", lg: "flex" }} align="center">
+                        <Div>
+                            <Row d="flex" m="0.5rem">
+                                {pages.map((list, index) => (
+                                    <Div key={index}>
+                                        <Link href={list.link}>
+                                            <Anchor p={{ x: "2rem" }} textSize="title" textAlign="center" textColor="cbWhite" hoverTextColor="cbBlue">
+                                                {list.name}
+                                            </Anchor>
+                                        </Link>
+                                    </Div>
+                                ))}
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <SearchBar />
+                                </Col>
+                            </Row>
                         </Div>
                     </Col>
-                    <Col size="flex" d={{ xs: "block", md: "none" }} align="flex-end">
-                        <Row transform="translate(0%, 40%)" p={{ r: "2rem" }}>
-                            <MenuDropDown />
-                        </Row>
+                    <Col d="flex" justify="flex-end">
+                        <Div m="0.5rem">
+                            <LoginButton />
+                        </Div>
+                    </Col>
+                </Row>
+                <Row d={{ xs: "block", lg: "none" }} m="0.5rem">
+                    <Col>
+                        <SearchBar />
                     </Col>
                 </Row>
             </Div>
