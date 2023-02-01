@@ -4,7 +4,7 @@ import { styletron } from '../../styletron'
 import './index.css';
 import { SessionProvider } from "next-auth/react"
 import useSWR, { SWRConfig } from 'swr'
-import Layout from '../components/layout';
+// import Layout from '../components/layout';
 
 export default class MyApp extends App {
   render() {
