@@ -1,12 +1,11 @@
-import { Text, Div, Image, Icon, Row, Col } from "atomize";
-import getClanWeeklyRewards from "../../functions/useGetClanWeeklyRewards";
-import getClanEngramMilestone from "../../functions/useGetClanEngramMilestone";
+import { Text, Div, Image, Icon, Row, Col, Anchor } from "atomize";
 import ClanIconBox from '../../components/ClanIconBox';
 import PvEIcon from '../../components/PvEIcon';
 import PvPIcon from '../../components/PvPIcon';
 import ScrollBox from '../../components/ScrollBox';
 import ClanBannerSimple from '../../components/ClanBannerSimple';
 import ClanEngrams from '../../components/ClanEngrams';
+import Link from 'next/link'
 
 export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router }) {
     const loadingValue = (value, color) => {
@@ -31,7 +30,7 @@ export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router 
                         <Text textSize={{ xs: "heading", md: "display1" }} textColor="cbWhite" p={{ x: "0.5rem" }}>
                             {loadingValue(clanInfo?.Response?.detail?.name, "cbWhite")} [{loadingValue(clanInfo?.Response?.detail?.clanInfo?.clanCallsign, "cbWhite")}]
                         </Text>
-                        <Icon name="Settings" size="25px" color="cbBlue" hoverColor="cbGrey3" cursor="pointer" onClick={() => router.push('/admin')}/>
+                        <Icon name="Settings" size="25px" color="cbBlue" hoverColor="cbGrey3" cursor="pointer" onClick={() => router.push('/admin')} />
                     </Row>
                     <Row m="0" minW="18rem">
                         <Text textSize="paragraph" textColor="cbGrey2" p={{ x: "0.5rem" }}>
@@ -50,7 +49,11 @@ export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router 
                                 {clanStatScores?.PvE.toFixed()}
                             </Text> :
                             <Icon name="Loading3" size="20px" color="cbBlue" />}
-                        <Icon name="Info" size="20px" color="cbGrey2" hoverColor="cbGrey3" cursor="pointer" />
+                        <Link href="clan-score-explained">
+                            <Anchor>
+                                <Icon name="Info" size="20px" color="cbGrey2" hoverColor="cbGrey3" cursor="pointer" />
+                            </Anchor>
+                        </Link>
                     </Div>
                     <Div d="flex" align="center" m={{ x: "0.5rem" }}>
                         <PvPIcon />
@@ -59,7 +62,11 @@ export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router 
                                 {clanStatScores?.PvP.toFixed()}
                             </Text> :
                             <Icon name="Loading3" size="20px" color="cbBlue" />}
-                        <Icon name="Info" size="20px" color="cbGrey2" hoverColor="cbGrey3" cursor="pointer" />
+                        <Link href="clan-score-explained">
+                            <Anchor>
+                                <Icon name="Info" size="20px" color="cbGrey2" hoverColor="cbGrey3" cursor="pointer" />
+                            </Anchor>
+                        </Link>
                     </Div>
                 </Col>
             </Row>
