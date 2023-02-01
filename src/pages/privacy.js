@@ -44,7 +44,7 @@ export default function Privacy() {
               <Body>This usage data may be processed to analyze the use of the website and services. The processing is based on either your consent or our legitimate interests in monitoring and improving our website and services.</Body>
 
               <Title>Contact Information</Title>
-              <Body>If you have any questions or concerns regarding ClanBase's Privacy Policy, please contact the developer at <Anchor href="mailto: clanbasedev@gmail.com" target="_blank" textColor="cbBlue" hoverTextColor="cbBlue">clanbasedev@gmail.com</Anchor>.</Body>
+              <Body>If you have any questions or concerns regarding ClanBase&apos;s Privacy Policy, please contact the developer at <Anchor href="mailto: clanbasedev@gmail.com" target="_blank" textColor="cbBlue" hoverTextColor="cbBlue">clanbasedev@gmail.com</Anchor>.</Body>
 
               <Title>Effective Date</Title>
               <Body>This Privacy Policy is effective as of January 31, 2023.</Body>
