@@ -76,7 +76,7 @@ export default function ClanCompare() {
                         ))}
                         {clanCount < maxCards ?
                             <InfoBox bg="cbGrey1" m="0.5rem">
-                                <Div p={{ x: "1rem" }} h="25rem" w="14.5rem" d="flex" align="center auto">
+                                <Div p={{ x: "1rem" }} h="37.65rem" w="14.5rem" d="flex" align="center auto">
                                     <Col>
                                         <Text textSize="title" p={{ b: "1rem" }} textAlign="center" textColor="cbWhite">
                                             Add a Clan

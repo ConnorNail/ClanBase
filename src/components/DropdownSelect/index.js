@@ -1,5 +1,5 @@
 import { Icon, Dropdown, Div, Textarea, Text, Anchor, Button } from "atomize";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const DropdownSelect = ({ value, setValue, list, display }) => {
     const [open, setOpen] = useState(false)

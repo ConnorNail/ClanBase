@@ -271,11 +271,11 @@ const ClanCard = ({ clanId, stats }) => {
     const stat = (text, stat) => {
         return (
             <>
-                <Text textSize="paragraph" textColor="cbWhite" p={{ l: '1rem', r: '0.5rem' }} h="1.1rem">
+                <Text textSize="paragraph" textColor="cbWhite" p={{ l: '1rem', r: '0.5rem', y: '0.25rem' }} h="1.1rem">
                     {text}
                 </Text>
                 {stat ?
-                    <Text textSize="paragraph" textColor="cbBlue" h="1rem">
+                    <Text textSize="paragraph" textColor="cbBlue" h="1rem" p={{ y: '0.25rem' }}>
                         {stat}
                     </Text> :
                     <Icon name="Loading3" size="20px" color="cbWhite" transform='translateY(15%)' />
@@ -350,7 +350,7 @@ const ClanCard = ({ clanId, stats }) => {
                 </Row>
 
                 <Row>
-                    <Text textSize="subheader" textColor="cbWhite" p={{ l: '0.5rem', t: '0.5rem', b: '0.5rem' }} h="1rem">
+                    <Text textSize="subheader" textColor="cbWhite" p={{ l: '0.5rem', t: '0.75rem', b: '0.5rem' }} h="1rem">
                         PvP
                     </Text>
                 </Row>
@@ -377,7 +377,7 @@ const ClanCard = ({ clanId, stats }) => {
                 </Row>
 
                 <Row>
-                    <Text textSize="subheader" textColor="cbWhite" p={{ l: '0.5rem', t: '0.5rem', b: '0.5rem' }} h="1rem">
+                    <Text textSize="subheader" textColor="cbWhite" p={{ l: '0.5rem', t: '0.75rem', b: '0.5rem' }} h="1rem">
                         Endgame
                     </Text>
                 </Row>

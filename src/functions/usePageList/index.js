@@ -24,7 +24,7 @@ const usePageList = () => {
         },
         {
             name: "ABOUT US",
-            link: "/clan-page-example"
+            link: "/about-us"
         }
     ]
 }

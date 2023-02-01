@@ -1,12 +1,30 @@
-import { Button, Image, Text, Div, Icon } from "atomize";
+import { Button, Image, Text, Div, Icon, Dropdown } from "atomize";
 import { useSession, signIn, signOut } from "next-auth/react"
 import getIdsForCurrentUser from "../../functions/getIdsForCurrentUser";
 import useGetUserInfo from "../../functions/useGetUserInfo";
 import useGetPlayerProfile from "../../functions/useGetPlayerProfile";
 import getRecentChar from "../../functions/getRecentChar";
+import React, { useState } from 'react';
 
 const LoginButton = () => {
     const { data: session, status } = useSession()
+    const [open, setOpen] = useState(false)
+
+    const menu = () => {
+        return (
+            <Div bg="cbRed" rounded="0 0 5px 5px">
+                <Button
+                    p="0.5rem"
+                    bg="cbTransparent"
+                    textColor="cbWhite"
+                    hoverTextColor="cbBlue"
+                    onClick={() => signOut()}
+                >
+                    Signout
+                </Button>
+            </Div>
+        )
+    }
 
     const baseURL = 'https://www.bungie.net/'
 
@@ -24,19 +42,26 @@ const LoginButton = () => {
 
     if (session) {
         return (
-            <Button
-                h="3.5rem"
-                p="0.5rem"
-                bg="cbTransparent"
-                onClick={() => signOut()}
-            >
-                <Div d="flex" align="center">
+            <Div d="flex" align="center">
+                <Dropdown
+                    isOpen={open}
+                    onClick={() => setOpen(!open)}
+                    menu={menu()}
+                    bg='cbTransparent'
+                    focusBg="cbTransparent"
+                    border="0px solid"
+                    textColor="cbWhite"
+                    textSize="paragraph"
+                    fontFamily="Primary"
+                    openSuffix={<></>}
+                    closeSuffix={<></>}
+                >
                     <Text textSize="subheader" textColor="cbWhite" hoverTextColor="cbBlue">
                         {session?.user?.name}
                     </Text>
-                    {d2Path ? <Image h="2.5rem" w="auto" rounded="md" src={baseURL + d2Path} alt="" m={{ l: "0.75rem", r: "0.25rem" }}/> : <Icon name="Loading" size="20px" color="cbWhite" m={{ l: "0.75rem", r: "0.25rem" }}/>}
-                </Div>
-            </Button>
+                    {d2Path ? <Image h="2.5rem" w="auto" rounded="md" src={baseURL + d2Path} alt="" m={{ l: "0.75rem", r: "0.25rem" }} /> : <Icon name="Loading" size="20px" color="cbWhite" m={{ l: "0.75rem", r: "0.25rem" }} />}
+                </Dropdown>
+            </Div>
         )
     } else {
         return (
@@ -47,7 +72,7 @@ const LoginButton = () => {
                 onClick={() => signIn('bungie')}
             >
                 <Div d="flex" align="center">
-                    <Text textSize="subheader" textColor="cbWhite" hoverTextColor="cbBlue" style={{whiteSpace: "nowrap"}}>
+                    <Text textSize="subheader" textColor="cbWhite" hoverTextColor="cbBlue" style={{ whiteSpace: "nowrap" }}>
                         Sign in With Bungie
                     </Text>
                 </Div>

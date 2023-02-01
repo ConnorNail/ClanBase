@@ -12,6 +12,9 @@ const theme = {
         cbBlue: '#5DD7F2',
         cbGreen: '#4af063',
         cbRed: '#f03e1f'
+    },
+    fontFamily: {
+        primary: "Primary",
     }
 };
 
