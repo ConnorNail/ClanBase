@@ -1,23 +1,20 @@
-import { Button } from "atomize";
-import { useSession, signIn, signOut } from "next-auth/react"
+import { Text, Anchor, Div } from "atomize";
+import { useSession } from "next-auth/react"
+import Link from 'next/link'
 
 const LoginButtonDiscord = () => {
     const { data: session } = useSession()
 
     return (
-        <Button
-            h="3.5rem"
-            p={{ x: "1.5rem" }}
-            textSize="body"
-            textColor="cbWhite"
-            hoverTextColor="cbBlue"
-            bg="cbGrey1"
-            hoverBg="cbGrey2"
-            m={{ r: "0.5rem" }}
-            onClick={() => signIn('discord')}
-        >
-            Login
-        </Button>
+        <Link href="/api/discord/login">
+            <Anchor>
+                <Div d="flex" align="center" p="0.5rem">
+                    <Text textSize="subheader" textColor="cbWhite" hoverTextColor="cbBlue" style={{ whiteSpace: "nowrap" }}>
+                        Sign in With Discord
+                    </Text>
+                </Div>
+            </Anchor>
+        </Link>
     )
 }
 

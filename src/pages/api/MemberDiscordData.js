@@ -1,17 +1,17 @@
 import clientPromise from "./lib/mongodb";
 
 export default async function handler(req, res) {
-    try {
+    // try {
         const client = await clientPromise;
         const db = client.db("test");
 
         if (req.method === "POST") {
-            if (typeof req?.body?.clanId === 'string' && typeof req?.body?.guildId === 'string' && typeof req?.body?.clanName === 'string') {
+            if (typeof req?.body?.discordId === 'string' && typeof req?.body?.discordName === 'string' && typeof req?.body?.voiceTime === 'number' && typeof req?.body?.messageCount === 'number') {
 
                 const bodyObject = req.body;
-                let group = await db.collection("groups").updateOne(
-                    { clanId: bodyObject.clanId.toString() },
-                    { $set: { guildId: bodyObject.guildId.toString(), clanName: bodyObject.clanName.toString() } },
+                let group = await db.collection("timeData").updateOne(
+                    { discordId: bodyObject.discordId },
+                    { $set: { discordName: bodyObject.discordName.toString(), voiceTime: bodyObject.voiceTime, messageCount: bodyObject.messageCount } },
                     { upsert: true }
                 )
 
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
         } else {
             res.json({ error: "This endpoint requires a POST request" })
         }
-    } catch (err) {
-        res.json({ error: "Error" })
-    }
+    // } catch (err) {
+    //     res.json({ error: "Error" })
+    // }
 }
