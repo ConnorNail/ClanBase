@@ -27,11 +27,11 @@ export default function Accounts() {
   const clanId = groupInfo ? groupInfo?.Response?.results[0]?.group?.groupId.toString() : null
 
   const clanBaseMemberInfo = useIndividualMembersIds(ids.membershipId ? ids.membershipId.toString() : null)
+  console.log(clanBaseMemberInfo)
 
   const discordMemberInfo = useGetDiscordUserInfo(token)
   const discordId = discordMemberInfo?.id
   const discordName = discordMemberInfo?.username
-  console.log(discordMemberInfo)
 
   const linkAccounts = useLinkBungieAndDiscord(discordId, discordName, ids.membershipId ? ids.membershipId.toString() : null, ids.membershipType ? ids.membershipType.toString() : null, clanId, send)
   // console.log(linkAccounts)

@@ -6,15 +6,14 @@ export default async function handler(req, res) {
         const db = client.db("test");
 
         if (req.method === 'POST') {
-            if (typeof req?.body?.discordId === 'string' && typeof req?.body?.discordName === 'string' && typeof req?.body?.voiceTimeIncr === 'number' && typeof req?.body?.messageCountIncr === 'number') {
+            if (typeof req?.body?.discordId === 'string' && typeof req?.body?.voiceTimeIncr === 'number' && typeof req?.body?.messageCountIncr === 'number') {
                 const bodyObject = req.body;
-                let group = await db.collection("members").updateOne(
+                let group = await db.collection("members").update(
                     { discordId: bodyObject.discordId },
                     {
-                        $set: { discordName: bodyObject.discordName.toString() },
                         $inc: { voiceTime: bodyObject.voiceTimeIncr, messageCount: bodyObject.messageCountIncr, seasonalVoiceTime: bodyObject.voiceTimeIncr, seasonalMessageCount: bodyObject.messageCountIncr }
                     },
-                    { upsert: true }
+                    { upsert: true, multi: true }
                 )
 
                 if (group.acknowledged) {

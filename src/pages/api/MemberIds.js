@@ -10,7 +10,7 @@ export default async function handler(req, res) {
             if (guildId) {
                 const group = await db.collection("groups").findOne({ guildId: guildId })
                 if (group?.clanId) {
-                    const membersCursor = await db.collection("members").find({ clanId: group.clanId }, { projection: { _id: false } })
+                    const membersCursor = await db.collection("members").find({ clanId: group.clanId }, { projection: { _id: false, discordId: true, destinyMembershipId: true, clanId: true, discordName: true } })
                     const members = await membersCursor.toArray()
 
                     if (members) {
