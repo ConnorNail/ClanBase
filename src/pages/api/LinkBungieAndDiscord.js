@@ -6,13 +6,12 @@ export default async function handler(req, res) {
         const db = client.db("test");
 
         if (req.method === 'POST') {
-            console.log(req?.body)
-            if (typeof req?.body?.discordId === 'string' && typeof req?.body?.destinyMembershipId === 'string' && typeof req?.body?.destinyMembershipType === 'string') {
+            if (typeof req?.body?.discordId === 'string' && typeof req?.body?.discordName === 'string' && typeof req?.body?.destinyMembershipId === 'string' && typeof req?.body?.destinyMembershipType === 'string') {
                 const bodyObject = req.body;
                 let group = await db.collection("members").updateOne(
                     { discordId: bodyObject.discordId },
                     {
-                        $set: { destinyMembershipId: bodyObject.destinyMembershipId.toString(), destinyMembershipType: bodyObject.destinyMembershipType.toString(), clanId: bodyObject?.clanId ? bodyObject.clanId.toString() : null },
+                        $set: { discordName: bodyObject.discordName.toString(), destinyMembershipId: bodyObject.destinyMembershipId.toString(), destinyMembershipType: bodyObject.destinyMembershipType.toString(), clanId: bodyObject?.clanId ? bodyObject.clanId.toString() : null },
                     },
                     { upsert: true }
                 )

@@ -3,7 +3,6 @@ import { useSession, signIn } from "next-auth/react"
 import { Row, Col, Div, Text, Button, Image, Icon } from "atomize";
 import InfoBox from '../components/InfoBox';
 import LoginButtonDiscord from '../components/LoginButtonDiscord';
-import useSWR from 'swr'
 import React, { useState, useEffect } from 'react';
 import useGetUserInfo from '../functions/useGetUserInfo';
 import getIdsForCurrentUser from '../functions/getIdsForCurrentUser';
@@ -11,10 +10,11 @@ import useGetGroupsForMember from '../functions/useGetGroupsForMember';
 import { useRouter } from 'next/router'
 import useLinkBungieAndDiscord from '../functions/useLinkBungieAndDiscord';
 import useIndividualMembersIds from '../functions/useIndividualMemberIds';
+import useGetDiscordUserInfo from '../functions/useGetDiscordUserInfo';
 
 export default function Accounts() {
   const router = useRouter()
-  const { id: discordId } = router.query
+  const { token } = router.query
 
   const { data: session, status } = useSession()
   const [send, setSend] = useState(false)
@@ -27,16 +27,20 @@ export default function Accounts() {
   const clanId = groupInfo ? groupInfo?.Response?.results[0]?.group?.groupId.toString() : null
 
   const clanBaseMemberInfo = useIndividualMembersIds(ids.membershipId ? ids.membershipId.toString() : null)
-  console.log(clanBaseMemberInfo)
 
-  const linkAccounts = useLinkBungieAndDiscord(discordId ? discordId.toString() : null, ids.membershipId ? ids.membershipId.toString() : null, ids.membershipType ? ids.membershipType.toString() : null, clanId, send)
-  console.log(linkAccounts)
+  const discordMemberInfo = useGetDiscordUserInfo(token)
+  const discordId = discordMemberInfo?.id
+  const discordName = discordMemberInfo?.username
+  console.log(discordMemberInfo)
 
-  // useEffect(() => {
-  //   if (status == 'authenticated' && groupInfo) {
-  //     setSend(true)
-  //   }
-  // }, [groupInfo])
+  const linkAccounts = useLinkBungieAndDiscord(discordId, discordName, ids.membershipId ? ids.membershipId.toString() : null, ids.membershipType ? ids.membershipType.toString() : null, clanId, send)
+  // console.log(linkAccounts)
+
+  useEffect(() => {
+    if (status == 'authenticated' && groupInfo) {
+      setSend(true)
+    }
+  }, [groupInfo])
 
   return (
     <DefaultTemplate>
@@ -58,7 +62,7 @@ export default function Accounts() {
                       <Image src="Shield_Crest.png" alt="discord" h="2rem" w="auto" />
                     </Div>
                     {clanBaseMemberInfo?.discordId ?
-                      <Div d="flex" justify="center" align="center">
+                      <Div d="flex" justify="center" align="center" m={{ t: "1rem" }}>
                         <Icon name="CBChecked" size="25px" color="cbBlue" />
                         <Text textSize="subheader" textColor="cbWhite" style={{ whiteSpace: "nowrap" }} p={{ x: "0.5rem" }}>
                           Signed in With Discord

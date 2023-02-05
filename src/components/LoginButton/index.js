@@ -5,14 +5,26 @@ import useGetUserInfo from "../../functions/useGetUserInfo";
 import useGetPlayerProfile from "../../functions/useGetPlayerProfile";
 import getRecentChar from "../../functions/getRecentChar";
 import React, { useState } from 'react';
+import { useRouter } from 'next/router'
 
 const LoginButton = () => {
     const { data: session, status } = useSession()
     const [open, setOpen] = useState(false)
 
+    const router = useRouter()
+
     const menu = () => {
         return (
             <Div bg="cbRed" rounded="0 0 5px 5px">
+                <Button
+                    p="0.5rem"
+                    bg="cbTransparent"
+                    textColor="cbWhite"
+                    hoverTextColor="cbBlue"
+                    onClick={() => router.push('/accounts')}
+                >
+                    Settings
+                </Button>
                 <Button
                     p="0.5rem"
                     bg="cbTransparent"
