@@ -22,8 +22,8 @@ export default function ClanEngrams({ clanId }) {
 
     let levelsCompletedStyle = {}
 
-    if (clanWeeklyRewards) {
-        const clanRewardResults = clanWeeklyRewards?.Response?.rewards[0].entries
+    const clanRewardResults = clanWeeklyRewards?.Response?.rewards[0].entries
+    if (clanRewardResults) {
         for (let i = 0; i < clanRewardResults.length; i++) {
             if (clanRewardResults[i].earned) {
                 levelsCompletedStyle[clanRewardResults[i]?.rewardEntryHash] = "cbBlue"

@@ -48,7 +48,7 @@ export default function ClanLevel({ clanInfo }) {
                                 Weekly Clan XP
                             </Text>
                             <Text textColor="cbBlue" textSize="subheader">
-                                {clanInfo ?
+                                {clanInfo && weeklyProgress && weeklyLimit ?
                                     weeklyProgress.toLocaleString() + '/' + weeklyLimit.toLocaleString() :
                                     <Icon name="Loading3" size="20px" color="cbBlue" transform='translateY(15%)' />
                                 }
