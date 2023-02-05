@@ -27,7 +27,7 @@ export default function Accounts() {
   const clanId = groupInfo ? groupInfo?.Response?.results[0]?.group?.groupId.toString() : null
 
   const clanBaseMemberInfo = useIndividualMembersIds(ids.membershipId ? ids.membershipId.toString() : null)
-  console.log(clanBaseMemberInfo)
+  // console.log(clanBaseMemberInfo)
 
   const discordMemberInfo = useGetDiscordUserInfo(token)
   const discordId = discordMemberInfo?.id

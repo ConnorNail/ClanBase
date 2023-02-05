@@ -1,7 +1,7 @@
 const CLIENT_ID = process.env.NEXT_DISCORD_CLIENT_ID;
 const CLIENT_SECRET = process.env.NEXT_DISCORD_CLIENT_SECRET;
 const creds = Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')
-const ORIGIN_PATH = process.env.ORIGIN_PATH;
+const ORIGIN_PATH = process.env.NEXT_ORIGIN_PATH;
 const redirect = ORIGIN_PATH + '/api/discord/callback';
 
 export default function handler(req, res) {
