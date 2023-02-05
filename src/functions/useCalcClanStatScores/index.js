@@ -1,6 +1,6 @@
 import usePostClanScores from "../usePostClanScores";
 
-export default function calcClanStatScores(clanMemberStats, clanMemberProfiles, clanId) {
+export default function useCalcClanStatScores(clanMemberStats, clanMemberProfiles, clanId) {
 
     // Calculate average clan KD
     const averageClanKD = (stats) => {

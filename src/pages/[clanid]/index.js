@@ -9,7 +9,7 @@ import getClanMembersAllTimeStats from '../../functions/useGetClanMembersAllTime
 import getAllMembersProfile from '../../functions/getClanMemberProfileInfo/useGetAllMembersProfile';
 import ClanBannerSimple from '../../components/ClanBannerSimple';
 import ClanIconBox from '../../components/ClanIconBox';
-import calcClanStatScores from '../../functions/calcClanStatScores';
+import calcClanStatScores from '../../functions/useCalcClanStatScores';
 import PvEIcon from '../../components/PvEIcon';
 import PvPIcon from '../../components/PvPIcon';
 import ScrollBox from '../../components/ScrollBox';
