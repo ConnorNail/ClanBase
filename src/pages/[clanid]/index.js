@@ -39,7 +39,7 @@ export default function ClanPage() {
   const clanMemberStats = getClanMembersAllTimeStats(clanMemberList)
   const clanMemberProfiles = getAllMembersProfile(clanMemberList)
 
-  const clanStatScores = calcClanStatScores(clanMemberStats, clanMemberProfiles)
+  const clanStatScores = calcClanStatScores(clanMemberStats, clanMemberProfiles, clanId)
 
   const memberSeasonalTimeStats = getClanMemberCharacterSeasonalTimeStats(clanMemberList, clanMemberProfiles)
 

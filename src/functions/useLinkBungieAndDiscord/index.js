@@ -14,7 +14,7 @@ export default function useLinkBungieAndDiscord(discordId, discordName, membersh
         })
     }).then((res) => res.json())
 
-    const { data, error } = useSWR(send ? 'https://localhost:3000/api/LinkBungieAndDiscord' : null, fetcher)
+    const { data, error } = useSWR(send ? window.location.origin + '/api/LinkBungieAndDiscord' : null, fetcher)
 
     return data
 }
