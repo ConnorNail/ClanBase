@@ -23,6 +23,7 @@ import getClanMemberCharacterSeasonalTimeStats from '../../functions/getClanMemb
 import MemberStatCard from '../../components/MemberStatCard';
 import ClanPageMain from '../../components/ClanPageMain';
 import ClanRosterMini from '../../components/ClanRosterMini';
+import Head from 'next/head'
 
 export default function ClanPage() {
 

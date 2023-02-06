@@ -4,7 +4,6 @@ import { styletron } from '../../styletron'
 
 const RESET_STYLES = `
 html,body {min-height:100vh;}
-body{margin:0;}
 `;
 
 class MyDocument extends Document {
@@ -36,6 +35,7 @@ class MyDocument extends Document {
                         />
                     ))}
                     <style type="text/css">{RESET_STYLES}</style>
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5349675379874975" crossorigin="anonymous"></script>
                 </Head>
                 <body>
                     <Main />
