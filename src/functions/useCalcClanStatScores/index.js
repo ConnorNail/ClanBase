@@ -1,4 +1,6 @@
-export default function calcClanStatScores(clanMemberStats, clanMemberProfiles) {
+import usePostClanScores from "../usePostClanScores";
+
+export default function useCalcClanStatScores(clanMemberStats, clanMemberProfiles, clanId) {
 
     // Calculate average clan KD
     const averageClanKD = (stats) => {
@@ -257,8 +259,9 @@ export default function calcClanStatScores(clanMemberStats, clanMemberProfiles) 
     const baseline = 1000
 
     let clanScore = {}
+    let perMemberStats = {}
     if (clanMemberStats && clanMemberProfiles) {
-        const perMemberStats = {
+        perMemberStats = {
             PvE: {
                 playtime: averagePlaytime(clanMemberStats)[0],
                 activitiesCompleted: averageActivitesCleared(clanMemberStats)[0],
@@ -298,6 +301,7 @@ export default function calcClanStatScores(clanMemberStats, clanMemberProfiles) 
         }
         
     }
+    usePostClanScores(clanId, perMemberStats?.PvE?.playtime, perMemberStats?.PvE?.activitiesCompleted, perMemberStats?.PvE?.averageStrikeDuration, perMemberStats?.PvE?.KD, perMemberStats?.PvE?.raidsCompleted, perMemberStats?.PvP?.playtime, perMemberStats?.PvP?.activitiesCompleted, perMemberStats?.PvP?.combatRating, perMemberStats?.PvP?.winPercentage, perMemberStats?.PvP?.flawlessCards, clanScore.PvE, clanScore.PvP)
 
     return clanScore
 }

@@ -1,6 +1,6 @@
 const CLIENT_ID = process.env.NEXT_DISCORD_CLIENT_ID;
-const CLIENT_SECRET = process.env.NEXT_DISCORD_CLIENT_SECRET;
-const redirect = encodeURIComponent('https://localhost:3000/api/discord/callback');
+const ORIGIN_PATH = process.env.NEXT_ORIGIN_PATH;
+const redirect = encodeURIComponent(ORIGIN_PATH + '/api/discord/callback');
 
 export default function handler(req, res) {
     // Get Discord token
