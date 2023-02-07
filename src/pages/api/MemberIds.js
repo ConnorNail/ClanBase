@@ -22,7 +22,7 @@ async function getClanMembers(clanId) {
 }
 
 export default async function handler(req, res) {
-    try {
+    // try {
         const client = await clientPromise;
         const db = client.db("test");
 
@@ -59,7 +59,7 @@ export default async function handler(req, res) {
         } else {
             res.json({ error: "This endpoint requires a GET request" })
         }
-    } catch (err) {
-        res.json({ error: "Error" })
-    }
+    // } catch (err) {
+    //     res.json({ error: "Error" })
+    // }
 }
