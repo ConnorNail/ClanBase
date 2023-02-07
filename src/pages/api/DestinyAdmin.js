@@ -40,15 +40,16 @@ export default async function handler(req, res) {
                         const userDestinyData = await getBungieMemberships(account.destinyMembershipId, account.destinyMembershipType)
                         const memberType = userDestinyData[0]?.member?.memberType
                         const clanId = userDestinyData[0]?.member?.groupId
+                        const clanName = userDestinyData[0]?.group?.name
 
                         // Creat list of clans that this member is an admin for
                         if (clanId && memberType >= 3) {
-                            clanAdmin.push(clanId)
+                            clanAdmin.push({ clanId: clanId, clanName: clanName })
                         }
                     }
 
                     if (clanAdmin.length > 0) {
-                        res.status(200).json({ message: "Success!", destinyClanAdmin: clanAdmin });
+                        res.status(200).json({ message: "Success!", destinyClanInfo: clanAdmin });
                     } else {
                         res.json({ error: "This user is either not in a clan or is not an admin of a clan" })
                     }
