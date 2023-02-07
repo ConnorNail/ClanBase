@@ -61,7 +61,7 @@ export default function ClanPage() {
   return (
     <DefaultTemplate>
       <Div d="flex" justify="center">
-        <Col size="11">
+        <Col size={{ xs: "11", xl: "8" }}>
           <Row>
             <Col>
               <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>
