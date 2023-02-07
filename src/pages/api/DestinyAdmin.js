@@ -51,18 +51,18 @@ export default async function handler(req, res) {
                     if (clanAdmin.length > 0) {
                         res.status(200).json({ message: "Success!", destinyClanInfo: clanAdmin });
                     } else {
-                        res.json({ error: "This user is either not in a clan or is not an admin of a clan" })
+                        res.status(500).json({ error: "This user is either not in a clan or is not an admin of a clan" })
                     }
                 } else {
-                    res.json({ error: "There are no members associated with this discord account. Please register at https://www.myclanbase.com/accounts" })
+                    res.status(500).json({ error: "There are no members associated with this discord account. Please register at https://www.myclanbase.com/accounts" })
                 }
             } else {
-                res.json({ error: "Incorrect request body" })
+                res.status(500).json({ error: "Incorrect request body" })
             }
         } else {
-            res.json({ error: "This endpoint requires a POST request" })
+            res.status(500).json({ error: "This endpoint requires a POST request" })
         }
     } catch (err) {
-        res.json({ error: "Error" })
+        res.status(500).json({ error: "Error" })
     }
 }
