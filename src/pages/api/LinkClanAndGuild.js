@@ -29,24 +29,24 @@ export default async function handler(req, res) {
         if (req.method === "POST") {
             if (typeof req?.body?.clanId === 'string' && typeof req?.body?.guildId === 'string') {
 
-                const isClan = await checkClan(req.body.clanId)
+                // const isClan = await checkClan(req.body.clanId)
 
-                if (isClan) {
-                    const bodyObject = req.body;
-                    let group = await db.collection("groups").updateOne(
-                        { clanId: bodyObject.clanId.toString() },
-                        { $set: { guildId: bodyObject.guildId.toString() } },
-                        { upsert: true }
-                    )
+                // if (isClan) {
+                const bodyObject = req.body;
+                let group = await db.collection("groups").updateOne(
+                    { clanId: bodyObject.clanId.toString() },
+                    { $set: { guildId: bodyObject.guildId.toString() } },
+                    { upsert: true }
+                )
 
-                    if (group.acknowledged) {
-                        res.status(200).json({ message: "Success!", clanExists: true });
-                    } else {
-                        res.json({ error: "Database error" })
-                    }
+                if (group.acknowledged) {
+                    res.status(200).json({ message: "Success!", clanExists: true });
                 } else {
-                    res.json({ error: "The clan id " + req.body.clanId + " does not exist", clanExists: false })
+                    res.json({ error: "Database error" })
                 }
+                // } else {
+                //     res.json({ error: "The clan id " + req.body.clanId + " does not exist", clanExists: false })
+                // }
             } else {
                 res.json({ error: "Incorrect request body" })
             }
