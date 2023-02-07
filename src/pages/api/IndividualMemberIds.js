@@ -1,7 +1,7 @@
 import clientPromise from "./lib/mongodb";
 
 export default async function handler(req, res) {
-    // try {
+    try {
         const client = await clientPromise;
         const db = client.db("test");
 
@@ -13,15 +13,15 @@ export default async function handler(req, res) {
                 if (member) {
                     res.status(200).json(member);
                 } else {
-                    res.json({ state: 0, error: "There are no members associated with this id" })
+                    res.status(500).json({ state: 0, error: "There are no members associated with this id" })
                 }
             } else {
-                res.json({ error: "Please provide a destinyMembershipId in the request" })
+                res.status(500).json({ error: "Please provide a destinyMembershipId in the request" })
             }
         } else {
-            res.json({ error: "This endpoint requires a GET request" })
+            res.status(500).json({ error: "This endpoint requires a GET request" })
         }
-    // } catch (err) {
-    //     res.json({ error: "Error" })
-    // }
+    } catch (err) {
+        res.json({ error: "Error" })
+    }
 }

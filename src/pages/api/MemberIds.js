@@ -22,7 +22,7 @@ async function getClanMembers(clanId) {
 }
 
 export default async function handler(req, res) {
-    // try {
+    try {
         const client = await clientPromise;
         const db = client.db("test");
 
@@ -48,18 +48,18 @@ export default async function handler(req, res) {
                     if (members) {
                         res.status(200).json(members);
                     } else {
-                        res.json({ error: "There are no members associated with this guild" })
+                        res.status(500).json({ error: "There are no members associated with this guild" })
                     }
                 } else {
-                    res.json({ error: "There is no clan associated with this guild" })
+                    res.status(500).json({ error: "There is no clan associated with this guild" })
                 }
             } else {
-                res.json({ error: "Please provide a guildId in the request" })
+                res.status(500).json({ error: "Please provide a guildId in the request" })
             }
         } else {
-            res.json({ error: "This endpoint requires a GET request" })
+            res.status(500).json({ error: "This endpoint requires a GET request" })
         }
-    // } catch (err) {
-    //     res.json({ error: "Error" })
-    // }
+    } catch (err) {
+        res.status(500).json({ error: "Error" })
+    }
 }

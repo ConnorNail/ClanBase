@@ -42,18 +42,18 @@ export default async function handler(req, res) {
                 if (group.acknowledged) {
                     res.status(200).json({ message: "Success!", clanExists: true });
                 } else {
-                    res.json({ error: "Database error" })
+                    res.status(500).json({ error: "Database error" })
                 }
                 // } else {
                 //     res.json({ error: "The clan id " + req.body.clanId + " does not exist", clanExists: false })
                 // }
             } else {
-                res.json({ error: "Incorrect request body" })
+                res.status(500).json({ error: "Incorrect request body" })
             }
         } else {
-            res.json({ error: "This endpoint requires a POST request" })
+            res.status(500).json({ error: "This endpoint requires a POST request" })
         }
     } catch (err) {
-        res.json({ error: "Error" })
+        res.status(500).json({ error: "Error" })
     }
 }

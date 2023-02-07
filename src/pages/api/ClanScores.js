@@ -1,7 +1,7 @@
 import clientPromise from "./lib/mongodb";
 
 export default async function handler(req, res) {
-    // try {
+    try {
         const client = await clientPromise;
         const db = client.db("test");
 
@@ -19,15 +19,15 @@ export default async function handler(req, res) {
                 if (group.acknowledged) {
                     res.status(200).json({ message: "Success!" });
                 } else {
-                    res.json({ error: "Database error" })
+                    res.status(500).json({ error: "Database error" })
                 }
             } else {
-                res.json({ error: "Incorrect request body" })
+                res.status(500).json({ error: "Incorrect request body" })
             }
         } else {
-            res.json({ error: "This endpoint requires a POST request" })
+            res.status(500).json({ error: "This endpoint requires a POST request" })
         }
-    // } catch (err) {
-    //     res.json({ error: "Error" })
-    // }
+    } catch (err) {
+        res.status(500).json({ error: "Error" })
+    }
 }
