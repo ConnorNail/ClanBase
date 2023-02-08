@@ -26,14 +26,16 @@ export default function Accounts() {
 
   const clanId = groupInfo ? groupInfo?.Response?.results[0]?.group?.groupId.toString() : null
 
-  const clanBaseMemberInfo = useIndividualMembersIds(ids.membershipId ? ids.membershipId.toString() : null)
+  const clanBaseMemberInfo = useIndividualMembersIds(ids.membershipId ? ids.membershipId.toString() : null, ids.membershipType ? ids.membershipType.toString() : null)
   // console.log(clanBaseMemberInfo)
 
   const discordMemberInfo = useGetDiscordUserInfo(token)
   const discordId = discordMemberInfo?.id
   const discordName = discordMemberInfo?.username
+  const discordDiscriminator = discordMemberInfo?.discriminator
+  // console.log(discordDiscriminator)
 
-  const linkAccounts = useLinkBungieAndDiscord(discordId, discordName, ids.membershipId ? ids.membershipId.toString() : null, ids.membershipType ? ids.membershipType.toString() : null, clanId, send)
+  const linkAccounts = useLinkBungieAndDiscord(discordId, discordName, discordDiscriminator, ids.membershipId ? ids.membershipId.toString() : null, ids.membershipType ? ids.membershipType.toString() : null, clanId, send)
   // console.log(linkAccounts)
 
   useEffect(() => {
@@ -61,7 +63,7 @@ export default function Accounts() {
                       </Text>
                       <Image src="Shield_Crest.png" alt="discord" h="2rem" w="auto" />
                     </Div>
-                    {clanBaseMemberInfo?.discordId ?
+                    {clanBaseMemberInfo?.member?.discordId ?
                       <Div d="flex" justify="center" align="center" m={{ t: "1rem" }}>
                         <Icon name="CBChecked" size="25px" color="cbBlue" />
                         <Text textSize="subheader" textColor="cbWhite" style={{ whiteSpace: "nowrap" }} p={{ x: "0.5rem" }}>

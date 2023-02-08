@@ -7,13 +7,14 @@ export default async function handler(req, res) {
 
         if (req.method == "GET") {
             const destinyMembershipId = req.query?.destinyMembershipId
-            if (destinyMembershipId) {
-                const member = await db.collection("members").findOne({ destinyMembershipId: destinyMembershipId }, { projection: { _id: false } })
+            const destinyMembershipType = req.query?.destinyMembershipType
+            if (destinyMembershipId && destinyMembershipType) {
+                const member = await db.collection("members").findOne({ $and: [{ destinyMembershipId: destinyMembershipId }, { destinyMembershipType: destinyMembershipType }]}, { projection: { _id: false } })
 
                 if (member) {
-                    res.status(200).json(member);
+                    res.status(200).json({ registered: true, member });
                 } else {
-                    res.status(500).json({ state: 0, error: "There are no members associated with this id" })
+                    res.status(200).json({ registered: false, error: "There are no members associated with this id" })
                 }
             } else {
                 res.status(500).json({ error: "Please provide a destinyMembershipId in the request" })

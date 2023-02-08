@@ -16,6 +16,11 @@ import CultureSettings from '../components/CultureSettings';
 import GeneralSettings from '../components/GeneralSettings';
 import useGetUserInfo from '../functions/useGetUserInfo';
 import useGetPendingMemberships from '../functions/useGetPendingMemberships';
+import ClanTimeStats from '../components/ClanTimeStats';
+import getClanMemberInfo from "../functions/getClanMemberProfileInfo/useGetClanMemberInfo";
+import useGetAllMembersProfile from '../functions/getClanMemberProfileInfo/useGetAllMembersProfile';
+import getClanMemberCharacterSeasonalTimeStats from '../functions/getClanMemberCharacterSeasonalTimeStats';
+import useGetClanMemberDiscordSeasonalTimeStats from '../functions/useGetClanMemberDiscordSeasonalTimeStats';
 
 export default function Admin() {
     const [tab, setTab] = useState('General')
@@ -34,6 +39,11 @@ export default function Admin() {
     const clanInfo = useGetClanInfoImut(clanId)
     const clanName = clanInfo?.Response?.detail?.name
     const clanCallsign = clanInfo?.Response?.detail?.clanInfo?.clanCallsign
+
+    const { data: members, mutate: mutateMembers } = getClanMemberInfo(clanId)
+    const clanMemberProfiles = useGetAllMembersProfile(members)
+
+    const memberSeasonalTimeStats = useGetClanMemberDiscordSeasonalTimeStats(members, clanMemberProfiles)
 
     // Pending member count
     const pendingMembers = useGetPendingMemberships(clanId)
@@ -105,7 +115,7 @@ export default function Admin() {
         )
 
         return (
-            <Div d={{ xs: "block", md: "none" }} m="0.5rem">
+            <Div d={{ xs: "block", lg: "none" }} m="0.5rem">
                 <Dropdown
                     bg="cbGrey2"
                     focusBg="cbGrey2"
@@ -128,7 +138,7 @@ export default function Admin() {
 
     function AdminTabs({ tabList }) {
         return (
-            <Div align="center" d={{ xs: "none", md: "flex" }}>
+            <Div align="center" d={{ xs: "none", lg: "flex" }}>
                 {tabList.map((tabName, index) => (
                     <Div align="center" d={{ xs: "none", md: "flex" }} flexGrow="1" key={index}>
                         {index != 0 ? <Div bg="cbWhite" h="3rem" w="0.1rem" /> : null}
@@ -156,6 +166,7 @@ export default function Admin() {
         if (memberType == 5) {
             tabList.push('General Settings')
         }
+        tabList.push('Time Stats')
         return tabList
     }
 
@@ -166,7 +177,7 @@ export default function Admin() {
                     <Div d="flex">
                         <Col>
                             <InfoBox bg={'cbGrey2'}>
-                                <AdminRoster clanId={clanId} curentMemberType={memberType} />
+                                <AdminRoster clanId={clanId} curentMemberType={memberType} members={members} mutateMembers={mutateMembers} />
                             </InfoBox>
                         </Col>
                     </Div>
@@ -220,6 +231,16 @@ export default function Admin() {
                         <Col>
                             <InfoBox bg={'cbGrey2'}>
                                 <GeneralSettings groupInfo={groupInfo} clanId={clanId} />
+                            </InfoBox>
+                        </Col>
+                    </Div>
+                )
+            case 'Time Stats':
+                return (
+                    <Div d="flex">
+                        <Col>
+                            <InfoBox bg={'cbGrey2'}>
+                                <ClanTimeStats memberSeasonalTimeStats={memberSeasonalTimeStats}/>
                             </InfoBox>
                         </Col>
                     </Div>

@@ -3,9 +3,8 @@ import BannedPlayerCard from '../BannedPlayerCard';
 import getClanMemberInfo from "../../functions/getClanMemberProfileInfo/useGetClanMemberInfo";
 import AdminRosterPlayerCard from "../AdminRosterPlayerCard";
 
-const AdminRoster = ({ clanId, curentMemberType }) => {
+const AdminRoster = ({ clanId, curentMemberType, members, mutateMembers }) => {
 
-    const { data: members, mutate: mutateMembers } = getClanMemberInfo(clanId)
     const memberList = members?.Response?.results
     const memberCount = memberList ? memberList.length : null
 
