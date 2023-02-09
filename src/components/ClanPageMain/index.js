@@ -1,4 +1,4 @@
-import { Text, Div, Image, Icon, Row, Col, Anchor } from "atomize";
+import { Text, Div, Image, Icon, Row, Col, Anchor, Button } from "atomize";
 import ClanIconBox from '../../components/ClanIconBox';
 import PvEIcon from '../../components/PvEIcon';
 import PvPIcon from '../../components/PvPIcon';
@@ -7,7 +7,7 @@ import ClanBannerSimple from '../../components/ClanBannerSimple';
 import ClanEngrams from '../../components/ClanEngrams';
 import Link from 'next/link'
 
-export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router }) {
+export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router, isUsersClan }) {
     const loadingValue = (value, color) => {
         if (value || value == 0) {
             return (
@@ -30,7 +30,6 @@ export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router 
                         <Text textSize={{ xs: "heading", md: "display1" }} textColor="cbWhite" p={{ x: "0.5rem" }}>
                             {loadingValue(clanInfo?.Response?.detail?.name, "cbWhite")} [{loadingValue(clanInfo?.Response?.detail?.clanInfo?.clanCallsign, "cbWhite")}]
                         </Text>
-                        <Icon name="Settings" size="25px" color="cbBlue" hoverColor="cbGrey3" cursor="pointer" onClick={() => router.push('/admin')} />
                     </Row>
                     <Row m="0" minW="18rem">
                         <Text textSize="paragraph" textColor="cbGrey2" p={{ x: "0.5rem" }}>
@@ -101,6 +100,19 @@ export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router 
             <Row d="flex" justify="center">
                 <Div bg="cbWhite" w="95%" h="0.1rem" m={{ y: "0.5rem" }}></Div>
             </Row>
+            {isUsersClan ?
+                <Row>
+                    <Div d="flex" justify="center" w="100%" m={{ x: "0.5rem" }}>
+                        <Button bg="cbGrey2" w="100%" hoverTextColor="cbBlue" textColor="cbWhite" textSize="subheader" shadow="2" hoverShadow="4" onClick={() => router.push('/clan-details')}>
+                            <Text textAlign="center">
+                                Details
+                            </Text>
+                        </Button>
+                    </Div>
+                </Row>
+                :
+                null
+            }
         </Div>
     )
 }

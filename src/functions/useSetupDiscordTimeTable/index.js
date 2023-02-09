@@ -59,7 +59,7 @@ export default function useSetupDiscordTimeTable(data) {
 
                             return (
                                 <Div h="2rem" w="100%" d="flex">
-                                    <Text textSize="caption" textColor={row?.original?.discord?.discordName ? "cbWhite" : "cbGrey2"} p={{ l: "0.4rem", y: "0.4rem", r: "0.25rem" }}>
+                                    <Text textSize="caption" textColor={row?.original?.discord?.discordName ? "cbWhite" : "cbGrey2"} p={{ x: "0.4rem", y: "0.4rem" }}>
                                         {row?.original?.discord?.discordName ? '@' + row?.original?.discord?.discordName + '#' + row?.original?.discord?.discordDiscriminator : "No Account"}
                                     </Text>
                                 </Div>

@@ -2,7 +2,7 @@ import DefaultTemplate from '../../components/DefaultLayout';
 import InfoBox from '../../components/InfoBox';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { Row, Col, Div, Text, Icon } from "atomize";
+import { Row, Col, Div, Text, Icon, Button } from "atomize";
 import getClanInfo from '../../functions/useGetClanInfo';
 import getClanMemberInfo from '../../functions/getClanMemberProfileInfo/useGetClanMemberInfo';
 import getClanMembersAllTimeStats from '../../functions/useGetClanMembersAllTimeStats';
@@ -23,7 +23,10 @@ import getClanMemberCharacterSeasonalTimeStats from '../../functions/getClanMemb
 import MemberStatCard from '../../components/MemberStatCard';
 import ClanPageMain from '../../components/ClanPageMain';
 import ClanRosterMini from '../../components/ClanRosterMini';
-import Head from 'next/head'
+import { useSession } from "next-auth/react"
+import useGetUserInfo from '../../functions/useGetUserInfo';
+import getIdsForCurrentUser from '../../functions/getIdsForCurrentUser';
+import useGetGroupsForMember from '../../functions/useGetGroupsForMember';
 
 export default function ClanPage() {
 
@@ -34,6 +37,16 @@ export default function ClanPage() {
   const clanId = queryObj.clanid
 
   const [memberIndex, setMemberIndex] = useState(0);
+
+  const { data, status } = useSession()
+
+  const userData = useGetUserInfo(status)
+
+  const ids = getIdsForCurrentUser(userData)
+  const groupInfo = useGetGroupsForMember(ids.membershipId, ids.membershipType)
+
+  const usersClanId = groupInfo ? groupInfo?.Response?.results[0]?.group?.groupId : null
+  const isUsersClan = usersClanId && usersClanId == clanId ? true : false
 
   const clanInfo = getClanInfo(clanId)
   const { data: clanMemberList } = getClanMemberInfo(clanId)
@@ -65,7 +78,7 @@ export default function ClanPage() {
           <Row>
             <Col>
               <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>
-                <ClanPageMain clanId={clanId} clanInfo={clanInfo} clanStatScores={clanStatScores} router={router} />
+                <ClanPageMain clanId={clanId} clanInfo={clanInfo} clanStatScores={clanStatScores} router={router} isUsersClan={isUsersClan} />
               </InfoBox>
             </Col>
             {/* <Col>
@@ -83,6 +96,20 @@ export default function ClanPage() {
               </InfoBox>
             </Col> */}
           </Row>
+          {/* <Row>
+            <Col>
+              <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>
+                <Div>
+                  <Button m="0.5rem">
+                    Time Log
+                  </Button>
+                  <Button m="0.5rem">
+                    Admin
+                  </Button>
+                </Div>
+              </InfoBox>
+            </Col>
+          </Row> */}
           <Row>
             <Col>
               <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>

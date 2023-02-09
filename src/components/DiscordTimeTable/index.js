@@ -9,7 +9,7 @@ export default function DiscordTimeTable({ memberSeasonalTime }) {
     return (
         <Div d="flex" justify="center" align="center">
             <Div maxW="55rem" bg="cbGrey1" p="0.5rem" rounded="md">
-            {timeData && timeColumns ? <Table columns={timeColumns} data={timeData} /> : <Icon name="Loading3" size="75px" color="cbWhite"/>}
+                {timeData && timeColumns ? <Table columns={timeColumns} data={timeData} /> : <Icon name="Loading3" size="75px" color="cbWhite" />}
             </Div>
         </Div>
     )

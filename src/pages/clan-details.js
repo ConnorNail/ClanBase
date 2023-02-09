@@ -21,8 +21,12 @@ import getClanMemberInfo from "../functions/getClanMemberProfileInfo/useGetClanM
 import useGetAllMembersProfile from '../functions/getClanMemberProfileInfo/useGetAllMembersProfile';
 import getClanMemberCharacterSeasonalTimeStats from '../functions/getClanMemberCharacterSeasonalTimeStats';
 import useGetClanMemberDiscordSeasonalTimeStats from '../functions/useGetClanMemberDiscordSeasonalTimeStats';
+import { useRouter } from 'next/router';
 
 export default function Admin() {
+
+    const router = useRouter();
+
     const [tab, setTab] = useState('General')
     const [showDropdown, setShowDropdown] = useState(false)
     const [pending, setPending] = useState(0)
@@ -57,11 +61,12 @@ export default function Admin() {
     const updateCulturePermissionOverride = clanInfo?.Response?.detail?.features?.updateCulturePermissionOverride
 
     // If the clan required approval show pending
-    const canSeePending = clanInfo?.Response?.detail?.membershipOption == 0 ? true : false
+    const canSeePending = clanInfo?.Response?.detail?.membershipOption == 0 && memberType != 0 ? true : false
 
     // Allow invites
-    const canSendInvites = !invitePermissionOverride && memberType == 3 ? false : true
-    const canEditCulture = !updateCulturePermissionOverride && memberType == 3 ? false : true
+    const canSendInvites = memberType == 0 ? false : !invitePermissionOverride && memberType == 3 ? false : true
+    const canEditCulture = memberType == 0 ? false : !updateCulturePermissionOverride && memberType == 3 ? false : true
+    const canSeeBans = memberType == 0 ? false : true
 
     function AdminMenuButtons({ children, toggleValue }) {
         return (
@@ -152,21 +157,22 @@ export default function Admin() {
     }
 
     const availableTabs = () => {
-        let tabList = ['General']
+        let tabList = ['General', 'Time Log']
         if (canSeePending) {
             tabList.push('Pending')
         }
         if (canSendInvites) {
             tabList.push('Invitations')
         }
-        tabList.push('Bans')
+        if (canSeeBans) {
+            tabList.push('Bans')
+        }
         if (canEditCulture) {
             tabList.push('Culture Settings')
         }
         if (memberType == 5) {
             tabList.push('General Settings')
         }
-        tabList.push('Time Stats')
         return tabList
     }
 
@@ -178,6 +184,16 @@ export default function Admin() {
                         <Col>
                             <InfoBox bg={'cbGrey2'}>
                                 <AdminRoster clanId={clanId} curentMemberType={memberType} members={members} mutateMembers={mutateMembers} />
+                            </InfoBox>
+                        </Col>
+                    </Div>
+                )
+            case 'Time Log':
+                return (
+                    <Div d="flex">
+                        <Col>
+                            <InfoBox bg={'cbGrey2'}>
+                                <ClanTimeStats memberSeasonalTimeStats={memberSeasonalTimeStats} />
                             </InfoBox>
                         </Col>
                     </Div>
@@ -235,29 +251,25 @@ export default function Admin() {
                         </Col>
                     </Div>
                 )
-            case 'Time Stats':
-                return (
-                    <Div d="flex">
-                        <Col>
-                            <InfoBox bg={'cbGrey2'}>
-                                <ClanTimeStats memberSeasonalTimeStats={memberSeasonalTimeStats}/>
-                            </InfoBox>
-                        </Col>
-                    </Div>
-                )
         }
     }
 
     return (
         <DefaultTemplate>
             <Div d="flex" justify="center">
-                <Col size="11">
+                <Col size={{ xs: "11", xl: "8" }}>
                     <InfoBox bg={'cbGrey1'} minH="40rem">
                         {clanId ?
                             <>
-                                <Text textColor="cbWhite" textSize="display1" m="0.5rem">
-                                    {clanName ? clanName : <Icon name="Loading3" size="25px" color="cbWhite" />} [{clanCallsign ? clanCallsign : <Icon name="Loading3" size="25px" color="cbWhite" />}]
-                                </Text>
+                                <Div d="flex" align="center" flexWrap="wrap-reverse">
+                                    <Text textColor="cbWhite" textSize="display1" m="0.5rem">
+                                        {clanName ? clanName : <Icon name="Loading3" size="25px" color="cbWhite" />} [{clanCallsign ? clanCallsign : <Icon name="Loading3" size="25px" color="cbWhite" />}]
+                                    </Text>
+                                    <Button bg="cbGrey2" textColor="cbWhite" hoverTextColor="cbBlue" shadow="2" hoverShadow="4" p={{ l: "0.25rem", r: "0.5rem" }} m={{ l: "auto" }} h="2rem" textSize="paragraph" style={{ whiteSpace: "nowrap" }} onClick={() => router.push(`/${clanId}`)}>
+                                        <Icon name="LeftArrow" size="20px" color="cbWhite" />
+                                        Back to Clan Page
+                                    </Button>
+                                </Div>
                                 <AdminTabs tabList={availableTabs()} />
                                 <AdminDropdown tabList={availableTabs()} />
                                 {status == 'authenticated' ?
