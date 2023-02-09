@@ -29,29 +29,36 @@ export default async function handler(req, res) {
         if (req.method == "GET") {
             const guildId = req.query?.guildId
             if (guildId) {
-                const group = await db.collection("groups").findOne({ guildId: guildId })
-                if (group?.clanId) {
+                const groupCursor = await db.collection("groups").find({ guildId: guildId })
+                const groups = await groupCursor.toArray()
 
-                    const data = await getClanMembers(group.clanId)
-                    let memberList = []
-                    const membersData = data?.Response?.results
-                    for (const member of membersData) {
-                        const membershipId = member?.destinyUserInfo?.membershipId
-                        if (membershipId) {
-                            memberList.push({ destinyMembershipId: membershipId })
+                let allMemberList = []
+
+                if (groups) {
+                    for (const group of groups) {
+                        const data = await getClanMembers(group.clanId)
+                        let memberList = []
+                        const membersData = data?.Response?.results
+                        for (const member of membersData) {
+                            const membershipId = member?.destinyUserInfo?.membershipId
+                            if (membershipId) {
+                                memberList.push({ destinyMembershipId: membershipId })
+                            }
                         }
+
+                        const membersCursor = await db.collection("members").find({ $or: memberList }, { projection: { _id: false, discordId: true, destinyMembershipId: true, clanId: true, discordName: true } })
+                        const members = await membersCursor.toArray()
+
+                        allMemberList.push(...members)
                     }
 
-                    const membersCursor = await db.collection("members").find({ $or: memberList }, { projection: { _id: false, discordId: true, destinyMembershipId: true, clanId: true, discordName: true } })
-                    const members = await membersCursor.toArray()
-
-                    if (members) {
-                        res.status(200).json(members);
+                    if (allMemberList.length > 0) {
+                        res.status(200).json(allMemberList);
                     } else {
                         res.status(500).json({ error: "There are no members associated with this guild" })
                     }
                 } else {
-                    res.status(500).json({ error: "There is no clan associated with this guild" })
+                    res.status(500).json({ error: "There are no clans associated with this guild" })
                 }
             } else {
                 res.status(500).json({ error: "Please provide a guildId in the request" })
