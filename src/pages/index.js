@@ -26,7 +26,7 @@ export default function Home() {
                     <Image src="discord.svg" alt="discord" />
                   </Button>
                 </Anchor>
-                <Anchor href="https://www.patreon.com/clanbase" target="_blank">
+                <Anchor href="https://ko-fi.com/clanbase" target="_blank">
                   <Button m="1rem" h="2.5rem" w="2.5rem" p="0rem" shadow="5" bg="#FF5E5B">
                     <Image src="ko-fi.png" alt="ko-fi" />
                   </Button>
@@ -63,7 +63,7 @@ export default function Home() {
                       <Image src="discord.svg" alt="discord" />
                     </Button>
                   </Anchor>
-                  <Anchor href="https://www.patreon.com/clanbase" target="_blank">
+                  <Anchor href="https://ko-fi.com/clanbase" target="_blank">
                     <Button m="1rem" h="2.5rem" w="2.5rem" p="0rem" shadow="5" bg="#FF5E5B">
                       <Image src="ko-fi.png" alt="ko-fi" />
                     </Button>
