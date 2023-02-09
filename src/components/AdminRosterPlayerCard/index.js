@@ -66,7 +66,6 @@ export default function AdminRosterPlayerCard({ clanId, playerInfo, curentMember
 
     // Check if successful
     useEffect(() => {
-        console.log('change', promote, demote, kick, ban)
         if (promote || demote || kick || ban) {
             if (promote?.ErrorCode == 1 || demote?.ErrorCode == 1 || kick?.ErrorCode == 1 || ban?.ErrorCode == 1) {
                 // Successful

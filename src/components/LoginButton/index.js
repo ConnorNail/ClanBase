@@ -23,6 +23,7 @@ const LoginButton = () => {
                     hoverTextColor="cbBlue"
                     onClick={() => router.push('/accounts')}
                 >
+                    <Icon name="Settings" size="20px" color="cbWhite" m={{ r: "0.5rem" }} />
                     Settings
                 </Button>
                 <Button
@@ -32,6 +33,7 @@ const LoginButton = () => {
                     hoverTextColor="cbBlue"
                     onClick={() => signOut()}
                 >
+                    <Icon name="Logout" size="20px" color="cbWhite" m={{ r: "0.5rem" }} />
                     Signout
                 </Button>
             </Div>

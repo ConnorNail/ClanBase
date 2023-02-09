@@ -71,7 +71,9 @@ export default function useSetupRosterTable(data, memberIndex, setMemberIndex) {
                                     hoverBg="cbGrey1"
                                     rounded="0"
                                     id={row?.id}
-                                    onClick={(a) => setMemberIndex(a?.target?.id)}
+                                    onClick={(a) => {
+                                        setMemberIndex(a?.target?.id)
+                                    }}
                                 >
                                     Stats
                                 </Button>
