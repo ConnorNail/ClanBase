@@ -27,22 +27,20 @@ export default function Accounts() {
   const clanId = groupInfo ? groupInfo?.Response?.results[0]?.group?.groupId.toString() : null
 
   const clanBaseMemberInfo = useIndividualMembersIds(ids.membershipId ? ids.membershipId.toString() : null, ids.membershipType ? ids.membershipType.toString() : null)
-  // console.log(clanBaseMemberInfo)
 
   const discordMemberInfo = useGetDiscordUserInfo(token)
   const discordId = discordMemberInfo?.id
   const discordName = discordMemberInfo?.username
   const discordDiscriminator = discordMemberInfo?.discriminator
-  // console.log(discordDiscriminator)
 
   const linkAccounts = useLinkBungieAndDiscord(discordId, discordName, discordDiscriminator, ids.membershipId ? ids.membershipId.toString() : null, ids.membershipType ? ids.membershipType.toString() : null, clanId, send)
-  // console.log(linkAccounts)
+  const accountsLinked = linkAccounts?.message ? true : false
 
   useEffect(() => {
-    if (status == 'authenticated' && groupInfo) {
+    if (status == 'authenticated' && groupInfo && discordMemberInfo) {
       setSend(true)
     }
-  }, [groupInfo])
+  }, [groupInfo, discordMemberInfo])
 
   return (
     <DefaultTemplate>
@@ -63,7 +61,7 @@ export default function Accounts() {
                       </Text>
                       <Image src="Shield_Crest.png" alt="discord" h="2rem" w="auto" />
                     </Div>
-                    {clanBaseMemberInfo?.member?.discordId ?
+                    {clanBaseMemberInfo?.member?.discordId || accountsLinked ?
                       <Div d="flex" justify="center" align="center" m={{ t: "1rem" }}>
                         <Icon name="CBChecked" size="25px" color="cbBlue" />
                         <Text textSize="subheader" textColor="cbWhite" style={{ whiteSpace: "nowrap" }} p={{ x: "0.5rem" }}>
