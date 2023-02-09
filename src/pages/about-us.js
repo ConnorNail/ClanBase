@@ -51,16 +51,16 @@ export default function AboutUs() {
                             <Subtitle>Connect</Subtitle>
                             <Body>You can get in touch with us through our Discord, Twitter, or Reddit accounts. These platforms provide the best channels for communication.</Body>
                             <Div d="flex" justify="center" flexWrap="wrap">
-                                <Anchor href="https://twitter.com/clanbasedev" target="_blank" m="0.5rem">
-                                    <Div bg="#5865F2" p={{ x: "0.75rem", y: "0.75rem" }} rounded="md" d="flex">
+                                <Anchor href="https://discord.gg/WDQC97ybAV" target="_blank" m="0.5rem" >
+                                    <Div bg="#5865F2" p={{ x: "0.75rem", y: "0.75rem" }} rounded="md" d="flex" shadow="2" hoverShadow="4">
                                         <Image src="discordLarge.svg" alt="discord" h="1.5rem" w="auto" />
                                     </Div>
                                 </Anchor>
-                                <Anchor href="https://twitter.com/clanbasedev" target="_blank" m="0.5rem">
-                                    <Image src="twitter.svg" alt="twitter" h="3rem" w="auto" />
+                                <Anchor href="https://twitter.com/clanbasedev" target="_blank" m="0.5rem" >
+                                    <Image src="twitter.svg" alt="twitter" h="3rem" w="auto" shadow="2" hoverShadow="4"/>
                                 </Anchor>
-                                <Anchor href="https://twitter.com/clanbasedev" target="_blank" m="0.5rem">
-                                    <Div bg="white" p={{ x: "0.25rem" }} rounded="md" d="flex">
+                                <Anchor href="https://www.reddit.com/user/ClanbaseDev" target="_blank" m="0.5rem" >
+                                    <Div bg="white" p={{ x: "0.25rem" }} rounded="md" d="flex" shadow="2" hoverShadow="4">
                                         <Image src="redditLarge.svg" alt="discord" h="3rem" w="auto" />
                                     </Div>
                                 </Anchor>
@@ -69,8 +69,8 @@ export default function AboutUs() {
                             <Subtitle>Support ClanBase</Subtitle>
                             <Body>If you would like to help keep the lights on around here and see new features added in the future we&apos;re thankful for your help! Here are the places you can find us.</Body>
                             <Div d="flex" justify="center">
-                                <Anchor href="https://twitter.com/clanbasedev" target="_blank">
-                                    <Image src="ko-fiLarge.png" alt="ko-fi" h="2.5rem" w="auto" />
+                                <Anchor href="https://ko-fi.com/clanbase" target="_blank">
+                                    <Image src="ko-fiLarge.png" alt="ko-fi" h="2.5rem" w="auto" shadow="2" hoverShadow="4"/>
                                 </Anchor>
                             </Div>
 
