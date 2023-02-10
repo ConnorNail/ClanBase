@@ -39,6 +39,7 @@ class MyDocument extends Document {
                         property="og:image"
                         content="https://www.myclanbase.com/destinyBackgroundOverlay.png"
                     />
+                    <meta name="google-site-verification" content="1bBGYobwBorHQSKGygOq8FXHVszmVbrt1qyVVV595rQ" />
 
                     {this.props.stylesheets.map((sheet, i) => (
                         <style
