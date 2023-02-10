@@ -48,7 +48,7 @@ export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router,
                                 {clanStatScores?.PvE.toFixed()}
                             </Text> :
                             <Icon name="Loading3" size="20px" color="cbBlue" />}
-                        <Link href="clan-score-explained">
+                        <Link href="clan-score-explained" passHref legacyBehavior>
                             <Anchor>
                                 <Icon name="Info" size="20px" color="cbGrey2" hoverColor="cbGrey3" cursor="pointer" />
                             </Anchor>
@@ -61,7 +61,7 @@ export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router,
                                 {clanStatScores?.PvP.toFixed()}
                             </Text> :
                             <Icon name="Loading3" size="20px" color="cbBlue" />}
-                        <Link href="clan-score-explained">
+                        <Link href="clan-score-explained" passHref legacyBehavior>
                             <Anchor>
                                 <Icon name="Info" size="20px" color="cbGrey2" hoverColor="cbGrey3" cursor="pointer" />
                             </Anchor>

@@ -33,7 +33,7 @@ const AppHeader = () => {
                             <Row d="flex" m="0.5rem">
                                 {pages.map((list, index) => (
                                     <Div key={index}>
-                                        <Link href={list.link}>
+                                        <Link href={list.link} passHref legacyBehavior>
                                             <Anchor p={{ x: "2rem" }} textSize="title" textAlign="center" textColor="cbWhite" hoverTextColor="cbBlue">
                                                 {list.name}
                                             </Anchor>
