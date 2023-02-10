@@ -1,4 +1,4 @@
-import clientPromise from "./lib/mongodb";
+import clientPromise from "../../../lib/mongodb";
 
 const BUNGIE_API_KEY = process.env.NEXT_PUBLIC_BUNGIE_API_KEY;
 
