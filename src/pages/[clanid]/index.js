@@ -27,6 +27,7 @@ import { useSession } from "next-auth/react"
 import useGetUserInfo from '../../functions/useGetUserInfo';
 import getIdsForCurrentUser from '../../functions/getIdsForCurrentUser';
 import useGetGroupsForMember from '../../functions/useGetGroupsForMember';
+import Head from 'next/head';
 
 export default function ClanPage() {
 
@@ -73,6 +74,16 @@ export default function ClanPage() {
 
   return (
     <DefaultTemplate>
+      <Head>
+        <title>
+          {clanInfo?.Response?.detail?.name ? clanInfo?.Response?.detail?.name : "Clan"} | ClanBase
+        </title>
+        <meta
+          name="description"
+          content={(clanInfo?.Response?.detail?.name ? clanInfo?.Response?.detail?.name : "Clan") + " details and member stat breakdown."}
+          key="desc"
+        />
+      </Head>
       <Div d="flex" justify="center">
         <Col size={{ xs: "11", xl: "8" }}>
           <Row>

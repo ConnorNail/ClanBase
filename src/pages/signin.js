@@ -4,6 +4,7 @@ import { Row, Col, Div } from "atomize";
 import InfoBox from '../components/InfoBox';
 import LoginButton from '../components/LoginButton';
 import { useRouter } from 'next/router'
+import Head from 'next/head';
 
 export default function Signin() {
   const { data: session, status } = useSession()
@@ -16,6 +17,16 @@ export default function Signin() {
 
   return (
     <DefaultTemplate>
+      <Head>
+        <title>
+          Sign In | ClanBase
+        </title>
+        <meta
+          name="description"
+          content="Sign into ClanBase the home base for all Destiny 2 clans."
+          key="desc"
+        />
+      </Head>
       <Div d="flex" justify="center" h="40rem">
         <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>
           <Row d="flex" justify="center">

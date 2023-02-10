@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import useLinkBungieAndDiscord from '../functions/useLinkBungieAndDiscord';
 import useIndividualMembersIds from '../functions/useIndividualMemberIds';
 import useGetDiscordUserInfo from '../functions/useGetDiscordUserInfo';
+import Head from 'next/head';
 
 export default function Accounts() {
   const router = useRouter()
@@ -44,6 +45,16 @@ export default function Accounts() {
 
   return (
     <DefaultTemplate>
+      <Head>
+        <title>
+          Settings | ClanBase
+        </title>
+        <meta
+          name="description"
+          content="Link accounts with ClanBase."
+          key="desc"
+        />
+      </Head>
       <Div d="flex" justify="center" h="40rem">
         <Col size={{ xs: "11", md: "6" }}>
           <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>

@@ -1,6 +1,7 @@
 import DefaultTemplate from '../components/DefaultLayout'
 import { Text, Row, Col, Anchor, Div } from "atomize";
 import InfoBox from '../components/InfoBox';
+import Head from 'next/head';
 
 export default function Privacy() {
 
@@ -22,6 +23,16 @@ export default function Privacy() {
 
   return (
     <DefaultTemplate>
+      <Head>
+        <title>
+          Privacy | ClanBase
+        </title>
+        <meta
+          name="description"
+          content="ClanBase privacy policy."
+          key="desc"
+        />
+      </Head>
       <Div d="flex" justify="center">
         <Col size={{ xs: "11", md: "8"}}>
           <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>

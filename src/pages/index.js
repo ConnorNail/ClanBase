@@ -3,13 +3,24 @@ import SearchBar from '../components/SearchBar'
 import LoginButton from '../components/LoginButton'
 import LoginButtonDiscord from '../components/LoginButtonDiscord'
 import { useRouter } from 'next/router'
-import { Container, Button, Text, Row, Col, Image, Div, Anchor } from "atomize";
+import { Button, Text, Row, Col, Image, Div, Anchor } from "atomize";
+import Head from 'next/head';
 
 export default function Home() {
   const router = useRouter()
 
   return (
     <DefaultTemplate>
+      <Head>
+        <title>
+          Home | ClanBase
+        </title>
+        <meta
+          name="description"
+          content="The home base for guardians seeking to manage their Destiny 2 clans."
+          key="desc"
+        />
+      </Head>
       <Div h="100vh" bgImg="../lightfallBackground.jpeg" bgPos="top" bgSize="auto" bgRepeat="no-repeat" m={{ x: "-0.5rem", y: "-2.5rem" }}>
         <Div h="100vh" bgImg="../destinyBackgroundOverlay.png" bgPos="top" bgSize="auto" bgRepeat="no-repeat">
           <Div h="100vh" bgPos="center" d="flex">
