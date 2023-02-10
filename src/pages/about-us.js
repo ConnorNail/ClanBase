@@ -1,6 +1,7 @@
 import DefaultTemplate from '../components/DefaultLayout'
 import { Text, Image, Col, Anchor, Div } from "atomize";
 import InfoBox from '../components/InfoBox';
+import Head from 'next/head';
 
 export default function AboutUs() {
 
@@ -38,6 +39,16 @@ export default function AboutUs() {
 
     return (
         <DefaultTemplate>
+            <Head>
+                <title>
+                    About Use | ClanBase
+                </title>
+                <meta
+                    name="description"
+                    content="A brief overview of how ClanBase came to be and how you can support us."
+                    key="desc"
+                />
+            </Head>
             <Div d="flex" justify="center">
                 <Col size={{ xs: "11", md: "8" }}>
                     <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>
@@ -57,7 +68,7 @@ export default function AboutUs() {
                                     </Div>
                                 </Anchor>
                                 <Anchor href="https://twitter.com/clanbasedev" target="_blank" m="0.5rem" >
-                                    <Image src="twitter.svg" alt="twitter" h="3rem" w="auto" shadow="2" hoverShadow="4"/>
+                                    <Image src="twitter.svg" alt="twitter" h="3rem" w="auto" shadow="2" hoverShadow="4" />
                                 </Anchor>
                                 <Anchor href="https://www.reddit.com/user/ClanbaseDev" target="_blank" m="0.5rem" >
                                     <Div bg="white" p={{ x: "0.25rem" }} rounded="md" d="flex" shadow="2" hoverShadow="4">
@@ -70,7 +81,7 @@ export default function AboutUs() {
                             <Body>If you would like to help keep the lights on around here and see new features added in the future we&apos;re thankful for your help! Here are the places you can find us.</Body>
                             <Div d="flex" justify="center">
                                 <Anchor href="https://ko-fi.com/clanbase" target="_blank">
-                                    <Image src="ko-fiLarge.png" alt="ko-fi" h="2.5rem" w="auto" shadow="2" hoverShadow="4"/>
+                                    <Image src="ko-fiLarge.png" alt="ko-fi" h="2.5rem" w="auto" shadow="2" hoverShadow="4" />
                                 </Anchor>
                             </Div>
 

@@ -25,6 +25,21 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
+                    <meta
+                        name="description"
+                        content="The home base for guardians seeking to manage their Destiny 2 clans."
+                    />
+                    <meta name="monetag" content="6e3db144c661dd5f91979c93ac705161" />
+                    <meta property="og:title" content="ClanBase | Home Base for all Destiny 2 Clans" />
+                    <meta
+                        property="og:description"
+                        content="The home base for guardians seeking to manage their Destiny 2 clans."
+                    />
+                    <meta
+                        property="og:image"
+                        content="https://www.myclanbase.com/destinyBackgroundOverlay.png"
+                    />
+
                     {this.props.stylesheets.map((sheet, i) => (
                         <style
                             className="_styletron_hydrate_"

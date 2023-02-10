@@ -3,7 +3,8 @@ import ClanCard from '../components/ClanCard'
 import InfoBox from '../components/InfoBox'
 import CompareSearchBar from '../components/CompareSearchBar'
 import { useRouter } from 'next/router'
-import { Container, Button, Text, Row, Col, Image, Div } from "atomize";
+import { Text, Row, Col, Div } from "atomize";
+import Head from 'next/head';
 
 export default function ClanCompare() {
     const router = useRouter()
@@ -60,6 +61,16 @@ export default function ClanCompare() {
 
     return (
         <DefaultTemplate>
+            <Head>
+                <title>
+                    Clan Compare | ClanBase
+                </title>
+                <meta
+                    name="description"
+                    content="Comapre Destiny 2 clan stats."
+                    key="desc"
+                />
+            </Head>
             <Div p="2rem">
                 {/* <InfoBox bg="cbGrey1"> */}
                 <Col>

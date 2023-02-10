@@ -22,6 +22,7 @@ import useGetAllMembersProfile from '../functions/getClanMemberProfileInfo/useGe
 import getClanMemberCharacterSeasonalTimeStats from '../functions/getClanMemberCharacterSeasonalTimeStats';
 import useGetClanMemberDiscordSeasonalTimeStats from '../functions/useGetClanMemberDiscordSeasonalTimeStats';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 export default function Admin() {
 
@@ -256,6 +257,16 @@ export default function Admin() {
 
     return (
         <DefaultTemplate>
+            <Head>
+                <title>
+                    Clan Details | ClanBase
+                </title>
+                <meta
+                    name="description"
+                    content="Stats and admin controls for your Destiny 2 clan."
+                    key="desc"
+                />
+            </Head>
             <Div d="flex" justify="center">
                 <Col size={{ xs: "11", xl: "8" }}>
                     <InfoBox bg={'cbGrey1'} minH="40rem">
