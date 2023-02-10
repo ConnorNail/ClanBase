@@ -21,7 +21,7 @@ export default class MyApp extends App {
         >
           <StyletronProvider value={styletron}>
             {/* <Layout> */}
-              <Script strategy="afterInteractive">{`(function(s,u,z,p){s.src=u,s.setAttribute('data-zone',z),p.appendChild(s);})(document.createElement('script'),'https://inklinkor.com/tag.min.js',5709375,document.body||document.documentElement)`}</Script>
+              <Script id="ad-test" strategy="afterInteractive">{`(function(s,u,z,p){s.src=u,s.setAttribute('data-zone',z),p.appendChild(s);})(document.createElement('script'),'https://inklinkor.com/tag.min.js',5709375,document.body||document.documentElement)`}</Script>
               
               
               <Component {...pageProps} />
