@@ -82,7 +82,7 @@ export default function ClanLeaderboards() {
             <Div d="flex" justify="center">
                 <Col size={{ xs: "11", md: "8" }}>
                     <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>
-                        <Div d="flex" align="center" m={{ x: "1rem", y: "0.5rem" }}>
+                        <Div d={{ xs: "block", lg: "flex" }} flexWrap="wrap" align="center" m={{ x: { xs: "0.5rem", lg: "2rem" }, y: "1rem" }}>
                             <Text textColor="cbWhite" textSize="display1">
                                 CLAN LEADERBOARD
                             </Text>
