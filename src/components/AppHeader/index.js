@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Div, Anchor, Button, Row, Col, Image, Icon } from "atomize";
+import { Div, Anchor, Button, Row, Col, Image, Icon, Text } from "atomize";
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import SearchBar from '../../components/SearchBar'
@@ -22,11 +22,11 @@ const AppHeader = () => {
                         </Div>
                     </Col>
                     <Col d={{ xs: "none", lg: "block" }}>
-                        <Div>
-                            <Button m="1rem" h="auto" w="4rem" p="0rem" bg="none" onClick={() => router.push("/")}>
-                                <Image src="../clanbaseLogo.svg" alt="ClanBase Logo" />
-                            </Button>
-                        </Div>
+                        <Link href="/" passHref legacyBehavior>
+                            <Anchor>
+                                <Image src="../clanbaseLogo.svg" alt="ClanBase Logo" h="auto" w="4rem" m="1rem" />
+                            </Anchor>
+                        </Link>
                     </Col>
                     <Col size="auto" d={{ xs: "none", lg: "flex" }} align="center">
                         <Div>
@@ -34,8 +34,10 @@ const AppHeader = () => {
                                 {pages.map((list, index) => (
                                     <Div key={index}>
                                         <Link href={list.link} passHref legacyBehavior>
-                                            <Anchor p={{ x: "2rem" }} textSize="title" textAlign="center" textColor="cbWhite" hoverTextColor="cbBlue">
-                                                {list.name}
+                                            <Anchor>
+                                                <Text p={{ x: { xs: "1rem", xl: "2rem"} }} textSize={{ xs: "subheader", xl: "title" }} textAlign="center" textColor="cbWhite" hoverTextColor="cbBlue">
+                                                    {list.name}
+                                                </Text>
                                             </Anchor>
                                         </Link>
                                     </Div>
