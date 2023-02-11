@@ -25,8 +25,10 @@ const AppFooter = () => {
                     </Col>
                     <Col size="flex">
                         <Link href="/privacy" passHref legacyBehavior>
-                            <Anchor d="block" textSize="paragraph" textColor="cbWhite" hoverTextColor="cbBlue" >
-                                Privacy Policy
+                            <Anchor>
+                                <Text d="block" textSize="paragraph" textColor="cbWhite" hoverTextColor="cbBlue">
+                                    Privacy Policy
+                                </Text>
                             </Anchor>
                         </Link>
                     </Col>

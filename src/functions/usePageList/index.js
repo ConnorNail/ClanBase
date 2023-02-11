@@ -23,6 +23,10 @@ const usePageList = () => {
             link: "/clan-compare"
         },
         {
+            name: "LEADERBOARDS",
+            link: "/clan-leaderboards"
+        },
+        {
             name: "ABOUT US",
             link: "/about-us"
         }

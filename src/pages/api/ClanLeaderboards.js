@@ -6,10 +6,10 @@ export default async function handler(req, res) {
         const db = client.db("test");
 
         if (req.method == "GET") {
-            const clansPvECursor = await db.collection("clanScores").find({}, { projection: { _id: false, clanId: true, clanScorePvE: true } }).sort({ clanScorePvE: -1 }).limit(10)
+            const clansPvECursor = await db.collection("clanScores").find({}, { projection: { _id: false, clanId: true, clanScorePvE: true } }).sort({ clanScorePvE: -1 }).limit(25)
             const clansPvELeaderboard = await clansPvECursor.toArray()
 
-            const clansPvPCursor = await db.collection("clanScores").find({}, { projection: { _id: false, clanId: true, clanScorePvP: true } }).sort({ clanScorePvP: -1 }).limit(10)
+            const clansPvPCursor = await db.collection("clanScores").find({}, { projection: { _id: false, clanId: true, clanScorePvP: true } }).sort({ clanScorePvP: -1 }).limit(25)
             const clansPvPLeaderboard = await clansPvPCursor.toArray()
 
             if (clansPvELeaderboard && clansPvPLeaderboard) {
