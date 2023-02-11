@@ -1,14 +1,13 @@
-import clientPromise from "../../../lib/mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
 
 export default async function handler(req, res) {
     try {
-        const client = await clientPromise;
-        const db = client.db("test");
+        const { database } = await connectToDatabase();
 
         if (req.method === 'POST') {
             if (typeof req?.body?.discordId === 'string' && typeof req?.body?.discordName === 'string' && typeof req?.body?.discordDiscriminator === 'string' && typeof req?.body?.destinyMembershipId === 'string' && typeof req?.body?.destinyMembershipType === 'string') {
                 const bodyObject = req.body;
-                let group = await db.collection("members").updateOne(
+                let group = await database.collection("members").updateOne(
                     { discordId: bodyObject.discordId, destinyMembershipId: bodyObject.destinyMembershipId },
                     {
                         $set: { discordName: bodyObject.discordName, discordDiscriminator: bodyObject.discordDiscriminator, destinyMembershipType: bodyObject.destinyMembershipType, clanId: bodyObject?.clanId ? bodyObject.clanId : null },

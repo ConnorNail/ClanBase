@@ -1,4 +1,4 @@
-import clientPromise from "../../../lib/mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
 
 const BUNGIE_API_KEY = process.env.NEXT_PUBLIC_BUNGIE_API_KEY;
 
@@ -23,14 +23,13 @@ async function getBungieMemberships(membershipId, membershipType) {
 
 export default async function handler(req, res) {
     try {
-        const client = await clientPromise;
-        const db = client.db("test");
+        const { database } = await connectToDatabase();
 
         if (req.method === "GET") {
             if (typeof req?.query?.discordId) {
 
                 // Get users's destiny ids from discord id
-                const membersCursor = await db.collection("members").find({ discordId: req.query.discordId }, { projection: { _id: false, destinyMembershipId: true, destinyMembershipType: true } })
+                const membersCursor = await database.collection("members").find({ discordId: req.query.discordId }, { projection: { _id: false, destinyMembershipId: true, destinyMembershipType: true } })
                 const bungieAccounts = await membersCursor.toArray()
 
                 if (bungieAccounts.length > 0) {

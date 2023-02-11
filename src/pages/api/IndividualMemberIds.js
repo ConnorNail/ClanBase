@@ -1,15 +1,14 @@
-import clientPromise from "../../../lib/mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
 
 export default async function handler(req, res) {
     try {
-        const client = await clientPromise;
-        const db = client.db("test");
+        const { database } = await connectToDatabase();
 
         if (req.method == "GET") {
             const destinyMembershipId = req.query?.destinyMembershipId
             const destinyMembershipType = req.query?.destinyMembershipType
             if (destinyMembershipId && destinyMembershipType) {
-                const member = await db.collection("members").findOne({ $and: [{ destinyMembershipId: destinyMembershipId }, { destinyMembershipType: destinyMembershipType }]}, { projection: { _id: false } })
+                const member = await database.collection("members").findOne({ $and: [{ destinyMembershipId: destinyMembershipId }, { destinyMembershipType: destinyMembershipType }]}, { projection: { _id: false } })
 
                 if (member) {
                     res.status(200).json({ registered: true, member });

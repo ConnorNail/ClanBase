@@ -1,4 +1,4 @@
-import clientPromise from "../../../lib/mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
 
 const BUNGIE_API_KEY = process.env.NEXT_PUBLIC_BUNGIE_API_KEY;
 
@@ -23,8 +23,7 @@ async function checkClan(clanId) {
 
 export default async function handler(req, res) {
     try {
-        const client = await clientPromise;
-        const db = client.db("test");
+        const { database } = await connectToDatabase();
 
         if (req.method === "POST") {
             if (typeof req?.body?.clanId === 'string' && typeof req?.body?.guildId === 'string') {
@@ -33,7 +32,7 @@ export default async function handler(req, res) {
 
                 // if (isClan) {
                 const bodyObject = req.body;
-                let group = await db.collection("groups").updateOne(
+                let group = await database.collection("groups").updateOne(
                     { clanId: bodyObject.clanId.toString() },
                     { $set: { guildId: bodyObject.guildId.toString() } },
                     { upsert: true }

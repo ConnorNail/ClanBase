@@ -1,4 +1,4 @@
-import clientPromise from "../../../lib/mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
 
 const BUNGIE_API_KEY = process.env.NEXT_PUBLIC_BUNGIE_API_KEY;
 
@@ -23,13 +23,12 @@ async function getClanMembers(clanId) {
 
 export default async function handler(req, res) {
     try {
-        const client = await clientPromise;
-        const db = client.db("test");
+        const { database } = await connectToDatabase();
 
         if (req.method == "GET") {
             const guildId = req.query?.guildId
             if (guildId) {
-                const groupCursor = await db.collection("groups").find({ guildId: guildId })
+                const groupCursor = await database.collection("groups").find({ guildId: guildId })
                 const groups = await groupCursor.toArray()
 
                 let allMemberList = []
@@ -46,7 +45,7 @@ export default async function handler(req, res) {
                             }
                         }
 
-                        const membersCursor = await db.collection("members").find({ $or: memberList }, { projection: { _id: false, discordId: true, destinyMembershipId: true, clanId: true, discordName: true } })
+                        const membersCursor = await database.collection("members").find({ $or: memberList }, { projection: { _id: false, discordId: true, destinyMembershipId: true, clanId: true, discordName: true } })
                         const members = await membersCursor.toArray()
 
                         allMemberList.push(...members)

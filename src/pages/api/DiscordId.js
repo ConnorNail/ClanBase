@@ -1,14 +1,13 @@
-import clientPromise from "../../../lib/mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
 
 export default async function handler(req, res) {
     try {
-        const client = await clientPromise;
-        const db = client.db("test");
+        const { database } = await connectToDatabase();
 
         if (req.method == "GET") {
             const clanId = req.query?.clanId
             if (clanId) {
-                const group = await db.collection("groups").findOne({ clanId: clanId }, { projection: { _id: false } })
+                const group = await database.collection("groups").findOne({ clanId: clanId }, { projection: { _id: false } })
 
                 if (group) {
                     res.status(200).json(group);
