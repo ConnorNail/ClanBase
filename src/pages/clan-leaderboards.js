@@ -1,5 +1,5 @@
 import DefaultTemplate from '../components/DefaultLayout'
-import { Text, Row, Col, Anchor, Div, Icon } from "atomize";
+import { Text, Row, Col, Anchor, Div, Icon, Button } from "atomize";
 import InfoBox from '../components/InfoBox';
 import Head from 'next/head';
 import useGetClanLeaderboards from '../functions/useGetClanLeaderboards';
@@ -82,6 +82,18 @@ export default function ClanLeaderboards() {
             <Div d="flex" justify="center">
                 <Col size={{ xs: "11", md: "8" }}>
                     <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>
+                        <Div d="flex" align="center" m={{ x: "1rem", y: "0.5rem" }}>
+                            <Text textColor="cbWhite" textSize="display1">
+                                CLAN LEADERBOARD
+                            </Text>
+                            <Link href="/clan-score-explained" passHref legacyBehavior>
+                                <Anchor m={{ l: "auto" }}>
+                                    <Button bg="cbGrey2" textColor="cbWhite" textSize="paragraph" shadow="2" hoverShadow="4">
+                                        What is a Clan Score?
+                                    </Button>
+                                </Anchor>
+                            </Link>
+                        </Div>
                         <Div d={{ xs: "block", lg: "flex" }} align="center" flexWrap="wrap" justify="center">
                             {clansPvELeaderboard && clansPvPLeaderboard ?
                                 <>
