@@ -54,8 +54,8 @@ export default function Discord() {
                     <InfoBox bg="cbGrey1" m={{ y: "0.5rem" }}>
                         <Div m={{ x: "2rem", y: "1rem" }}>
                             <Title>DISCORD BOT</Title>
-                            <Div d="flex" align="center" justify="center">
-                                <Anchor href="https://discordapp.com/oauth2/authorize?&client_id=1063891110805639338&scope=bot&permissions=33557504" target="_blank" m={{ y: "2rem", x: "0.5rem" }}>
+                            <Div d="flex" align="center">
+                                <Anchor href="https://discordapp.com/oauth2/authorize?&client_id=1063891110805639338&scope=bot&permissions=33557504" target="_blank" m={{ y: "1rem", x: "0.5rem" }}>
                                     <Button bg="cbBlue" shadow="2" hoverShadow="4" m="0.5rem">
                                         <Text textColor="cbGrey1">
                                             Add To Server
