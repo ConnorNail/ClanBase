@@ -16,26 +16,26 @@ const AppHeader = () => {
         <header>
             <Div bg="cbRed" border={{ b: "1px solid" }} borderColor="cbWhite">
                 <Row>
-                    <Col size="auto" d={{ xs: "flex", lg: "none" }} align="center">
+                    <Col size="auto" d={{ xs: "flex", xl: "none" }} align="center">
                         <Div m={{ x: "0.5rem" }}>
                             <MenuDropDown />
                         </Div>
                     </Col>
-                    <Col d={{ xs: "none", lg: "block" }}>
+                    <Col d={{ xs: "none", xl: "block" }}>
                         <Link href="/" passHref legacyBehavior>
                             <Anchor>
                                 <Image src="../clanbaseLogo.svg" alt="ClanBase Logo" h="auto" w="4rem" m="1rem" />
                             </Anchor>
                         </Link>
                     </Col>
-                    <Col size="auto" d={{ xs: "none", lg: "flex" }} align="center">
+                    <Col size="auto" d={{ xs: "none", xl: "flex" }} align="center">
                         <Div>
                             <Row d="flex" m="0.5rem">
                                 {pages.map((list, index) => (
                                     <Div key={index}>
                                         <Link href={list.link} passHref legacyBehavior>
                                             <Anchor>
-                                                <Text p={{ x: { xs: "1rem", xl: "2rem"} }} textSize={{ xs: "subheader", xl: "title" }} textAlign="center" textColor="cbWhite" hoverTextColor="cbBlue">
+                                                <Text p={{ x: "1.5rem" }} textSize="subheader" textAlign="center" textColor="cbWhite" hoverTextColor="cbBlue">
                                                     {list.name}
                                                 </Text>
                                             </Anchor>
@@ -56,7 +56,7 @@ const AppHeader = () => {
                         </Div>
                     </Col>
                 </Row>
-                <Row d={{ xs: "block", lg: "none" }} m="0.5rem">
+                <Row d={{ xs: "block", xl: "none" }} m="0.5rem">
                     <Col>
                         <SearchBar />
                     </Col>
