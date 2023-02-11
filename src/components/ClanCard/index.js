@@ -180,10 +180,10 @@ const ClanCard = ({ clanId, stats }) => {
                 const killsPvE = stats[i]?.Response?.allPvE?.allTime?.kills?.basic?.value
                 const killsPvP = stats[i]?.Response?.allPvP?.allTime?.kills?.basic?.value
                 if (killsPvE) {
-                    clanKillsPvP += killsPvE
+                    clanKillsPvE += killsPvE
                 }
                 if (killsPvP) {
-                    clanKillsPvE += killsPvP
+                    clanKillsPvP += killsPvP
                 }
             }
 

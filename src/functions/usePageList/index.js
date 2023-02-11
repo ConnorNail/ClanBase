@@ -16,7 +16,7 @@ const usePageList = () => {
     return [
         {
             name: "MY CLAN",
-            link: clanId === null ? `/signin` : `/${clanId}`
+            link: "/clan-details"//clanId === null ? `/signin` : `/${clanId}`
         },
         {
             name: "COMPARE",
@@ -25,6 +25,10 @@ const usePageList = () => {
         {
             name: "LEADERBOARDS",
             link: "/clan-leaderboards"
+        },
+        {
+            name: "DISCORD BOT",
+            link: "/discord"
         },
         {
             name: "ABOUT US",
