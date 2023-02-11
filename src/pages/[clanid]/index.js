@@ -58,20 +58,6 @@ export default function ClanPage() {
 
   const memberSeasonalTimeStats = getClanMemberCharacterSeasonalTimeStats(clanMemberList, clanMemberProfiles)
 
-  const loadingValue = (value, color) => {
-    if (value || value == 0) {
-      return (
-        <>
-          {value}
-        </>
-      )
-    } else {
-      return (
-        <Icon name="Loading3" size="20px" color={color} transform='translateY(15%)' />
-      )
-    }
-  }
-
   return (
     <DefaultTemplate>
       <Head>

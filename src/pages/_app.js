@@ -15,15 +15,17 @@ export default class MyApp extends App {
       <SessionProvider session={session}>
         <SWRConfig
           value={{
+            revalidateIfStale: false,
             revalidateOnFocus: false,
-            refreshInterval: 900000
+            refreshInterval: 0
           }}
         >
           <StyletronProvider value={styletron}>
             {/* <Layout> */}
-              <Script id="Adsense-id" data-ad-client="ca-pub-5349675379874975" async={true} src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" onError={ (e) => { console.error('Script failed to load', e) }}/>
-              <Component {...pageProps} />
-              <Analytics />
+            {/* <Script id="Adsense-id" data-ad-client="ca-pub-5349675379874975" async={true} src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" onError={ (e) => { console.error('Script failed to load', e) }}/> */}
+            
+            <Component {...pageProps} />
+            <Analytics />
             {/* </Layout> */}
           </StyletronProvider>
         </SWRConfig>
