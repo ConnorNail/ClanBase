@@ -31,7 +31,10 @@ const LoginButton = () => {
                     bg="cbTransparent"
                     textColor="cbWhite"
                     hoverTextColor="cbBlue"
-                    onClick={() => signOut()}
+                    onClick={() => {
+                        signOut()
+                        window.localStorage.clear()
+                    }}
                 >
                     <Icon name="Logout" size="20px" color="cbWhite" m={{ r: "0.5rem" }} />
                     Signout
