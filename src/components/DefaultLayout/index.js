@@ -11,13 +11,9 @@ const DefaultLayout = ({ children }) => {
     <ThemeProvider theme={theme}>
       <Div className="font-face-gm" m="-0.5rem" overflow="hidden">
         <AppHeader />
-        {/* <Div bgImg="../lightfallBackground.jpeg" bgPos="top" bgSize="auto" bgRepeat="no-repeat" m={{ x: "-0.5rem", y: "-2.5rem" }}>
-          <Div bgImg="../destinyBackgroundOverlay.png" bgPos="top" bgSize="auto" bgRepeat="no-repeat"> */}
-
-            {children}
-
-          {/* </Div>
-        </Div> */}
+        <Div minH="100vh">
+          {children}
+        </Div>
         <AppFooter />
       </Div>
     </ThemeProvider>

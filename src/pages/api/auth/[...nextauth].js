@@ -30,8 +30,6 @@ async function refreshAccessToken(token) {
       throw refreshedTokens
     }
 
-    console.log(refreshedTokens)
-
     return {
       ...token,
       accessToken: refreshedTokens.access_token,
@@ -75,7 +73,6 @@ export const authOptions = {
       authorization: {params: {scope: scopes}},
     })
   ],
-  debug: true,
   session: {
     strategy: "jwt"
   },
@@ -110,7 +107,6 @@ export const authOptions = {
 
       // Return previous token if the access token has not expired yet
       if (Date.now() < (token.accessTokenExpires - 300000)) {
-        console.log('Access Token has not expired yet', token.accessTokenExpires)
         return token
       }
 
