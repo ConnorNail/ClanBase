@@ -55,11 +55,11 @@ const SearchBar = ({ clanId }) => {
                         {suggestion?.Response?.detail?.name} [{suggestion?.Response?.detail?.clanInfo?.clanCallsign}]
                     </Anchor>
                     :
-                    <Text d="block" p={{ y: "0.25rem" }} border={{ b: "1px solid" }} borderColor="cbWhite" textColor="cbGrey3">
-                        There is no clan with that name
-                    </Text>
+                    <Icon name="Loading3" size="25px" color="cbWhite" />
                 :
-                <Icon name="Loading3" size="25px" color="cbWhite" />
+                <Text d="block" p={{ y: "0.25rem" }} border={{ b: "1px solid" }} borderColor="cbWhite" textColor="cbGrey3">
+                    There is no clan with that name
+                </Text>
             }
         </Div>
     );
