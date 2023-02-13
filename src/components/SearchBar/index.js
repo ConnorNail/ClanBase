@@ -4,7 +4,7 @@ import getHeaders from '../../functions/useGetHeaders'
 import useSWRMutation from 'swr/mutation'
 import { useRouter } from 'next/router';
 
-const searchBar = ({ clanId }) => {
+const SearchBar = ({ clanId }) => {
     const router = useRouter();
 
     const header = getHeaders(false)
@@ -101,4 +101,4 @@ const searchBar = ({ clanId }) => {
     )
 }
 
-export default searchBar
+export default SearchBar
