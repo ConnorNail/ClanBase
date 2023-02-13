@@ -40,7 +40,7 @@ const MemberSearchBar = ({ memberInfo, memberProfiles, setMemberIndex }) => {
 
         // List elements
         const menuList = (
-            <Div p={{ x: "1rem", y: "0.5rem" }} bg="cbGrey1">
+            <Div p={{ x: "1rem", y: "0.5rem" }} bg="cbGrey1" m={{ t: "-0.25rem" }} rounded="0 0 5px 5px">
                 {suggestions.map((suggestion, index) => (
                     <Anchor d="block" p={{ y: "0.25rem" }} key={index} border={{ b: "1px solid" }} borderColor="cbWhite" textColor="cbGrey3" hoverTextColor="cbBlue"
                         onClick={() => {

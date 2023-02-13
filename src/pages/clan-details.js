@@ -276,7 +276,7 @@ export default function Admin() {
                                     <Text textColor="cbWhite" textSize="display1" m="0.5rem">
                                         {clanName ? clanName : <Icon name="Loading3" size="25px" color="cbWhite" />} [{clanCallsign ? clanCallsign : <Icon name="Loading3" size="25px" color="cbWhite" />}]
                                     </Text>
-                                    <Button bg="cbGrey2" textColor="cbWhite" hoverTextColor="cbBlue" shadow="2" hoverShadow="4" p={{ l: "0.25rem", r: "0.5rem" }} m={{ l: "auto" }} h="2rem" textSize="paragraph" style={{ whiteSpace: "nowrap" }} onClick={() => router.push(`/${clanId}`)}>
+                                    <Button bg="cbGrey2" textColor="cbWhite" hoverTextColor="cbBlue" shadow="2" hoverShadow="4" p={{ l: "0.25rem", r: "0.5rem" }} m={{ l: "auto", r: "0.5rem" }} h="2rem" textSize="paragraph" style={{ whiteSpace: "nowrap" }} onClick={() => router.push(`/${clanId}`)}>
                                         <Icon name="LeftArrow" size="20px" color="cbWhite" />
                                         Back to Clan Page
                                     </Button>
