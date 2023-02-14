@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 import getHeaders from '../../useGetHeaders'
 
 export default function useGetAllMembersProfile(playerData) {
     const header = getHeaders(false)
+    const [data, setData] = useState(null)
 
     const getKey = () => {
         let keys = []
@@ -18,9 +20,22 @@ export default function useGetAllMembersProfile(playerData) {
         return null
     }
 
-    const { data, error } = useSWR(getKey, (keys) =>
-        Promise.all(keys.map((key) => fetch(key, { headers: header }).then((res) => res.json())))
-    )
+    // const { data, error } = useSWR(getKey, (keys) =>
+    //     Promise.all(keys.map((key) => fetch(key, { headers: header }).then((res) => res.json())))
+    // )
+
+    useEffect(() => {
+        const keys = getKey()
+
+        const callData = async () => {
+            if (keys) {
+                const fetchedData = await Promise.all(keys.map((key) => fetch(key, { headers: header }).then((res) => res.json())))
+                setData(fetchedData)
+            }
+        }
+
+        callData()
+    }, [playerData])
 
     return data
 }

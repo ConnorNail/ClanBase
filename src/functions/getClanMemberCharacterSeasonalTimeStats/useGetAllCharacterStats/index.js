@@ -1,11 +1,15 @@
+import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 import getHeaders from '../../useGetHeaders'
 
 export default function useGetAllCharacterStats(playerProfiles, dateArray) {
     const header = getHeaders(false)
+    const [data, setData] = useState(null)
+    const [characterCountArray, setCharacterCountArray] = useState([])
+    const [dateCount, setDateCount] = useState(0)
 
-    let characterCountArray = []
-    let dateCount = 0
+    // let characterCountArray = []
+    // let dateCount = 0
 
     // console.log(playerProfiles)
 
@@ -22,8 +26,10 @@ export default function useGetAllCharacterStats(playerProfiles, dateArray) {
                     const membershipId = playerProfiles[i]?.Response?.profile?.data?.userInfo?.membershipId
                     const membershipType = playerProfiles[i]?.Response?.profile?.data?.userInfo?.membershipType
 
-                    characterCountArray.push(characterCount)
-                    dateCount = dateArray.length
+                    // characterCountArray.push(characterCount)
+                    setCharacterCountArray(characterCountArray => [...characterCountArray, characterCount])
+                    // dateCount = dateArray.length
+                    setDateCount(dateArray.length)
 
                     for (let j = 0; j < dateArray.length; j++) {
                         characterIds.forEach((characterId) => {
@@ -40,9 +46,22 @@ export default function useGetAllCharacterStats(playerProfiles, dateArray) {
         return null
     }
 
-    const { data, error } = useSWR(getKey, (keys) =>
-        Promise.all(keys.map((key) => fetch(key, { headers: header }).then((res) => res.json())))
-    )
+    // const { data, error } = useSWR(getKey, (keys) =>
+    //     Promise.all(keys.map((key) => fetch(key, { headers: header }).then((res) => res.json())))
+    // )
+
+    useEffect(() => {
+        const keys = getKey()
+
+        const callData = async () => {
+            if (keys) {
+                const fetchedData = await Promise.all(keys.map((key) => fetch(key, { headers: header }).then((res) => res.json())))
+                setData(fetchedData)
+            }
+        }
+
+        callData()
+    }, [playerProfiles])
 
     return { data: data, characterCountArray: characterCountArray, dateCount: dateCount }
 }

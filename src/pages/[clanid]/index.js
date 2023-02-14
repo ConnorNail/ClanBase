@@ -1,7 +1,6 @@
 import DefaultTemplate from '../../components/DefaultLayout';
 import InfoBox from '../../components/InfoBox';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
 import { Row, Col, Div, Text, Icon, Button } from "atomize";
 import getClanInfo from '../../functions/useGetClanInfo';
 import getClanMemberInfo from '../../functions/getClanMemberProfileInfo/useGetClanMemberInfo';
@@ -28,10 +27,12 @@ import useGetUserInfo from '../../functions/useGetUserInfo';
 import getIdsForCurrentUser from '../../functions/getIdsForCurrentUser';
 import useGetGroupsForMember from '../../functions/useGetGroupsForMember';
 import Head from 'next/head';
+import { useState, useEffect } from 'react';
 
 export default function ClanPage() {
-
   const router = useRouter();
+
+  // const [clanStatScores, setClanStatScores] = useState(false) 
 
   // Get query string from URL
   const queryObj = router.query
@@ -57,6 +58,10 @@ export default function ClanPage() {
   const clanStatScores = calcClanStatScores(clanMemberStats, clanMemberProfiles, clanId)
 
   const memberSeasonalTimeStats = getClanMemberCharacterSeasonalTimeStats(clanMemberList, clanMemberProfiles)
+
+  // useEffect(() => {
+  //   setClanStatScores(calcClanStatScores(clanMemberStats, clanMemberProfiles, clanId))
+  // }, [clanMemberStats, clanMemberProfiles])
 
   return (
     <DefaultTemplate>
