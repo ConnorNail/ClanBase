@@ -25,6 +25,7 @@ export default function useGetAllMembersProfile(playerData) {
     // )
 
     useEffect(() => {
+        setData(null)
         const keys = getKey()
 
         const callData = async () => {

@@ -32,8 +32,6 @@ import { useState, useEffect } from 'react';
 export default function ClanPage() {
   const router = useRouter();
 
-  // const [clanStatScores, setClanStatScores] = useState(false) 
-
   // Get query string from URL
   const queryObj = router.query
   const clanId = queryObj.clanid
@@ -58,10 +56,6 @@ export default function ClanPage() {
   const clanStatScores = calcClanStatScores(clanMemberStats, clanMemberProfiles, clanId)
 
   const memberSeasonalTimeStats = getClanMemberCharacterSeasonalTimeStats(clanMemberList, clanMemberProfiles)
-
-  // useEffect(() => {
-  //   setClanStatScores(calcClanStatScores(clanMemberStats, clanMemberProfiles, clanId))
-  // }, [clanMemberStats, clanMemberProfiles])
 
   return (
     <DefaultTemplate>

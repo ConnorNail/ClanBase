@@ -51,11 +51,12 @@ export default function useGetAllCharacterStats(playerProfiles, dateArray) {
     // )
 
     useEffect(() => {
+        setData(null)
         const keys = getKey()
 
         const callData = async () => {
             if (keys) {
-                const fetchedData = await Promise.all(keys.map((key) => fetch(key, { headers: header }).then((res) => res.json())))
+                const fetchedData = await Promise.all(keys.map((key) => fetch(key, { headers: header }).then((res) => res.json()).catch((err) => err)))
                 setData(fetchedData)
             }
         }
