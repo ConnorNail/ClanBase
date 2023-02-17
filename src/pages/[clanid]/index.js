@@ -1,7 +1,7 @@
 import DefaultTemplate from '../../components/DefaultLayout';
 import InfoBox from '../../components/InfoBox';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Div, Text, Icon, Button } from "atomize";
 import getClanInfo from '../../functions/useGetClanInfo';
 import getClanMemberInfo from '../../functions/getClanMemberProfileInfo/useGetClanMemberInfo';
@@ -28,10 +28,12 @@ import useGetUserInfo from '../../functions/useGetUserInfo';
 import getIdsForCurrentUser from '../../functions/getIdsForCurrentUser';
 import useGetGroupsForMember from '../../functions/useGetGroupsForMember';
 import Head from 'next/head';
+import { mutate } from 'swr';
 
 export default function ClanPage() {
 
   const router = useRouter();
+  const [clearCache, setCleaCache] = useState(true)
 
   // Get query string from URL
   const queryObj = router.query
@@ -51,12 +53,24 @@ export default function ClanPage() {
 
   const clanInfo = getClanInfo(clanId)
   const { data: clanMemberList } = getClanMemberInfo(clanId)
-  const clanMemberStats = getClanMembersAllTimeStats(clanMemberList)
-  const clanMemberProfiles = getAllMembersProfile(clanMemberList)
+  const { data: clanMemberStats, keyList: allTimeStatList } = getClanMembersAllTimeStats(clanMemberList)
+  const { data: clanMemberProfiles, keyList: profileList } = getAllMembersProfile(clanMemberList)
 
   const clanStatScores = calcClanStatScores(clanMemberStats, clanMemberProfiles, clanId)
 
-  const memberSeasonalTimeStats = getClanMemberCharacterSeasonalTimeStats(clanMemberList, clanMemberProfiles)
+  const { memberSeasonalTime: memberSeasonalTimeStats, keyList: memberSeasonalTimeList } = getClanMemberCharacterSeasonalTimeStats(clanMemberList, clanMemberProfiles)
+
+  const keyList = allTimeStatList && profileList && memberSeasonalTimeList ? [...allTimeStatList, ...profileList, ...memberSeasonalTimeList] : null
+
+  // Clear cache if it exists
+  useEffect(() => {
+    if (keyList) {
+      console.log(keyList)
+      mutate((key)=>keyList.includes(key), undefined, false)
+      setCleaCache(false)
+      console.log('clearCache')
+    }
+  }, [keyList])
 
   return (
     <DefaultTemplate>

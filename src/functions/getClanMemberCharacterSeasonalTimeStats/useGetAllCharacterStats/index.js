@@ -44,5 +44,5 @@ export default function useGetAllCharacterStats(playerProfiles, dateArray) {
         Promise.all(keys.map((key) => fetch(key, { headers: header }).then((res) => res.json())))
     )
 
-    return { data: data, characterCountArray: characterCountArray, dateCount: dateCount }
+    return { keyList: getKey(), data: data, characterCountArray: characterCountArray, dateCount: dateCount }
 }

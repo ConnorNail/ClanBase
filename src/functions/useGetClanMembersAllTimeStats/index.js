@@ -22,5 +22,5 @@ export default function useGetClanMembersAllTimeStats(playerData) {
         Promise.all(keys.map((key) => fetch(key, { headers: header }).then((res) => res.json())))
     )
 
-    return data
+    return { data, keyList: getKey() }
 }
