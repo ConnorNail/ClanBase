@@ -11,6 +11,7 @@ export default function getClanMemberCharacterSeasonalTimeStats(memberInfo, memb
   const dateArray = createSubDateArray(currentSeasonInfo?.Response?.startDate, currentSeasonInfo?.Response?.endDate);
 
   const allCharacterStats = getAllCharacterStats(memberProfiles, dateArray)
+  console.log(allCharacterStats)
 
   const memberSeasonalTime = calcMemberSeasonalActivityTime(allCharacterStats, memberProfiles, memberInfo)
 

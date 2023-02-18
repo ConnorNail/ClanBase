@@ -34,7 +34,7 @@ const MemberSearchBar = ({ memberInfo, memberProfiles, setMemberIndex }) => {
         let suggestions = []
         suggestions = names.filter((data, index) => {
             //filtering array value and user characters to lowercase and return only those words which are start with user enetered chars
-            return data.name.toLocaleLowerCase().startsWith(input.toLocaleLowerCase())
+            return data?.name ? data.name.toLocaleLowerCase().startsWith(input.toLocaleLowerCase()) : false
         });
         suggestions.splice(4)
 
