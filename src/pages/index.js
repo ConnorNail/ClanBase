@@ -21,11 +21,11 @@ export default function Home() {
           key="desc"
         />
       </Head>
-      <Div h="100vh" bgImg="../lightfallBackground.jpeg" bgPos="top" bgSize="auto" bgRepeat="no-repeat" m={{ x: "-0.5rem", y: "-2.5rem" }}>
-        <Div h="100vh" bgImg="../destinyBackgroundOverlay.png" bgPos="top" bgSize="auto" bgRepeat="no-repeat">
+      <Div h="100vh" bgImg="../lightfallBackground.jpeg" bgPos="top" bgSize="cover" bgRepeat="no-repeat" m={{ x: "-0.5rem", y: "-2.5rem" }}>
+        <Div h="100vh" bgImg="../destinyBackgroundOverlay.png" bgPos="top" bgSize="cover" bgRepeat="no-repeat">
           <Div h="100vh" bgPos="center" d="flex">
             <Col size="2" d={{ xs: "none", md: "block" }}>
-              <Div m={{ t: "10rem" }} d={{ xs: "none", md: "block" }}>
+              <Div m={{ t: "10rem" }} d={{ xs: "none", md: "inline-block" }}>
                 <Div bg="cbWhite" h="3rem" w="0.1rem" m={{ l: "2.3rem" }}></Div>
                 <Anchor href="https://twitter.com/clanbasedev" target="_blank">
                   <Button m="1rem" h="2.5rem" w="2.5rem" p="0rem" shadow="5" bg="none">
