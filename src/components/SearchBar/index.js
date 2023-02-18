@@ -3,7 +3,6 @@ import { Input, Icon, Dropdown, Div, Anchor, Col, Text, Image } from "atomize";
 import getHeaders from '../../functions/useGetHeaders'
 import useSWRMutation from 'swr/mutation'
 import { useRouter } from 'next/router';
-import { mutate } from 'swr';
 
 const SearchBar = ({ clanId }) => {
     const router = useRouter();
@@ -43,13 +42,12 @@ const SearchBar = ({ clanId }) => {
 
     // List elements
     const menuList = (
-        <Div p={{ x: "1rem", y: "0.5rem" }} bg="cbRed" m={{ t: "-0.25rem" }} rounded="0 0 5px 5px">
+        <Div p={{ x: "1rem", y: "0.5rem" }} bg="cbRed" m={{ t: "-0.25rem" }} shadow="4" rounded="0 0 5px 5px">
             {suggestion ?
                 suggestion?.Response ?
                     <Anchor d="block" p={{ y: "0.25rem" }} border={{ b: "1px solid" }} borderColor="cbWhite" textColor="cbGrey3" hoverTextColor="cbBlue"
                         onClick={() => {
                             router.push(`/${suggestion?.Response?.detail?.groupId}`)
-                            // mutate(()=>true, undefined, false)
                             setShowDropdown(false)
                             setInput('')
                         }}
