@@ -29,6 +29,14 @@ export default function AboutUs() {
         )
     }
 
+    function List({ children }) {
+        return (
+            <Text textColor="cbWhite" textSize="paragraph" p={{ x: "0.5rem" }}>
+                {children}
+            </Text>
+        )
+    }
+
     function Highlight({ children }) {
         return (
             <Text textColor="cbBlue" tag="span">
@@ -86,7 +94,10 @@ export default function AboutUs() {
                             </Div>
 
                             <Subtitle>Special Thank You</Subtitle>
-                            <Body>Thank you <Highlight>AllegedGames#5980</Highlight>, <Highlight>Ducor#0773</Highlight>, and <Highlight>Trech</Highlight> for all your help and continued support!</Body>
+                            <Body>Thank you so much to everyone who has helped with ClanBase! We are so thankful for each and every one of you!</Body>
+                            <List><Highlight>Ducor#0773</Highlight> for all your help developing the Discord bot</List>
+                            <List><Highlight>AllegedGames#5980</Highlight></List>
+                            <List><Highlight>Creator Trech#5812</Highlight></List>
                         </Div>
                     </InfoBox>
                 </Col>

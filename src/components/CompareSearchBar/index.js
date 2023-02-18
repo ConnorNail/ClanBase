@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Icon } from "atomize";
-import { useRouter } from 'next/router';
+import { Input, Icon, Dropdown, Div, Anchor, Col, Text, Image } from "atomize";
 import getHeaders from '../../functions/useGetHeaders'
+import useSWRMutation from 'swr/mutation'
+import { useRouter } from 'next/router';
 
-const CompareSearchBar = () => {
-    const [input, setInput] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-
+const CompareSearchBar = ({ clanId }) => {
     const router = useRouter();
 
-    // Clear states on route change
-    const dynamicRoute = router.asPath;
-    useEffect(() => setInput(''), [dynamicRoute]);
-    useEffect(() => setIsLoading(false), [dynamicRoute]);
+    const header = getHeaders(false)
 
-    const headers = getHeaders(false);
+    const [input, setInput] = useState('');
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    useEffect(() => {
+        // Mutate request
+        triggerBungie(input)
+
+        // Close dropdown when empty
+        if (input.length > 0) {
+            setShowDropdown(true)
+        } else {
+            setShowDropdown(false)
+        }
+    }, [input]);
 
     const addQuery = (newValue) => {
         const newQuery = []
@@ -36,67 +44,80 @@ const CompareSearchBar = () => {
         });
     };
 
-    function handleSearch(e, button) {
-        if (input.length > 2) {
-            setIsLoading(true);
-            search(); // Uncoment when API is back up ***************************************
-            if (button) {
-                e.target.parentElement.firstChild.value = ''
-            } else {
-                e.target.value = ''
-            }
-            // addQuery(input) // Do not pass input but instead pass clanId once recieved from search() ***************************************
-        }
-    }
-
-    const search = async () => {
-        await fetch('https://www.bungie.net/Platform/GroupV2/NameV2/', {
-            method: 'post', headers, body: JSON.stringify({
+    // fetch for request mutation
+    // Clan general search
+    async function updateBungieUser(url, { arg }) {
+        return fetch(url, {
+            method: 'post',
+            headers: header,
+            body: JSON.stringify({
                 'groupName': input,
                 'groupType': 1,
             })
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                addQuery(data.Response.detail.groupId)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+        }).then((res) => res.json())
+    }
+    const { data: dataBungie, trigger: triggerBungie } = useSWRMutation('https://www.bungie.net/Platform/GroupV2/NameV2/', updateBungieUser)
+
+    const suggestion = dataBungie
+
+    // List elements
+    const menuList = (
+        <Div p={{ x: "1rem", y: "0.5rem" }} bg="cbGrey1" m={{ t: "-0.25rem" }} shadow="4" rounded="0 0 5px 5px">
+            {suggestion ?
+                suggestion?.Response ?
+                    <Anchor d="block" p={{ y: "0.25rem" }} border={{ b: "1px solid" }} borderColor="cbWhite" textColor="cbGrey3" hoverTextColor="cbBlue"
+                        onClick={() => {
+                            addQuery(suggestion?.Response?.detail?.groupId)
+                            setShowDropdown(false)
+                            setInput('')
+                        }}
+                    >
+                        {suggestion?.Response?.detail?.name} [{suggestion?.Response?.detail?.clanInfo?.clanCallsign}]
+                    </Anchor>
+                    :
+                    <Icon name="Loading3" size="25px" color="cbWhite" />
+                :
+                <Text d="block" p={{ y: "0.25rem" }} border={{ b: "1px solid" }} borderColor="cbWhite" textColor="cbGrey3">
+                    There is no clan with that name
+                </Text>
+            }
+        </Div>
+    );
+
+    // Update input while typing
+    function handleSearch(e) {
+        setInput(e.target.value)
     }
 
     return (
-        <Input
-            placeholder="Clan Name"
-            rounded="circle"
+        <Dropdown
+            isOpen={showDropdown}
+            m={{ b: "0.5rem" }}
+            menu={menuList}
             bg="cbGrey1"
-            borderColor="cbWhite"
-            hoverBorderColor="cbWhite"
-            textColor="cbWhite"
-            focusTextColor="cbWhite"
-            hoverTextColor="cbWhite"
-            fontFamily="Primary"
-            h="2rem"
-            onInput={e => { setInput(e.target.value) }}
-            onKeyPress={e => {
-                if (e.key === "Enter") {
-                    handleSearch(e, false)
-                }
-            }}
-            suffix={
-                <Icon
-                    name={isLoading ? "Loading" : "Add"}
-                    size="20px"
-                    cursor="pointer"
-                    color="cbWhite"
-                    onClick={(e) => handleSearch(e, true)}
-                    pos="absolute"
-                    top="50%"
-                    right="0.5rem"
-                    transform="translateY(-50%)"
+            focusBg="cbGrey1"
+            borderColor="cbGrey1"
+            focusBorderColor="cbGrey1"
+            closeSuffix={<></>}
+            openSuffix={<></>}
+        >
+            <Col>
+                <Input
+                    placeholder="Clan Name"
+                    rounded="circle"
+                    bg="cbGrey1"
+                    borderColor="cbWhite"
+                    hoverBorderColor="cbWhite"
+                    textColor="cbWhite"
+                    focusTextColor="cbWhite"
+                    hoverTextColor="cbWhite"
+                    fontFamily="Primary"
+                    h="2rem"
+                    value={input}
+                    onChange={e => { handleSearch(e) }}
                 />
-            }
-        />
+            </Col>
+        </Dropdown>
     )
 }
 
