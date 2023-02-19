@@ -11,7 +11,7 @@ export default function Signin() {
   const router = useRouter()
   
   if (session) {
-    router.push('/')
+    router.push('/clan-details')
   }
   
 
