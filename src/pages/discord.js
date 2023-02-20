@@ -1,7 +1,8 @@
 import DefaultTemplate from '../components/DefaultLayout'
-import { Text, Image, Col, Anchor, Div, Button } from "atomize";
+import { Text, Icon, Col, Anchor, Div, Button } from "atomize";
 import InfoBox from '../components/InfoBox';
 import Head from 'next/head';
+import Link from 'next/link'
 
 export default function Discord() {
 
@@ -15,7 +16,15 @@ export default function Discord() {
 
     function Subtitle({ children }) {
         return (
-            <Text textColor="cbWhite" textSize="title" p={{ t: "0.5rem" }}>
+            <Text textColor="cbWhite" textSize="title" p={{ y: "0.5rem" }}>
+                {children}
+            </Text>
+        )
+    }
+
+    function Command({ children }) {
+        return (
+            <Text textColor="cbBlue" textSize="subheader">
                 {children}
             </Text>
         )
@@ -23,7 +32,7 @@ export default function Discord() {
 
     function Body({ children }) {
         return (
-            <Text textColor="cbWhite" textSize="paragraph" p="0.5rem">
+            <Text textColor="cbWhite" textSize="paragraph" p={{ t: "0.5rem", b: "1rem", x: "1rem" }}>
                 {children}
             </Text>
         )
@@ -34,6 +43,18 @@ export default function Discord() {
             <Text textColor="cbBlue" tag="span">
                 {children}
             </Text>
+        )
+    }
+
+    function LinkStyle({ href, children }) {
+        return (
+            <Link href={href} passHref legacyBehavior>
+                <Anchor>
+                    <Highlight>
+                        {children}
+                    </Highlight>
+                </Anchor>
+            </Link>
         )
     }
 
@@ -72,14 +93,31 @@ export default function Discord() {
                             </Div>
 
                             <Subtitle>Setup</Subtitle>
-                            <Body>Coming Soon...</Body>
+                            <Div m={{ l: "0.5rem" }}>
+                                <Command>/setup</Command>
+                                <Body>
+                                    Initiates the process of linking your Destiny 2 clan and your Discord server.
+                                    <br />
+                                    Admin permissions in both the Discord server and Destiny 2 clan that is being linked.
+                                    <br/>
+                                    <br/>
+                                    <Icon name="Alert" size="1.2rem" transform='translate(0, 20%)' color="cbBlue" d="inline-block" m={{ r: "0.25rem" }} />
+                                    <Highlight>IMPORTANT:</Highlight> Before using this command you must first authenticate with ClanBase by using the /authenticate command.
+                                </Body>
+                            </Div>
 
                             <Subtitle>Commands</Subtitle>
-                            <Body>Coming Soon...</Body>
+                            <Div m={{ l: "0.5rem" }}>
+                                <Command>/authenticate</Command>
+                                <Body>Provides a link to <LinkStyle href="/accounts">myclanbase.com/accounts</LinkStyle>. Here you can login with both your Destiny 2 and Discord accounts through ClanBase. This will enable Discord time tracking on ClanBase.</Body>
+
+                                <Command>/myclan</Command>
+                                <Body>Provides a link to <LinkStyle href="/clan-details">myclanbase.com/clan-details</LinkStyle>. Here you can see your clan&apos;s dashboard on ClanBase.</Body>
+                            </Div>
                         </Div>
                     </InfoBox>
                 </Col>
             </Div>
-        </DefaultTemplate>
+        </DefaultTemplate >
     )
 }
