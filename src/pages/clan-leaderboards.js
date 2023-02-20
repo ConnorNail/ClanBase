@@ -22,7 +22,7 @@ export default function ClanLeaderboards() {
                 <Div>
                     {data.map((clan, index) => (
                         <Div key={index}>
-                            <ClanCard index={index} clanId={clan.clanId} clanScore={clan[`clanScore${name}`]} name={name} />
+                            <ClanCard index={index} clanId={clan.clanId} clanName={clan.clanName} clanCallsign={clan.clanCallsign} clanScore={clan[`clanScore${name}`]} name={name} />
                         </Div>
                     ))}
                 </Div>
@@ -30,12 +30,7 @@ export default function ClanLeaderboards() {
         )
     }
 
-    function ClanCard({ index, clanId, clanScore, name }) {
-        const clanInfo = useGetClanInfoImut(clanId)
-        const clanName = clanInfo?.Response?.detail?.name
-        const clanCallsign = clanInfo?.Response?.detail?.clanInfo?.clanCallsign
-        const motto = clanInfo?.Response?.detail?.motto
-
+    function ClanCard({ index, clanId, clanName, clanCallsign, clanScore, name }) {
         return (
             <Div textColor="cbBlue" textSize={{ xs: "subheader", md: "title" }} d="flex" align="center">
                 <Text textAlign="center" textColor="cbBlue" textSize={{ xs: "subheader", md: "title" }} w="1rem" p={{ l: "0.5rem", r: "1rem" }}>{index+1}</Text>

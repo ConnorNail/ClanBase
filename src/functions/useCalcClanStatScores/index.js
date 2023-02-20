@@ -1,6 +1,6 @@
 import usePostClanScores from "../usePostClanScores";
 
-export default function useCalcClanStatScores(clanMemberStats, clanMemberProfiles, clanId) {
+export default function useCalcClanStatScores(clanMemberStats, clanMemberProfiles, clanId, clanName, clanCallsign) {
 
     // Calculate average clan KD
     const averageClanKD = (stats) => {
@@ -224,18 +224,18 @@ export default function useCalcClanStatScores(clanMemberStats, clanMemberProfile
 
     const normals = {
         PvE: {
-            playtime: 1901000,
-            activitiesCompleted: 1020,
-            averageStrikeDuration: 980,
-            KD: 33.5,
-            raidsCompleted: 25
+            playtime: 2119145,
+            activitiesCompleted: 1164,
+            averageStrikeDuration: 937,
+            KD: 34.68,
+            raidsCompleted: 47
         },
         PvP: {
-            playtime: 604800,
-            activitiesCompleted: 1100,
-            combatRating: 115,
-            winPercentage: 0.5,
-            flawlessCards: 3
+            playtime: 474459,
+            activitiesCompleted: 906,
+            combatRating: 108,
+            winPercentage: 0.4721,
+            flawlessCards: 4
         }
     }
 
@@ -244,15 +244,15 @@ export default function useCalcClanStatScores(clanMemberStats, clanMemberProfile
             playtime: 0.2,
             activitiesCompleted: 0.3,
             averageStrikeDuration: 0.2,
-            KD: 0.2,
-            raidsCompleted: 0.1
+            KD: 0.25,
+            raidsCompleted: 0.05
         },
         PvP: {
             playtime: 0.2,
             activitiesCompleted: 0.2,
             combatRating: 0.3,
-            winPercentage: 0.2,
-            flawlessCards: 0.1
+            winPercentage: 0.25,
+            flawlessCards: 0.05
         }
     }
 
@@ -301,7 +301,7 @@ export default function useCalcClanStatScores(clanMemberStats, clanMemberProfile
         }
         
     }
-    usePostClanScores(clanId, perMemberStats?.PvE?.playtime, perMemberStats?.PvE?.activitiesCompleted, perMemberStats?.PvE?.averageStrikeDuration, perMemberStats?.PvE?.KD, perMemberStats?.PvE?.raidsCompleted, perMemberStats?.PvP?.playtime, perMemberStats?.PvP?.activitiesCompleted, perMemberStats?.PvP?.combatRating, perMemberStats?.PvP?.winPercentage, perMemberStats?.PvP?.flawlessCards, clanScore.PvE, clanScore.PvP)
+    usePostClanScores(clanId, clanName, clanCallsign, perMemberStats?.PvE?.playtime, perMemberStats?.PvE?.activitiesCompleted, perMemberStats?.PvE?.averageStrikeDuration, perMemberStats?.PvE?.KD, perMemberStats?.PvE?.raidsCompleted, perMemberStats?.PvP?.playtime, perMemberStats?.PvP?.activitiesCompleted, perMemberStats?.PvP?.combatRating, perMemberStats?.PvP?.winPercentage, perMemberStats?.PvP?.flawlessCards, clanScore.PvE, clanScore.PvP)
 
     return clanScore
 }

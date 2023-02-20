@@ -1,12 +1,14 @@
 import useSWR from 'swr'
 
-export default function usePostClanScores(clanId, playtimePvE, activitiesCompletedPvE, averageStrikeDuration, KDPvE, raidsCompleted, playtimePvP, activitiesCompletedPvP, combatRating, winPercentage, flawlessCards, clanScorePvE, clanScorePvP) {
+export default function usePostClanScores(clanId, clanName, clanCallsign, playtimePvE, activitiesCompletedPvE, averageStrikeDuration, KDPvE, raidsCompleted, playtimePvP, activitiesCompletedPvP, combatRating, winPercentage, flawlessCards, clanScorePvE, clanScorePvP) {
 
     const fetcher = (url) => fetch(url, {
         method: 'post',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             'clanId': clanId,
+            'clanName': clanName,
+            'clanCallsign': clanCallsign,
             'playtimePvE': playtimePvE.toString(),
             'activitiesCompletedPvE': activitiesCompletedPvE,
             'averageStrikeDuration': averageStrikeDuration,
@@ -22,7 +24,7 @@ export default function usePostClanScores(clanId, playtimePvE, activitiesComplet
         })
     }).then((res) => res.json())
 
-    const { data, error } = useSWR(clanScorePvP ? window.location.origin + '/api/ClanScores' : null, fetcher)
+    const { data, error } = useSWR(clanScorePvP && clanName && clanCallsign ? window.location.origin + '/api/ClanScores' : null, fetcher)
 
     return data
 }
