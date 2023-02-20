@@ -25,6 +25,7 @@ export default function Accounts() {
   console.log("User Data", userData)
 
   const ids = getIdsForCurrentUser(userData)
+  console.log(ids)
   const groupInfo = useGetGroupsForMember(ids.membershipId, ids.membershipType)
   console.log("Group info", groupInfo)
 
