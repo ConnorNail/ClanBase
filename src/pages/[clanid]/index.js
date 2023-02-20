@@ -49,11 +49,14 @@ export default function ClanPage() {
   const isUsersClan = usersClanId && usersClanId == clanId ? true : false
 
   const clanInfo = getClanInfo(clanId)
+  const clanName = clanInfo?.Response?.detail?.name ? clanInfo?.Response?.detail?.name : null
+  const clanCallsign = clanInfo?.Response?.detail?.clanInfo?.clanCallsign ? clanInfo?.Response?.detail?.clanInfo?.clanCallsign : null
+
   const { data: clanMemberList } = getClanMemberInfo(clanId)
   const clanMemberStats = getClanMembersAllTimeStats(clanMemberList)
   const clanMemberProfiles = getAllMembersProfile(clanMemberList)
 
-  const clanStatScores = calcClanStatScores(clanMemberStats, clanMemberProfiles, clanId)
+  const clanStatScores = calcClanStatScores(clanMemberStats, clanMemberProfiles, clanId, clanName, clanCallsign)
 
   const memberSeasonalTimeStats = getClanMemberCharacterSeasonalTimeStats(clanMemberList, clanMemberProfiles)
 

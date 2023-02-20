@@ -19,10 +19,10 @@ export default function ClanLeaderboards() {
                 <Text textColor="cbWhite" textSize={{ xs: "title", md: "heading" }} p={{ t: "0.5rem", x: "0.5rem" }}>
                     {name} Leaderboard
                 </Text>
-                <Div tag="ol" >
+                <Div>
                     {data.map((clan, index) => (
                         <Div key={index}>
-                            <ClanCard clanId={clan.clanId} clanScore={clan[`clanScore${name}`]} name={name} />
+                            <ClanCard index={index} clanId={clan.clanId} clanName={clan.clanName} clanCallsign={clan.clanCallsign} clanScore={clan[`clanScore${name}`]} name={name} />
                         </Div>
                     ))}
                 </Div>
@@ -30,16 +30,12 @@ export default function ClanLeaderboards() {
         )
     }
 
-    function ClanCard({ clanId, clanScore, name }) {
-        const clanInfo = useGetClanInfoImut(clanId)
-        const clanName = clanInfo?.Response?.detail?.name
-        const clanCallsign = clanInfo?.Response?.detail?.clanInfo?.clanCallsign
-        const motto = clanInfo?.Response?.detail?.motto
-
+    function ClanCard({ index, clanId, clanName, clanCallsign, clanScore, name }) {
         return (
-            <Div tag="li" textColor="cbBlue" textSize={{ xs: "subheader", md: "title" }}>
+            <Div textColor="cbBlue" textSize={{ xs: "subheader", md: "title" }} d="flex" align="center">
+                <Text textAlign="center" textColor="cbBlue" textSize={{ xs: "subheader", md: "title" }} w="1rem" p={{ l: "0.5rem", r: "1rem" }}>{index+1}</Text>
                 <Link href={`/${clanId}`} passHref legacyBehavior>
-                    <Anchor>
+                    <Anchor style={{ flex: "0 1 auto"}} w="95%">
                         <Div bg="cbGrey2" rounded="md" m={{ x: "0.25rem", y: "0.5rem" }} p={{ l: "0.75rem", r: "0.5rem", y: "0.25rem" }} shadow="2" hoverShadow="4" d="flex" align="center">
                             <Div m={{ r: "1rem" }} style={{ whiteSpace: "nowrap", overflow: "hidden" }}>
                                 {clanName && clanCallsign ?
