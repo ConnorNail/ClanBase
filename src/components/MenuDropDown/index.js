@@ -10,6 +10,11 @@ export default function MenuDropDown() {
 
     const menuList = (
         <Div p={{ x: "1rem", y: "0.5rem" }} bg="cbRed" shadow="4" rounded="0 0 5px 5px">
+            <Link href="/" passHref legacyBehavior>
+                <Anchor d="block" p={{ y: "0.5rem", x: "0.5rem" }} textSize="subheader" textColor="cbWhite" hoverTextColor="cbBlue" style={{ whiteSpace: "nowrap" }}>
+                    HOME
+                </Anchor>
+            </Link>
             {pages.map((list, index) => (
                 <Link href={list.link} key={index} passHref legacyBehavior>
                     <Anchor d="block" p={{ y: "0.5rem", x: "0.5rem" }} textSize="subheader" textColor="cbWhite" hoverTextColor="cbBlue" style={{ whiteSpace: "nowrap" }}>
