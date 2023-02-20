@@ -19,6 +19,7 @@ export default function Accounts() {
 
   const { data: session, status } = useSession()
   const [send, setSend] = useState(false)
+  console.log("session", session)
 
   const userData = useGetUserInfo(status)
   console.log("User Data", userData)
