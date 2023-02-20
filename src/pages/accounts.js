@@ -21,21 +21,25 @@ export default function Accounts() {
   const [send, setSend] = useState(false)
 
   const userData = useGetUserInfo(status)
+  console.log("User Data", userData)
 
   const ids = getIdsForCurrentUser(userData)
   const groupInfo = useGetGroupsForMember(ids.membershipId, ids.membershipType)
+  console.log("Group info", groupInfo)
 
   const clanId = groupInfo ? groupInfo?.Response?.results[0]?.group?.groupId.toString() : null
 
   const clanBaseMemberInfo = useIndividualMembersIds(ids.membershipId ? ids.membershipId.toString() : null, ids.membershipType ? ids.membershipType.toString() : null)
 
   const discordMemberInfo = useGetDiscordUserInfo(token)
+  console.log("Discord member", discordMemberInfo)
   const discordId = discordMemberInfo?.id
   const discordName = discordMemberInfo?.username
   const discordDiscriminator = discordMemberInfo?.discriminator
 
   const linkAccounts = useLinkBungieAndDiscord(discordId, discordName, discordDiscriminator, ids.membershipId ? ids.membershipId.toString() : null, ids.membershipType ? ids.membershipType.toString() : null, clanId, send)
   const accountsLinked = linkAccounts?.message ? true : false
+  console.log("link account", linkAccounts)
 
   useEffect(() => {
     if (status == 'authenticated' && groupInfo && discordMemberInfo) {
