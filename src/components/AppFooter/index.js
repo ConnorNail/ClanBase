@@ -45,7 +45,7 @@ const AppFooter = () => {
                                 <Image src="/discord.svg" alt="discord" />
                             </Button>
                         </Anchor>
-                        <Anchor href="https://www.patreon.com/clanbase" target="_blank">
+                        <Anchor href="https://ko-fi.com/clanbase" target="_blank">
                             <Button m="0.5rem" h="1.5rem" w="1.5rem" p="0rem" shadow="5" bg="#FF5E5B">
                                 <Image src="/ko-fi.png" alt="ko-fi" />
                             </Button>
