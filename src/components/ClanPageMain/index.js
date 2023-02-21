@@ -43,7 +43,7 @@ export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router,
                 <Col d="flex" align="center" justify="center">
                     <Div d="flex" align="center" m={{ x: "0.5rem" }}>
                         <PvEIcon />
-                        {clanStatScores?.PvE ?
+                        {clanStatScores?.PvE || clanStatScores?.PvE == 0 ?
                             <Text textSize={{ xs: "title", md: "heading" }} textColor="cbBlue" p="0.5rem">
                                 {clanStatScores?.PvE.toFixed()}
                             </Text> :
@@ -56,7 +56,7 @@ export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router,
                     </Div>
                     <Div d="flex" align="center" m={{ x: "0.5rem" }}>
                         <PvPIcon />
-                        {clanStatScores?.PvP ?
+                        {clanStatScores?.PvP || clanStatScores?.PvP == 0 ?
                             <Text textSize={{ xs: "title", md: "heading" }} textColor="cbBlue" p="0.5rem">
                                 {clanStatScores?.PvP.toFixed()}
                             </Text> :
