@@ -1,6 +1,6 @@
 import usePostClanScores from "../usePostClanScores";
 
-export default function useCalcClanStatScores(clanMemberStats, clanMemberProfiles, clanId, clanName, clanCallsign) {
+export default function useCalcClanStatScores(clanMemberStats, clanMemberProfiles, clanId, clanName, clanMemberCount, clanCallsign) {
 
     // Calculate average clan KD
     const averageClanKD = (stats) => {
@@ -282,7 +282,7 @@ export default function useCalcClanStatScores(clanMemberStats, clanMemberProfile
             PvE: {
                 playtime: perMemberStats?.PvE?.playtime / normals?.PvE?.playtime,
                 activitiesCompleted: perMemberStats?.PvE?.activitiesCompleted / normals?.PvE?.activitiesCompleted,
-                averageStrikeDuration: perMemberStats?.PvE?.averageStrikeDuration / normals?.PvE?.averageStrikeDuration,
+                averageStrikeDuration: perMemberStats?.PvE?.averageStrikeDuration ? 1 / (perMemberStats?.PvE?.averageStrikeDuration / normals?.PvE?.averageStrikeDuration) : 0,
                 KD: perMemberStats?.PvE?.KD / normals?.PvE?.KD,
                 raidsCompleted: perMemberStats?.PvE?.raidsCompleted / normals?.PvE?.raidsCompleted
             },
@@ -295,13 +295,15 @@ export default function useCalcClanStatScores(clanMemberStats, clanMemberProfile
             }
         }
 
+        const memberWeight = clanMemberCount ? Math.log10(clanMemberCount + 11.1111) - 1.04576 : 0
+
         clanScore = {
-            PvE: (normalizedStats?.PvE?.playtime * weights?.PvE?.playtime + normalizedStats?.PvE?.activitiesCompleted * weights?.PvE?.activitiesCompleted + normalizedStats?.PvE?.averageStrikeDuration * weights?.PvE?.averageStrikeDuration + normalizedStats?.PvE?.KD * weights?.PvE?.KD + normalizedStats?.PvE?.raidsCompleted * weights?.PvE?.raidsCompleted) * baseline,
-            PvP: (normalizedStats?.PvP?.playtime * weights?.PvP?.playtime + normalizedStats?.PvP?.activitiesCompleted * weights?.PvP?.activitiesCompleted + normalizedStats?.PvP?.combatRating * weights?.PvP?.combatRating + normalizedStats?.PvP?.winPercentage * weights?.PvP?.winPercentage + normalizedStats?.PvP?.flawlessCards * weights?.PvP?.flawlessCards) * baseline
+            PvE: (normalizedStats?.PvE?.playtime * weights?.PvE?.playtime + normalizedStats?.PvE?.activitiesCompleted * weights?.PvE?.activitiesCompleted + normalizedStats?.PvE?.averageStrikeDuration * weights?.PvE?.averageStrikeDuration + normalizedStats?.PvE?.KD * weights?.PvE?.KD + normalizedStats?.PvE?.raidsCompleted * weights?.PvE?.raidsCompleted) * memberWeight * baseline,
+            PvP: (normalizedStats?.PvP?.playtime * weights?.PvP?.playtime + normalizedStats?.PvP?.activitiesCompleted * weights?.PvP?.activitiesCompleted + normalizedStats?.PvP?.combatRating * weights?.PvP?.combatRating + normalizedStats?.PvP?.winPercentage * weights?.PvP?.winPercentage + normalizedStats?.PvP?.flawlessCards * weights?.PvP?.flawlessCards) * memberWeight * baseline
         }
         
     }
-    usePostClanScores(clanId, clanName, clanCallsign, perMemberStats?.PvE?.playtime, perMemberStats?.PvE?.activitiesCompleted, perMemberStats?.PvE?.averageStrikeDuration, perMemberStats?.PvE?.KD, perMemberStats?.PvE?.raidsCompleted, perMemberStats?.PvP?.playtime, perMemberStats?.PvP?.activitiesCompleted, perMemberStats?.PvP?.combatRating, perMemberStats?.PvP?.winPercentage, perMemberStats?.PvP?.flawlessCards, clanScore.PvE, clanScore.PvP)
+    usePostClanScores(clanId, clanName, clanMemberCount, clanCallsign, perMemberStats?.PvE?.playtime, perMemberStats?.PvE?.activitiesCompleted, perMemberStats?.PvE?.averageStrikeDuration, perMemberStats?.PvE?.KD, perMemberStats?.PvE?.raidsCompleted, perMemberStats?.PvP?.playtime, perMemberStats?.PvP?.activitiesCompleted, perMemberStats?.PvP?.combatRating, perMemberStats?.PvP?.winPercentage, perMemberStats?.PvP?.flawlessCards, clanScore.PvE, clanScore.PvP)
 
     return clanScore
 }

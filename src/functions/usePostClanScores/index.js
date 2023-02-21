@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 
-export default function usePostClanScores(clanId, clanName, clanCallsign, playtimePvE, activitiesCompletedPvE, averageStrikeDuration, KDPvE, raidsCompleted, playtimePvP, activitiesCompletedPvP, combatRating, winPercentage, flawlessCards, clanScorePvE, clanScorePvP) {
+export default function usePostClanScores(clanId, clanName, clanMemberCount, clanCallsign, playtimePvE, activitiesCompletedPvE, averageStrikeDuration, KDPvE, raidsCompleted, playtimePvP, activitiesCompletedPvP, combatRating, winPercentage, flawlessCards, clanScorePvE, clanScorePvP) {
 
     const fetcher = (url) => fetch(url, {
         method: 'post',
@@ -9,6 +9,7 @@ export default function usePostClanScores(clanId, clanName, clanCallsign, playti
             'clanId': clanId,
             'clanName': clanName,
             'clanCallsign': clanCallsign,
+            'clanMemberCount': clanMemberCount,
             'playtimePvE': playtimePvE.toString(),
             'activitiesCompletedPvE': activitiesCompletedPvE,
             'averageStrikeDuration': averageStrikeDuration,

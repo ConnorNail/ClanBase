@@ -49,6 +49,20 @@ export default async function handler(req, res) {
             } else {
                 res.status(500).json({ error: "Incorrect request body" })
             }
+        } else if (req.method === "GET") {
+            const discordGuildId = req.query?.guildId
+            if (discordGuildId) {
+                const group = await database.collection("groups").findOne({ guildId: discordGuildId }, { projection: { _id: false } })
+                console.log(group)
+
+                if (group) {
+                    res.status(200).json({ registered: true, group: group });
+                } else {
+                    res.status(200).json({ registered: false, error: "There are no groups associated with this id" })
+                }
+            } else {
+                res.status(500).json({ error: "Please provide a Discord guild id in the request" })
+            }
         } else {
             res.status(500).json({ error: "This endpoint requires a POST request" })
         }
