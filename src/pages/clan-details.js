@@ -74,7 +74,7 @@ export default function Admin() {
             <Button
                 flexGrow="1"
                 bg="cbGrey2"
-                textColor={tab == toggleValue ? "cbWhite" : "cbGrey1"}
+                textColor={tab == toggleValue ? "cbWhite" : "cbGrey0"}
                 textSize="subheader"
                 hoverTextColor="cbWhite"
                 shadow={tab == toggleValue ? "4" : "2"}

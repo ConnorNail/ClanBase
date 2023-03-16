@@ -85,7 +85,7 @@ export default function ClanLeaderboards() {
                             <Link href="/clan-score-explained" passHref legacyBehavior>
                                 <Anchor m={{ l: "auto" }}>
                                     <Button bg="cbGrey2" textColor="cbWhite" textSize="paragraph" shadow="2" hoverShadow="4">
-                                        What is a Clan Score?
+                                        What are Clan Scores?
                                     </Button>
                                 </Anchor>
                             </Link>

@@ -32,8 +32,8 @@ export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router,
                         </Text>
                     </Row>
                     <Row m="0" minW="18rem">
-                        <Text textSize="paragraph" textColor="cbGrey2" p={{ x: "0.5rem" }}>
-                            &quot;{loadingValue(clanInfo?.Response?.detail?.motto, "cbGrey2")}&quot;
+                        <Text textSize="paragraph" textColor="cbGrey0" p={{ x: "0.5rem" }}>
+                            &quot;{loadingValue(clanInfo?.Response?.detail?.motto, "cbGrey0")}&quot;
                         </Text>
                     </Row>
                 </Col>
@@ -50,7 +50,7 @@ export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router,
                             <Icon name="Loading3" size="20px" color="cbBlue" />}
                         <Link href="clan-score-explained" passHref legacyBehavior>
                             <Anchor>
-                                <Icon name="Info" size="20px" color="cbGrey2" hoverColor="cbGrey3" cursor="pointer" />
+                                <Icon name="Info" size="20px" color="cbGrey3" hoverColor="cbWhite" cursor="pointer" />
                             </Anchor>
                         </Link>
                     </Div>
@@ -63,7 +63,7 @@ export default function ClanPageMain({ clanId, clanInfo, clanStatScores, router,
                             <Icon name="Loading3" size="20px" color="cbBlue" />}
                         <Link href="clan-score-explained" passHref legacyBehavior>
                             <Anchor>
-                                <Icon name="Info" size="20px" color="cbGrey2" hoverColor="cbGrey3" cursor="pointer" />
+                                <Icon name="Info" size="20px" color="cbGrey3" hoverColor="cbWhite" cursor="pointer" />
                             </Anchor>
                         </Link>
                     </Div>

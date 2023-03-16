@@ -37,13 +37,13 @@ body {
 }
 
 .scroller::-webkit-scrollbar-track {
-  background: #F1E9E6;
+  background: #F4EEEB;
   border: 2px solid transparent;
   background-clip: content-box;
 }
 
 .scroller::-webkit-scrollbar-thumb {
-  background: #F1E9E6;
+  background: #F4EEEB;
   border-radius: 10px;
   /* border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;

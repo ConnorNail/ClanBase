@@ -48,7 +48,7 @@ export default function Home() {
 
             <Col size={{ xs: "12", md: "8" }}>
               <Row d="flex" flexDir="column" align="center" p={{ t: "3rem" }}>
-                <Text textSize="title" textAlign="center" textWeight="500" textColor="cbWhite" m={{ t: "3rem" }}>
+                <Text textSize="title" textAlign="center" textWeight="500" textColor="cbWhite" m={{ t: "1rem" }}>
                   WELCOME TO
                 </Text>
                 <Text textSize="display3" textAlign="center" textWeight="700" textColor="cbWhite">
