@@ -11,6 +11,8 @@
   "dependencies": {
     "@next-auth/mongodb-adapter": "^1.1.1",
     "@vercel/analytics": "^0.1.8",
+    "ag-grid-community": "^29.2.0",
+    "ag-grid-react": "^29.2.0",
     "atomize": "^1.0.28",
     "mongodb": "^4.13.0",
     "next": "^12.2.5",

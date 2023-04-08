@@ -15,7 +15,7 @@ const AppHeader = () => {
     return (
         <header>
             <nav>
-                <Div bg="cbRed" border={{ b: "1px solid" }} borderColor="cbWhite">
+                <Div bg="cbGrey1" border={{ b: "1px solid" }} borderColor="cbWhite">
                     <Row>
                         <Col size="auto" d={{ xs: "flex", xl: "none" }} align="center">
                             <Div m={{ x: "0.5rem" }}>
