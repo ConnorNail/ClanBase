@@ -181,7 +181,7 @@ export default function Admin() {
                 <Col size={{ xs: "11", xl: "8" }}>
                     <InfoBox bg={'cbGrey1'} minH="40rem">
                         <ScrollBox h="50rem">
-                            <TestList nodes={triumphNodes?.Response?.children?.presentationNodes} entityType={'DestinyPresentationNodeDefinition'} />
+                            {/* <TestList nodes={triumphNodes?.Response?.children?.presentationNodes} entityType={'DestinyPresentationNodeDefinition'} /> */}
                             {/* <MyGrid/> */}
                             {/* <QueryStatTable profiles={clanMemberProfiles} /> */}
                             {/* <Metrics profiles={clanMemberProfiles}/> */}

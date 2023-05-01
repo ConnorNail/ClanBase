@@ -1,6 +1,6 @@
 const theme = {
     colors: {
-        cbRed: '#E72F1DBF',
+        cbRed: '#BD2314',
         cbRedTransparent: 'rgba(231, 47, 29, 0.75)',
         cbWhite: '#F4EEEB',
         cbYellow: '#D6BF27',
@@ -12,7 +12,6 @@ const theme = {
         cbTransparent: 'rgba(0, 0, 0, 0)',
         cbBlue: '#81DCEE',
         cbGreen: '#4af063',
-        cbRed: '#f03e1f'
     },
     fontFamily: {
         primary: "Primary",

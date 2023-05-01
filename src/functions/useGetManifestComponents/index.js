@@ -1,13 +1,13 @@
 import useSWRImmutable from 'swr/immutable'
 
-export default function useGetManifestComponents(manifest) {
+export default function useGetManifestComponents(manifest, componentName) {
     const baseURL = 'https://www.bungie.net'
 
-    const destinyRecordDefinitionURL = manifest ? manifest?.Response?.jsonWorldComponentContentPaths?.en?.DestinyRecordDefinition : null
+    const destinyComponentDefinitionURL = manifest ? manifest?.Response?.jsonWorldComponentContentPaths?.en[componentName] : null
 
     const fetcher = (url) => fetch(url).then((res) => res.json())
 
-    const { data: destinyRecordDefinition } = useSWRImmutable(destinyRecordDefinitionURL ? baseURL + destinyRecordDefinitionURL : null, fetcher )
+    const { data: destinyDefinitions } = useSWRImmutable(destinyComponentDefinitionURL ? baseURL + destinyComponentDefinitionURL : null, fetcher )
 
-    return { destinyRecordDefinition }
+    return { destinyDefinitions }
 }

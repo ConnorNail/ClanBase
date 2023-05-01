@@ -42,7 +42,7 @@ const SearchBar = ({ clanId }) => {
 
     // List elements
     const menuList = (
-        <Div p={{ x: "1rem", y: "0.5rem" }} bg="cbGrey1" m={{ t: "-0.25rem" }} shadow="4" rounded="0 0 5px 5px">
+        <Div p={{ x: "1rem", y: "0.5rem" }} bg="cbRed" m={{ t: "-0.25rem" }} shadow="4" rounded="0 0 5px 5px">
             {suggestion ?
                 suggestion?.Response ?
                     <Anchor d="block" p={{ y: "0.25rem" }} border={{ b: "1px solid" }} borderColor="cbWhite" textColor="cbGrey3" hoverTextColor="cbBlue"
@@ -74,10 +74,10 @@ const SearchBar = ({ clanId }) => {
             isOpen={showDropdown}
             m={{ b: "0.5rem" }}
             menu={menuList}
-            bg="cbGrey1"
-            focusBg="cbGrey1"
-            borderColor="cbGrey1"
-            focusBorderColor="cbGrey1"
+            bg="cbRed"
+            focusBg="cbRed"
+            borderColor="cbRed"
+            focusBorderColor="cbRed"
             closeSuffix={<></>}
             openSuffix={<></>}
         >
@@ -85,7 +85,7 @@ const SearchBar = ({ clanId }) => {
                 <Input
                     placeholder="Clan Name"
                     rounded="circle"
-                    bg="cbGrey1"
+                    bg="cbRed"
                     borderColor="cbWhite"
                     hoverBorderColor="cbWhite"
                     textColor="cbWhite"
